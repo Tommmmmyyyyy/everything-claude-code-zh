@@ -11,7 +11,7 @@ import {
   STEP_FIELDS,
   type BookingInput,
 } from "@/lib/booking-schema";
-import { TURNSTILE_SITE_KEY } from "@/lib/config";
+import { DEMO, TURNSTILE_SITE_KEY, siteHref } from "@/lib/config";
 
 const STEPS = [
   { id: "request", label: "Votre demande" },
@@ -172,6 +172,12 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
       return;
     }
     setStatus({ kind: "sending" });
+    if (DEMO) {
+      // Aperçu : le parcours est complet mais aucune donnée ne quitte la page.
+      await new Promise((r) => setTimeout(r, 900));
+      setStatus({ kind: "sent", dev: true });
+      return;
+    }
     try {
       const res = await fetch("/api/rendez-vous", {
         method: "POST",
@@ -306,7 +312,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
           <p className="mt-3 max-w-xl text-cream/55">Votre demande ne vaut pas confirmation : le rendez-vous est fixé après échange avec Anaëlle.</p>
           {status.dev && (
             <p className="mt-6">
-              <span className="ph-tag">Mode développement — demande enregistrée dans .data/demandes.jsonl</span>
+              <span className="ph-tag">{DEMO ? "Démonstration — aucune donnée n\u2019a été envoyée" : "Mode développement — demande enregistrée dans .data/demandes.jsonl"}</span>
             </p>
           )}
           <button type="button" onClick={reset} className="btn btn-ghost mt-10">
@@ -540,7 +546,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
                     />
                     <span className="text-[0.92rem] leading-relaxed text-cream/75">
                       J&apos;accepte que les informations saisies soient transmises à Anaëlle Toso pour traiter ma demande de rendez-vous. Elles ne sont ni revendues ni utilisées à d&apos;autres fins.{" "}
-                      <a href="/confidentialite" className="underline underline-offset-4 hover:text-cream" target="_blank" rel="noopener">
+                      <a href={siteHref("/confidentialite")} className="underline underline-offset-4 hover:text-cream" target="_blank" rel="noopener">
                         Politique de confidentialité
                       </a>
                     </span>

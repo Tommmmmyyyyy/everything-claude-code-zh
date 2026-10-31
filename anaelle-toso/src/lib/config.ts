@@ -12,3 +12,15 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || (vercelUrl ? `https
 
 /** Clé publique Cloudflare Turnstile (anti-spam optionnel). */
 export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+
+/** Mode démonstration (aperçu privé) : formulaire simulé, aucune donnée envoyée, mention « Prototype ». */
+export const DEMO = process.env.NEXT_PUBLIC_DEMO === "true";
+
+/** Liens internes : en mode démo (export statique), les pages sont des fichiers .html relatifs. */
+export function siteHref(href: string) {
+  if (!DEMO) return href;
+  if (href === "/") return "site.html";
+  if (href.startsWith("/#")) return "site.html" + href.slice(1);
+  if (href.startsWith("/")) return href.slice(1) + ".html";
+  return href;
+}

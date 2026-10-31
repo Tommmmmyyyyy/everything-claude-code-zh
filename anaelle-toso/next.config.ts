@@ -7,12 +7,17 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
+// STATIC_EXPORT=1 : export statique pour l'aperçu privé (sans API ni administration).
+const staticExport = process.env.STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
+  ...(staticExport ? { output: "export" as const } : {}),
   poweredByHeader: false,
   turbopack: { root: __dirname },
   agentRules: false,
   reactStrictMode: true,
   images: {
+    unoptimized: staticExport,
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75, 90],
     remotePatterns: [
@@ -21,9 +26,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**.fbcdn.net" },
     ],
   },
-  async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
-  },
+  ...(staticExport
+    ? {}
+    : {
+        async headers() {
+          return [{ source: "/:path*", headers: securityHeaders }];
+        },
+      }),
 };
 
 export default nextConfig;

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/ui/SiteLink";
 import { navLinks, site, socialLinks } from "@/lib/content";
 import { SocialIcon } from "@/components/sections/Social";
 

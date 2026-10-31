@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/content";
-import { SITE_URL } from "@/lib/config";
+import { SITE_URL, siteHref } from "@/lib/config";
 import { LegalBlock, LegalPage, V } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
@@ -70,7 +70,7 @@ export default function MentionsLegales() {
 
       <LegalBlock title="Données personnelles">
         <p>
-          Le traitement des données transmises via le formulaire de demande de rendez-vous est détaillé dans la <a href="/confidentialite">politique de confidentialité</a>.
+          Le traitement des données transmises via le formulaire de demande de rendez-vous est détaillé dans la <a href={siteHref("/confidentialite")}>politique de confidentialité</a>.
         </p>
       </LegalBlock>
 

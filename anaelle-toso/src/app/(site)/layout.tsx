@@ -3,6 +3,7 @@ import { Cursor } from "@/components/providers/Cursor";
 import { Preloader } from "@/components/providers/Preloader";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { DEMO } from "@/lib/config";
 
 export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -16,6 +17,11 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
       <Footer />
       <Cursor />
       <Experience />
+      {DEMO && (
+        <p className="micro pointer-events-none fixed bottom-4 right-4 z-[140] rounded-full border border-cognac/60 bg-ink/85 px-3.5 py-2 text-cognac backdrop-blur-sm">
+          Prototype — version de travail
+        </p>
+      )}
     </>
   );
 }

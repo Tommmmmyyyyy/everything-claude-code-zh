@@ -43,8 +43,9 @@ export function Experience() {
       const href = a.getAttribute("href");
       if (!href || !href.includes("#")) return;
       const url = new URL(href, window.location.href);
-      if (url.pathname !== window.location.pathname || !url.hash) return;
+      if (!url.hash) return;
       const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      // Cible présente sur cette page : défilement doux, quelle que soit la forme du lien.
       if (!target) return;
       e.preventDefault();
       scrollToTarget(target, { immediate: reduce });
