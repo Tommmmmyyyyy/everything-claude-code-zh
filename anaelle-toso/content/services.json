@@ -1,0 +1,129 @@
+{
+  "provisional": true,
+  "title": "Des soins pensés pour le confort de votre cheval.",
+  "intro": "Chaque intervention commence par un examen attentif. Les soins sont ensuite adaptés à l'âge, à l'activité et à l'état de la bouche de votre cheval — toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
+  "items": [
+    {
+      "id": "examen",
+      "title": "Examen de la dentition",
+      "kicker": "Un état des lieux complet",
+      "description": "Observation du comportement, palpation externe des joues et de la mâchoire, puis examen de la bouche à l'aide d'un pas-d'âne et d'un éclairage adapté. Incisives, barres, tables dentaires, joues et langue sont observées une à une.",
+      "details": [
+        "Observation et palpation externe",
+        "Examen buccal au pas-d'âne et à la lampe",
+        "Compte rendu expliqué au propriétaire"
+      ],
+      "diagram": "exam",
+      "image": "",
+      "imageAlt": "Examen de la bouche d'un cheval au pas-d'âne",
+      "price": ""
+    },
+    {
+      "id": "suivi",
+      "title": "Contrôle et suivi dentaire",
+      "kicker": "Un rythme adapté à chaque cheval",
+      "description": "Les dents du cheval poussent et s'usent tout au long de sa vie. Un suivi régulier permet d'intervenir tôt, avant que l'inconfort ne s'installe. La fréquence des visites est définie selon l'âge, l'activité et l'état de la bouche.",
+      "details": [
+        "Fréquence adaptée à l'âge et à l'activité",
+        "Historique des observations",
+        "Repères à surveiller entre deux visites"
+      ],
+      "diagram": "follow",
+      "image": "",
+      "imageAlt": "Suivi dentaire d'un cheval",
+      "price": ""
+    },
+    {
+      "id": "tables",
+      "title": "Entretien des tables dentaires",
+      "kicker": "Préserver une mastication efficace",
+      "description": "Les tables dentaires sont les surfaces de mastication des prémolaires et des molaires. Leur entretien vise à conserver une surface fonctionnelle et équilibrée, pour que le cheval broie correctement ses fibres.",
+      "details": [
+        "Contrôle de l'usure des surfaces de mastication",
+        "Élimination des aspérités",
+        "Équilibre entre les arcades"
+      ],
+      "diagram": "tables",
+      "image": "",
+      "imageAlt": "Tables dentaires d'un cheval",
+      "price": ""
+    },
+    {
+      "id": "pointes",
+      "title": "Correction des pointes d'émail et aspérités",
+      "kicker": "Ce qui blesse, en douceur",
+      "description": "La mâchoire supérieure du cheval est plus large que la mâchoire inférieure. Avec l'usure, des pointes d'émail tranchantes se forment sur le bord externe des dents du haut et sur le bord interne des dents du bas. Leur élimination soulage les joues et la langue.",
+      "details": [
+        "Repérage des zones blessantes",
+        "Élimination des pointes d'émail",
+        "Prévention des ulcérations des joues et de la langue"
+      ],
+      "diagram": "points",
+      "image": "",
+      "imageAlt": "Correction des pointes d'émail",
+      "price": ""
+    },
+    {
+      "id": "nivellement",
+      "title": "Nivellement dentaire",
+      "kicker": "Dans le cadre réglementaire",
+      "description": "Lorsque l'usure est irrégulière, certaines dents dépassent : on parle de surdents (crochets, rampes, vagues). Le nivellement réduit ces excès pour retrouver une table de mastication équilibrée, dans la limite des actes autorisés aux techniciens dentaires équins.",
+      "details": [
+        "Réduction des crochets et rampes",
+        "Rééquilibrage des tables",
+        "Orientation vers le vétérinaire si nécessaire"
+      ],
+      "diagram": "level",
+      "image": "",
+      "imageAlt": "Nivellement des tables dentaires",
+      "price": ""
+    },
+    {
+      "id": "dents-de-lait",
+      "title": "Extraction de dents de lait",
+      "kicker": "Accompagner le jeune cheval",
+      "description": "Entre deux ans et demi et cinq ans environ, le cheval remplace ses dents de lait. Il arrive qu'un « capuchon » — reste de dent de lait — persiste sur la dent définitive et gêne la mastication : il peut alors être retiré.",
+      "details": [
+        "Contrôle de l'éruption des dents définitives",
+        "Retrait des capuchons persistants",
+        "Suivi rapproché du jeune cheval"
+      ],
+      "diagram": "caps",
+      "image": "",
+      "imageAlt": "Dentition d'un jeune cheval",
+      "price": ""
+    },
+    {
+      "id": "dents-de-loup",
+      "title": "Extraction de dents de loup",
+      "kicker": "Un meilleur confort avec le mors",
+      "description": "Les dents de loup sont de petites prémolaires vestigiales, situées juste devant les premières dents jugales, le plus souvent sur la mâchoire supérieure. Selon leur position, elles peuvent gêner le contact du mors. Leur extraction se décide au cas par cas.",
+      "details": [
+        "Évaluation de la position de la dent",
+        "Extraction lorsque c'est justifié",
+        "La sédation éventuelle relève du vétérinaire"
+      ],
+      "diagram": "wolf",
+      "image": "",
+      "imageAlt": "Dent de loup chez le cheval",
+      "price": ""
+    },
+    {
+      "id": "conseils",
+      "title": "Conseils et accompagnement",
+      "kicker": "Comprendre pour mieux prendre soin",
+      "description": "Chaque visite est l'occasion d'expliquer ce qui a été observé, de répondre à vos questions et de vous donner des repères : alimentation, signes à surveiller, fréquence des contrôles — et orientation vers votre vétérinaire lorsque c'est nécessaire.",
+      "details": [
+        "Explications claires après chaque visite",
+        "Repères d'alimentation et d'observation",
+        "Lien avec votre vétérinaire"
+      ],
+      "diagram": "advice",
+      "image": "",
+      "imageAlt": "Échange avec un propriétaire de cheval",
+      "price": ""
+    }
+  ],
+  "regulatoryNote": "Les actes réalisés par un technicien dentaire équin sont encadrés par l'article L.243-3 du Code rural et de la pêche maritime et ses textes d'application. Le diagnostic et le traitement des pathologies, la sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent du vétérinaire.",
+  "pricingNote": ""
+}

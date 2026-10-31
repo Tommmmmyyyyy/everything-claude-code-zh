@@ -1,0 +1,17 @@
+{
+  "title": "Je viens à la rencontre de vos chevaux.",
+  "intro": "Écuries privées, pensions, centres équestres : j'interviens directement là où vivent vos chevaux.",
+  "main": {
+    "label": ""
+  },
+  "cities": [],
+  "extended": [],
+  "travelNote": "",
+  "map": {
+    "defaultLat": 46.6,
+    "defaultLng": 2.4,
+    "defaultZoom": 5,
+    "tileUrl": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>"
+  }
+}

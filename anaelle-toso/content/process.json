@@ -1,0 +1,49 @@
+{
+  "provisional": true,
+  "title": "Une intervention, étape par étape.",
+  "intro": "De votre premier message au conseil de suivi, voici comment se déroule une visite.",
+  "steps": [
+    {
+      "title": "Prise de contact",
+      "text": "Par téléphone, par e-mail ou via le formulaire en ligne, vous décrivez votre demande : nombre de chevaux, âge, date du dernier contrôle, comportement observé.",
+      "image": "",
+      "motif": "phone"
+    },
+    {
+      "title": "Organisation du rendez-vous",
+      "text": "Nous convenons ensemble d'une date et d'un créneau. Si plusieurs chevaux sont concernés, précisez-le : l'organisation de la visite en tiendra compte.",
+      "image": "",
+      "motif": "calendar"
+    },
+    {
+      "title": "Arrivée du camion",
+      "text": "J'arrive à l'écurie avec mon camion équipé. Le matériel est préparé avant chaque cheval.",
+      "image": "",
+      "motif": "truck"
+    },
+    {
+      "title": "Préparation du cheval",
+      "text": "Le cheval est installé au licol, dans un endroit calme, propre et éclairé. On prend le temps de faire connaissance, à son rythme.",
+      "image": "",
+      "motif": "halter"
+    },
+    {
+      "title": "Examen de la dentition",
+      "text": "Observation, palpation externe, puis examen de la bouche au pas-d'âne et à la lampe : incisives, barres, tables dentaires, joues et langue.",
+      "image": "",
+      "motif": "exam"
+    },
+    {
+      "title": "Réalisation des soins autorisés",
+      "text": "Les soins sont réalisés dans le cadre des actes autorisés aux techniciens dentaires équins, en respectant le confort du cheval.",
+      "image": "",
+      "motif": "care"
+    },
+    {
+      "title": "Conseils et suivi",
+      "text": "Je vous explique ce qui a été observé et réalisé, et nous fixons ensemble le prochain contrôle. Si la situation relève du vétérinaire, je vous oriente vers lui.",
+      "image": "",
+      "motif": "advice"
+    }
+  ]
+}

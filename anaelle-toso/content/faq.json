@@ -1,0 +1,55 @@
+{
+  "title": "Vos questions, mes réponses.",
+  "items": [
+    {
+      "q": "Pourquoi faire contrôler les dents de son cheval ?",
+      "a": "Les dents du cheval poussent et s'usent tout au long de sa vie. Une usure irrégulière peut créer des pointes d'émail, des surdents ou des déséquilibres qui blessent les joues ou la langue et gênent la mastication. Un contrôle régulier aide à préserver son confort, sa capacité à bien se nourrir et sa relation au mors — souvent avant même que des signes visibles n'apparaissent.",
+      "provisional": false
+    },
+    {
+      "q": "À quelle fréquence prévoir un contrôle ?",
+      "a": "Pour un cheval adulte, un contrôle annuel est généralement recommandé. Les jeunes chevaux (pendant le remplacement des dents de lait), les chevaux âgés et ceux dont la dentition présente des particularités peuvent nécessiter un suivi plus rapproché, par exemple tous les six mois. La fréquence est ajustée à chaque cheval après le premier examen.",
+      "provisional": false
+    },
+    {
+      "q": "Comment savoir si mon cheval présente une gêne dentaire ?",
+      "a": "Certains signes peuvent alerter : difficultés de mastication, aliments qui tombent de la bouche, perte d'état, résistance au mors, salivation excessive, mauvaise haleine ou fibres longues dans le crottin. Ces signes ne constituent pas un diagnostic et peuvent avoir d'autres causes. En cas de douleur, d'aggravation ou de doute, consultez votre vétérinaire.",
+      "provisional": false
+    },
+    {
+      "q": "Comment se déroule une intervention ?",
+      "a": "Après un temps de prise de contact avec le cheval, l'examen commence par l'observation et la palpation externe, puis se poursuit dans la bouche à l'aide d'un pas-d'âne (ouvre-bouche) et d'un éclairage. Les soins autorisés sont ensuite réalisés si nécessaire, puis je vous explique ce qui a été observé et réalisé. Durée moyenne par cheval : [à préciser].",
+      "provisional": true
+    },
+    {
+      "q": "Faut-il préparer son cheval ?",
+      "a": "Il suffit que votre cheval soit disponible, au licol, dans un endroit calme, propre et suffisamment éclairé, idéalement à l'abri. Un point d'eau à proximité est apprécié. Évitez de lui distribuer son repas juste avant le rendez-vous, afin que sa bouche ne soit pas encombrée.",
+      "provisional": true
+    },
+    {
+      "q": "Anaëlle intervient-elle dans les écuries privées ?",
+      "a": "[À confirmer] Oui : je me déplace auprès de vos chevaux, que ce soit en écurie privée, en pension, en centre équestre ou en élevage, dans ma zone d'intervention.",
+      "provisional": true
+    },
+    {
+      "q": "Peut-elle examiner plusieurs chevaux lors d'un déplacement ?",
+      "a": "[À confirmer] Oui, plusieurs chevaux d'une même écurie peuvent être vus lors d'un même déplacement. Indiquez simplement leur nombre dans votre demande de rendez-vous pour que l'organisation de la visite en tienne compte.",
+      "provisional": true
+    },
+    {
+      "q": "Comment prendre rendez-vous ?",
+      "a": "Via le formulaire de demande de rendez-vous de ce site, par téléphone ou par e-mail. Votre demande m'est transmise directement et je vous recontacte pour convenir ensemble d'une date. Un rendez-vous n'est confirmé qu'après ma réponse.",
+      "provisional": false
+    },
+    {
+      "q": "Quand faut-il faire appel à un vétérinaire ?",
+      "a": "Le vétérinaire est votre interlocuteur pour tout ce qui relève du diagnostic et du traitement : douleur importante, gonflement de la face ou de la mâchoire, écoulement nasal, odeur fétide, refus de s'alimenter, dent mobile ou fracturée, infection. La sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent également du vétérinaire. Le technicien dentaire équin intervient dans le cadre des actes que lui autorise la réglementation et vous oriente vers votre vétérinaire dès que la situation le nécessite.",
+      "provisional": false
+    },
+    {
+      "q": "Quel est le cadre réglementaire du métier ?",
+      "a": "En France, l'activité de technicien dentaire équin est encadrée par l'article L.243-3 du Code rural et de la pêche maritime. Les actes qu'il peut réaliser — notamment l'élimination des pointes d'émail et des aspérités des tables dentaires, ainsi que l'extraction des dents de lait et des dents de loup — sont fixés par arrêté (arrêté du 5 octobre 2011 modifié).",
+      "provisional": false
+    }
+  ]
+}

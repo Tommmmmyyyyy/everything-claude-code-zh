@@ -1,0 +1,70 @@
+{
+  "provisional": true,
+  "title": "Derrière chaque intervention, une passion.",
+  "intro": "[Texte à personnaliser] Une ou deux phrases d'introduction, à la première personne, pour donner le ton : qui vous êtes, ce qui vous anime, pourquoi les chevaux.",
+  "portrait": {
+    "image": "",
+    "alt": "Portrait d'Anaëlle Toso",
+    "hint": "Portrait d'Anaëlle, lumière naturelle, avec un cheval en arrière-plan"
+  },
+  "chapters": [
+    {
+      "id": "passion",
+      "label": "La passion",
+      "title": "Les chevaux, depuis toujours",
+      "text": "[Texte à personnaliser] Racontez votre première rencontre avec les chevaux : un souvenir d'enfance, une écurie, un cheval qui a compté.",
+      "image": "",
+      "hint": "Photo personnelle : vous et un cheval qui a marqué votre histoire",
+      "motif": "horse"
+    },
+    {
+      "id": "decouverte",
+      "label": "La découverte du métier",
+      "title": "Le jour où tout a commencé",
+      "text": "[Texte à personnaliser] Comment avez-vous découvert la dentisterie équine ? Une rencontre, une observation, une évidence ?",
+      "image": "",
+      "hint": "Photo d'archive ou de vos débuts",
+      "motif": "tools"
+    },
+    {
+      "id": "parcours",
+      "label": "Le parcours",
+      "title": "Un chemin construit pas à pas",
+      "text": "[Texte à personnaliser] Les grandes étapes de votre parcours professionnel, en restant factuelle (lieux, expériences, rencontres).",
+      "image": "",
+      "hint": "Photo en écurie ou en déplacement",
+      "motif": "stable"
+    },
+    {
+      "id": "formation",
+      "label": "La formation",
+      "title": "Apprendre, et continuer d'apprendre",
+      "text": "[Texte à personnaliser] Votre formation et votre titre exacts, tels qu'ils figurent sur vos documents officiels. Ne mentionnez que des qualifications réellement obtenues.",
+      "image": "",
+      "hint": "Photo de matériel ou de formation",
+      "motif": "tools"
+    },
+    {
+      "id": "vision",
+      "label": "La vision",
+      "title": "Le bien-être comme boussole",
+      "text": "[Texte à personnaliser] Votre vision du bien-être équin : ce qui compte pour vous lors de chaque intervention.",
+      "image": "",
+      "hint": "Photo d'un cheval détendu, en pâture",
+      "motif": "pasture"
+    },
+    {
+      "id": "proprietaires",
+      "label": "L'approche avec les propriétaires",
+      "title": "Expliquer, rassurer, accompagner",
+      "text": "[Texte à personnaliser] Comment vous accompagnez les propriétaires : explications, conseils, suivi dans le temps.",
+      "image": "",
+      "hint": "Photo d'un échange avec un propriétaire",
+      "motif": "intervention"
+    }
+  ],
+  "quote": {
+    "text": "[Citation à personnaliser] Une phrase qui vous ressemble.",
+    "author": "Anaëlle Toso"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "_doc": "Explorateur anatomique (section « Comprendre la dentition »). id ne doit pas être modifié (il pilote les surlignages du schéma).",
+  "title": "Comprendre la dentition de votre cheval.",
+  "intro": "Un cheval adulte possède de 36 à 44 dents. Ses dents jugales poussent et s'usent tout au long de sa vie : c'est pour cela que leur équilibre se surveille.",
+  "note": "Schéma pédagogique simplifié — vue latérale gauche. Numérotation selon le système de Triadan modifié.",
+  "items": [
+    {
+      "id": "incisives",
+      "title": "Les incisives",
+      "short": "Couper l'herbe",
+      "text": "Douze incisives — six en haut, six en bas — coupent l'herbe au pâturage. Leur forme et leurs tables évoluent avec l'âge. Chez les mâles, des canines, appelées « crochets », se trouvent souvent dans l'espace interdentaire.",
+      "detail": "incisors",
+      "hotspot": [92, 356]
+    },
+    {
+      "id": "premolaires",
+      "title": "Les prémolaires",
+      "short": "Ouvrir l'arcade",
+      "text": "Trois prémolaires par demi-mâchoire (dents 06 à 08) ouvrent la rangée des dents jugales. La première d'entre elles est la plus proche de l'emplacement du mors.",
+      "detail": "arch-premolaires",
+      "hotspot": [452, 300]
+    },
+    {
+      "id": "molaires",
+      "title": "Les molaires",
+      "short": "Broyer les fibres",
+      "text": "Trois molaires par demi-mâchoire (dents 09 à 11) complètent l'arcade. Comme les prémolaires, ce sont des dents à couronne très longue : elles sortent progressivement de l'os et s'usent d'environ 2 à 3 mm par an.",
+      "detail": "arch-molaires",
+      "hotspot": [598, 292]
+    },
+    {
+      "id": "tables",
+      "title": "Les tables dentaires",
+      "short": "La surface de mastication",
+      "text": "La table dentaire est la surface de mastication des dents jugales. Ses replis d'émail, plus durs que la dentine et le cément, forment des crêtes qui broient les fibres. Une table équilibrée est la condition d'une mastication efficace.",
+      "detail": "molar-table",
+      "hotspot": [520, 346]
+    },
+    {
+      "id": "pointes",
+      "title": "Les pointes d'émail",
+      "short": "Ce qui blesse",
+      "text": "La mâchoire supérieure est plus large que la mâchoire inférieure. La mastication use donc les dents en biais : des pointes tranchantes se forment sur le bord externe des dents du haut et sur le bord interne des dents du bas, au contact des joues et de la langue.",
+      "detail": "cross-section",
+      "hotspot": [640, 352]
+    },
+    {
+      "id": "surdents",
+      "title": "Les surdents",
+      "short": "Crochets, rampes, vagues",
+      "text": "Quand une dent n'est pas usée par sa dent opposée, elle dépasse : crochet sur la première dent jugale, rampe sur la dernière, vagues ou marches le long de l'arcade. Ces excès peuvent gêner les mouvements de la mâchoire.",
+      "detail": "hooks",
+      "hotspot": [380, 362]
+    },
+    {
+      "id": "dents-de-loup",
+      "title": "Les dents de loup",
+      "short": "Près du mors",
+      "text": "Petites prémolaires vestigiales (dents 05), présentes chez une partie des chevaux, le plus souvent sur la mâchoire supérieure, juste devant la première dent jugale. Situées près de l'emplacement du mors, elles peuvent être source d'inconfort.",
+      "detail": "wolf",
+      "hotspot": [360, 322]
+    }
+  ]
+}

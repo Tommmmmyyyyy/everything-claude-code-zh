@@ -1,0 +1,56 @@
+{
+  "title": "Et si votre cheval essayait de vous dire quelque chose ?",
+  "intro": "Un cheval ne dit pas qu'il a mal aux dents. Il le montre. Voici quelques signes qui peuvent justifier un contrôle dentaire — ou un avis vétérinaire.",
+  "items": [
+    {
+      "id": "mastication",
+      "title": "Difficultés de mastication",
+      "text": "Une mastication lente ou inhabituelle, la tête penchée, des arrêts fréquents pendant le repas.",
+      "icon": "chew",
+      "vet": false
+    },
+    {
+      "id": "boulettes",
+      "title": "Aliments qui tombent de la bouche",
+      "text": "Des boulettes de foin ou des grains qui tombent pendant le repas : le cheval « fait des boulettes ».",
+      "icon": "drop-food",
+      "vet": false
+    },
+    {
+      "id": "condition",
+      "title": "Perte de condition corporelle",
+      "text": "Un amaigrissement progressif, sans changement de ration ni d'activité. De nombreuses causes sont possibles : un avis vétérinaire est recommandé.",
+      "icon": "condition",
+      "vet": true
+    },
+    {
+      "id": "mors",
+      "title": "Résistance inhabituelle au mors",
+      "text": "Encensement, bouche ouverte, tête qui se dérobe, défenses nouvelles au contact du mors.",
+      "icon": "bit",
+      "vet": false
+    },
+    {
+      "id": "salivation",
+      "title": "Salivation excessive",
+      "text": "Une bave abondante, en dehors de l'effort ou de la mise en bouche du mors.",
+      "icon": "saliva",
+      "vet": false
+    },
+    {
+      "id": "haleine",
+      "title": "Mauvaise haleine",
+      "text": "Une odeur forte ou inhabituelle de la bouche ou des naseaux peut traduire une infection : contactez votre vétérinaire.",
+      "icon": "breath",
+      "vet": true
+    },
+    {
+      "id": "fibres",
+      "title": "Aliments partiellement mastiqués",
+      "text": "Des fibres longues ou des grains entiers visibles dans le crottin.",
+      "icon": "fibers",
+      "vet": false
+    }
+  ],
+  "disclaimer": "Ces signes ne constituent pas un diagnostic. Ils peuvent avoir d'autres origines que dentaires. En cas de douleur, de gonflement, d'écoulement, de perte d'appétit ou au moindre doute, contactez votre vétérinaire."
+}

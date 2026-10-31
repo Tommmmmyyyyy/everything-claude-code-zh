@@ -1,0 +1,128 @@
+{
+  "title": "Instants d'écurie.",
+  "intro": "Les chevaux, les gestes, la route : quelques images du quotidien.",
+  "categories": [
+    {
+      "id": "chevaux",
+      "label": "Les chevaux"
+    },
+    {
+      "id": "interventions",
+      "label": "Les interventions"
+    },
+    {
+      "id": "ecuries",
+      "label": "Les écuries"
+    },
+    {
+      "id": "camion",
+      "label": "Le camion"
+    },
+    {
+      "id": "materiel",
+      "label": "Le matériel"
+    },
+    {
+      "id": "coulisses",
+      "label": "Les coulisses"
+    }
+  ],
+  "items": [
+    {
+      "src": "",
+      "alt": "",
+      "category": "chevaux",
+      "layout": "hero",
+      "caption": "Portrait de cheval, lumière du matin",
+      "motif": "horse"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "interventions",
+      "layout": "tall",
+      "caption": "Examen au pas-d'âne, plan serré",
+      "motif": "intervention"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "camion",
+      "layout": "wide",
+      "caption": "Le camion à l'entrée d'une écurie",
+      "motif": "truck"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "materiel",
+      "layout": "square",
+      "caption": "Le matériel, rangé dans le camion",
+      "motif": "tools"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "ecuries",
+      "layout": "tall",
+      "caption": "Allée d'écurie, chevaux aux boxes",
+      "motif": "stable"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "chevaux",
+      "layout": "square",
+      "caption": "Chevaux en pâture",
+      "motif": "pasture"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "coulisses",
+      "layout": "wide",
+      "caption": "Sur la route, entre deux rendez-vous",
+      "motif": "road"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "interventions",
+      "layout": "square",
+      "caption": "Échange avec un propriétaire",
+      "motif": "intervention"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "materiel",
+      "layout": "tall",
+      "caption": "Détail d'un instrument",
+      "motif": "tools"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "ecuries",
+      "layout": "wide",
+      "caption": "Une écurie au petit matin",
+      "motif": "stable"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "camion",
+      "layout": "square",
+      "caption": "Le camion, porte latérale ouverte",
+      "motif": "truck"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "category": "coulisses",
+      "layout": "square",
+      "caption": "Préparation avant une intervention",
+      "motif": "tools"
+    }
+  ]
+}

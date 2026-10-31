@@ -1,0 +1,57 @@
+{
+  "identity": {
+    "firstName": "Anaëlle",
+    "lastName": "Toso",
+    "fullName": "Anaëlle Toso",
+    "profession": "Technicienne dentaire équine",
+    "tagline": "Le bien-être commence par une bouche en bonne santé.",
+    "subtitle": "Technicienne dentaire équine — Des soins adaptés au confort et au bien-être de vos chevaux.",
+    "seoDescription": "Anaëlle Toso, technicienne dentaire équine : examen de la dentition, entretien des tables dentaires et suivi du confort buccal de vos chevaux, directement à l'écurie."
+  },
+  "contact": {
+    "phone": "",
+    "phoneDisplay": "",
+    "email": "",
+    "addressLocality": "",
+    "region": "",
+    "hours": ""
+  },
+  "social": {
+    "instagram": "",
+    "instagramHandle": "",
+    "facebook": "",
+    "tiktok": ""
+  },
+  "booking": {
+    "calendlyUrl": "",
+    "googleAppointmentUrl": "",
+    "responseDelay": ""
+  },
+  "hero": {
+    "video": "",
+    "image": "",
+    "imageAlt": "Cheval dans une pâture au lever du soleil"
+  },
+  "truck": {
+    "image": "",
+    "imageAlt": "Le camion d'intervention d'Anaëlle Toso",
+    "livery": "ANAËLLE TOSO",
+    "liverySub": "Dentisterie équine"
+  },
+  "legal": {
+    "businessName": "",
+    "status": "",
+    "siret": "",
+    "address": "",
+    "publicationDirector": "Anaëlle Toso",
+    "host": "",
+    "hostAddress": "",
+    "dataRetention": "",
+    "lastUpdate": ""
+  },
+  "credits": {
+    "label": "Direction artistique & développement",
+    "studio": "",
+    "url": ""
+  }
+}
