@@ -59,6 +59,7 @@ export default async function Home() {
         profession={id.profession}
         video={site.hero.video}
         image={site.hero.image}
+        imageMobile={site.hero.imageMobile}
         imageAlt={site.hero.imageAlt}
       />
       <Approach />

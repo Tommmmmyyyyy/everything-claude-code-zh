@@ -83,7 +83,8 @@ export default config({
         hero: fields.object(
           {
             video: fields.text({ label: "Vidéo d'ouverture (chemin, ex. /images/hero/pature.mp4)" }),
-            image: img("Photo d'ouverture", "hero"),
+            image: img("Photo d'ouverture (format paysage)", "hero"),
+            imageMobile: img("Photo d'ouverture sur mobile (format portrait)", "hero"),
             imageAlt: fields.text({ label: "Description de la photo" }),
           },
           { label: "Ouverture (hero)" },
@@ -175,6 +176,7 @@ export default config({
             image: img("Portrait", "histoire"),
             alt: fields.text({ label: "Description" }),
             hint: fields.text({ label: "Indication (si pas de photo)" }),
+            caption: fields.text({ label: "Légende / crédit photo" }),
           },
           { label: "Portrait" },
         ),
@@ -187,6 +189,7 @@ export default config({
             image: img("Photo", "histoire"),
             hint: fields.text({ label: "Indication (si pas de photo)" }),
             motif: fields.select({ label: "Illustration de remplacement", defaultValue: "horse", options: MOTIFS }),
+            caption: fields.text({ label: "Légende / crédit photo" }),
           }),
           { label: "Chapitres", itemLabel: (p) => p.fields.label.value },
         ),
@@ -311,6 +314,7 @@ export default config({
                 { label: "Portrait", value: "tall" },
                 { label: "Paysage", value: "wide" },
                 { label: "Carré", value: "square" },
+                { label: "Paysage 3:2", value: "landscape" },
               ],
             }),
             caption: fields.text({ label: "Légende" }),

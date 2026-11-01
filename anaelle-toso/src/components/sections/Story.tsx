@@ -10,8 +10,8 @@ export function Story({ content }: { content: StoryContent }) {
 
       {/* Ouverture : portrait + introduction */}
       <div className="container-x mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-6">
-        <div className="md:col-span-5 md:col-start-1">
-          <div data-reveal="mask" className="relative aspect-[4/5] overflow-hidden rounded-[12px]">
+        <figure className={content.portrait.image ? "md:col-span-6 md:col-start-1" : "md:col-span-5 md:col-start-1"}>
+          <div data-reveal="mask" className={`relative overflow-hidden rounded-[12px] ${content.portrait.image ? "aspect-[3/2]" : "aspect-[4/5]"}`}>
             <PhotoSlot
               src={content.portrait.image}
               alt={content.portrait.alt}
@@ -22,8 +22,9 @@ export function Story({ content }: { content: StoryContent }) {
               innerProps={{ "data-reveal-inner": "" }}
             />
           </div>
-        </div>
-        <div className="flex flex-col justify-end md:col-span-6 md:col-start-7">
+          {content.portrait.caption && <figcaption className="micro mt-3 text-cream/45">{content.portrait.caption}</figcaption>}
+        </figure>
+        <div className="flex flex-col justify-end md:col-span-5 md:col-start-8">
           <p className="body-lg text-cream/85" data-reveal="up">
             <ProvisionalText text={content.intro} />
           </p>
@@ -71,6 +72,7 @@ export function Story({ content }: { content: StoryContent }) {
                       innerProps={{ "data-reveal-inner": "" }}
                     />
                   </div>
+                  {c.image && c.caption && <p className="micro mt-3 text-cream/45">{c.caption}</p>}
                 </div>
                 <div className={`flex flex-col justify-end md:col-span-4 ${flip ? "md:order-1 md:col-start-1" : ""}`}>
                   <p className="label text-sand" data-reveal="up">

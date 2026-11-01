@@ -14,10 +14,11 @@ interface Props {
   profession: string;
   video: string | null;
   image: string | null;
+  imageMobile?: string | null;
   imageAlt: string;
 }
 
-export function Hero({ firstName, lastName, tagline, subtitle, profession, video, image, imageAlt }: Props) {
+export function Hero({ firstName, lastName, tagline, subtitle, profession, video, image, imageMobile, imageAlt }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -118,8 +119,15 @@ export function Hero({ firstName, lastName, tagline, subtitle, profession, video
             aria-label={imageAlt}
           />
         ) : image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
+          <div data-depth="0.1" className="absolute inset-[-4%] will-change-transform">
+            <picture>
+              {imageMobile && <source media="(max-width: 767px)" srcSet={imageMobile} />}
+              <img src={image} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover object-[22%_58%] max-md:object-[55%_62%]" fetchPriority="high" />
+            </picture>
+            {/* Étalonnage : lumière dorée et noirs chauds, accordés à la palette */}
+            <div className="absolute inset-0 mix-blend-soft-light" style={{ background: "linear-gradient(160deg, rgba(240,180,110,0.55), rgba(122,75,42,0.35) 55%, rgba(13,10,7,0.6))" }} />
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 18% 22%, rgba(13,10,7,0.72), rgba(13,10,7,0) 58%)" }} />
+          </div>
         ) : (
           <HeroLandscape />
         )}

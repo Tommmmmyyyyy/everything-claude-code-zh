@@ -29,8 +29,9 @@
   },
   "hero": {
     "video": "",
-    "image": "",
-    "imageAlt": "Cheval dans une pâture au lever du soleil"
+    "image": "/images/hero/paturage-contre-jour-large.jpg",
+    "imageAlt": "Complicité avec un cheval bai dans une pâture, à contre-jour",
+    "imageMobile": "/images/hero/paturage-contre-jour.jpg"
   },
   "truck": {
     "image": "",

@@ -18,7 +18,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
       <Cursor />
       <Experience />
       {DEMO && (
-        <p className="micro pointer-events-none fixed bottom-4 right-4 z-[140] rounded-full border border-cognac/60 bg-ink/85 px-3.5 py-2 text-cognac backdrop-blur-sm">
+        <p className="micro pointer-events-none fixed bottom-4 right-4 z-[140] rounded-full border border-cognac/60 bg-ink/85 px-3.5 py-2 text-cognac backdrop-blur-sm max-md:bottom-2 max-md:right-2 max-md:px-2 max-md:py-1 max-md:text-[8px] max-md:opacity-80">
           Prototype — version de travail
         </p>
       )}

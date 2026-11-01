@@ -55,7 +55,7 @@ export interface SiteContent {
     googleAppointmentUrl: string | null;
     responseDelay: string | null;
   };
-  hero: { video: string | null; image: string | null; imageAlt: string };
+  hero: { video: string | null; image: string | null; imageMobile?: string | null; imageAlt: string };
   truck: { image: string | null; imageAlt: string; livery: string; liverySub: string };
   legal: {
     businessName: string | null;
@@ -100,13 +100,14 @@ export interface StoryChapter {
   image: string | null;
   hint: string;
   motif: Motif;
+  caption?: string | null;
 }
 
 export interface StoryContent {
   provisional: boolean;
   title: string;
   intro: string;
-  portrait: { image: string | null; alt: string; hint: string };
+  portrait: { image: string | null; alt: string; hint: string; caption?: string | null };
   chapters: StoryChapter[];
   quote: { text: string; author: string };
 }
@@ -140,7 +141,7 @@ export interface SignsContent {
   disclaimer: string;
 }
 
-export type GalleryLayout = "hero" | "wide" | "tall" | "square";
+export type GalleryLayout = "hero" | "wide" | "tall" | "square" | "landscape";
 
 export interface GalleryItem {
   src: string | null;

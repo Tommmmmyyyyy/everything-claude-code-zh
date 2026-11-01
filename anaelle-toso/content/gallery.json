@@ -29,20 +29,60 @@
   ],
   "items": [
     {
-      "src": "",
-      "alt": "",
+      "src": "/images/galerie/portrait-poney.jpg",
+      "alt": "Anaëlle Toso et un poney bai, portrait en studio",
       "category": "chevaux",
-      "layout": "hero",
-      "caption": "Portrait de cheval, lumière du matin",
+      "layout": "landscape",
+      "caption": "Complicité, en studio — photo : LD",
       "motif": "horse"
     },
     {
-      "src": "",
-      "alt": "",
+      "src": "/images/galerie/intervention-montagne.jpg",
+      "alt": "Examen dentaire d'un cheval alezan au pas-d'âne, dans une écurie de montagne",
       "category": "interventions",
       "layout": "tall",
-      "caption": "Examen au pas-d'âne, plan serré",
+      "caption": "Examen au pas-d'âne, à l'écurie",
       "motif": "intervention"
+    },
+    {
+      "src": "/images/galerie/materiel-ensemble.jpg",
+      "alt": "Illustration du matériel : pas-d'âne, râpes dentaires, miroir, lampe frontale et seringue de rinçage",
+      "category": "materiel",
+      "layout": "wide",
+      "caption": "Le matériel (illustration)",
+      "motif": "tools"
+    },
+    {
+      "src": "/images/galerie/cso-la-falize-2024.jpg",
+      "alt": "Cavalière et cheval bai au saut d'obstacle, CSO La Falize 2024",
+      "category": "chevaux",
+      "layout": "tall",
+      "caption": "CSO La Falize, 6 octobre 2024",
+      "motif": "horse"
+    },
+    {
+      "src": "/images/galerie/pas-dane-detail.jpg",
+      "alt": "Gros plan sur un pas-d'âne en place sur un cheval alezan",
+      "category": "interventions",
+      "layout": "square",
+      "caption": "Le pas-d'âne en place",
+      "motif": "intervention"
+    },
+    {
+      "src": "/images/galerie/paturage-carre.jpg",
+      "alt": "Cheval bai au pré, à contre-jour",
+      "category": "chevaux",
+      "layout": "square",
+      "caption": "Au pré, à contre-jour",
+      "motif": "pasture"
+    },
+    {
+      "src": "/images/galerie/materiel-rapes.jpg",
+      "alt": "Illustration de deux râpes dentaires",
+      "category": "materiel",
+      "layout": "wide",
+      "caption": "Les râpes (illustration)",
+      "motif": "tools"
     },
     {
       "src": "",
@@ -53,11 +93,11 @@
       "motif": "truck"
     },
     {
-      "src": "",
-      "alt": "",
+      "src": "/images/galerie/materiel-pas-dane.jpg",
+      "alt": "Illustration d'un pas-d'âne",
       "category": "materiel",
       "layout": "square",
-      "caption": "Le matériel, rangé dans le camion",
+      "caption": "Le pas-d'âne (illustration)",
       "motif": "tools"
     },
     {
@@ -71,42 +111,10 @@
     {
       "src": "",
       "alt": "",
-      "category": "chevaux",
-      "layout": "square",
-      "caption": "Chevaux en pâture",
-      "motif": "pasture"
-    },
-    {
-      "src": "",
-      "alt": "",
       "category": "coulisses",
-      "layout": "wide",
+      "layout": "square",
       "caption": "Sur la route, entre deux rendez-vous",
       "motif": "road"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "interventions",
-      "layout": "square",
-      "caption": "Échange avec un propriétaire",
-      "motif": "intervention"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "materiel",
-      "layout": "tall",
-      "caption": "Détail d'un instrument",
-      "motif": "tools"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "ecuries",
-      "layout": "wide",
-      "caption": "Une écurie au petit matin",
-      "motif": "stable"
     },
     {
       "src": "",
@@ -115,14 +123,6 @@
       "layout": "square",
       "caption": "Le camion, porte latérale ouverte",
       "motif": "truck"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "coulisses",
-      "layout": "square",
-      "caption": "Préparation avant une intervention",
-      "motif": "tools"
     }
   ]
 }

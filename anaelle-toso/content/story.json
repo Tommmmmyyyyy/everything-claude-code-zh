@@ -3,9 +3,10 @@
   "title": "Derrière chaque intervention, une passion.",
   "intro": "[Texte à personnaliser] Une ou deux phrases d'introduction, à la première personne, pour donner le ton : qui vous êtes, ce qui vous anime, pourquoi les chevaux.",
   "portrait": {
-    "image": "",
-    "alt": "Portrait d'Anaëlle Toso",
-    "hint": "Portrait d'Anaëlle, lumière naturelle, avec un cheval en arrière-plan"
+    "image": "/images/histoire/portrait-poney.jpg",
+    "alt": "Portrait d'Anaëlle Toso avec un poney bai",
+    "hint": "Portrait d'Anaëlle, lumière naturelle, avec un cheval en arrière-plan",
+    "caption": "Photo : LD"
   },
   "chapters": [
     {
@@ -13,9 +14,10 @@
       "label": "La passion",
       "title": "Les chevaux, depuis toujours",
       "text": "[Texte à personnaliser] Racontez votre première rencontre avec les chevaux : un souvenir d'enfance, une écurie, un cheval qui a compté.",
-      "image": "",
+      "image": "/images/histoire/cso-la-falize-2024.jpg",
       "hint": "Photo personnelle : vous et un cheval qui a marqué votre histoire",
-      "motif": "horse"
+      "motif": "horse",
+      "caption": "CSO La Falize, 6 octobre 2024"
     },
     {
       "id": "decouverte",
@@ -31,27 +33,30 @@
       "label": "Le parcours",
       "title": "Un chemin construit pas à pas",
       "text": "[Texte à personnaliser] Les grandes étapes de votre parcours professionnel, en restant factuelle (lieux, expériences, rencontres).",
-      "image": "",
+      "image": "/images/histoire/intervention-montagne.jpg",
       "hint": "Photo en écurie ou en déplacement",
-      "motif": "stable"
+      "motif": "stable",
+      "caption": "Examen au pas-d'âne"
     },
     {
       "id": "formation",
       "label": "La formation",
       "title": "Apprendre, et continuer d'apprendre",
       "text": "[Texte à personnaliser] Votre formation et votre titre exacts, tels qu'ils figurent sur vos documents officiels. Ne mentionnez que des qualifications réellement obtenues.",
-      "image": "",
+      "image": "/images/galerie/materiel-pas-dane.jpg",
       "hint": "Photo de matériel ou de formation",
-      "motif": "tools"
+      "motif": "tools",
+      "caption": "Le pas-d'âne (illustration)"
     },
     {
       "id": "vision",
       "label": "La vision",
       "title": "Le bien-être comme boussole",
       "text": "[Texte à personnaliser] Votre vision du bien-être équin : ce qui compte pour vous lors de chaque intervention.",
-      "image": "",
+      "image": "/images/histoire/paturage-complicite.jpg",
       "hint": "Photo d'un cheval détendu, en pâture",
-      "motif": "pasture"
+      "motif": "pasture",
+      "caption": "Au pré"
     },
     {
       "id": "proprietaires",

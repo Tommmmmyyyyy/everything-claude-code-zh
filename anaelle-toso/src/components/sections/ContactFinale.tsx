@@ -1,6 +1,6 @@
+import Image from "next/image";
 import type { SiteContent, ZoneContent } from "@/lib/content";
 import { ButtonLink } from "@/components/ui/Button";
-import { HORSE_HEAD_DOOR } from "@/components/illustrations/silhouettes";
 import { SocialIcon } from "./Social";
 import { SHOW_PLACEHOLDERS } from "@/lib/config";
 
@@ -24,18 +24,19 @@ export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneCon
       {/* Grand cheval à contre-jour */}
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 72% 58%, #e7b072 0%, #a5643a 18%, #3b2618 42%, #0d0a07 72%)" }} />
-        <div data-parallax="0.12" className="absolute -right-[8%] bottom-0 h-[92%] w-[min(1100px,95vw)]">
-          <svg viewBox="0 0 300 300" preserveAspectRatio="xMaxYMax meet" className="h-full w-full">
-            <g transform="translate(300 0) scale(-1 1)">
-              <path d={HORSE_HEAD_DOOR} fill="#0b0805" />
-              <path d={HORSE_HEAD_DOOR} fill="none" stroke="#f3c48a" strokeOpacity="0.55" strokeWidth="1.2" />
-              <path d="M 176 140 C 182 134, 194 134, 200 140 C 194 146, 182 146, 176 140 Z" fill="#2a1c12" />
-              <path d="M 252 222 C 258 216, 266 220, 264 228" fill="none" stroke="#3b2618" strokeWidth="2.4" strokeLinecap="round" />
-              <path d="M 146 104 C 120 130, 96 160, 78 196 M 140 112 C 112 146, 92 178, 74 214 M 150 102 C 128 124, 108 150, 90 178" fill="none" stroke="#f3c48a" strokeOpacity="0.18" strokeWidth="1" />
-            </g>
-          </svg>
+        <div className="absolute inset-y-0 right-0 w-full overflow-hidden md:w-[66%] md:[mask-image:linear-gradient(to_right,transparent,black_38%)]">
+          <div data-parallax="0.08" className="absolute inset-[-8%_0]">
+            <Image
+              src="/images/contact/cheval-pas-dane.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 768px) 62vw, 100vw"
+              className="object-cover object-[35%_40%]"
+            />
+          </div>
+          <div className="absolute inset-0 mix-blend-soft-light" style={{ background: "linear-gradient(200deg, rgba(240,180,110,0.5), rgba(13,10,7,0.5))" }} />
         </div>
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,10,7,0.92) 0%, rgba(13,10,7,0.55) 45%, rgba(13,10,7,0) 75%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,10,7,0.97) 0%, rgba(13,10,7,0.88) 38%, rgba(13,10,7,0.2) 70%, rgba(13,10,7,0.05) 100%), linear-gradient(to top, rgba(13,10,7,0.9), rgba(13,10,7,0) 45%)" }} />
         <div className="absolute inset-0 overflow-hidden">
           <div className="grain" />
         </div>

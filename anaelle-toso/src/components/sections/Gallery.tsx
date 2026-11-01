@@ -16,6 +16,7 @@ const ASPECT: Record<GalleryItem["layout"], string> = {
   tall: "aspect-[3/4]",
   wide: "aspect-[4/3]",
   square: "aspect-square",
+  landscape: "aspect-[3/2]",
 };
 
 export function Gallery({ content }: { content: GalleryContent }) {
