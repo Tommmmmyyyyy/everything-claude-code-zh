@@ -23,7 +23,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     const cleanup = setupPageFX();
     if (!prefersReducedMotion() && root.current) {
       // Opacité seule : une transformation casserait l'épinglage des sections animées.
-      gsap.fromTo(root.current, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out", clearProps: "opacity" });
+      gsap.fromTo(root.current, { opacity: 0 }, { opacity: 1, duration: 0.7, delay: 0.1, ease: "power2.out", clearProps: "opacity" });
     }
     const t = target ? setTimeout(() => scrollToTarget(target, { immediate: true }), 350) : undefined;
     return () => {

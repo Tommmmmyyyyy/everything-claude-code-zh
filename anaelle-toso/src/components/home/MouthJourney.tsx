@@ -236,7 +236,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
               <div key={l.id} data-mj-label data-side={l.side} className="group invisible absolute left-0 top-0 opacity-0 will-change-transform">
                 <span className="absolute -left-[5px] -top-[5px] h-2.5 w-2.5 rounded-full bg-sand shadow-[0_0_0_4px_rgba(217,196,160,0.18),0_0_18px_rgba(255,170,90,0.6)]" />
                 <span className="absolute left-2 top-0 h-px w-10 border-t border-dashed border-cream/60 group-data-[side=l]:left-auto group-data-[side=l]:right-2 md:w-16" />
-                <span data-mj-pill className="label absolute -top-[13px] left-12 whitespace-nowrap rounded-full border border-cream/25 bg-ink/70 px-3 py-1.5 text-[10px] text-cream backdrop-blur-sm group-data-[side=l]:left-auto group-data-[side=l]:right-12 md:left-[4.5rem] md:text-[11px] md:group-data-[side=l]:left-auto md:group-data-[side=l]:right-[4.5rem]">
+                <span data-mj-pill className="label absolute -top-[13px] left-12 whitespace-nowrap rounded-full border border-cream/25 bg-ink/80 px-3 py-1.5 text-[10px] text-cream group-data-[side=l]:left-auto group-data-[side=l]:right-12 md:left-[4.5rem] md:text-[11px] md:group-data-[side=l]:left-auto md:group-data-[side=l]:right-[4.5rem]">
                   <span className="md:hidden">{l.short ?? l.text}</span>
                   <span className="max-md:hidden">{l.text}</span>
                 </span>
@@ -284,7 +284,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
             {/* Chapitres */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-10 md:pb-14">
               <div className="container-x">
-                <div className="grid max-w-md transition-opacity duration-500 max-md:rounded-[12px] max-md:bg-ink/60 max-md:p-5 max-md:backdrop-blur-[6px] [&:not(:has(.is-active))]:opacity-0">
+                <div className="grid max-w-md transition-opacity duration-500 max-md:rounded-[12px] max-md:bg-ink/80 max-md:p-5 [&:not(:has(.is-active))]:opacity-0">
                 {CHAPTERS.map((c) => (
                   <article
                     key={c.n}

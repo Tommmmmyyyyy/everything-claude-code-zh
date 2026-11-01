@@ -16,7 +16,7 @@ export function getLenis() {
 export function scrollToTarget(target: string | HTMLElement | number, opts: { offset?: number; immediate?: boolean } = {}) {
   const lenis = instance;
   if (lenis) {
-    lenis.scrollTo(target, { offset: opts.offset ?? 0, immediate: opts.immediate, duration: 1.6 });
+    lenis.scrollTo(target, { offset: opts.offset ?? 0, immediate: opts.immediate, duration: 1.25, easing: (t) => 1 - Math.pow(1 - t, 4) });
     return;
   }
   if (typeof target === "number") {

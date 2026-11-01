@@ -25,7 +25,7 @@ export function Experience() {
     const cleanups: Array<() => void> = [];
 
     if (!reduce) {
-      lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.4 });
+      lenis = new Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.4 });
       setLenis(lenis);
       lenis.on("scroll", ScrollTrigger.update);
       const raf = (time: number) => lenis?.raf(time * 1000);
@@ -77,6 +77,33 @@ export function Experience() {
     };
     document.addEventListener("click", onClick, true);
     cleanups.push(() => document.removeEventListener("click", onClick, true));
+
+    /* Préchargement au survol / au toucher : la page suivante est prête avant le clic */
+    const warmed = new Set<string>();
+    const warm = (e: Event) => {
+      const a = (e.target as HTMLElement | null)?.closest?.("a");
+      const href = a?.getAttribute("href");
+      if (!a || !href || a.target === "_blank" || /^(mailto:|tel:|#)/.test(href)) return;
+      const url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin || url.pathname === window.location.pathname || warmed.has(url.pathname)) return;
+      warmed.add(url.pathname);
+      if (DEMO) {
+        const l = document.createElement("link");
+        l.rel = "prefetch";
+        l.href = url.pathname;
+        document.head.appendChild(l);
+      } else {
+        router.prefetch(url.pathname);
+      }
+    };
+    document.addEventListener("pointerover", warm, { passive: true });
+    document.addEventListener("touchstart", warm, { passive: true });
+    document.addEventListener("focusin", warm);
+    cleanups.push(() => {
+      document.removeEventListener("pointerover", warm);
+      document.removeEventListener("touchstart", warm);
+      document.removeEventListener("focusin", warm);
+    });
 
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(refresh);

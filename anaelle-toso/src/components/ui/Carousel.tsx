@@ -49,8 +49,10 @@ export function Carousel({ label, children, itemClass = "w-[82vw] sm:w-[48vw] lg
         card.style.opacity = String(1 - Math.min(Math.abs(t), 1.2) * 0.32);
       }
     });
-    setIndex(best);
-    setEdges({ start: el.scrollLeft < 8, end: el.scrollLeft + el.clientWidth > el.scrollWidth - 8 });
+    setIndex((v) => (v === best ? v : best));
+    const start = el.scrollLeft < 8;
+    const end = el.scrollLeft + el.clientWidth > el.scrollWidth - 8;
+    setEdges((e) => (e.start === start && e.end === end ? e : { start, end }));
   }, [depth]);
 
   useEffect(() => {
@@ -149,7 +151,7 @@ export function Carousel({ label, children, itemClass = "w-[82vw] sm:w-[48vw] lg
       >
         {items.map((child, i) => (
           <li key={i} className={`shrink-0 snap-start ${itemClass}`} role="group" aria-roledescription="diapositive" aria-label={`${i + 1} sur ${items.length}`}>
-            <div className="h-full origin-center transition-[transform,opacity] duration-300 ease-out will-change-transform">{child}</div>
+            <div className="h-full origin-center">{child}</div>
           </li>
         ))}
         <li aria-hidden="true" className="w-px shrink-0" />

@@ -8,6 +8,8 @@ import { useGSAP } from "@gsap/react";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
   gsap.defaults({ ease: "expo.out", duration: 1.1 });
+  // mobile : la barre d'adresse qui se replie ne doit pas provoquer de recalcul (saccades)
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 export { gsap, ScrollTrigger, SplitText, useGSAP };

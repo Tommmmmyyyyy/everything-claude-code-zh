@@ -33,8 +33,8 @@ export function cover(label: string, then: () => void) {
   gsap.set(el, { visibility: "visible" });
   gsap
     .timeline({ onComplete: then })
-    .fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "expo.inOut" })
-    .fromTo(el.querySelectorAll("[data-curtain-in]"), { yPercent: 110 }, { yPercent: 0, duration: 0.5, stagger: 0.05, ease: "expo.out" }, 0.18);
+    .fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "expo.inOut" })
+    .fromTo(el.querySelectorAll("[data-curtain-in]"), { yPercent: 110 }, { yPercent: 0, duration: 0.45, stagger: 0.04, ease: "expo.out" }, 0.16);
 }
 
 export function uncover() {
@@ -51,10 +51,15 @@ export function uncover() {
   covered = false;
   gsap.killTweensOf(el);
   gsap.set(el, { visibility: "visible", clipPath: "inset(0% 0% 0% 0%)" });
-  gsap
-    .timeline({ delay: 0.05, onComplete: () => gsap.set(el, { visibility: "hidden" }) })
-    .to(el.querySelectorAll("[data-curtain-in]"), { yPercent: -110, duration: 0.35, stagger: 0.03, ease: "expo.in" })
-    .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.7, ease: "expo.inOut" }, ">-0.1");
+  // relevé après le premier affichage de la nouvelle page (aucun flash de contenu non stylé)
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() =>
+      gsap
+        .timeline({ onComplete: () => gsap.set(el, { visibility: "hidden", clearProps: "willChange" }) })
+        .to(el.querySelectorAll("[data-curtain-in]"), { yPercent: -110, duration: 0.3, stagger: 0.03, ease: "expo.in" })
+        .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.65, ease: "expo.inOut" }, ">-0.12"),
+    ),
+  );
 }
 
 export function isCovered() {

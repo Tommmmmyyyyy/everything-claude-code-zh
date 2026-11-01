@@ -116,7 +116,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
         const { c, zoom } = state;
         // Couches en parallaxe
         for (const { el, s } of layers) {
-          el.style.transform = `translate3d(${(-OFFSET - c * s) * u}px,0,0)`;
+          el.style.transform = `translateX(${(-OFFSET - c * s) * u}px)`;
         }
         // Bascule de décor, masquée par l'intérieur de l'écurie
         const scene = c > C_SWITCH ? "pasture" : "road";
@@ -131,10 +131,10 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
         const exitX = EXIT_C * SPEED.fg - c * SPEED.fg;
         const L = Math.max(-10, Math.min(W + 10, W / 2 + entranceX * u));
         const R = Math.max(-10, Math.min(W + 10, W / 2 + exitX * u));
-        clipA.style.transform = `translate3d(${L}px,0,0)`;
-        clipAInner.style.transform = `translate3d(${-L}px,0,0)`;
-        clipB.style.transform = `translate3d(${R - W}px,0,0)`;
-        clipBInner.style.transform = `translate3d(${W - R}px,0,0)`;
+        clipA.style.transform = `translateX(${L}px)`;
+        clipAInner.style.transform = `translateX(${-L}px)`;
+        clipB.style.transform = `translateX(${R - W}px)`;
+        clipBInner.style.transform = `translateX(${W - R}px)`;
         // Ambiance intérieure : le camion est-il dans l'écurie ?
         const truckFront = TRUCK_X + TRUCK_W / 2;
         const inside = smoothstep(truckFront + 200, truckFront - 200, entranceX) * smoothstep(truckFront - 400, truckFront, exitX);
@@ -150,7 +150,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
         if (door) door.setAttribute("transform", `translate(${-118 * state.door} 0)`);
         if (examLight) examLight.setAttribute("opacity", String(smoothstep(0.4, 1, state.cta)));
         // Soleil
-        sun.style.transform = `translate3d(${-c * 0.02 * u}px, ${(c > C_SWITCH ? -120 : 0) * u}px, 0)`;
+        sun.style.transform = `translate(${-c * 0.02 * u}px, ${(c > C_SWITCH ? -120 : 0) * u}px)`;
         // Caméra (zoom final sur la scène d'intervention)
         camera.style.transform = `scale(${zoom})`;
         // Chapitres
@@ -198,6 +198,8 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
           scrub: 0.9,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          // les calques ne sont promus (GPU) que pendant la séquence
+          onToggle: (self) => section.classList.toggle("is-live", self.isActive),
           onRefresh: () => {
             measure();
             setOrigin();
@@ -224,7 +226,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
     <div
       data-layer
       data-speed={s}
-      className={`absolute bottom-0 left-1/2 will-change-transform ${extra}`}
+      className={`absolute bottom-0 left-1/2 [.is-live_&]:will-change-transform ${extra}`}
       style={{ width: `calc(var(--u) * ${layerWidth(s)}px)`, height: `calc(var(--u) * ${H}px)` }}
     >
       {children}
@@ -242,7 +244,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
         Le camion d&apos;Anaëlle : sur la route de vos chevaux
       </h2>
       <div data-stage className="absolute inset-0" style={{ ["--u" as string]: 1 }}>
-        <div data-camera className="absolute inset-0 will-change-transform">
+        <div data-camera className="absolute inset-0 [.is-live_&]:will-change-transform">
           {/* Ciels */}
           <div
             className="absolute inset-0"
@@ -276,10 +278,10 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
           {layer(SPEED.ground, <GroundLayer />)}
 
           {/* Intérieur de l'écurie, découpé entre les chambranles */}
-          <div data-clip-a className="absolute inset-y-0 left-0 w-[200%] overflow-hidden will-change-transform">
-            <div data-clip-a-inner className="absolute inset-y-0 left-0 w-1/2 will-change-transform">
-              <div data-clip-b className="absolute inset-y-0 -left-full w-[200%] overflow-hidden will-change-transform">
-                <div data-clip-b-inner className="absolute inset-y-0 left-1/2 w-1/2 will-change-transform">
+          <div data-clip-a className="absolute inset-y-0 left-0 w-[200%] overflow-hidden [.is-live_&]:will-change-transform">
+            <div data-clip-a-inner className="absolute inset-y-0 left-0 w-1/2 [.is-live_&]:will-change-transform">
+              <div data-clip-b className="absolute inset-y-0 -left-full w-[200%] overflow-hidden [.is-live_&]:will-change-transform">
+                <div data-clip-b-inner className="absolute inset-y-0 left-1/2 w-1/2 [.is-live_&]:will-change-transform">
                   <div className="absolute inset-0" style={{ background: "linear-gradient(#0c0805, #1d140c 60%, #120c07)" }} />
                   {layer(SPEED.near, <InteriorWall />)}
                   {layer(SPEED.ground, <InteriorFloor />)}

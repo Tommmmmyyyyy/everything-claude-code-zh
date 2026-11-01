@@ -153,7 +153,7 @@ export function Gallery({ content, index = "09", header = true }: { content: Gal
           <PhotoSlot src={null} alt="" motif={it.motif} hint={it.caption} className="absolute inset-0" />
         )}
       </div>
-      <span className="label absolute left-4 top-4 rounded-[22.5px] bg-ink/60 px-3 py-1.5 text-cream/80 backdrop-blur-sm">{catLabel(it.category)}</span>
+      <span className="label absolute left-4 top-4 rounded-[22.5px] bg-ink/75 px-3 py-1.5 text-cream/80">{catLabel(it.category)}</span>
       {it.caption && (
         <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-ink/85 to-transparent px-4 pb-4 pt-12 font-serif text-[1.3rem] leading-tight opacity-0 transition-[opacity,transform] duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
           {it.caption}

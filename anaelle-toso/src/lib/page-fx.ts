@@ -167,5 +167,12 @@ export function setupPageFX(): () => void {
 
 
   requestAnimationFrame(() => ScrollTrigger.refresh());
+  /* ── Grain argentique : animé seulement lorsqu'il est à l'écran ── */
+  if (!reduce && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => e.target.classList.toggle("is-live", e.isIntersecting)), { rootMargin: "10% 0px" });
+    document.querySelectorAll(".grain").forEach((g) => io.observe(g));
+    cleanups.push(() => io.disconnect());
+  }
+
   return () => cleanups.forEach((fn) => fn());
 }
