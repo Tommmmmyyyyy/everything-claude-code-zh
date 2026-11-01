@@ -1,6 +1,8 @@
 /**
  * Tests de bout en bout (Playwright) — à lancer sur un serveur démarré :
  *   BASE_URL=http://localhost:3000 node tests/e2e.mjs
+ * (serveur de développement : sans canal d'envoi configuré, les formulaires y sont acceptés en mode test ;
+ *  la limite anti-spam des API impose d'attendre 15 min ou de redémarrer le serveur entre deux passes)
  * Vérifie l'architecture multipage (navigation, liens, retour arrière), les carrousels,
  * les animations signatures, la FAQ, les formulaires (rendez-vous, contact, avis) et les API.
  */
@@ -147,9 +149,9 @@ await step("navigation par le menu avec transition", async () => {
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.getByRole("navigation", { name: "Navigation principale" }).getByRole("link", { name: /Mon histoire/ }).click();
   await page.waitForURL("**/mon-histoire", { timeout: 8000 });
-  await page.waitForTimeout(2200);
+  // le rideau doit se relever rapidement après l'arrivée sur la page
+  await page.waitForFunction(() => getComputedStyle(document.querySelector("[data-curtain]")).visibility === "hidden", null, { timeout: 9000 });
   assert.match(await page.locator("h1").textContent(), /passion/);
-  assert.equal(await page.locator("[data-curtain]").evaluate((el) => getComputedStyle(el).visibility), "hidden");
 });
 
 await step("menu plein écran (tablette) : 7 vignettes, fermeture Échap", async () => {

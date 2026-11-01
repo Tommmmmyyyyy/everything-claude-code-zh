@@ -33,8 +33,8 @@ export function cover(label: string, then: () => void) {
   gsap.set(el, { visibility: "visible" });
   gsap
     .timeline({ onComplete: then })
-    .fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "expo.inOut" })
-    .fromTo(el.querySelectorAll("[data-curtain-in]"), { yPercent: 110 }, { yPercent: 0, duration: 0.45, stagger: 0.04, ease: "expo.out" }, 0.16);
+    .fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.42, ease: "expo.inOut" })
+    .fromTo(el.querySelectorAll("[data-curtain-in]"), { yPercent: 110 }, { yPercent: 0, duration: 0.4, stagger: 0.04, ease: "expo.out" }, 0.12);
 }
 
 export function uncover() {
@@ -56,8 +56,8 @@ export function uncover() {
     requestAnimationFrame(() =>
       gsap
         .timeline({ onComplete: () => gsap.set(el, { visibility: "hidden", clearProps: "willChange" }) })
-        .to(el.querySelectorAll("[data-curtain-in]"), { yPercent: -110, duration: 0.3, stagger: 0.03, ease: "expo.in" })
-        .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.65, ease: "expo.inOut" }, ">-0.12"),
+        .to(el.querySelectorAll("[data-curtain-in]"), { yPercent: -110, duration: 0.22, stagger: 0.025, ease: "expo.in" })
+        .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.58, ease: "expo.inOut" }, ">-0.1"),
     ),
   );
 }

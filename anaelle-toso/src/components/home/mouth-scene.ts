@@ -11,12 +11,15 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
+import { buildHead } from "./head";
 
 export type AnchorId = "incisives" | "barres" | "loup" | "premolaires" | "molaires" | "pointes-haut" | "pointes-bas" | "tables" | "crochet" | "rampe";
 
 export interface MouthScene {
   setProgress(p: number): void;
   resize(w: number, h: number): void;
+  /** Qualité adaptative : réduit (ou rétablit) la résolution de rendu. */
+  setQuality(level: number): void;
   render(): void;
   /** Position écran (px) d'une ancre ; visible = devant la caméra et dans le cadre. */
   project(id: AnchorId): { x: number; y: number; visible: boolean };
@@ -47,10 +50,11 @@ const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 
 /* Trajet de caméra : [progression, position, cible] */
 const CAM: [number, THREE.Vector3, THREE.Vector3][] = [
-  [0.0, V(0, 0.8, 36), V(0, -0.4, -6)],
-  [0.1, V(0, 0.3, 15.5), V(0, -0.7, -3)],
-  [0.2, V(1.1, -0.1, 6.8), V(0, -1, 0)],
-  [0.255, V(0, -1.5, 3), V(0, -1.7, -6)], // dans l'axe de l'ouverture
+  [0.0, V(-104, 9, -20), V(0, 2.5, -37)], // la tête entière, de profil
+  [0.06, V(-52, 5, 18), V(-2, 1, -16)], // elle pivote de trois-quarts
+  [0.12, V(-27, 1.5, 24), V(-1, -0.8, -5)], // les lèvres s'écartent
+  [0.2, V(1.1, -0.2, 6.8), V(0, -1.1, 0)], // incisives, entre les lèvres
+  [0.255, V(0, -1.6, 3.2), V(0, -1.7, -6)], // dans l'axe de l'ouverture
   [0.3, V(0.3, -1, -3.2), V(-3.3, -2.6, -10)], // les barres
   [0.36, V(-0.9, -1.5, -8.4), V(-3.8, 0.8, -13.4)], // dent de loup, vue de dessous
   [0.445, V(0.3, 0.3, -11.2), V(-4.3, -0.2, -23)], // l'arcade
@@ -60,9 +64,9 @@ const CAM: [number, THREE.Vector3, THREE.Vector3][] = [
   [0.745, V(-0.7, 2.2, -16.2), V(-3.9, -2.2, -23)], // tables
   [0.775, V(0, -1.6, -2.5), V(-3.6, -1.6, -20)], // recul entre les mâchoires ouvertes
   [0.8, V(-6, -1.4, 9), V(-4.2, -0.8, -18)], // sortie par l'avant, trois-quarts
-  [0.835, V(-24, 0.6, -21.5), V(-4.2, -0.4, -21.5)], // profil : surdents
+  [0.835, V(-24, 0.6, -21.5), V(-4.2, -0.4, -21.5)], // profil : surdents (peau en transparence)
   [0.9, V(-24.5, 0.9, -21.8), V(-4.2, -0.4, -21.8)],
-  [1.0, V(-19, 11.5, 23), V(0, -0.8, -13)],
+  [1.0, V(-78, 14, 46), V(-6, 3, -27)], // retour à la tête entière, de trois-quarts
 ];
 
 const PIVOT = V(0, 3.2, -36); // articulation temporo-mandibulaire (approx.)
@@ -353,7 +357,8 @@ function tongueGeometry() {
 
 export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: boolean }): MouthScene {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, opts.mobile ? 1.5 : 2));
+  const maxDpr = Math.min(window.devicePixelRatio || 1, opts.mobile ? 1.5 : 2);
+  renderer.setPixelRatio(maxDpr);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.9;
@@ -400,6 +405,11 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   const rim2 = new THREE.DirectionalLight(0x9cae8e, 0);
   rim2.position.set(10, -4, 10);
   scene.add(rim2);
+  // lumière de modelé pour les plans extérieurs de la tête (avant et après le voyage)
+  const key = new THREE.DirectionalLight(0xffe2bd, 0);
+  key.position.set(-30, 26, 22);
+  key.target.position.set(0, 2, -20);
+  scene.add(key, key.target);
 
   /* Matériaux */
   const streaks = reliefTexture("streaks");
@@ -680,6 +690,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     if (side === -1) anchor("loup", upper, -3.75, 0.55, ROW_START + 0.95);
   }
 
+  /* Tête : chanfrein, naseaux, lèvres, yeux, oreilles, joues */
+  const head = buildHead(upper, lower, PIVOT, opts);
+
   /* Poussière lumineuse dans le faisceau */
   const dustGeo = keep(new THREE.BufferGeometry());
   {
@@ -724,8 +737,12 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     camAt(p);
     // travelling compensé : la caméra recule pendant que le champ se resserre (vue en coupe quasi orthogonale)
     const cutMul = width / height < 0.8 ? 0.8 : 0.66;
+    // objectif plus long pour les plans extérieurs (moins de déformation de perspective)
+    const outside = Math.max(1 - smooth(0.12, 0.2, p), smooth(0.9, 0.98, p));
+    const portrait = width / height < 0.8;
     camera.fov =
       baseFov *
+      (1 - (portrait ? 0 : 0.22) * outside) *
       track(
         [
           [0.5, 1],
@@ -735,6 +752,14 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         ],
         p,
       );
+    if (portrait && outside > 0.001) {
+      // écran portrait : la tête entière, reculée et placée sous le titre
+      tmp.copy(camera.position).sub(tgt);
+      camera.position.copy(tgt).addScaledVector(tmp, 1 + 0.75 * outside);
+      camera.setViewOffset(width, height, 0, -height * 0.2 * outside, width, height);
+    } else if (camera.view) {
+      camera.clearViewOffset();
+    }
     camera.updateProjectionMatrix();
     if (width / height < 0.8) {
       // écran portrait : recul supplémentaire pour cadrer les deux arcades en coupe
@@ -750,11 +775,13 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     }
 
     // ouverture de la mâchoire
-    jawPivot.rotation.x = track(
+    // ouverture de la mâchoire : les lèvres s'écartent, la bouche s'ouvre largement puis se stabilise
+    const jaw = track(
       [
-        [0, 0.02],
-        [0.1, 0.05],
-        [0.2, 0.075],
+        [0, 0],
+        [0.05, 0],
+        [0.135, 0.16],
+        [0.2, 0.12],
         [0.3, 0.1],
         [0.45, 0.1],
         [0.52, 0.085],
@@ -762,19 +789,26 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         [0.71, 0.25],
         [0.78, 0.25],
         [0.835, 0.06],
-        [1, 0.07],
+        [0.9, 0.06],
+        [0.97, 0.008],
+        [1, 0.008],
       ],
       p,
     );
-    model.rotation.y = track(
-      [
-        [0, -0.55],
-        [0.12, 0],
-        [0.88, 0],
-        [1, 0.32],
-      ],
-      p,
+    jawPivot.rotation.x = jaw;
+    head.update(jaw);
+    // peau : silhouette lumineuse au début, opaque pendant le voyage, transparente pour le profil
+    head.setXray(
+      Math.max(
+        1 - smooth(0.02, 0.095, p),
+        win(0.785, 0.82, 0.9, 0.95, p),
+      ),
     );
+    // brouillard : lointain pour les plans extérieurs, plus dense dans la bouche
+    const ext = Math.max(1 - smooth(0.1, 0.2, p), smooth(0.9, 0.98, p));
+    (scene.fog as THREE.Fog).near = 18 + 62 * ext;
+    (scene.fog as THREE.Fog).far = 66 + 130 * ext;
+    key.intensity = 2.2 * ext * Math.max(smooth(0.02, 0.08, p), smooth(0.9, 0.97, p)) + 0.6 * win(0.8, 0.84, 0.9, 0.94, p);
 
     // lumière : la lampe frontale s'allume, puis l'ambiance
     lamp.intensity = 20 * smooth(0.0, 0.07, p) * (1 - 0.45 * smooth(0.9, 1, p)) * (1 - 0.4 * win(0.32, 0.35, 0.39, 0.42, p));
@@ -830,9 +864,21 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     return { x: (tmp.x * 0.5 + 0.5) * width, y: (-tmp.y * 0.5 + 0.5) * height, visible };
   }
 
+  let quality = 1;
+  function setQuality(level: number) {
+    const q = Math.max(0.5, Math.min(1, level));
+    if (Math.abs(q - quality) < 0.01) return;
+    quality = q;
+    const dpr = Math.max(0.75, maxDpr * q);
+    renderer.setPixelRatio(dpr);
+    composer?.setPixelRatio(dpr);
+    resize(width, height);
+  }
+
   return {
     setProgress,
     resize,
+    setQuality,
     render: () => (composer ? composer.render() : renderer.render(scene, camera)),
     project,
     dispose() {
@@ -841,6 +887,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       upperTex.dispose();
       lowerTex.dispose();
       textures.forEach((t) => t.dispose());
+      head.dispose();
       envRT.dispose();
       composer?.dispose();
       renderer.dispose();

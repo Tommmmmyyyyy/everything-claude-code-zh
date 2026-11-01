@@ -73,10 +73,10 @@ tests/                 Tests unitaires et de bout en bout
 
 **Trois animations signatures** : le camion (`TruckJourney`, accueil), la bouche qui s'ouvre au
 pas-d'âne (`Anatomy`, prestations) et « L'anatomie en mouvement » (`MouthJourney`, accueil) :
-une scène 3D procédurale — aucun modèle externe — où la lampe frontale s'allume puis la caméra
+une scène 3D procédurale — aucun modèle externe : tête de cheval sculptée par profils anatomiques (`head.ts`, robe baie à poil ras, naseaux, lèvres, joues qui s'étirent à l'ouverture, muqueuse à l'intérieur), dentition détaillée (`mouth-scene.ts`) — où la tête apparaît en « rayons X », la lampe frontale s'allume, les lèvres s'écartent puis la caméra
 traverse la bouche (incisives, barres, dent de loup, arcades, coupe des pointes d'émail, tables,
 crochet et rampe) avant d'ouvrir sur les prestations. La scène n'est chargée qu'à l'approche de la
-section ; sans WebGL ou en mouvements réduits, une version fixe et textuelle la remplace.
+section, et sa résolution s'adapte à la puissance de l'appareil ; sans WebGL ou en mouvements réduits, une version fixe et textuelle la remplace.
 
 Les révélations au défilement sont déclaratives : `data-reveal="lines|chars|words|up|mask|line|stagger|fade|scrub-words"`
 et `data-parallax="0.15"` sur n'importe quel élément. Toutes les animations respectent

@@ -115,11 +115,27 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
     };
 
     let last = 0;
+    let slow = 0;
+    let quality = 1;
+    let fastFrames = 0;
     const frame = (now: number) => {
       raf = 0;
       if (!scene || disposed) return;
       // lissage indépendant de la cadence d'affichage
       const dt = last ? Math.min(0.25, (now - last) / 1000) : 1 / 60;
+      // qualité adaptative : si les images s'enchaînent trop lentement, la résolution baisse
+      if (last) {
+        slow = slow * 0.9 + (dt > 1 / 40 ? 1 : 0) * 0.1;
+        if (slow > 0.6 && quality > 0.5) {
+          quality -= 0.15;
+          scene.setQuality(quality);
+          slow = 0.3;
+        } else if (slow < 0.05 && quality < 1 && ++fastFrames > 240) {
+          quality = Math.min(1, quality + 0.1);
+          scene.setQuality(quality);
+          fastFrames = 0;
+        }
+      }
       last = now;
       const d = target - current;
       current = Math.abs(d) < 0.0004 ? target : current + d * (1 - Math.exp(-dt / 0.11));
@@ -284,12 +300,12 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
             {/* Chapitres */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-10 md:pb-14">
               <div className="container-x">
-                <div className="grid max-w-md transition-opacity duration-500 max-md:rounded-[12px] max-md:bg-ink/80 max-md:p-5 [&:not(:has(.is-active))]:opacity-0">
+                <div className="grid max-w-md transition-opacity duration-300 max-md:rounded-[12px] max-md:bg-ink/80 max-md:p-5 [&:not(:has(.is-active))]:opacity-0">
                 {CHAPTERS.map((c) => (
                   <article
                     key={c.n}
                     data-mj-chapter
-                    className="col-start-1 row-start-1 opacity-0 transition-[opacity,transform] duration-300 [transform:translateY(12px)] [&.is-active]:opacity-100 [&.is-active]:delay-200 [&.is-active]:duration-700 [&.is-active]:[transform:none]"
+                    className="col-start-1 row-start-1 opacity-0 transition-[opacity,transform] duration-300 [transform:translateY(12px)] [&.is-active]:opacity-100 [&.is-active]:delay-100 [&.is-active]:duration-500 [&.is-active]:[transform:none]"
                   >
                     <p className="label text-sand">
                       {c.n} — {c.title}
