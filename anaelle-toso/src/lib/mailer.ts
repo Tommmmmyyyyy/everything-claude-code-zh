@@ -170,3 +170,79 @@ export async function deliver(b: Booking): Promise<DeliveryResult> {
   console.error("[rendez-vous] échec d'envoi :", errors);
   return { ok: false, channels: [], error: "send-failed" };
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Messages génériques (contact, avis) — mêmes canaux que les rendez-vous
+   ───────────────────────────────────────────────────────────── */
+export interface GenericMessage {
+  kind: "contact" | "avis";
+  subject: string;
+  rows: [string, string][];
+  replyTo?: string;
+  footer?: string;
+  payload: Record<string, unknown>;
+}
+
+function renderGeneric(m: GenericMessage) {
+  const text = m.rows.map(([k, v]) => `${k} : ${v}`).join("\n") + (m.footer ? `\n\n${m.footer}` : "");
+  const html = `<!doctype html><html lang="fr"><body style="margin:0;padding:24px;background:#f4eadb;font-family:Arial,Helvetica,sans-serif;color:#0d0a07">
+  <table role="presentation" width="100%" style="max-width:640px;margin:auto;background:#fffaf2;border-radius:12px;border:1px solid #e3d6c0">
+    <tr><td style="padding:28px 28px 8px"><p style="margin:0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a4b2a">${m.kind === "avis" ? "Nouvel avis à modérer" : "Nouveau message via le site"}</p>
+    <h1 style="margin:8px 0 0;font-family:Georgia,serif;font-weight:normal;font-size:24px">${esc(m.subject)}</h1></td></tr>
+    <tr><td style="padding:16px 28px 28px"><table role="presentation" width="100%" style="border-collapse:collapse">
+    ${m.rows.map(([k, v]) => `<tr><td style="padding:8px 12px 8px 0;border-top:1px dashed #d9c4a0;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#6b5a45;vertical-align:top;width:34%">${esc(k)}</td><td style="padding:8px 0;border-top:1px dashed #d9c4a0;font-size:15px;white-space:pre-wrap">${esc(v)}</td></tr>`).join("")}
+    </table>${m.footer ? `<p style="margin:20px 0 0;font-size:13px;color:#6b5a45;white-space:pre-wrap">${esc(m.footer)}</p>` : ""}</td></tr>
+  </table></body></html>`;
+  return { subject: m.subject, text, html };
+}
+
+export async function deliverMessage(m: GenericMessage): Promise<DeliveryResult> {
+  const ch = configuredChannels();
+  const to = process.env.BOOKING_TO!;
+  const mail = renderGeneric(m);
+  const done: string[] = [];
+  const errors: string[] = [];
+  if (ch.resend) {
+    try {
+      await sendResend(to, mail, m.replyTo);
+      done.push("resend");
+    } catch (e) {
+      errors.push(String(e));
+    }
+  }
+  if (ch.smtp && !done.includes("resend")) {
+    try {
+      await sendSmtp(to, mail, m.replyTo);
+      done.push("smtp");
+    } catch (e) {
+      errors.push(String(e));
+    }
+  }
+  if (ch.webhook) {
+    try {
+      const res = await fetch(process.env.BOOKING_WEBHOOK_URL!, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...(process.env.BOOKING_WEBHOOK_SECRET ? { "X-Webhook-Secret": process.env.BOOKING_WEBHOOK_SECRET } : {}) },
+        body: JSON.stringify({ kind: m.kind, receivedAt: new Date().toISOString(), ...m.payload }),
+      });
+      if (!res.ok) throw new Error(`Webhook ${res.status}`);
+      done.push("webhook");
+    } catch (e) {
+      errors.push(String(e));
+    }
+  }
+  if (done.length) return { ok: true, channels: done };
+  if (!ch.resend && !ch.smtp && !ch.webhook) {
+    if (process.env.NODE_ENV !== "production") {
+      const fs = await import("node:fs/promises");
+      const path = await import("node:path");
+      const dir = path.join(process.cwd(), ".data");
+      await fs.mkdir(dir, { recursive: true });
+      await fs.appendFile(path.join(dir, `${m.kind}.jsonl`), JSON.stringify({ receivedAt: new Date().toISOString(), ...m.payload }) + "\n");
+      return { ok: true, channels: ["dev-file"], dev: true };
+    }
+    return { ok: false, channels: [], error: "no-channel" };
+  }
+  console.error(`[${m.kind}] échec d'envoi :`, errors);
+  return { ok: false, channels: [], error: "send-failed" };
+}

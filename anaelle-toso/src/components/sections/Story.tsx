@@ -4,13 +4,19 @@ import { PhotoSlot } from "@/components/ui/PhotoSlot";
 import { SHOW_PLACEHOLDERS } from "@/lib/config";
 
 /** « Derrière chaque intervention, une passion. » — récit éditorial en chapitres. */
-export function Story({ content }: { content: StoryContent }) {
+export function Story({ content, index = "06", header = true }: { content: StoryContent; index?: string; header?: boolean }) {
   return (
     <section id="histoire" aria-labelledby="histoire-title" className="relative section-y overflow-clip bg-forest">
-      <SectionHeader index="06" label="Mon histoire" title={content.title} provisional={content.provisional} titleId="histoire-title" align="left" />
+      {header ? (
+        <SectionHeader index={index} label="Mon histoire" title={content.title} provisional={content.provisional} titleId="histoire-title" align="left" />
+      ) : (
+        <h2 id="histoire-title" className="sr-only">
+          {content.title}
+        </h2>
+      )}
 
       {/* Ouverture : portrait + introduction */}
-      <div className="container-x mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-6">
+      <div className={`container-x grid gap-10 md:grid-cols-12 md:gap-6 ${header ? "mt-16 md:mt-24" : ""}`}>
         <figure className={content.portrait.image ? "md:col-span-6 md:col-start-1" : "md:col-span-5 md:col-start-1"}>
           <div data-reveal="mask" className={`relative overflow-hidden rounded-[12px] ${content.portrait.image ? "aspect-[3/2]" : "aspect-[4/5]"}`}>
             <PhotoSlot

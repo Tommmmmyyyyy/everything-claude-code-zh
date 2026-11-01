@@ -179,6 +179,8 @@ export interface ZoneContent {
 export interface Testimonial {
   name: string;
   horse?: string | null;
+  /** Note de 1 à 5 (facultative). */
+  rating?: number | null;
   text: string;
   image?: string | null;
   date?: string | null;
@@ -193,7 +195,8 @@ export interface TestimonialsContent {
 
 export interface FaqContent {
   title: string;
-  items: { q: string; a: string; provisional: boolean }[];
+  categories: { id: string; label: string }[];
+  items: { q: string; a: string; provisional: boolean; category: string }[];
 }
 
 export interface SocialPost {
@@ -246,27 +249,18 @@ export const faq = faqJson as unknown as FaqContent;
 export const social = nullify(socialJson) as unknown as SocialContent;
 export const anatomy = anatomyJson as unknown as AnatomyContent;
 
-/** Liens de navigation (ancres de la page d'accueil). */
+/** Pages du site (menu principal, menu plein écran, pied de page). */
 export const navLinks = [
-  { href: "/#approche", label: "Approche" },
-  { href: "/#le-camion", label: "Le camion" },
-  { href: "/#dentition", label: "Dentition" },
-  { href: "/#prestations", label: "Prestations" },
-  { href: "/#histoire", label: "Histoire" },
-  { href: "/#deroulement", label: "Déroulement" },
-  { href: "/#signes", label: "Signes" },
-  { href: "/#galerie", label: "Galerie" },
-  { href: "/#zone", label: "Zone" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/", label: "Accueil", sub: "Bienvenue à l'écurie", image: "/images/hero/paturage-contre-jour-large.jpg" },
+  { href: "/mon-histoire", label: "Mon histoire", sub: "Mon parcours, ma passion", image: "/images/histoire/portrait-poney.jpg" },
+  { href: "/prestations", label: "Mes prestations", sub: "Soins et anatomie", image: "/images/galerie/pas-dane-detail.jpg" },
+  { href: "/rendez-vous", label: "Rendez-vous", sub: "Demande et réservation", image: "/images/galerie/ecurie-montagne.jpg" },
+  { href: "/galerie", label: "Galerie", sub: "Chevaux, écuries, interventions", image: "/images/galerie/concours.jpg" },
+  { href: "/faq", label: "FAQ", sub: "Vos questions, mes réponses", image: "/images/galerie/complicite-poney.jpg" },
+  { href: "/contact", label: "Contact", sub: "Me joindre, laisser un avis", image: "/images/contact/cheval-pas-dane.jpg" },
 ] as const;
 
-export const primaryNav = [
-  { href: "/#approche", label: "Approche" },
-  { href: "/#dentition", label: "Dentition" },
-  { href: "/#prestations", label: "Prestations" },
-  { href: "/#histoire", label: "Histoire" },
-] as const;
+export const primaryNav = navLinks;
 
 export function socialLinks() {
   const s = site.social;

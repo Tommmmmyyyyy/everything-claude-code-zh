@@ -523,6 +523,16 @@ html.intro-seen [data-preloader] {
   50% { opacity: 1; }
 }
 
+/* ── Navigation « dure » : la nouvelle page démarre sous le rideau ── */
+html.nav-in [data-curtain] {
+  visibility: visible;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.nav-in [data-curtain] {
+    visibility: hidden;
+  }
+}
+
 /* ── Grain argentique ─────────────────────────────────────── */
 .grain {
   pointer-events: none;

@@ -4,9 +4,16 @@ import { SITE_URL } from "@/lib/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return [
-    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "monthly", priority: 1 },
-    { url: `${SITE_URL}/mentions-legales`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${SITE_URL}/confidentialite`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+  const pages: [string, number, MetadataRoute.Sitemap[number]["changeFrequency"]][] = [
+    ["/", 1, "monthly"],
+    ["/mon-histoire", 0.7, "yearly"],
+    ["/prestations", 0.9, "monthly"],
+    ["/rendez-vous", 0.9, "monthly"],
+    ["/galerie", 0.6, "monthly"],
+    ["/faq", 0.7, "monthly"],
+    ["/contact", 0.8, "yearly"],
+    ["/mentions-legales", 0.2, "yearly"],
+    ["/confidentialite", 0.2, "yearly"],
   ];
+  return pages.map(([p, priority, changeFrequency]) => ({ url: `${SITE_URL}${p}`, lastModified: now, changeFrequency, priority }));
 }

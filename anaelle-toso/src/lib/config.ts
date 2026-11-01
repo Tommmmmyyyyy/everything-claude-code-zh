@@ -18,9 +18,15 @@ export const DEMO = process.env.NEXT_PUBLIC_DEMO === "true";
 
 /** Liens internes : en mode démo (export statique), les pages sont des fichiers .html relatifs. */
 export function siteHref(href: string) {
-  if (!DEMO) return href;
-  if (href === "/") return "site.html";
-  if (href.startsWith("/#")) return "site.html" + href.slice(1);
-  if (href.startsWith("/")) return href.slice(1) + ".html";
-  return href;
+  if (!DEMO || !href.startsWith("/")) return href;
+  const m = href.match(/^([^?#]*)(\?[^#]*)?(#.*)?$/);
+  const path = m?.[1] ?? href;
+  const rest = (m?.[2] ?? "") + (m?.[3] ?? "");
+  const file = path === "/" || path === "" ? "site.html" : path.replace(/^\//, "").replace(/\/$/, "") + ".html";
+  return file + rest;
+}
+
+/** Ressource de /public : relative en mode démo (export statique servi depuis un sous-dossier). */
+export function siteAsset(src: string) {
+  return DEMO && src.startsWith("/") ? "." + src : src;
 }

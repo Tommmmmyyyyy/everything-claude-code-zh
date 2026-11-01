@@ -16,10 +16,10 @@ emplacement « À renseigner » (ou est masqué une fois `NEXT_PUBLIC_SHOW_PLACE
 | `story.json` | L'histoire d'Anaëlle | Tous les textes sont **provisoires** : les remplacer par le vrai parcours. Un texte qui commence par `[…]` est affiché comme provisoire. Ne mentionner que des qualifications réellement obtenues. |
 | `process.json` | Les 7 étapes d'une intervention | `image` facultative. |
 | `signs.json` | Signes à surveiller | `vet: true` : l'auto-observation recommande d'abord un avis vétérinaire. |
-| `gallery.json` | Galerie | Déposer les photos dans `public/images/galerie/` puis renseigner `src` (ex. `/images/galerie/cheval-01.jpg`) et `alt`. Un `src` vide est un emplacement réservé. `layout` : `hero`, `tall`, `wide`, `square`. |
+| `gallery.json` | Galerie | Déposer les photos dans `public/images/galerie/` puis ajouter une entrée (`src`, `alt`, `caption`, `category`). Catégories : `chevaux`, `anaelle`, `interventions`, `ecuries`, `camion`, `materiel`. Une catégorie sans photo affiche automatiquement une vignette « Photos à venir » (aucune image générique). `layout` : `hero`, `tall`, `wide`, `square`, `landscape`. |
 | `zone.json` | Zone d'intervention et carte | `main.lat` / `main.lng` / `main.radiusKm` : centre et rayon de la zone principale. Tant qu'ils sont absents, la carte affiche la France et un message d'attente. `cities` : villes desservies. `extended` : déplacements possibles sur demande. |
-| `testimonials.json` | Témoignages | **Réels uniquement**, avec l'accord écrit de leurs auteurs. Jamais d'avis ni de note inventés. `reviewUrl` : lien pour laisser un avis (Google, Facebook…). |
-| `faq.json` | Questions fréquentes | `provisional: true` : réponse à confirmer (pratique personnelle). Vérifier les réponses réglementaires sur Légifrance. |
+| `testimonials.json` | Témoignages | **Réels uniquement** : avis reçus par le formulaire de la page Contact puis validés par Anaëlle, ou recueillis avec l'accord écrit de leurs auteurs. `rating` : note de 1 à 5 donnée par l'auteur (facultative). Jamais d'avis ni de note inventés. |
+| `faq.json` | Questions fréquentes | Chaque question a une `category` (`dentisterie`, `soins`, `deroulement`, `rendez-vous`, `deplacements`) ; les catégories et leur ordre sont dans `categories`. `provisional: true` : réponse à confirmer. Vérifier les réponses réglementaires sur Légifrance. |
 | `social.json` | Galerie manuelle des réseaux | Utilisée si `INSTAGRAM_ACCESS_TOKEN` n'est pas configuré. Chaque publication renvoie vers son lien original. |
 | `anatomy.json` | Explorateur anatomique | Textes pédagogiques. Ne pas modifier les `id` ni les `hotspot` (ils pilotent le schéma). Non géré par l'administration. |
 

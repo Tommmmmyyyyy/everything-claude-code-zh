@@ -44,10 +44,10 @@
       "label": "La formation",
       "title": "Apprendre, et continuer d'apprendre",
       "text": "La dentisterie équine demande de la rigueur et des gestes précis. Formée à la technique dentaire équine, je continue d'apprendre pour suivre l'évolution des pratiques et du matériel, toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
-      "image": "/images/galerie/materiel-pas-dane.jpg",
-      "hint": "Photo de matériel ou de formation",
+      "image": "",
+      "hint": "Photo de formation ou de vos gestes (à venir)",
       "motif": "tools",
-      "caption": "Le pas-d'âne (illustration)"
+      "caption": ""
     },
     {
       "id": "vision",

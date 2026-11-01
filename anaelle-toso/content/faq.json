@@ -4,62 +4,120 @@
     {
       "q": "Pourquoi faire contrôler les dents de son cheval ?",
       "a": "Les dents du cheval poussent et s'usent tout au long de sa vie. Une usure irrégulière peut créer des pointes d'émail, des surdents ou des déséquilibres qui blessent les joues ou la langue et gênent la mastication. Un contrôle régulier aide à préserver son confort, sa capacité à bien se nourrir et sa relation au mors — souvent avant même que des signes visibles n'apparaissent.",
-      "provisional": false
+      "provisional": false,
+      "category": "dentisterie"
     },
     {
       "q": "À quelle fréquence prévoir un contrôle ?",
       "a": "Pour un cheval adulte, un contrôle annuel est généralement recommandé. Les jeunes chevaux (pendant le remplacement des dents de lait), les chevaux âgés et ceux dont la dentition présente des particularités peuvent nécessiter un suivi plus rapproché, par exemple tous les six mois. La fréquence est ajustée à chaque cheval après le premier examen.",
-      "provisional": false
+      "provisional": false,
+      "category": "dentisterie"
     },
     {
       "q": "Comment savoir si mon cheval présente une gêne dentaire ?",
       "a": "Certains signes peuvent alerter : difficultés de mastication, aliments qui tombent de la bouche, perte d'état, résistance au mors, salivation excessive, mauvaise haleine ou fibres longues dans le crottin. Ces signes ne constituent pas un diagnostic et peuvent avoir d'autres causes. En cas de douleur, d'aggravation ou de doute, consultez votre vétérinaire.",
-      "provisional": false
-    },
-    {
-      "q": "Comment se déroule une intervention ?",
-      "a": "Après un temps de prise de contact avec le cheval, l'examen commence par l'observation et la palpation externe, puis se poursuit dans la bouche à l'aide d'un pas-d'âne (ouvre-bouche) et d'un éclairage. Les soins autorisés sont ensuite réalisés si nécessaire, puis je vous explique ce que j'ai observé et réalisé. Comptez en moyenne 30 à 45 minutes par cheval, selon son âge, son tempérament et les soins nécessaires.",
-      "provisional": false
-    },
-    {
-      "q": "Faut-il préparer son cheval ?",
-      "a": "Il suffit que votre cheval soit disponible, au licol, dans un endroit calme, plat et suffisamment éclairé, idéalement à l'abri. Un point d'eau à proximité est apprécié. Évitez de lui distribuer son repas juste avant le rendez-vous, afin que sa bouche ne soit pas encombrée.",
-      "provisional": false
-    },
-    {
-      "q": "Anaëlle intervient-elle dans les écuries privées ?",
-      "a": "Oui. Je me déplace là où vit votre cheval : écurie privée, pension, centre équestre, élevage, ou directement au pré chez vous. Un endroit calme et plat suffit.",
-      "provisional": false
-    },
-    {
-      "q": "Dans quelle zone intervenez-vous ?",
-      "a": "Je suis basée à Cardonnette (80260), au nord d'Amiens, et j'interviens dans toute la Somme : Amiens, Abbeville, Albert, Doullens, Péronne, Montdidier, la baie de Somme… Je me déplace aussi dans les Hauts-de-France sur demande.",
-      "provisional": false
-    },
-    {
-      "q": "Mon cheval vit au pré, est-ce un problème ?",
-      "a": "Pas du tout. J'interviens aussi en pâture : il suffit de pouvoir attraper votre cheval et de le tenir au licol dans un endroit plat et calme, si possible à l'abri du vent et du soleil direct.",
-      "provisional": false
-    },
-    {
-      "q": "Peut-elle examiner plusieurs chevaux lors d'un déplacement ?",
-      "a": "Oui, et c'est même l'idéal : regrouper plusieurs chevaux d'une même écurie ou d'un même secteur permet d'optimiser les déplacements. Indiquez simplement leur nombre dans votre demande.",
-      "provisional": false
-    },
-    {
-      "q": "Comment prendre rendez-vous ?",
-      "a": "Via le formulaire de demande de rendez-vous de ce site, par téléphone au 07 44 73 49 56, par e-mail à anaelletoso@gmail.com ou par message sur Instagram (@anaelle_ts). Je vous recontacte pour convenir ensemble d'une date. Un rendez-vous n'est confirmé qu'après ma réponse.",
-      "provisional": false
-    },
-    {
-      "q": "Quand faut-il faire appel à un vétérinaire ?",
-      "a": "Le vétérinaire est votre interlocuteur pour tout ce qui relève du diagnostic et du traitement : douleur importante, gonflement de la face ou de la mâchoire, écoulement nasal, odeur fétide, refus de s'alimenter, dent mobile ou fracturée, infection. La sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent également du vétérinaire. Le technicien dentaire équin intervient dans le cadre des actes que lui autorise la réglementation et vous oriente vers votre vétérinaire dès que la situation le nécessite.",
-      "provisional": false
+      "provisional": false,
+      "category": "dentisterie"
     },
     {
       "q": "Quel est le cadre réglementaire du métier ?",
       "a": "En France, l'activité de technicien dentaire équin est encadrée par l'article L.243-3 du Code rural et de la pêche maritime. Les actes qu'il peut réaliser — notamment l'élimination des pointes d'émail et des aspérités des tables dentaires, ainsi que l'extraction des dents de lait et des dents de loup — sont fixés par arrêté (arrêté du 5 octobre 2011 modifié).",
-      "provisional": false
+      "provisional": false,
+      "category": "dentisterie"
+    },
+    {
+      "q": "Quand faut-il faire appel à un vétérinaire ?",
+      "a": "Le vétérinaire est votre interlocuteur pour tout ce qui relève du diagnostic et du traitement : douleur importante, gonflement de la face ou de la mâchoire, écoulement nasal, odeur fétide, refus de s'alimenter, dent mobile ou fracturée, infection. La sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent également du vétérinaire. Le technicien dentaire équin intervient dans le cadre des actes que lui autorise la réglementation et vous oriente vers votre vétérinaire dès que la situation le nécessite.",
+      "provisional": false,
+      "category": "soins"
+    },
+    {
+      "q": "Quels soins réalisez-vous ?",
+      "a": "Examen de la dentition, entretien des tables dentaires, élimination des pointes d'émail et des aspérités, nivellement des surdents, extraction des dents de lait et des dents de loup, et conseils de suivi — toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
+      "provisional": false,
+      "category": "soins"
+    },
+    {
+      "q": "Les soins sont-ils douloureux pour le cheval ?",
+      "a": "En principe non : les pointes d'émail et les surdents sont des parties usées de la dent, sans sensibilité particulière. Les soins peuvent toutefois impressionner un cheval qui n'en a pas l'habitude ; je prends le temps de le mettre en confiance et de travailler à son rythme. Si une sédation est nécessaire, elle relève exclusivement du vétérinaire.",
+      "provisional": false,
+      "category": "soins"
+    },
+    {
+      "q": "Que se passe-t-il si un problème relève du vétérinaire ?",
+      "a": "Je vous l'explique clairement et vous oriente vers votre vétérinaire. Je peux lui transmettre mes observations pour faciliter sa prise en charge.",
+      "provisional": false,
+      "category": "soins"
+    },
+    {
+      "q": "Comment se déroule une intervention ?",
+      "a": "Après un temps de prise de contact avec le cheval, l'examen commence par l'observation et la palpation externe, puis se poursuit dans la bouche à l'aide d'un pas-d'âne (ouvre-bouche) et d'un éclairage. Les soins autorisés sont ensuite réalisés si nécessaire, puis je vous explique ce que j'ai observé et réalisé. Comptez en moyenne 30 à 45 minutes par cheval, selon son âge, son tempérament et les soins nécessaires.",
+      "provisional": false,
+      "category": "deroulement"
+    },
+    {
+      "q": "Faut-il préparer son cheval ?",
+      "a": "Il suffit que votre cheval soit disponible, au licol, dans un endroit calme, plat et suffisamment éclairé, idéalement à l'abri. Un point d'eau à proximité est apprécié. Évitez de lui distribuer son repas juste avant le rendez-vous, afin que sa bouche ne soit pas encombrée.",
+      "provisional": false,
+      "category": "deroulement"
+    },
+    {
+      "q": "Pouvez-vous examiner plusieurs chevaux lors d'un même déplacement ?",
+      "a": "Oui, et c'est même l'idéal : regrouper plusieurs chevaux d'une même écurie ou d'un même secteur permet d'optimiser les déplacements. Indiquez simplement leur nombre dans votre demande.",
+      "provisional": false,
+      "category": "rendez-vous"
+    },
+    {
+      "q": "Comment prendre rendez-vous ?",
+      "a": "Via le formulaire de demande de rendez-vous de ce site, par téléphone au 07 44 73 49 56, par e-mail à anaelletoso@gmail.com ou par message sur Instagram (@anaelle_ts). Je vous recontacte pour convenir ensemble d'une date. Un rendez-vous n'est confirmé qu'après ma réponse.",
+      "provisional": false,
+      "category": "rendez-vous"
+    },
+    {
+      "q": "Quels sont vos tarifs ?",
+      "a": "Les tarifs sont communiqués sur demande, selon le nombre de chevaux et le déplacement. Regrouper plusieurs chevaux d'une même écurie ou d'un même secteur permet de limiter les frais.",
+      "provisional": false,
+      "category": "rendez-vous"
+    },
+    {
+      "q": "Intervenez-vous dans les écuries privées ?",
+      "a": "Oui. Je me déplace là où vit votre cheval : écurie privée, pension, centre équestre, élevage, ou directement au pré chez vous. Un endroit calme et plat suffit.",
+      "provisional": false,
+      "category": "deplacements"
+    },
+    {
+      "q": "Dans quelle zone intervenez-vous ?",
+      "a": "Je suis basée à Cardonnette (80260), au nord d'Amiens, et j'interviens dans toute la Somme : Amiens, Abbeville, Albert, Doullens, Péronne, Montdidier, la baie de Somme… Je me déplace aussi dans les Hauts-de-France sur demande.",
+      "provisional": false,
+      "category": "deplacements"
+    },
+    {
+      "q": "Mon cheval vit au pré, est-ce un problème ?",
+      "a": "Pas du tout. J'interviens aussi en pâture : il suffit de pouvoir attraper votre cheval et de le tenir au licol dans un endroit plat et calme, si possible à l'abri du vent et du soleil direct.",
+      "provisional": false,
+      "category": "deplacements"
+    }
+  ],
+  "categories": [
+    {
+      "id": "dentisterie",
+      "label": "Dentisterie équine"
+    },
+    {
+      "id": "soins",
+      "label": "Les soins"
+    },
+    {
+      "id": "deroulement",
+      "label": "Le déroulement des interventions"
+    },
+    {
+      "id": "rendez-vous",
+      "label": "Les rendez-vous"
+    },
+    {
+      "id": "deplacements",
+      "label": "Les déplacements"
     }
   ]
 }

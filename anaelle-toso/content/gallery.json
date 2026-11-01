@@ -1,10 +1,14 @@
 {
   "title": "Instants d'écurie.",
-  "intro": "Les chevaux, les gestes, la route : quelques images du quotidien.",
+  "intro": "Les chevaux, les gestes, la route : quelques images du quotidien, au box comme au pré.",
   "categories": [
     {
       "id": "chevaux",
       "label": "Les chevaux"
+    },
+    {
+      "id": "anaelle",
+      "label": "Anaëlle"
     },
     {
       "id": "interventions",
@@ -25,12 +29,20 @@
   ],
   "items": [
     {
-      "src": "/images/galerie/complicite-poney.jpg",
-      "alt": "Main tendue vers un poney bai, en studio",
+      "src": "/images/galerie/concours.jpg",
+      "alt": "Cheval bai au saut d'obstacle en concours",
       "category": "chevaux",
-      "layout": "square",
-      "caption": "Complicité — photo : LD",
+      "layout": "tall",
+      "caption": "En concours — CSO La Falize",
       "motif": "horse"
+    },
+    {
+      "src": "/images/hero/paturage-contre-jour.jpg",
+      "alt": "Anaëlle et un cheval bai dans une pâture, à contre-jour",
+      "category": "anaelle",
+      "layout": "tall",
+      "caption": "Au pré, en fin de journée",
+      "motif": "pasture"
     },
     {
       "src": "/images/galerie/pas-dane-detail.jpg",
@@ -41,12 +53,12 @@
       "motif": "intervention"
     },
     {
-      "src": "/images/galerie/materiel-ensemble.jpg",
-      "alt": "Illustration du matériel : pas-d'âne, râpes dentaires, miroir, lampe frontale et seringue de rinçage",
-      "category": "materiel",
-      "layout": "wide",
-      "caption": "Le matériel (illustration)",
-      "motif": "tools"
+      "src": "/images/galerie/complicite-poney.jpg",
+      "alt": "Main tendue vers un poney bai, en studio",
+      "category": "chevaux",
+      "layout": "square",
+      "caption": "Complicité — photo : LD",
+      "motif": "horse"
     },
     {
       "src": "/images/galerie/ecurie-montagne.jpg",
@@ -55,30 +67,6 @@
       "layout": "square",
       "caption": "Une écurie en montagne",
       "motif": "stable"
-    },
-    {
-      "src": "/images/galerie/concours.jpg",
-      "alt": "Cheval bai au saut d'obstacle en concours",
-      "category": "chevaux",
-      "layout": "tall",
-      "caption": "En concours — CSO La Falize",
-      "motif": "horse"
-    },
-    {
-      "src": "/images/galerie/materiel-rapes.jpg",
-      "alt": "Illustration de deux râpes dentaires",
-      "category": "materiel",
-      "layout": "wide",
-      "caption": "Les râpes (illustration)",
-      "motif": "tools"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "camion",
-      "layout": "wide",
-      "caption": "Le camion d'intervention",
-      "motif": "truck"
     }
   ]
 }

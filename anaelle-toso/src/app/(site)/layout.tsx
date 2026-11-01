@@ -1,6 +1,7 @@
 import { Experience } from "@/components/providers/Experience";
 import { Cursor } from "@/components/providers/Cursor";
 import { Preloader } from "@/components/providers/Preloader";
+import { PageCurtain } from "@/components/providers/PageCurtain";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { DEMO } from "@/lib/config";
@@ -12,6 +13,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
         Aller au contenu
       </a>
       <Preloader />
+      <PageCurtain />
       <Header />
       <main id="contenu">{children}</main>
       <Footer />

@@ -60,9 +60,10 @@ interface Props {
   liverySub: string;
   truckImage: string | null;
   truckImageAlt: string;
+  index?: string;
 }
 
-export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt }: Props) {
+export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, index = "03" }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -319,7 +320,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt }: P
         {/* Récit */}
         <div className="pointer-events-none absolute inset-x-0 top-0 pt-[calc(var(--header-h,72px)+3vh)]">
           <div className="container-x flex items-center gap-4">
-            <span className="label text-cream/60">(03)</span>
+            <span className="label text-cream/60">({index})</span>
             <span className="label">Sur la route de vos chevaux</span>
             <span className="rule-dashed flex-1" aria-hidden="true" />
             <ol className="flex items-center gap-2" aria-hidden="true">
@@ -349,7 +350,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt }: P
         <div data-cta className="invisible absolute inset-x-0 top-[40%] opacity-0 md:top-[calc(var(--header-h)+3vh+56px)]">
           <div className="container-x flex flex-col items-start gap-6 md:items-end md:text-right">
             <p className="heading max-w-md">Votre cheval est le prochain sur ma route&nbsp;?</p>
-            <ButtonLink href="#rendez-vous" variant="cream">
+            <ButtonLink href="/rendez-vous" variant="cream">
               Prendre rendez-vous
             </ButtonLink>
           </div>

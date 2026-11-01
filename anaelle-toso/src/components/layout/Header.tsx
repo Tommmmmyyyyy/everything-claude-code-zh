@@ -6,17 +6,23 @@ import { usePathname } from "next/navigation";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { lockScroll } from "@/lib/lenis";
 import { navLinks, primaryNav, site, socialLinks } from "@/lib/content";
-import { SHOW_PLACEHOLDERS } from "@/lib/config";
+import { DEMO, SHOW_PLACEHOLDERS, siteAsset } from "@/lib/config";
+
+function normalize(p: string) {
+  let x = p.replace(/\.html$/, "").replace(/\/$/, "") || "/";
+  // Démo statique servie depuis un sous-dossier (…/app/faq.html) : seul le dernier segment compte
+  if (DEMO) x = "/" + (x.split("/").pop() || "");
+  return x === "/site" || x === "/index" ? "/" : x;
+}
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState<string>("");
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const pathname = usePathname();
-  const home = pathname === "/";
+  const current = normalize(usePathname() || "/");
+  const isActive = (href: string) => normalize(href) === current;
 
   /* Masquer à la descente, réafficher à la remontée */
   useEffect(() => {
@@ -34,23 +40,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Section active (indicateur pointillé) */
-  useEffect(() => {
-    if (!home) return;
-    const ids = primaryNav.map((l) => l.href.split("#")[1]);
-    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [home]);
-
   /* Menu plein écran : animation, verrouillage, Échap, piège de focus */
   useEffect(() => {
     const menu = menuRef.current;
@@ -59,11 +48,12 @@ export function Header() {
     if (open) {
       lockScroll(true);
       menu.hidden = false;
+      const cards = menu.querySelectorAll("[data-menu-card]");
       const items = menu.querySelectorAll("[data-menu-item]");
       gsap.fromTo(menu, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: reduce ? 0 : 0.9, ease: "expo.inOut" });
-      gsap.fromTo(items, { yPercent: 110 }, { yPercent: 0, duration: reduce ? 0 : 1, stagger: 0.04, delay: reduce ? 0 : 0.35, ease: "expo.out" });
-      const first = menu.querySelector<HTMLElement>("a, button");
-      first?.focus();
+      gsap.fromTo(cards, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: reduce ? 0 : 1, stagger: 0.05, delay: reduce ? 0 : 0.3, ease: "expo.out", clearProps: "transform" });
+      gsap.fromTo(items, { yPercent: 110 }, { yPercent: 0, duration: reduce ? 0 : 1, stagger: 0.04, delay: reduce ? 0 : 0.45, ease: "expo.out" });
+      menu.querySelector<HTMLElement>("a, button")?.focus();
       const onKey = (e: KeyboardEvent) => {
         if (e.key === "Escape") setOpen(false);
         if (e.key === "Tab") {
@@ -91,7 +81,6 @@ export function Header() {
           menu.hidden = true;
         },
       });
-      toggleRef.current?.focus();
     }
   }, [open]);
 
@@ -100,41 +89,39 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[100] transition-transform duration-700 ease-[var(--ease-expo)] ${
-          hidden && !open ? "-translate-y-full" : "translate-y-0"
-        }`}
-        style={{ ["--header-h" as string]: "72px" }}
+        className={`fixed inset-x-0 top-0 z-[100] transition-transform duration-700 ease-[var(--ease-expo)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"}`}
       >
         <div
           className={`pointer-events-none absolute inset-0 transition-opacity duration-700 ${scrolled && !open ? "opacity-100" : "opacity-0"}`}
-          style={{ background: "linear-gradient(to bottom, rgba(13,10,7,0.85), rgba(13,10,7,0))" }}
+          style={{ background: "linear-gradient(to bottom, rgba(13,10,7,0.88), rgba(13,10,7,0))" }}
           aria-hidden="true"
         />
         <div className="container-x relative flex h-[72px] items-center justify-between gap-6">
-          <Link href="/#accueil" className="label flex items-baseline gap-2" aria-label={`${site.identity.fullName}, retour à l'accueil`}>
-            <span className="font-serif text-[1.35rem] normal-case tracking-normal">{site.identity.fullName}</span>
-            <span className="hidden text-cream/50 lg:inline">— Dentisterie équine</span>
+          <Link href="/" className="flex items-baseline gap-2" aria-label={`${site.identity.fullName}, accueil`}>
+            <span className="font-serif text-[1.35rem]">{site.identity.fullName}</span>
+            <span className="label hidden text-cream/50 2xl:inline">— Dentisterie équine</span>
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden md:block">
-            <ul className="flex items-center gap-7">
+          <nav aria-label="Navigation principale" className="hidden xl:block">
+            <ul className="flex items-center gap-6">
               {primaryNav.map((l) => {
-                const id = l.href.split("#")[1];
-                const isActive = home && active === id;
+                const on = isActive(l.href);
                 return (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="label relative py-2 text-cream/80 transition-colors hover:text-cream"
-                      aria-current={isActive ? "true" : undefined}
+                      className={`label group relative block py-2 transition-colors ${on ? "text-cream" : "text-cream/70 hover:text-cream"}`}
+                      aria-current={on ? "page" : undefined}
                     >
-                      {l.label}
+                      <span className="relative block overflow-hidden">
+                        <span className="block transition-transform duration-500 ease-[var(--ease-expo)] group-hover:-translate-y-full">{l.label}</span>
+                        <span className="absolute inset-0 block translate-y-full text-sand transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-y-0" aria-hidden="true">
+                          {l.label}
+                        </span>
+                      </span>
                       <span
-                        className={`absolute inset-x-0 -bottom-0.5 h-px transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-0"}`}
-                        style={{
-                          backgroundImage: "linear-gradient(to right, var(--color-cream) 50%, transparent 0)",
-                          backgroundSize: "6px 1px",
-                        }}
+                        className={`absolute inset-x-0 bottom-0 h-px transition-opacity duration-500 ${on ? "opacity-100" : "opacity-0"}`}
+                        style={{ backgroundImage: "linear-gradient(to right, var(--color-cream) 50%, transparent 0)", backgroundSize: "6px 1px" }}
                         aria-hidden="true"
                       />
                     </Link>
@@ -145,10 +132,14 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="/#rendez-vous" className="btn btn-filled !min-h-[40px] !px-5 !py-2.5 max-sm:!px-4" data-magnetic="0.2">
+            <Link href="/rendez-vous" className="btn btn-cream !min-h-[42px] !px-5 !py-2.5 max-sm:!px-4" data-magnetic="0.2">
               <span className="btn-label">
-                <span>Rendez-vous</span>
-                <span aria-hidden="true">Rendez-vous</span>
+                <span>
+                  <span className="max-sm:hidden">Prendre </span>rendez-vous
+                </span>
+                <span aria-hidden="true">
+                  <span className="max-sm:hidden">Prendre </span>rendez-vous
+                </span>
               </span>
             </Link>
             <button
@@ -157,49 +148,46 @@ export function Header() {
               onClick={() => setOpen((o) => !o)}
               aria-expanded={open}
               aria-controls="menu-plein-ecran"
-              className="label flex h-10 items-center gap-3 rounded-[22.5px] border border-line-strong px-4 transition-colors hover:border-cream"
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              className="label flex h-[42px] items-center gap-3 rounded-[22.5px] border border-line-strong px-4 transition-colors hover:border-cream xl:hidden"
             >
               <span className="relative block h-2.5 w-4" aria-hidden="true">
                 <span className={`absolute left-0 top-0 h-px w-full bg-cream transition-transform duration-500 ${open ? "translate-y-[5px] rotate-45" : ""}`} />
                 <span className={`absolute bottom-0 left-0 h-px w-full bg-cream transition-transform duration-500 ${open ? "-translate-y-[4px] -rotate-45" : ""}`} />
               </span>
-              <span>{open ? "Fermer" : "Menu"}</span>
+              <span className="max-sm:hidden">{open ? "Fermer" : "Menu"}</span>
             </button>
           </div>
         </div>
       </header>
 
-      <div
-        ref={menuRef}
-        id="menu-plein-ecran"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu"
-        hidden
-        className="fixed inset-0 z-[90] overflow-y-auto bg-forest"
-        data-lenis-prevent
-      >
-        <div className="container-x flex min-h-full flex-col justify-between gap-12 pb-10 pt-28">
-          <nav aria-label="Menu complet">
-            <ol className="grid gap-1 md:grid-cols-2 md:gap-x-16">
-              {navLinks.map((l, i) => (
-                <li key={l.href} className="overflow-hidden border-b border-dashed border-line-strong">
-                  <Link
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    data-menu-item
-                    className="group flex items-baseline gap-5 py-3 md:py-4"
-                  >
-                    <span className="label tabular-nums text-cream/40">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="font-serif text-[clamp(2rem,4.6vw,3.8rem)] leading-none transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-x-3">
-                      {l.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ol>
+      {/* Menu plein écran : une vignette par page */}
+      <div ref={menuRef} id="menu-plein-ecran" role="dialog" aria-modal="true" aria-label="Menu" hidden className="fixed inset-0 z-[90] overflow-y-auto bg-ink" data-lenis-prevent>
+        <div className="container-x pb-10 pt-24 md:pt-28">
+          <p className="label text-cream/45">Navigation</p>
+          <nav aria-label="Pages du site" className="mt-6">
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-3 md:gap-x-5 lg:grid-cols-4">
+              {navLinks.map((l, i) => {
+                const on = isActive(l.href);
+                return (
+                  <li key={l.href} data-menu-card>
+                    <Link href={l.href} onClick={() => setOpen(false)} className="group block" aria-current={on ? "page" : undefined}>
+                      <span className="relative block aspect-[4/3] overflow-hidden rounded-[12px] bg-umber">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={siteAsset(l.image)} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-expo)] group-hover:scale-[1.06]" />
+                        <span className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" aria-hidden="true" />
+                        <span className="label absolute left-3 top-3 tabular-nums text-cream/80">{String(i + 1).padStart(2, "0")}</span>
+                        {on && <span className="micro absolute right-3 top-3 rounded-full bg-cream px-2 py-1 text-ink">Ici</span>}
+                      </span>
+                      <span className="mt-3 block font-serif text-[clamp(1.35rem,2.4vw,2rem)] leading-none transition-colors group-hover:text-sand">{l.label}</span>
+                      <span className="mt-1.5 block text-[0.85rem] text-cream/55">{l.sub}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </nav>
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid gap-8 border-t border-dashed border-line-strong pt-8 md:grid-cols-3">
             <div className="overflow-hidden">
               <div data-menu-item>
                 <p className="label text-cream/50">Contact</p>
@@ -226,7 +214,7 @@ export function Header() {
             </div>
             <div className="overflow-hidden md:text-right">
               <div data-menu-item>
-                <Link href="/#rendez-vous" onClick={() => setOpen(false)} className="btn btn-cream">
+                <Link href="/rendez-vous" onClick={() => setOpen(false)} className="btn btn-cream">
                   <span className="btn-label">
                     <span>Prendre rendez-vous</span>
                     <span aria-hidden="true">Prendre rendez-vous</span>

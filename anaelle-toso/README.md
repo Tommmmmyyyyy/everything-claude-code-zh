@@ -40,20 +40,43 @@ fournies, et chaque emplacement photo est clairement signalé.
 
 ## Architecture
 
+Site multipage : chaque page a son URL, son titre et sa description (SEO), et la navigation
+passe par un rideau de transition qui respecte le bouton « retour » du navigateur.
+
+| Page | URL | Contenu |
+| --- | --- | --- |
+| Accueil | `/` | Hero, approche, carrousel des soins, présentation, camion, « L'anatomie en mouvement », témoignages, contact |
+| Mon histoire | `/mon-histoire` | Récit en chapitres (`content/story.json`) |
+| Mes prestations | `/prestations` | Bouche interactive (pas-d'âne), carrousel et fiches des 8 soins, signes à surveiller |
+| Rendez-vous | `/rendez-vous` | Demande en 6 étapes, déroulement d'une visite, carte de la zone |
+| Galerie | `/galerie` | Carrousel / mosaïque filtrables, emplacements « Photos à venir », Instagram |
+| FAQ | `/faq` | Questions par catégories, en accordéons |
+| Contact | `/contact` | Coordonnées, formulaire de contact, formulaire d'avis (modéré) |
+
 ```text
 content/               Contenus éditables (JSON) — voir content/README.md
 keystatic.config.ts    Schéma de l'espace d'administration
-src/app/(site)/        Pages publiques (accueil, mentions légales, confidentialité)
-src/app/api/rendez-vous  Réception sécurisée des demandes
+src/app/(site)/        Pages publiques + template.tsx (effets de page, transitions)
+src/app/api/           rendez-vous · contact · avis — réception sécurisée des formulaires
 src/app/keystatic/     Administration (/keystatic)
 src/components/
-  sections/            Une section = un fichier (Hero, TruckJourney, Anatomy…)
+  sections/            Sections réutilisables (Hero, TruckJourney, Anatomy, Gallery, Faq…)
+  home/                Carrousels, présentation, MouthJourney + mouth-scene.ts (Three.js)
+  pages/               Fiches des soins, formulaires contact / avis, appels à l'action
   illustrations/       Silhouettes, camion, décors, planches anatomiques
   booking/             Formulaire de rendez-vous en 6 étapes
-  providers/           Défilement fluide, révélations, curseur, rideau d'ouverture
-src/lib/               Contenu typé, schéma Zod, envoi d'e-mails, anti-spam, Instagram
+  providers/           Défilement fluide, rideau de transition, curseur, préchargement
+  ui/                  Boutons, en-têtes de page, carrousel accessible
+src/lib/               Contenu typé, schémas Zod, envoi d'e-mails, anti-spam, transitions, SEO
 tests/                 Tests unitaires et de bout en bout
 ```
+
+**Trois animations signatures** : le camion (`TruckJourney`, accueil), la bouche qui s'ouvre au
+pas-d'âne (`Anatomy`, prestations) et « L'anatomie en mouvement » (`MouthJourney`, accueil) :
+une scène 3D procédurale — aucun modèle externe — où la lampe frontale s'allume puis la caméra
+traverse la bouche (incisives, barres, dent de loup, arcades, coupe des pointes d'émail, tables,
+crochet et rampe) avant d'ouvrir sur les prestations. La scène n'est chargée qu'à l'approche de la
+section ; sans WebGL ou en mouvements réduits, une version fixe et textuelle la remplace.
 
 Les révélations au défilement sont déclaratives : `data-reveal="lines|chars|words|up|mask|line|stagger|fade|scrub-words"`
 et `data-parallax="0.15"` sur n'importe quel élément. Toutes les animations respectent
@@ -114,6 +137,16 @@ uniquement au clic (cookies tiers). Sans agenda, aucune disponibilité n'est aff
 
 Pour un suivi dans un tableur : `BOOKING_WEBHOOK_URL` vers un scénario Make / Zapier / n8n
 (en-tête `X-Webhook-Secret` = `BOOKING_WEBHOOK_SECRET`).
+
+### Formulaire de contact et avis
+
+`/api/contact` et `/api/avis` appliquent les mêmes protections (origine, débit, pot de miel,
+délai, Turnstile, validation Zod) et utilisent les mêmes canaux d'envoi que les rendez-vous.
+
+**Avis** : rien n'est publié automatiquement. Chaque avis arrive par e-mail avec une entrée JSON
+prête à copier. Après relecture, Anaëlle l'ajoute dans Témoignages (`content/testimonials.json`
+ou l'administration) : il apparaît alors dans les carrousels de l'accueil et de la page Contact.
+Sans avis réel, le site affiche une invitation à en laisser un — jamais de note inventée.
 
 ## Réseaux sociaux
 

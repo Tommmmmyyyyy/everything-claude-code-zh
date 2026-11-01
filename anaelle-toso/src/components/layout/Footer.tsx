@@ -57,7 +57,7 @@ export function Footer() {
             )}
             {c.addressLocality && <li>{c.addressLocality}</li>}
             <li>
-              <Link href="/#rendez-vous" className="link-u">
+              <Link href="/rendez-vous" className="link-u">
                 Demande de rendez-vous
               </Link>
             </li>

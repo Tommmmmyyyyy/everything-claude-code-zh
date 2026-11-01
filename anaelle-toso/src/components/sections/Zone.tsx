@@ -12,7 +12,7 @@ const ZoneMap = dynamic(() => import("./ZoneMap"), {
   loading: () => <div className="h-full w-full animate-pulse bg-forest-2" />,
 });
 
-export function Zone({ zone }: { zone: ZoneContent }) {
+export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string }) {
   const configured = zone.main.lat != null && zone.main.lng != null;
   // La carte (Leaflet + tuiles) n'est chargée qu'à l'approche de la section.
   const mapBox = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ export function Zone({ zone }: { zone: ZoneContent }) {
 
   return (
     <section id="zone" aria-labelledby="zone-title" className="relative section-y bg-ink">
-      <SectionHeader index="10" label="Zone d'intervention" title={zone.title} intro={zone.intro} titleId="zone-title" />
+      <SectionHeader index={index} label="Zone d'intervention" title={zone.title} intro={zone.intro} titleId="zone-title" />
 
       <div className="container-x mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-6">
         <div className="flex flex-col gap-10 md:col-span-4">

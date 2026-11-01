@@ -21,12 +21,12 @@ const PILLARS = [
   },
 ];
 
-export function Approach() {
+export function Approach({ index = "02" }: { index?: string }) {
   return (
     <section id="approche" aria-labelledby="approche-title" className="relative section-y bg-ink">
       <div className="container-x">
         <div className="flex items-center gap-4">
-          <span className="label text-cream/50">(02)</span>
+          <span className="label text-cream/50">({index})</span>
           <span className="label">Mon approche</span>
           <span className="rule-dashed flex-1" data-reveal="line" aria-hidden="true" />
         </div>

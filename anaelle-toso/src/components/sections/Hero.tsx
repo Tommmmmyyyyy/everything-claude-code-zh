@@ -48,10 +48,10 @@ export function Hero({ firstName, lastName, tagline, subtitle, profession, video
       const intro = gsap.timeline({ paused: true });
       intro
         .to(scene, { scale: 1, duration: 3.2, ease: "expo.out" }, 0)
-        .to(sun, { yPercent: 0, duration: 3.4, ease: "power3.out" }, 0)
         .to(splits.flatMap((s) => s.chars), { yPercent: 0, duration: 1.5, stagger: 0.045, ease: "expo.out" }, 0.25)
         .to(tagSplit.lines, { yPercent: 0, duration: 1.3, stagger: 0.1, ease: "expo.out" }, 0.7)
         .to(fades, { opacity: 1, y: 0, duration: 1.2, stagger: 0.08, ease: "expo.out" }, 0.95);
+      if (sun) intro.to(sun, { yPercent: 0, duration: 3.4, ease: "power3.out" }, 0);
       const off = onIntroDone(() => intro.play());
 
       /* Parallaxe au mouvement de la souris */
@@ -167,7 +167,7 @@ export function Hero({ firstName, lastName, tagline, subtitle, profession, video
             <ButtonLink href="#approche" variant="ghost" icon={false}>
               Découvrir mon approche
             </ButtonLink>
-            <ButtonLink href="#rendez-vous" variant="filled">
+            <ButtonLink href="/rendez-vous" variant="filled">
               Prendre rendez-vous
             </ButtonLink>
           </div>

@@ -42,7 +42,7 @@ function Detail({ kind }: { kind: string }) {
   }
 }
 
-export function Anatomy({ content }: { content: AnatomyContent }) {
+export function Anatomy({ content, index = "04" }: { content: AnatomyContent; index?: string }) {
   const root = useRef<HTMLElement>(null);
   const [active, setActive] = useState<AnatomyItem["id"]>("pointes");
   const [explorer, setExplorer] = useState(false);
@@ -137,7 +137,7 @@ export function Anatomy({ content }: { content: AnatomyContent }) {
         {/* Colonne texte */}
         <div className="relative z-10 flex min-w-0 flex-col md:col-span-5 lg:col-span-4">
           <div className="flex items-center gap-4">
-            <span className="label text-cream/50">(04)</span>
+            <span className="label text-cream/50">({index})</span>
             <span className="label">Anatomie</span>
             <span className="rule-dashed flex-1" aria-hidden="true" />
           </div>

@@ -58,7 +58,7 @@ const ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-export function Signs({ content }: { content: SignsContent }) {
+export function Signs({ content, index = "08" }: { content: SignsContent; index?: string }) {
   const [active, setActive] = useState(content.items[0].id);
   const [checked, setChecked] = useState<string[]>([]);
   const current = content.items.find((i) => i.id === active)!;
@@ -84,7 +84,7 @@ export function Signs({ content }: { content: SignsContent }) {
 
   return (
     <section id="signes" aria-labelledby="signes-title" className="relative section-y bg-forest">
-      <SectionHeader index="08" label="Signes à surveiller" title={content.title} intro={content.intro} titleId="signes-title" />
+      <SectionHeader index={index} label="Signes à surveiller" title={content.title} intro={content.intro} titleId="signes-title" />
 
       <div className="container-x mt-16 grid gap-12 md:mt-24 md:grid-cols-12 md:gap-6">
         <fieldset className="md:col-span-7">
@@ -141,7 +141,7 @@ export function Signs({ content }: { content: SignsContent }) {
                 <>
                   <p className={`mt-3 text-[1.05rem] leading-relaxed ${verdict.tone === "vet" ? "text-[#f0b48f]" : "text-cream/90"}`}>{verdict.text}</p>
                   <div className="mt-5">
-                    <ButtonLink href="#rendez-vous" variant="ghost">
+                    <ButtonLink href="/rendez-vous" variant="ghost">
                       {verdict.tone === "vet" ? "Me contacter ensuite" : "Demander un contrôle"}
                     </ButtonLink>
                   </div>

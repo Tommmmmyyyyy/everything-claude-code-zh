@@ -16,9 +16,8 @@ function Item({ label, children }: { label: string; children: React.ReactNode })
 const Missing = ({ children }: { children: string }) => (SHOW_PLACEHOLDERS ? <span className="ph-tag">{children}</span> : <span className="text-cream/40">—</span>);
 
 /** Dernière scène : grand portrait de cheval au soleil couchant, invitation au contact. */
-export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneContent }) {
+export function ContactFinale({ site, zone, index = "15" }: { site: SiteContent; zone: ZoneContent; index?: string }) {
   const c = site.contact;
-  const contactHref = c.email ? `mailto:${c.email}` : c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : site.social.instagram || "#rendez-vous";
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-ink">
       {/* Grand cheval à contre-jour */}
@@ -45,17 +44,17 @@ export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneCon
       <div className="container-x relative flex min-h-[100svh] flex-col justify-between gap-16 pb-12 pt-[calc(var(--header-h)+8vh)]">
         <div>
           <div className="flex items-center gap-4">
-            <span className="label text-cream/50">(15)</span>
+            <span className="label text-cream/50">({index})</span>
             <span className="label">Contact</span>
           </div>
           <h2 id="contact-title" className="display mt-10 max-w-[12ch]" data-reveal="lines">
             Prenons soin de leur <em className="italic text-sand">sourire.</em>
           </h2>
           <div className="mt-12 flex flex-wrap gap-3" data-reveal="up" data-delay="0.2">
-            <ButtonLink href="#rendez-vous" variant="cream">
+            <ButtonLink href="/rendez-vous" variant="cream">
               Prendre rendez-vous
             </ButtonLink>
-            <ButtonLink href={contactHref} variant="ghost" icon={false} data-booking-type={contactHref === "#rendez-vous" ? "information" : undefined} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noopener noreferrer" : undefined}>
+            <ButtonLink href="/contact" variant="ghost" icon={false}>
               Contacter Anaëlle
             </ButtonLink>
           </div>

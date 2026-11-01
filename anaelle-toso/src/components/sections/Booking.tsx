@@ -7,7 +7,7 @@ import { BookingForm } from "@/components/booking/BookingForm";
 import { ContactLines } from "@/components/layout/Header";
 
 /** Prise de rendez-vous : formulaire de demande + réservation en ligne si un agenda est connecté. */
-export function Booking({ site }: { site: SiteContent }) {
+export function Booking({ site, index = "11", header = true }: { site: SiteContent; index?: string; header?: boolean }) {
   const calendar = site.booking.calendlyUrl || site.booking.googleAppointmentUrl;
   const provider = site.booking.calendlyUrl ? "Calendly" : "Google Agenda";
   const [showCal, setShowCal] = useState(false);
@@ -27,8 +27,9 @@ export function Booking({ site }: { site: SiteContent }) {
 
   return (
     <section id="rendez-vous" aria-labelledby="rdv-title" className="relative section-y bg-forest">
+      {header ? (
       <SectionHeader
-        index="11"
+        index={index}
         label="Rendez-vous"
         title={
           <>
@@ -43,9 +44,14 @@ export function Booking({ site }: { site: SiteContent }) {
         }
         titleId="rdv-title"
       />
+      ) : (
+        <h2 id="rdv-title" className="sr-only">
+          Demande de rendez-vous
+        </h2>
+      )}
 
       {calendarSrc && (
-        <div className="container-x mt-14">
+        <div className={`container-x ${header ? "mt-14" : ""}`}>
           <div className="rounded-[12px] border border-line p-6 md:p-8">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
@@ -71,7 +77,7 @@ export function Booking({ site }: { site: SiteContent }) {
         </div>
       )}
 
-      <div className="container-x mt-14 md:mt-20">
+      <div className={`container-x ${header || calendarSrc ? "mt-14 md:mt-20" : ""}`}>
         <BookingForm contactFallback={<ContactLines className="" />} />
       </div>
     </section>

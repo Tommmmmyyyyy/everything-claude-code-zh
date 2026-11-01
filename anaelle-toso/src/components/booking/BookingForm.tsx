@@ -62,6 +62,12 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
 
   useEffect(() => {
     startedAt.current = Date.now();
+    // Lien entrant : /rendez-vous?type=deplacement (ou premier-rdv, suivi, information)
+    const type = new URLSearchParams(window.location.search).get("type");
+    if (!type || !REQUEST_TYPES.some((r) => r.id === type)) return;
+    // après l'hydratation : le rendu serveur ne connaît pas l'URL
+    const id = requestAnimationFrame(() => setData((d) => ({ ...d, request: { type: type as BookingInput["request"]["type"] } })));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   /* Les liens [data-booking-type] du site présélectionnent le type de demande */

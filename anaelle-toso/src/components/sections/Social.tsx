@@ -32,14 +32,14 @@ export function SocialIcon({ id, className = "h-5 w-5" }: { id: string; classNam
   );
 }
 
-export function Social({ site, content, posts }: { site: SiteContent; content: SocialContent; posts: SocialPost[] | null }) {
+export function Social({ site, content, posts, index = "12" }: { site: SiteContent; content: SocialContent; posts: SocialPost[] | null; index?: string }) {
   const list = (posts && posts.length ? posts : content.posts).slice(0, 6);
   const links = NETWORKS.map((n) => ({ ...n, url: site.social[n.id] }));
   const handle = site.social.instagramHandle;
 
   return (
     <section id="reseaux" aria-labelledby="reseaux-title" className="relative section-y bg-ink">
-      <SectionHeader index="12" label="Réseaux" title={content.title} intro={content.intro} titleId="reseaux-title" />
+      <SectionHeader index={index} label="Réseaux" title={content.title} intro={content.intro} titleId="reseaux-title" />
 
       <div className="container-x mt-12 flex flex-wrap gap-3 md:mt-16">
         {links.map((l) =>

@@ -57,7 +57,7 @@ export const viewport: Viewport = {
 };
 
 /* Script minimal exécuté avant le rendu : active les révélations JS et saute le rideau déjà vu. */
-const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('at-intro-seen')==='1')d.classList.add('intro-seen')}catch(e){}})();`;
+const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('at-intro-seen')==='1')d.classList.add('intro-seen');if(sessionStorage.getItem('at-nav')==='1')d.classList.add('nav-in')}catch(e){}})();`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

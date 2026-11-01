@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import { siteHref } from "@/lib/config";
 
 type Variant = "filled" | "ghost" | "cream";
 
@@ -37,7 +38,7 @@ export function ButtonLink({
   ...rest
 }: Common & AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
-    <a {...rest} data-magnetic={magnetic ? "0.25" : undefined} className={`btn btn-${variant} ${className}`}>
+    <a {...rest} href={rest.href ? siteHref(rest.href) : undefined} data-magnetic={magnetic ? "0.25" : undefined} className={`btn btn-${variant} ${className}`}>
       <Inner icon={icon}>{children}</Inner>
     </a>
   );

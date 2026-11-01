@@ -166,7 +166,7 @@ export function Services({ content }: { content: ServicesContent }) {
                         ))}
                       </ul>
                       <div className="mt-8 flex flex-wrap items-center gap-4">
-                        <ButtonLink href="#rendez-vous" variant="ghost">
+                        <ButtonLink href="/rendez-vous" variant="ghost">
                           Demander ce soin
                         </ButtonLink>
                         {s.price ? (

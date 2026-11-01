@@ -16,7 +16,7 @@ const ICONS: Record<string, React.ReactNode> = {
   advice: <path d="M 6 8 h 36 v 22 H 20 l -8 8 v -8 H 6 Z M 14 16 h 20 M 14 22 h 12" />,
 };
 
-export function Process({ content }: { content: ProcessContent }) {
+export function Process({ content, index = "07" }: { content: ProcessContent; index?: string }) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -72,7 +72,7 @@ export function Process({ content }: { content: ProcessContent }) {
     <section ref={root} id="deroulement" aria-labelledby="deroulement-title" className="relative bg-ink">
       <div data-pin className="relative md:flex md:h-[100svh] md:flex-col md:justify-center md:overflow-hidden">
         <div className="section-y md:py-0">
-          <SectionHeader index="07" label="Déroulement" title={content.title} intro={content.intro} provisional={content.provisional} titleId="deroulement-title" />
+          <SectionHeader index={index} label="Déroulement" title={content.title} intro={content.intro} provisional={content.provisional} titleId="deroulement-title" />
         </div>
 
         {/* Piste horizontale (ordinateur) / chronologie verticale (mobile) */}

@@ -268,11 +268,26 @@ export default config({
       format: { data: "json" },
       schema: {
         title: fields.text({ label: "Titre" }),
+        categories: fields.array(fields.object({ id: fields.text({ label: "Identifiant" }), label: fields.text({ label: "Libellé" }) }), {
+          label: "Catégories",
+          itemLabel: (p) => p.fields.label.value,
+        }),
         items: fields.array(
           fields.object({
             q: fields.text({ label: "Question" }),
             a: fields.text({ label: "Réponse", multiline: true }),
             provisional: fields.checkbox({ label: "Réponse à confirmer" }),
+            category: fields.select({
+              label: "Catégorie",
+              defaultValue: "dentisterie",
+              options: [
+                { label: "Dentisterie équine", value: "dentisterie" },
+                { label: "Les soins", value: "soins" },
+                { label: "Le déroulement des interventions", value: "deroulement" },
+                { label: "Les rendez-vous", value: "rendez-vous" },
+                { label: "Les déplacements", value: "deplacements" },
+              ],
+            }),
           }),
           { label: "Questions", itemLabel: (p) => p.fields.q.value },
         ),
@@ -363,6 +378,7 @@ export default config({
           fields.object({
             name: fields.text({ label: "Prénom du propriétaire" }),
             horse: fields.text({ label: "Nom du cheval" }),
+            rating: fields.integer({ label: "Note (1 à 5)", validation: { min: 1, max: 5 } }),
             text: fields.text({ label: "Témoignage (avec l'accord écrit de son auteur)", multiline: true }),
             image: img("Photo du cheval", "avis"),
             date: fields.text({ label: "Date (ex. 2026-05)" }),
