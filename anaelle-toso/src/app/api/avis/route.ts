@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     ],
     replyTo: a.email || undefined,
     footer:
-      "Modération : cet avis n'est pas publié automatiquement.\nPour le publier, ajoutez-le dans l'administration du site (Témoignages), ou collez ce bloc dans content/testimonials.json :\n" +
+      "Modération : cet avis n'est pas publié automatiquement.\nPour le publier, ajoutez-le dans l'administration du site (Témoignages), ou collez ce bloc dans content/testimonials.json :\n" +
       JSON.stringify(entry, null, 2),
     payload: { review: { ...a, status: "en attente de modération" }, testimonialEntry: entry },
   });

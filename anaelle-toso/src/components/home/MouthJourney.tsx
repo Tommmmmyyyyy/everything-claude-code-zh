@@ -9,11 +9,11 @@ import type { AnchorId, MouthScene } from "./mouth-scene";
 /* Chapitres du voyage (progression de défilement) */
 const CHAPTERS = [
   { n: "01", from: 0.1, to: 0.24, title: "Les incisives", text: "Douze incisives, six en haut, six en bas, coupent l'herbe au pâturage. Leur forme évolue avec l'âge." },
-  { n: "02", from: 0.24, to: 0.4, title: "Les barres et la dent de loup", text: "Derrière les incisives, un espace sans dents : les barres, où repose le mors. Juste devant la première dent jugale peut se trouver une petite dent de loup." },
-  { n: "03", from: 0.4, to: 0.49, title: "Prémolaires et molaires", text: "Trois prémolaires et trois molaires par demi-mâchoire : vingt-quatre dents jugales à couronne très longue, qui broient les fibres." },
-  { n: "04", from: 0.49, to: 0.69, title: "Les pointes d'émail", text: "La mâchoire du haut est plus large que celle du bas. Les dents s'usent en biais : des pointes se forment côté joue en haut, côté langue en bas." },
-  { n: "05", from: 0.69, to: 0.8, title: "Les tables dentaires", text: "La surface de mastication : des replis d'émail, plus durs que la dentine, forment des crêtes qui broient les fibres." },
-  { n: "06", from: 0.8, to: 0.92, title: "Les surdents", text: "Une dent qui n'est pas usée par son opposée dépasse : crochet à l'avant de l'arcade, rampe à l'arrière." },
+  { n: "02", from: 0.24, to: 0.4, title: "Les barres et la dent de loup", text: "Derrière les incisives, un espace sans dents : les barres, où repose le mors. Juste devant la première dent jugale peut se trouver une petite dent de loup." },
+  { n: "03", from: 0.4, to: 0.49, title: "Prémolaires et molaires", text: "Trois prémolaires et trois molaires par demi-mâchoire : vingt-quatre dents jugales à couronne très longue, qui broient les fibres." },
+  { n: "04", from: 0.49, to: 0.69, title: "Les pointes d'émail", text: "La mâchoire du haut est plus large que celle du bas. Les dents s'usent en biais : des pointes se forment côté joue en haut, côté langue en bas." },
+  { n: "05", from: 0.69, to: 0.8, title: "Les tables dentaires", text: "La surface de mastication : des replis d'émail, plus durs que la dentine, forment des crêtes qui broient les fibres." },
+  { n: "06", from: 0.8, to: 0.92, title: "Les surdents", text: "Une dent qui n'est pas usée par son opposée dépasse : crochet à l'avant de l'arcade, rampe à l'arrière." },
 ] as const;
 
 const LABELS: { id: AnchorId; text: string; short?: string; win: [number, number, number, number]; side: "l" | "r" }[] = [
@@ -105,7 +105,9 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
         if (show) {
           // l'étiquette bascule de côté si elle sortait du cadre
           const w = holder.clientWidth;
-          const side = L.side === "l" && pr.x < 300 ? "r" : L.side === "r" && pr.x > w - 300 ? "l" : L.side;
+          const pill = el.querySelector<HTMLElement>("[data-mj-pill]");
+          const need = (pill?.offsetWidth ?? 160) + (w < 768 ? 56 : 80);
+          const side = L.side === "l" && pr.x - need < 8 ? "r" : L.side === "r" && pr.x + need > w - 8 ? "l" : L.side;
           if (el.dataset.side !== side) el.dataset.side = side;
           el.style.transform = `translate3d(${pr.x.toFixed(1)}px, ${pr.y.toFixed(1)}px, 0)`;
         }
@@ -234,7 +236,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
               <div key={l.id} data-mj-label data-side={l.side} className="group invisible absolute left-0 top-0 opacity-0 will-change-transform">
                 <span className="absolute -left-[5px] -top-[5px] h-2.5 w-2.5 rounded-full bg-sand shadow-[0_0_0_4px_rgba(217,196,160,0.18),0_0_18px_rgba(255,170,90,0.6)]" />
                 <span className="absolute left-2 top-0 h-px w-10 border-t border-dashed border-cream/60 group-data-[side=l]:left-auto group-data-[side=l]:right-2 md:w-16" />
-                <span className="label absolute -top-[13px] left-12 whitespace-nowrap rounded-full border border-cream/25 bg-ink/70 px-3 py-1.5 text-[10px] text-cream backdrop-blur-sm group-data-[side=l]:left-auto group-data-[side=l]:right-12 md:left-[4.5rem] md:text-[11px] md:group-data-[side=l]:left-auto md:group-data-[side=l]:right-[4.5rem]">
+                <span data-mj-pill className="label absolute -top-[13px] left-12 whitespace-nowrap rounded-full border border-cream/25 bg-ink/70 px-3 py-1.5 text-[10px] text-cream backdrop-blur-sm group-data-[side=l]:left-auto group-data-[side=l]:right-12 md:left-[4.5rem] md:text-[11px] md:group-data-[side=l]:left-auto md:group-data-[side=l]:right-[4.5rem]">
                   <span className="md:hidden">{l.short ?? l.text}</span>
                   <span className="max-md:hidden">{l.text}</span>
                 </span>
@@ -275,18 +277,19 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
                 <h2 id="mj-title" className="display mt-6 max-w-[13ch]">
                   Entrez dans la bouche <em className="italic text-sand">du cheval.</em>
                 </h2>
-                <p className="body-lg mt-6 max-w-md text-cream/70">La lampe frontale s&apos;allume. Faites défiler&nbsp;: la caméra traverse la bouche, des incisives aux molaires.</p>
+                <p className="body-lg mt-6 max-w-md text-cream/70">La lampe frontale s&apos;allume. Faites défiler : la caméra traverse la bouche, des incisives aux molaires.</p>
               </div>
             </div>
 
             {/* Chapitres */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-10 md:pb-14">
-              <div className="container-x grid">
+              <div className="container-x">
+                <div className="grid max-w-md transition-opacity duration-500 max-md:rounded-[12px] max-md:bg-ink/60 max-md:p-5 max-md:backdrop-blur-[6px] [&:not(:has(.is-active))]:opacity-0">
                 {CHAPTERS.map((c) => (
                   <article
                     key={c.n}
                     data-mj-chapter
-                    className="col-start-1 row-start-1 max-w-md rounded-[12px] bg-ink/55 p-5 opacity-0 backdrop-blur-[6px] transition-[opacity,transform] duration-700 [transform:translateY(16px)] md:bg-transparent md:p-0 md:backdrop-blur-0 [&.is-active]:opacity-100 [&.is-active]:[transform:none]"
+                    className="col-start-1 row-start-1 opacity-0 transition-[opacity,transform] duration-300 [transform:translateY(12px)] [&.is-active]:opacity-100 [&.is-active]:delay-200 [&.is-active]:duration-700 [&.is-active]:[transform:none]"
                   >
                     <p className="label text-sand">
                       {c.n} — {c.title}
@@ -294,6 +297,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
                     <p className="mt-3 text-[0.98rem] leading-relaxed text-cream/85 md:text-[1.05rem]">{c.text}</p>
                   </article>
                 ))}
+                </div>
               </div>
             </div>
 

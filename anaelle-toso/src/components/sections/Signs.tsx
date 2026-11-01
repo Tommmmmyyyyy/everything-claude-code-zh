@@ -69,14 +69,14 @@ export function Signs({ content, index = "08" }: { content: SignsContent; index?
     if (vet.length > 0)
       return {
         tone: "vet" as const,
-        text: `Vous avez coché ${vet.map((v) => `« ${v.title.toLowerCase()} »`).join(" et ")}. Ce type de signe justifie d'abord un avis vétérinaire. Un contrôle dentaire pourra ensuite être envisagé, en lien avec votre vétérinaire.`,
+        text: `Vous avez coché ${vet.map((v) => `« ${v.title.toLowerCase()} »`).join(" et ")}. Ce type de signe justifie d'abord un avis vétérinaire. Un contrôle dentaire pourra ensuite être envisagé, en lien avec votre vétérinaire.`,
       };
     return {
       tone: "check" as const,
       text:
         checked.length === 1
           ? "Ce signe peut avoir une origine dentaire — ou non. Un contrôle permet de faire le point, et je vous oriente vers votre vétérinaire si nécessaire."
-          : `${checked.length} signes observés : un contrôle dentaire est une bonne idée. En cas de douleur, d'aggravation ou de doute, contactez votre vétérinaire.`,
+          : `${checked.length} signes observés : un contrôle dentaire est une bonne idée. En cas de douleur, d'aggravation ou de doute, contactez votre vétérinaire.`,
     };
   }, [checked, content.items]);
 
@@ -147,7 +147,7 @@ export function Signs({ content, index = "08" }: { content: SignsContent; index?
                   </div>
                 </>
               ) : (
-                <p className="mt-3 text-cream/60">Cochez les signes que vous observez : une orientation s&apos;affiche ici.</p>
+                <p className="mt-3 text-cream/60">Cochez les signes que vous observez : une orientation s&apos;affiche ici.</p>
               )}
             </div>
 

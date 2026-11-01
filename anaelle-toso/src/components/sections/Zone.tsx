@@ -88,12 +88,12 @@ export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string
               <p className="body mt-3 text-cream/75">
                 {zone.travelNote}
                 {zone.extended.length > 0 && (
-                  <span className="mt-3 block text-[0.95rem] text-cream/60">Secteurs sur demande : {zone.extended.map((z) => z.name).join(", ")}.</span>
+                  <span className="mt-3 block text-[0.95rem] text-cream/60">Secteurs sur demande : {zone.extended.map((z) => z.name).join(", ")}.</span>
                 )}
               </p>
             ) : (
               <p className="body mt-3 text-cream/75">
-                Votre écurie se trouve hors de la zone indiquée&nbsp;? Faites une demande de déplacement : je vous réponds au cas par cas.
+                Votre écurie se trouve hors de la zone indiquée ? Faites une demande de déplacement : je vous réponds au cas par cas.
               </p>
             )}
           </div>
@@ -131,7 +131,7 @@ export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string
                 <div className="pointer-events-auto max-w-sm rounded-[12px] border border-line bg-ink/85 p-5 backdrop-blur-sm">
                   <p className="label text-sand">Carte en préparation</p>
                   <p className="mt-2 text-[0.95rem] leading-relaxed text-cream/75">
-                    La zone d&apos;intervention sera affichée ici. En attendant, indiquez l&apos;adresse de votre écurie dans votre demande&nbsp;: je vous confirme si je peux me déplacer.
+                    La zone d&apos;intervention sera affichée ici. En attendant, indiquez l&apos;adresse de votre écurie dans votre demande : je vous confirme si je peux me déplacer.
                   </p>
                 </div>
               </div>

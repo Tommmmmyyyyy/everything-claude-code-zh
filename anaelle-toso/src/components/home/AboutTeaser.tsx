@@ -31,7 +31,7 @@ export function AboutTeaser({ story, index = "04" }: { story: StoryContent; inde
             {story.intro}
           </p>
           <blockquote className="mt-8 border-l border-dashed border-line-strong pl-5 font-serif text-[1.45rem] leading-snug text-cream/90" data-reveal="up" data-delay="0.1">
-            « {story.quote.text} »
+            « {story.quote.text} »
           </blockquote>
           <div className="mt-10" data-reveal="up" data-delay="0.15">
             <ButtonLink href="/mon-histoire" variant="ghost">

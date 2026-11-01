@@ -315,7 +315,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
           <p className="body-lg mt-5 max-w-xl text-cream/80">
             Votre demande a bien été transmise à Anaëlle. Elle vous recontacte rapidement pour convenir ensemble d&apos;un rendez-vous.
           </p>
-          <p className="mt-3 max-w-xl text-cream/55">Votre demande ne vaut pas confirmation : le rendez-vous est fixé après échange avec Anaëlle.</p>
+          <p className="mt-3 max-w-xl text-cream/55">Votre demande ne vaut pas confirmation : le rendez-vous est fixé après échange avec Anaëlle.</p>
           {status.dev && (
             <p className="mt-6">
               <span className="ph-tag">{DEMO ? "Démonstration — aucune donnée n\u2019a été envoyée" : "Mode développement — demande enregistrée dans .data/demandes.jsonl"}</span>
@@ -370,7 +370,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
           })}
         </ol>
         <div className="mt-8 hidden md:block">
-          <p className="label text-cream/45">Vous préférez appeler&nbsp;?</p>
+          <p className="label text-cream/45">Vous préférez appeler ?</p>
           <div className="mt-2">{contactFallback}</div>
         </div>
       </nav>
@@ -386,11 +386,11 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
             <h3 data-step-title tabIndex={-1} className="heading-sm mt-3 outline-none">
               {
                 {
-                  request: "Que puis-je faire pour vous ?",
+                  request: "Que puis-je faire pour vous ?",
                   owner: "Faisons connaissance.",
                   horse: info ? "Votre cheval (facultatif)." : "Parlez-moi de votre cheval.",
-                  location: info ? "Où se trouve-t-il ? (facultatif)" : "Où se trouve-t-il ?",
-                  schedule: "Quand souhaitez-vous me voir ?",
+                  location: info ? "Où se trouve-t-il ? (facultatif)" : "Où se trouve-t-il ?",
+                  schedule: "Quand souhaitez-vous me voir ?",
                   review: "Vérifions ensemble.",
                 }[current]
               }
@@ -432,7 +432,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
               {current === "horse" && (
                 <>
                   <div className="grid gap-8 sm:grid-cols-2">
-                    {field("horse.name", "Nom du cheval", { optional: info, placeholder: "Plusieurs chevaux ? Indiquez le premier" })}
+                    {field("horse.name", "Nom du cheval", { optional: info, placeholder: "Plusieurs chevaux ? Indiquez le premier" })}
                     {field("horse.age", "Âge", { optional: true, placeholder: "ex. 9 ans" })}
                   </div>
                   <div className="grid gap-8 sm:grid-cols-2">
@@ -481,7 +481,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
               {current === "schedule" && (
                 <>
                   <p className="-mt-4 text-[0.95rem] text-cream/60">
-                    Indiquez vos préférences : il ne s&apos;agit pas d&apos;une réservation. Anaëlle vous recontacte pour fixer le rendez-vous.
+                    Indiquez vos préférences : il ne s&apos;agit pas d&apos;une réservation. Anaëlle vous recontacte pour fixer le rendez-vous.
                   </p>
                   <div className="grid gap-8 sm:grid-cols-2">
                     {field("schedule.preferredDate", "Date souhaitée", { type: "date", optional: true, min: today })}

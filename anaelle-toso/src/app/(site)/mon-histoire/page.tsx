@@ -6,7 +6,7 @@ import { PageCta } from "@/components/pages/PageCta";
 
 export const metadata: Metadata = {
   title: "Mon histoire",
-  description: `${site.identity.fullName}, ${site.identity.profession.toLowerCase()} : la passion des chevaux, la découverte du métier, une approche douce et pédagogique.`,
+  description: `${site.identity.fullName}, ${site.identity.profession.toLowerCase()} : la passion des chevaux, la découverte du métier, une approche douce et pédagogique.`,
   alternates: { canonical: "/mon-histoire" },
 };
 
@@ -22,7 +22,7 @@ export default function MonHistoire() {
             Faisons <em className="italic text-sand">connaissance.</em>
           </>
         }
-        text="Une question sur votre cheval, un premier contrôle à prévoir ? Je vous réponds avec plaisir."
+        text="Une question sur votre cheval, un premier contrôle à prévoir ? Je vous réponds avec plaisir."
         primary={{ href: "/rendez-vous", label: "Prendre rendez-vous" }}
         secondary={{ href: "/prestations", label: "Découvrir les prestations" }}
       />

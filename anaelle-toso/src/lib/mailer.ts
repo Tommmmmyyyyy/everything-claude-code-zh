@@ -43,7 +43,7 @@ export function summarize(b: Booking) {
 export function renderEmail(b: Booking) {
   const rows = summarize(b);
   const subject = `Demande de rendez-vous — ${labelOf(REQUEST_TYPES, b.request.type)} — ${b.owner.fullName}`;
-  const text = rows.map(([k, v]) => `${k} : ${v}`).join("\n") + "\n\nRépondre directement à cet e-mail pour contacter le propriétaire.";
+  const text = rows.map(([k, v]) => `${k} : ${v}`).join("\n") + "\n\nRépondre directement à cet e-mail pour contacter le propriétaire.";
   const html = `<!doctype html><html lang="fr"><body style="margin:0;padding:24px;background:#f4eadb;font-family:Arial,Helvetica,sans-serif;color:#0d0a07">
   <table role="presentation" width="100%" style="max-width:640px;margin:auto;background:#fffaf2;border-radius:12px;border:1px solid #e3d6c0">
     <tr><td style="padding:28px 28px 8px"><p style="margin:0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a4b2a">Nouvelle demande via le site</p>
@@ -148,7 +148,7 @@ export async function deliver(b: Booking): Promise<DeliveryResult> {
       if (ch.resend) await sendResend(b.owner.email, ack, to);
       else if (ch.smtp) await sendSmtp(b.owner.email, ack, to);
     } catch (e) {
-      console.warn("[rendez-vous] accusé de réception non envoyé :", e);
+      console.warn("[rendez-vous] accusé de réception non envoyé :", e);
     }
   }
 
@@ -167,7 +167,7 @@ export async function deliver(b: Booking): Promise<DeliveryResult> {
     }
     return { ok: false, channels: [], error: "no-channel" };
   }
-  console.error("[rendez-vous] échec d'envoi :", errors);
+  console.error("[rendez-vous] échec d'envoi :", errors);
   return { ok: false, channels: [], error: "send-failed" };
 }
 
@@ -184,7 +184,7 @@ export interface GenericMessage {
 }
 
 function renderGeneric(m: GenericMessage) {
-  const text = m.rows.map(([k, v]) => `${k} : ${v}`).join("\n") + (m.footer ? `\n\n${m.footer}` : "");
+  const text = m.rows.map(([k, v]) => `${k} : ${v}`).join("\n") + (m.footer ? `\n\n${m.footer}` : "");
   const html = `<!doctype html><html lang="fr"><body style="margin:0;padding:24px;background:#f4eadb;font-family:Arial,Helvetica,sans-serif;color:#0d0a07">
   <table role="presentation" width="100%" style="max-width:640px;margin:auto;background:#fffaf2;border-radius:12px;border:1px solid #e3d6c0">
     <tr><td style="padding:28px 28px 8px"><p style="margin:0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a4b2a">${m.kind === "avis" ? "Nouvel avis à modérer" : "Nouveau message via le site"}</p>
@@ -243,6 +243,6 @@ export async function deliverMessage(m: GenericMessage): Promise<DeliveryResult>
     }
     return { ok: false, channels: [], error: "no-channel" };
   }
-  console.error(`[${m.kind}] échec d'envoi :`, errors);
+  console.error(`[${m.kind}] échec d'envoi :`, errors);
   return { ok: false, channels: [], error: "send-failed" };
 }

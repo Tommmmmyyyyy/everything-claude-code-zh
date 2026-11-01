@@ -117,5 +117,5 @@ export default function ZoneMap({ zone, onReady }: { zone: ZoneContent; onReady?
     };
   }, [zone, onReady]);
 
-  return <div ref={el} className="h-full w-full" role="region" aria-label="Carte interactive de la zone d'intervention : Somme et Hauts-de-France" />;
+  return <div ref={el} className="h-full w-full" role="region" aria-label="Carte interactive de la zone d'intervention : Somme et Hauts-de-France" />;
 }

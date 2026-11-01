@@ -63,6 +63,9 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
       const hotspots = gsap.utils.toArray<SVGGElement>("[data-hotspot]", el);
       const intro = el.querySelector<HTMLElement>("[data-anat-intro]")!;
       const panel = el.querySelector<HTMLElement>("[data-anat-panel]")!;
+      const plate = el.querySelector<HTMLElement>("[data-anat-plate]")!;
+      // mobile : la planche occupe d'abord l'écran, puis se réduit quand l'explorateur apparaît
+      const narrow = window.matchMedia("(max-width: 767px)").matches;
 
       const finalState = () => {
         gsap.set(cam, { attr: { transform: camTransform(1) } });
@@ -90,6 +93,13 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
       gsap.set(lamp, { opacity: 0 });
       gsap.set(hotspots, { opacity: 0, scale: 0, transformOrigin: "50% 50%" });
       gsap.set(panel, { autoAlpha: 0, y: 30 });
+      const textCol = el.querySelector<HTMLElement>("[data-anat-text]")!;
+      if (narrow) {
+        // la planche est limitée par la largeur : on l'agrandit (cadrée sur la bouche) et on décale le texte
+        const lift = plate.getBoundingClientRect().height * 0.5;
+        gsap.set(plate, { scale: 1.5, transformOrigin: "8% 0%" });
+        gsap.set(textCol, { y: lift });
+      }
 
       const camProxy = { p: 0 };
       const tl = gsap.timeline({
@@ -117,6 +127,7 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
         .to(hotspots, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.06, ease: "back.out(2)" }, 3.5)
         .to(panel, { autoAlpha: 1, y: 0, duration: 0.6 }, 3.6)
         .to({}, { duration: 0.6 });
+      if (narrow) tl.to(plate, { scale: 1, duration: 0.8, ease: "power2.inOut" }, 3.1).to(textCol, { y: 0, duration: 0.8, ease: "power2.inOut" }, 3.1);
     },
     { scope: root },
   );
@@ -135,7 +146,7 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
 
       <div className="container-x relative grid h-full grid-cols-[minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)] gap-4 pb-6 pt-[calc(var(--header-h)+2vh)] md:grid-cols-12 md:grid-rows-1 md:gap-6 md:pb-10">
         {/* Colonne texte */}
-        <div className="relative z-10 flex min-w-0 flex-col md:col-span-5 lg:col-span-4">
+        <div data-anat-text className="relative z-10 flex min-w-0 flex-col md:col-span-5 lg:col-span-4">
           <div className="flex items-center gap-4">
             <span className="label text-cream/50">({index})</span>
             <span className="label">Anatomie</span>
@@ -190,10 +201,10 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
         </div>
 
         {/* Planche anatomique */}
-        <div className="relative row-start-1 min-h-0 min-w-0 max-md:max-h-[34svh] md:col-span-7 md:row-start-auto lg:col-span-8">
+        <div data-anat-plate className="relative row-start-1 min-h-0 min-w-0 max-md:max-h-[34svh] md:col-span-7 md:row-start-auto lg:col-span-8">
           <svg viewBox="0 0 1000 620" className="h-full w-full" role="img" aria-labelledby="anat-svg-title">
             <title id="anat-svg-title">
-              Schéma de la tête d&apos;un cheval en vue latérale : crâne, mâchoires, incisives, dents jugales, dent de loup et pas-d&apos;âne en place.
+              Schéma de la tête d&apos;un cheval en vue latérale : crâne, mâchoires, incisives, dents jugales, dent de loup et pas-d&apos;âne en place.
             </title>
             <defs>
               <radialGradient id="anatLamp">

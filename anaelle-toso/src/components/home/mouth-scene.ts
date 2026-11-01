@@ -6,6 +6,11 @@
  */
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 
 export type AnchorId = "incisives" | "barres" | "loup" | "premolaires" | "molaires" | "pointes-haut" | "pointes-bas" | "tables" | "crochet" | "rampe";
 
@@ -47,7 +52,7 @@ const CAM: [number, THREE.Vector3, THREE.Vector3][] = [
   [0.2, V(1.1, -0.1, 6.8), V(0, -1, 0)],
   [0.255, V(0, -1.5, 3), V(0, -1.7, -6)], // dans l'axe de l'ouverture
   [0.3, V(0.3, -1, -3.2), V(-3.3, -2.6, -10)], // les barres
-  [0.36, V(-0.4, 0.1, -6.6), V(-3.7, 0.7, -14)], // dent de loup
+  [0.36, V(-0.9, -1.5, -8.4), V(-3.8, 0.8, -13.4)], // dent de loup, vue de dessous
   [0.445, V(0.3, 0.3, -11.2), V(-4.3, -0.2, -23)], // l'arcade
   [0.52, V(0, -0.4, -2), V(0, -0.6, -21)], // recul pendant la coupe
   [0.585, V(0, -0.6, 7), V(0, -0.6, -20)], // vue en coupe (dolly zoom)
@@ -145,22 +150,242 @@ function tableTexture(kind: "upper" | "lower") {
   return t;
 }
 
+/** Générateur pseudo-aléatoire déterministe (rendu identique à chaque visite). */
+function rng(seed: number) {
+  let x = seed;
+  return () => (x = (x * 16807) % 2147483647) / 2147483647;
+}
+
+/** Textures de relief procédurales (bump) : stries d'émail, papilles de la langue, grain des gencives. */
+function reliefTexture(kind: "streaks" | "papillae" | "gum") {
+  const c = document.createElement("canvas");
+  c.width = c.height = 256;
+  const g = c.getContext("2d")!;
+  const r = rng(kind === "streaks" ? 11 : kind === "papillae" ? 23 : 37);
+  g.fillStyle = "#808080";
+  g.fillRect(0, 0, 256, 256);
+  if (kind === "streaks") {
+    // fines stries verticales + micro-variations de l'émail
+    for (let i = 0; i < 140; i++) {
+      const x = r() * 256;
+      g.strokeStyle = `rgba(${r() > 0.5 ? 255 : 0},${r() > 0.5 ? 255 : 0},${r() > 0.5 ? 255 : 0},0.06)`;
+      g.fillStyle = r() > 0.5 ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)";
+      g.fillRect(x, 0, 1 + r() * 3, 256);
+    }
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = r() > 0.5 ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+      g.fillRect(r() * 256, r() * 256, 2, 2);
+    }
+  } else {
+    const n = kind === "papillae" ? 2600 : 1400;
+    for (let i = 0; i < n; i++) {
+      const x = r() * 256;
+      const y = r() * 256;
+      const rad = kind === "papillae" ? 0.8 + r() * 1.8 : 1 + r() * 3;
+      const grd = g.createRadialGradient(x, y, 0, x, y, rad);
+      grd.addColorStop(0, kind === "papillae" ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.18)");
+      grd.addColorStop(1, "rgba(128,128,128,0)");
+      g.fillStyle = grd;
+      g.beginPath();
+      g.arc(x, y, rad, 0, Math.PI * 2);
+      g.fill();
+    }
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.anisotropy = 4;
+  return t;
+}
+
+/** Fond : halo chaud au centre, noir chaud sur les bords. */
+function backdropTexture() {
+  const c = document.createElement("canvas");
+  c.width = c.height = 512;
+  const g = c.getContext("2d")!;
+  const grd = g.createRadialGradient(256, 290, 10, 256, 290, 360);
+  grd.addColorStop(0, "#22170f");
+  grd.addColorStop(0.55, "#140e09");
+  grd.addColorStop(1, "#0b0806");
+  g.fillStyle = grd;
+  g.fillRect(0, 0, 512, 512);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+/**
+ * Crête gingivale : section en « dôme » balayée le long de l'arcade en U,
+ * plus large au niveau des dents jugales, affinée sur les barres, fermée aux extrémités.
+ */
+function ridgeGeometry(curve: THREE.Curve<THREE.Vector3>, dir: 1 | -1, dims: (z: number) => { w: number; h: number; y0: number }) {
+  const SEG = 260;
+  const P = 30; // points par section
+  const pos: number[] = [];
+  const col: number[] = [];
+  const idx: number[] = [];
+  const margin = new THREE.Color(0x9a5246);
+  const body = new THREE.Color(0x672923);
+  const deep = new THREE.Color(0x3e1714);
+  const c = new THREE.Color();
+  const pt = new THREE.Vector3();
+  const tan = new THREE.Vector3();
+  const r = rng(91);
+  const profile = (w: number, h: number) => {
+    // rectangle arrondi (n, v) : v = 0 au collet (bord gingival), v = h vers l'os
+    const out: [number, number][] = [];
+    const rb = Math.min(0.9, w * 0.32, h * 0.4);
+    const rt = Math.min(0.7, w * 0.25, h * 0.3);
+    const arc = (cx: number, cy: number, rad: number, a0: number, a1: number, n: number) => {
+      for (let i = 0; i < n; i++) {
+        const a = a0 + ((a1 - a0) * i) / (n - 1);
+        out.push([cx + Math.cos(a) * rad, cy + Math.sin(a) * rad]);
+      }
+    };
+    const hw = w / 2;
+    arc(-hw + rb, rb, rb, Math.PI, Math.PI * 1.5, 8); // collet, côté gauche
+    arc(hw - rb, rb, rb, Math.PI * 1.5, Math.PI * 2, 8); // collet, côté droit
+    arc(hw - rt, h - rt, rt, 0, Math.PI / 2, 7);
+    arc(-hw + rt, h - rt, rt, Math.PI / 2, Math.PI, 7);
+    return out.slice(0, P);
+  };
+  for (let i = 0; i <= SEG; i++) {
+    const u = i / SEG;
+    curve.getPointAt(u, pt);
+    curve.getTangentAt(u, tan);
+    const nx = -tan.z;
+    const nz = tan.x;
+    const len = Math.hypot(nx, nz) || 1;
+    const { w, h, y0 } = dims(pt.z);
+    const prof = profile(w, h);
+    for (const [n, v] of prof) {
+      pos.push(pt.x + (nx / len) * n, dir * (y0 + v), pt.z + (nz / len) * n);
+      const k = v / h;
+      c.copy(margin).lerp(body, Math.min(1, k * 3.2)).lerp(deep, Math.max(0, (k - 0.55) / 0.45));
+      const j = 0.94 + r() * 0.08;
+      col.push(c.r * j, c.g * j, c.b * j);
+    }
+  }
+  for (let i = 0; i < SEG; i++) {
+    for (let j = 0; j < P; j++) {
+      const a = i * P + j;
+      const b = i * P + ((j + 1) % P);
+      const c2 = (i + 1) * P + j;
+      const d = (i + 1) * P + ((j + 1) % P);
+      idx.push(a, c2, b, b, c2, d);
+    }
+  }
+  // bouchons aux deux extrémités
+  for (const ring of [0, SEG]) {
+    let cx = 0, cy = 0, cz = 0;
+    for (let j = 0; j < P; j++) {
+      cx += pos[(ring * P + j) * 3];
+      cy += pos[(ring * P + j) * 3 + 1];
+      cz += pos[(ring * P + j) * 3 + 2];
+    }
+    const center = pos.length / 3;
+    pos.push(cx / P, cy / P, cz / P);
+    col.push(deep.r, deep.g, deep.b);
+    for (let j = 0; j < P; j++) {
+      const a = ring * P + j;
+      const b = ring * P + ((j + 1) % P);
+      if (ring === 0) idx.push(center, b, a);
+      else idx.push(center, a, b);
+    }
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+  // UV simples pour le relief
+  const uv: number[] = [];
+  for (let i = 0; i <= SEG; i++) for (let j = 0; j < P; j++) uv.push((i / SEG) * 18, j / P);
+  uv.push(0, 0, 1, 1);
+  geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+  // orientation : les normales doivent pointer vers l'extérieur de la section
+  const nrm = geo.attributes.normal;
+  const mid = Math.floor(SEG / 2) * P + Math.floor(P / 4);
+  let sx = 0, sy = 0, sz = 0;
+  for (let j = 0; j < P; j++) {
+    sx += pos[(Math.floor(SEG / 2) * P + j) * 3];
+    sy += pos[(Math.floor(SEG / 2) * P + j) * 3 + 1];
+    sz += pos[(Math.floor(SEG / 2) * P + j) * 3 + 2];
+  }
+  const out = new THREE.Vector3(pos[mid * 3] - sx / P, pos[mid * 3 + 1] - sy / P, pos[mid * 3 + 2] - sz / P);
+  if (out.dot(new THREE.Vector3(nrm.getX(mid), nrm.getY(mid), nrm.getZ(mid))) < 0) {
+    const ix = geo.index!;
+    for (let t = 0; t < ix.count; t += 3) {
+      const tmpI = ix.getX(t + 1);
+      ix.setX(t + 1, ix.getX(t + 2));
+      ix.setX(t + 2, tmpI);
+    }
+    geo.computeVertexNormals();
+  }
+  return geo;
+}
+
+/** Langue : aplatie, effilée vers la pointe, sillon médian, teinte dégradée. */
+function tongueGeometry() {
+  const geo = new THREE.SphereGeometry(1, 72, 40);
+  const pos = geo.attributes.position;
+  const col: number[] = [];
+  const tip = new THREE.Color(0x87443b);
+  const back = new THREE.Color(0x4a1f1b);
+  const c = new THREE.Color();
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i);
+    const y = pos.getY(i);
+    const z = pos.getZ(i); // -1 (fond) → 1 (pointe)
+    const zz = -19 + z * 13.6;
+    const width = 2.3 - Math.max(0, z - 0.55) * 0.75 + Math.max(0, -z - 0.6) * 0.4;
+    const top = y > 0;
+    const groove = top ? 0.16 * Math.exp(-((x / 0.22) ** 2)) * (1 - Math.abs(z) * 0.6) : 0;
+    const yy = top ? y * (0.7 - Math.max(0, z - 0.4) * 0.55) - groove : y * (0.7 - Math.max(0, z - 0.4) * 0.4);
+    pos.setXYZ(i, x * width, yy, zz);
+    c.copy(back).lerp(tip, smooth(-0.6, 0.9, z));
+    if (!top) c.multiplyScalar(0.7);
+    col.push(c.r, c.g, c.b);
+  }
+  geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+  geo.computeVertexNormals();
+  return geo;
+}
+
 export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: boolean }): MouthScene {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, opts.mobile ? 1.5 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
-  renderer.setClearColor(0x000000, 0);
+  renderer.toneMappingExposure = 0.9;
+  renderer.setClearColor(0x0d0a07, 1);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x0d0a07, 16, 64);
+  const backdrop = backdropTexture();
+  scene.background = backdrop;
+  scene.fog = new THREE.Fog(0x110c08, 18, 66);
+  // reflets doux d'un environnement neutre : surfaces humides, émail brillant
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
+  scene.environment = envRT.texture;
+  scene.environmentIntensity = 0;
+  pmrem.dispose();
 
   const camera = new THREE.PerspectiveCamera(opts.mobile ? 52 : 38, 1, 0.1, 200);
   scene.add(camera);
 
+  // halo lumineux sur les zones mises en valeur (désactivé sur mobile)
+  let composer: EffectComposer | null = null;
+  let bloom: UnrealBloomPass | null = null;
+  if (!opts.mobile) {
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), 0.15, 0.45, 0.92);
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+  }
+
   /* Lumières : lampe frontale (sur la caméra), ambiance chaude, contre-jour cognac */
-  const lamp = new THREE.SpotLight(0xffe4bf, 0, 0, 0.62, 0.65, 1.1);
+  const lamp = new THREE.SpotLight(0xffe4bf, 0, 0, 0.62, 0.7, 0.8);
   lamp.position.set(0, 0.25, 0);
   camera.add(lamp);
   const lampTarget = new THREE.Object3D();
@@ -177,21 +402,61 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   scene.add(rim2);
 
   /* Matériaux */
-  const enamel = new THREE.MeshPhysicalMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.33, metalness: 0, clearcoat: 0.55, clearcoatRoughness: 0.32, emissive: 0x2a1c10, emissiveIntensity: 0.12 });
-  const cut = new THREE.MeshBasicMaterial({ color: 0x9b7c58, side: THREE.BackSide });
-  const gum = new THREE.MeshPhysicalMaterial({ color: 0x542823, roughness: 0.62, metalness: 0, clearcoat: 0.18, clearcoatRoughness: 0.6 });
-  const gumCut = new THREE.MeshBasicMaterial({ color: 0x3a1714, side: THREE.BackSide });
-  const palateMat = new THREE.MeshStandardMaterial({ color: 0x55241f, roughness: 0.62, side: THREE.DoubleSide });
-  const tongueMat = new THREE.MeshStandardMaterial({ color: 0x5e2e29, roughness: 0.66 });
-  const glow = new THREE.MeshStandardMaterial({ color: 0xeadcc3, roughness: 0.3, emissive: 0xff8f45, emissiveIntensity: 0 });
+  const streaks = reliefTexture("streaks");
+  const papillae = reliefTexture("papillae");
+  papillae.repeat.set(3, 9);
+  const gumGrain = reliefTexture("gum");
+  const enamel = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    vertexColors: true,
+    roughness: 0.3,
+    metalness: 0,
+    clearcoat: 0.75,
+    clearcoatRoughness: 0.2,
+    sheen: 0.25,
+    sheenColor: 0xfff0d8,
+    bumpMap: streaks,
+    bumpScale: 1.2,
+    emissive: 0x2a1c10,
+    emissiveIntensity: 0.1,
+  });
+  const cut = new THREE.MeshBasicMaterial({ color: 0xb39472, side: THREE.BackSide });
+  const gum = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    vertexColors: true,
+    roughness: 0.42,
+    metalness: 0,
+    clearcoat: 0.85,
+    clearcoatRoughness: 0.22,
+    sheen: 0.3,
+    sheenColor: 0xd99080,
+    sheenRoughness: 0.55,
+    bumpMap: gumGrain,
+    bumpScale: 0.8,
+  });
+  const gumCut = new THREE.MeshBasicMaterial({ color: 0x5e2620, side: THREE.BackSide });
+  const palateMat = new THREE.MeshPhysicalMaterial({ color: 0x5c2823, roughness: 0.5, clearcoat: 0.7, clearcoatRoughness: 0.28, sheen: 0.4, sheenColor: 0xe0a090, side: THREE.DoubleSide });
+  const tongueMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    vertexColors: true,
+    roughness: 0.74,
+    clearcoat: 0.2,
+    clearcoatRoughness: 0.5,
+    sheen: 0.3,
+    sheenColor: 0xc98a7c,
+    bumpMap: papillae,
+    bumpScale: 1.6,
+  });
+  const glow = new THREE.MeshPhysicalMaterial({ color: 0xeee2cb, roughness: 0.28, clearcoat: 0.7, emissive: 0xff8a3d, emissiveIntensity: 0 });
   const hookMat = new THREE.MeshPhysicalMaterial({ color: 0xeee3cd, roughness: 0.33, clearcoat: 0.5, emissive: 0xff8f45, emissiveIntensity: 0 });
-  const wolfMat = new THREE.MeshPhysicalMaterial({ color: 0xeee3cd, roughness: 0.33, clearcoat: 0.5, emissive: 0xff8f45, emissiveIntensity: 0 });
+  const wolfMat = new THREE.MeshPhysicalMaterial({ color: 0xd8c098, roughness: 0.33, clearcoat: 0.5, emissive: 0xff8f45, emissiveIntensity: 0 });
   const upperTex = tableTexture("upper");
   const lowerTex = tableTexture("lower");
   const tableUp = new THREE.MeshStandardMaterial({ map: upperTex, emissiveMap: upperTex, emissive: 0xffe6c4, emissiveIntensity: 0, roughness: 0.5 });
   const tableLow = new THREE.MeshStandardMaterial({ map: lowerTex, emissiveMap: lowerTex, emissive: 0xffe6c4, emissiveIntensity: 0, roughness: 0.5 });
   const lineMat = new THREE.LineBasicMaterial({ color: 0xf4eadb, transparent: true, opacity: 0, depthWrite: false, fog: true });
   const materials: THREE.Material[] = [enamel, cut, gum, gumCut, palateMat, tongueMat, glow, hookMat, wolfMat, tableUp, tableLow, lineMat];
+  const textures: THREE.Texture[] = [streaks, papillae, gumGrain, backdrop];
   const geometries: THREE.BufferGeometry[] = [];
   const cutMeshes: THREE.Mesh[] = [];
 
@@ -204,11 +469,11 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
    * Prépare une géométrie de dent (axe y : -h/2 = surface d'occlusion, +h/2 = côté gencive) :
    * léger effilement vers la racine, stries verticales, teinte ivoire → jaunie vers la gencive.
    */
-  function toothShade(geo: THREE.BufferGeometry, h: number, ridges: boolean, taper: number) {
+  function toothShade(geo: THREE.BufferGeometry, h: number, ridges: boolean, taper: number, bend = 0) {
     const pos = geo.attributes.position;
     const colors = new Float32Array(pos.count * 3);
-    const tip = new THREE.Color(0xf3ead8);
-    const base = new THREE.Color(0xc7a77a);
+    const tip = new THREE.Color(0xebdec6);
+    const base = new THREE.Color(0xbb9a6d);
     const c = new THREE.Color();
     geo.computeBoundingBox();
     const bb = geo.boundingBox!;
@@ -222,6 +487,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       const k = 1 - t * taper;
       x *= k;
       z *= 1 - t * taper * 0.5;
+      z -= bend * t * t; // courbure (face vestibulaire bombée)
       pos.setXYZ(i, x, y, z);
       c.copy(tip).lerp(base, smooth(0.25, 1, t));
       colors[i * 3] = c.r;
@@ -268,7 +534,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   };
 
   /* Incisives : 6 en haut, 6 en bas, en arc */
-  const incGeo = keep(toothShade(new RoundedBoxGeometry(1.12, 2.7, 0.92, 3, 0.24), 2.7, false, 0.18));
+  const incGeo = keep(toothShade(new RoundedBoxGeometry(1.1, 2.8, 0.9, 4, 0.26), 2.8, false, 0.2, 0.45));
   const R = 3.7;
   const C = -3.3;
   for (const jaw of ["up", "low"] as const) {
@@ -292,27 +558,36 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   anchor("incisives", upper, 0, 1.3, C + R + 0.5);
 
   /* Gencives : crête continue en U (arcade jugale, barres, incisives) */
-  function ridgePath(xBack: number, xFront: number, y: number) {
+  function ridgePath(xBack: number, xFront: number) {
     const pts: THREE.Vector3[] = [];
-    pts.push(V(-xBack - 0.15, y, zOf(5) - 1.6));
-    pts.push(V(-xBack, y, zOf(3)));
-    pts.push(V(-xFront, y, ROW_START + 0.6));
-    pts.push(V(-3.3, y, -7));
+    pts.push(V(-xBack - 0.2, 0, zOf(5) - 1.5));
+    pts.push(V(-xBack - 0.1, 0, zOf(3)));
+    pts.push(V(-xFront, 0, ROW_START + 0.4));
+    pts.push(V(-3.25, 0, -7.5));
     for (let k = 0; k <= 8; k++) {
-      const a = -1.05 + (k * 2.1) / 8;
-      pts.push(V(Math.sin(a) * (R - 0.15), y, C + Math.cos(a) * (R - 0.15)));
+      const a = -1.02 + (k * 2.04) / 8;
+      pts.push(V(Math.sin(a) * (R - 0.1), 0, C + Math.cos(a) * (R - 0.1)));
     }
-    pts.push(V(3.3, y, -7));
-    pts.push(V(xFront, y, ROW_START + 0.6));
-    pts.push(V(xBack, y, zOf(3)));
-    pts.push(V(xBack + 0.15, y, zOf(5) - 1.6));
+    pts.push(V(3.25, 0, -7.5));
+    pts.push(V(xFront, 0, ROW_START + 0.4));
+    pts.push(V(xBack + 0.1, 0, zOf(3)));
+    pts.push(V(xBack + 0.2, 0, zOf(5) - 1.5));
     return new THREE.CatmullRomCurve3(pts, false, "centripetal");
   }
-  const upRidge = keep(new THREE.TubeGeometry(ridgePath(UPPER_X, UPPER_X - 0.3, 3.05), 220, 1.45, 14, false));
+  const ridgeDims = (lowerJaw: boolean) => (z: number) => {
+    const cheek = 1 - smooth(-16, -11, z);
+    const inc = smooth(-6.5, -3.2, z);
+    return {
+      w: 2.1 + 1.35 * cheek + 0.25 * inc,
+      h: 1.75 + 0.5 * cheek + 0.2 * inc,
+      y0: (lowerJaw ? 1.05 : 0.95) + 0.5 * cheek + 0.6 * inc,
+    };
+  };
+  const upRidge = keep(ridgeGeometry(ridgePath(UPPER_X, UPPER_X - 0.35), 1, ridgeDims(false)));
   solid(upRidge, gum, upper, gumCut, false);
-  const lowRidge = keep(new THREE.TubeGeometry(ridgePath(LOWER_X, LOWER_X - 0.2, -3.0), 220, 1.35, 14, false));
+  const lowRidge = keep(ridgeGeometry(ridgePath(LOWER_X + 0.05, LOWER_X - 0.15), -1, ridgeDims(true)));
   solid(lowRidge, gum, lower, gumCut, false);
-  anchor("barres", lower, -3.35, -1.75, -8.5);
+  anchor("barres", lower, -3.3, -1.1, -8.5);
 
   /* Palais avec rugosités */
   {
@@ -336,13 +611,8 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
 
   /* Langue */
   {
-    const geo = keep(new THREE.SphereGeometry(1, 40, 24));
-    const m = solid(geo, tongueMat, lower, gumCut, false);
-    m.scale.set(2.15, 1.05, 12.5);
-    m.position.set(0, -2.6, -19.5);
-    const tip = solid(keep(new THREE.SphereGeometry(1, 28, 18)), tongueMat, lower, gumCut, false);
-    tip.scale.set(1.75, 0.68, 3.0);
-    tip.position.set(0, -2.6, -8.6);
+    const m = solid(keep(tongueGeometry()), tongueMat, lower, gumCut, false);
+    m.position.set(0, -2.55, -1.1);
   }
 
   /* Dents jugales */
@@ -352,6 +622,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   const hookGeo = keep(new RoundedBoxGeometry(TOOTH_W - 0.3, 1.0, 0.9, 2, 0.2));
   const wolfGeo = keep(new THREE.ConeGeometry(0.3, 1.05, 12));
 
+  const vary = rng(5);
   for (const side of [-1, 1] as const) {
     for (const jaw of ["up", "low"] as const) {
       const isUp = jaw === "up";
@@ -366,6 +637,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         // géométrie : occlusion en -y ; retournée pour la mâchoire inférieure
         m.position.y = isUp ? TOOTH_H / 2 : -TOOTH_H / 2;
         if (!isUp) m.rotation.x = Math.PI;
+        // légères irrégularités naturelles
+        m.scale.set(1 + (vary() - 0.5) * 0.06, 1, 1 + (vary() - 0.5) * 0.04);
+        m.rotation.y = (vary() - 0.5) * 0.05;
         // table dentaire
         const t = new THREE.Mesh(tableGeo, isUp ? tableUp : tableLow);
         t.rotation.x = isUp ? Math.PI / 2 : -Math.PI / 2;
@@ -449,7 +723,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   function setProgress(p: number) {
     camAt(p);
     // travelling compensé : la caméra recule pendant que le champ se resserre (vue en coupe quasi orthogonale)
-    const cutMul = width / height < 0.8 ? 0.88 : 0.66;
+    const cutMul = width / height < 0.8 ? 0.8 : 0.66;
     camera.fov =
       baseFov *
       track(
@@ -464,7 +738,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     camera.updateProjectionMatrix();
     if (width / height < 0.8) {
       // écran portrait : recul supplémentaire pour cadrer les deux arcades en coupe
-      camera.position.z += 14 * track(
+      camera.position.z += 6 * track(
         [
           [0.5, 0],
           [0.585, 1],
@@ -503,8 +777,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     );
 
     // lumière : la lampe frontale s'allume, puis l'ambiance
-    lamp.intensity = 38 * smooth(0.0, 0.07, p) * (1 - 0.45 * smooth(0.9, 1, p));
-    hemi.intensity = 0.55 * smooth(0.05, 0.2, p);
+    lamp.intensity = 20 * smooth(0.0, 0.07, p) * (1 - 0.45 * smooth(0.9, 1, p)) * (1 - 0.4 * win(0.32, 0.35, 0.39, 0.42, p));
+    hemi.intensity = 0.3 * smooth(0.05, 0.2, p);
+    scene.environmentIntensity = 0.26 * smooth(0.04, 0.2, p) * (1 - 0.35 * smooth(0.9, 1, p));
     rim.intensity = 1.6 * smooth(0.06, 0.2, p);
     rim2.intensity = 0.5 * smooth(0.1, 0.25, p) + 0.6 * smooth(0.88, 1, p);
     dustMat.opacity = 0.55 * smooth(0.02, 0.1, p) * (1 - smooth(0.28, 0.4, p)) + 0.35 * smooth(0.9, 1, p);
@@ -517,6 +792,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     glow.emissiveIntensity = 2.8 * win(0.5, 0.56, 0.64, 0.68, p);
     tableUp.emissiveIntensity = tableLow.emissiveIntensity = 0.75 * win(0.69, 0.73, 0.78, 0.81, p);
     hookMat.emissiveIntensity = 1.6 * win(0.8, 0.83, 0.9, 0.94, p);
+    if (bloom) bloom.strength = 0.12 + 0.5 * Math.max(win(0.3, 0.335, 0.38, 0.41, p), win(0.5, 0.56, 0.64, 0.68, p), win(0.69, 0.73, 0.78, 0.81, p), win(0.8, 0.83, 0.9, 0.94, p));
 
     // plan de coupe : balaie la bouche d'avant en arrière, puis se retire
     const zc = track(
@@ -538,6 +814,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     width = Math.max(1, w);
     height = Math.max(1, h);
     renderer.setSize(width, height, false);
+    composer?.setSize(width, height);
     camera.aspect = width / height;
     baseFov = width / height < 0.8 ? 58 : opts.mobile ? 50 : 38;
     camera.fov = baseFov;
@@ -556,13 +833,16 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   return {
     setProgress,
     resize,
-    render: () => renderer.render(scene, camera),
+    render: () => (composer ? composer.render() : renderer.render(scene, camera)),
     project,
     dispose() {
       geometries.forEach((g) => g.dispose());
       materials.forEach((m) => m.dispose());
       upperTex.dispose();
       lowerTex.dispose();
+      textures.forEach((t) => t.dispose());
+      envRT.dispose();
+      composer?.dispose();
       renderer.dispose();
     },
   };

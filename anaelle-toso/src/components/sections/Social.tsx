@@ -98,7 +98,7 @@ export function Social({ site, content, posts, index = "12" }: { site: SiteConte
             <span className="relative md:col-span-8">
               <span className="label block text-sand">Instagram</span>
               <span className="display mt-6 block break-words">@{handle || "instagram"}</span>
-              <span className="body-lg mt-6 block max-w-xl text-cream/70">Interventions, chevaux rencontrés, coulisses de la route : le quotidien d&apos;une technicienne dentaire équine dans la Somme.</span>
+              <span className="body-lg mt-6 block max-w-xl text-cream/70">Interventions, chevaux rencontrés, coulisses de la route : le quotidien d&apos;une technicienne dentaire équine dans la Somme.</span>
             </span>
             <span className="relative mt-10 md:col-span-4 md:mt-0 md:justify-self-end">
               <span className="btn btn-cream">

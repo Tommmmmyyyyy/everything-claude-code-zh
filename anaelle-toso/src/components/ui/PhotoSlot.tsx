@@ -118,7 +118,7 @@ export function PhotoSlot({ src, alt, motif = "horse", hint, sizes = "(min-width
   }
   const id = (hint || motif || "x").replace(/[^a-z0-9]/gi, "").slice(0, 16) + String(hint?.length ?? 0);
   return (
-    <div className={`${pos} overflow-hidden ${className}`} role="img" aria-label={`${label}${hint ? ` : ${hint}` : ""}`}>
+    <div className={`${pos} overflow-hidden ${className}`} role="img" aria-label={`${label}${hint ? ` : ${hint}` : ""}`}>
       <div className="absolute inset-0" {...innerProps}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 20%, #2a3b2d, #121c15 55%, #0d0a07)" }} />
         <MotifArt motif={motif} id={id} />

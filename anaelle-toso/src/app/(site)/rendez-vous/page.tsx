@@ -8,7 +8,7 @@ import { Zone } from "@/components/sections/Zone";
 
 export const metadata: Metadata = {
   title: "Prendre rendez-vous",
-  description: `Demande de rendez-vous avec ${site.identity.fullName}, ${site.identity.profession.toLowerCase()} basée à ${site.contact.addressLocality} : à l'écurie comme au pré, dans toute la Somme.`,
+  description: `Demande de rendez-vous avec ${site.identity.fullName}, ${site.identity.profession.toLowerCase()} basée à ${site.contact.addressLocality} : à l'écurie comme au pré, dans toute la Somme.`,
   alternates: { canonical: "/rendez-vous" },
 };
 

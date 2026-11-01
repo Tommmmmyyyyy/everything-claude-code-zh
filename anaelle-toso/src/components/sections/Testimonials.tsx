@@ -9,7 +9,7 @@ import { siteAsset } from "@/lib/config";
 
 export function Stars({ value, className = "h-4 w-4" }: { value: number; className?: string }) {
   return (
-    <span className="flex gap-1 text-sand" role="img" aria-label={`Note : ${value} sur 5`}>
+    <span className="flex gap-1 text-sand" role="img" aria-label={`Note : ${value} sur 5`}>
       {[1, 2, 3, 4, 5].map((n) => (
         <svg key={n} viewBox="0 0 20 20" className={className} aria-hidden="true">
           <path d="M10 1.6l2.5 5.3 5.8.7-4.3 4 1.1 5.7L10 14.5l-5.1 2.8 1.1-5.7-4.3-4 5.8-.7z" fill={n <= value ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.1" />
@@ -40,7 +40,7 @@ export function Testimonials({ content, index = "07", id = "temoignages" }: { co
             <figure key={i} className="flex h-full flex-col justify-between rounded-[12px] border border-line bg-ink/40 p-7 md:p-10">
               <div>
                 {t.rating ? <Stars value={t.rating} /> : null}
-                <blockquote className="mt-6 font-serif text-[clamp(1.45rem,2vw,2rem)] leading-[1.15]">« {t.text} »</blockquote>
+                <blockquote className="mt-6 font-serif text-[clamp(1.45rem,2vw,2rem)] leading-[1.15]">« {t.text} »</blockquote>
               </div>
               <figcaption className="mt-10 flex items-center gap-4">
                 {t.image && (
@@ -65,7 +65,7 @@ export function Testimonials({ content, index = "07", id = "temoignages" }: { co
             <div className="md:col-span-7">
               <p className="heading-sm">Les premiers avis arrivent.</p>
               <p className="body mt-4 max-w-lg text-cream/70">
-                Vous m&apos;avez déjà confié votre cheval&nbsp;? Votre retour aidera d&apos;autres propriétaires. Chaque avis est relu avant publication&nbsp;: seuls des témoignages réels figurent ici.
+                Vous m&apos;avez déjà confié votre cheval ? Votre retour aidera d&apos;autres propriétaires. Chaque avis est relu avant publication : seuls des témoignages réels figurent ici.
               </p>
             </div>
             <div className="flex items-end md:col-span-3 md:justify-end">

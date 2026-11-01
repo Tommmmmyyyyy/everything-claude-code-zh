@@ -38,7 +38,7 @@ export function Booking({ site, index = "11", header = true }: { site: SiteConte
         }
         intro={
           <>
-            Décrivez votre demande en quelques étapes&nbsp;: elle est transmise directement à Anaëlle, qui vous recontacte pour fixer ensemble la date
+            Décrivez votre demande en quelques étapes : elle est transmise directement à Anaëlle, qui vous recontacte pour fixer ensemble la date
             {site.booking.responseDelay ? ` (${site.booking.responseDelay})` : ""}.
           </>
         }

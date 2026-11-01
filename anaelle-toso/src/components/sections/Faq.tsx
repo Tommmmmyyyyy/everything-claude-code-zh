@@ -18,10 +18,10 @@ export function Faq({ content }: { content: FaqContent }) {
         <nav aria-label="Catégories" className="md:col-span-3">
           <div className="md:sticky md:top-[calc(var(--header-h)+40px)]">
             <p className="label text-cream/45">Catégories</p>
-            <ol className="mt-5 flex flex-wrap gap-2 md:grid md:gap-1">
+            <ol className="-mx-[var(--gutter)] mt-5 flex gap-2 overflow-x-auto px-[var(--gutter)] pb-1 [scrollbar-width:none] md:mx-0 md:grid md:gap-1 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden" data-lenis-prevent>
               {groups.map((g, i) => (
                 <li key={g.id}>
-                  <a href={`#faq-${g.id}`} className="group flex items-baseline gap-3 rounded-[22.5px] border border-line-strong px-3.5 py-2 text-cream/70 transition-colors hover:text-cream md:rounded-none md:border-0 md:px-0 md:py-1.5">
+                  <a href={`#faq-${g.id}`} className="group flex shrink-0 items-baseline gap-3 whitespace-nowrap rounded-[22.5px] border border-line-strong px-3.5 py-2 text-cream/70 transition-colors hover:text-cream md:shrink md:whitespace-normal md:rounded-none md:border-0 md:px-0 md:py-1.5">
                     <span className="label tabular-nums text-cream/35 max-md:hidden">{String(i + 1).padStart(2, "0")}</span>
                     <span className="link-u max-md:label">{g.label}</span>
                     <span className="micro text-cream/35 max-md:hidden">{g.items.length}</span>

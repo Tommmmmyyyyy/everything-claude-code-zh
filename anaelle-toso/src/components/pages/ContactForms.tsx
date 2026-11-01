@@ -167,7 +167,7 @@ export function ReviewForm() {
     send(r.data, setErrors);
   };
   if (status.kind === "sent")
-    return <Sent title="Merci pour votre avis !" text="Il sera relu par Anaëlle avant d'être publié sur le site." dev={status.dev} onReset={() => { setD({ firstName: "", horse: "", rating: 0, comment: "", email: "", consent: false }); setStatus({ kind: "idle" }); }} />;
+    return <Sent title="Merci pour votre avis !" text="Il sera relu par Anaëlle avant d'être publié sur le site." dev={status.dev} onReset={() => { setD({ firstName: "", horse: "", rating: 0, comment: "", email: "", consent: false }); setStatus({ kind: "idle" }); }} />;
   const inv = (k: string) => (errors[k] ? { "aria-invalid": true as const, "aria-describedby": `r-${k}-err` } : {});
   const shown = hover || d.rating;
   const labels = ["", "Décevant", "Moyen", "Bien", "Très bien", "Excellent"];
@@ -199,7 +199,7 @@ export function ReviewForm() {
         {errors.rating && <p id="r-rating-err" className="field-error mt-2">{errors.rating}</p>}
       </fieldset>
       <Field id="r-comment" label="Votre avis" error={errors.comment}>
-        <textarea id="r-comment" rows={5} className="field-input" placeholder="Comment s'est passée l'intervention ? Comment va votre cheval depuis ?" value={d.comment} onChange={(e) => set("comment", e.target.value)} {...inv("comment")} />
+        <textarea id="r-comment" rows={5} className="field-input" placeholder="Comment s'est passée l'intervention ? Comment va votre cheval depuis ?" value={d.comment} onChange={(e) => set("comment", e.target.value)} {...inv("comment")} />
       </Field>
       <Field id="r-email" label="E-mail (jamais publié)" optional error={errors.email}>
         <input id="r-email" type="email" className="field-input" autoComplete="email" value={d.email} onChange={(e) => set("email", e.target.value)} {...inv("email")} />

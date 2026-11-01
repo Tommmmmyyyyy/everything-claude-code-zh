@@ -28,13 +28,13 @@ const CHAPTERS = [
     n: "01",
     label: "La route",
     title: "Chaque rendez-vous commence sur la route.",
-    text: "Mon camion est mon cabinet itinérant : le matériel voyage avec moi, partout dans la Somme.",
+    text: "Mon camion est mon cabinet itinérant : le matériel voyage avec moi, partout dans la Somme.",
   },
   {
     n: "02",
     label: "L'écurie",
     title: "J'entre dans le quotidien de vos chevaux.",
-    text: "L'allée, les boxes, les habitudes de chacun : je prends le temps d'observer avant d'intervenir.",
+    text: "L'allée, les boxes, les habitudes de chacun : je prends le temps d'observer avant d'intervenir.",
   },
   {
     n: "03",
@@ -239,7 +239,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
       className="relative h-[100svh] overflow-hidden bg-ink"
     >
       <h2 id="camion-title" className="sr-only">
-        Le camion d&apos;Anaëlle : sur la route de vos chevaux
+        Le camion d&apos;Anaëlle : sur la route de vos chevaux
       </h2>
       <div data-stage className="absolute inset-0" style={{ ["--u" as string]: 1 }}>
         <div data-camera className="absolute inset-0 will-change-transform">
@@ -349,7 +349,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
         {/* Invitation finale */}
         <div data-cta className="invisible absolute inset-x-0 top-[40%] opacity-0 md:top-[calc(var(--header-h)+3vh+56px)]">
           <div className="container-x flex flex-col items-start gap-6 md:items-end md:text-right">
-            <p className="heading max-w-md">Votre cheval est le prochain sur ma route&nbsp;?</p>
+            <p className="heading max-w-md">Votre cheval est le prochain sur ma route ?</p>
             <ButtonLink href="/rendez-vous" variant="cream">
               Prendre rendez-vous
             </ButtonLink>

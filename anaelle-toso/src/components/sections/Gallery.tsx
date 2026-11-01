@@ -144,7 +144,7 @@ export function Gallery({ content, index = "09", header = true }: { content: Gal
       onClick={(e) => open(e, it.i)}
       className="group relative block w-full overflow-hidden rounded-[12px] text-left"
       data-cursor="Ouvrir"
-      aria-label={`Agrandir : ${it.src ? it.alt || it.caption : `emplacement photo — ${it.caption}`}`}
+      aria-label={`Agrandir : ${it.src ? it.alt || it.caption : `emplacement photo — ${it.caption}`}`}
     >
       <div className={`relative ${aspect} transition-transform duration-[1.2s] ease-[var(--ease-expo)] group-hover:scale-[1.04]`}>
         {it.src ? (

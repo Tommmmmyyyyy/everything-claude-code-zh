@@ -237,17 +237,35 @@ function nullify<T>(v: T): T {
   return v;
 }
 
-export const site = nullify(siteJson) as unknown as SiteContent;
-export const services = nullify(servicesJson) as unknown as ServicesContent;
-export const story = nullify(storyJson) as unknown as StoryContent;
-export const processContent = nullify(processJson) as unknown as ProcessContent;
-export const signs = signsJson as unknown as SignsContent;
-export const gallery = nullify(galleryJson) as unknown as GalleryContent;
-export const zone = nullify(zoneJson) as unknown as ZoneContent;
-export const testimonials = nullify(testimonialsJson) as unknown as TestimonialsContent;
-export const faq = faqJson as unknown as FaqContent;
-export const social = nullify(socialJson) as unknown as SocialContent;
-export const anatomy = anatomyJson as unknown as AnatomyContent;
+/**
+ * Typographie française : espaces insécables avant « ? ! ; : » et à l'intérieur des guillemets,
+ * pour qu'aucune ponctuation ne se retrouve seule en début de ligne.
+ */
+export function frTypo(text: string) {
+  return text
+    .replace(/[ \u00A0]+([?!;])/g, "\u202F$1")
+    .replace(/[ \u00A0]+(:)(?=\s|$)/g, "\u00A0$1")
+    .replace(/«[ \u00A0]+/g, "«\u00A0")
+    .replace(/[ \u00A0]+»/g, "\u00A0»");
+}
+function typo<T>(v: T): T {
+  if (typeof v === "string") return frTypo(v) as T;
+  if (Array.isArray(v)) return v.map(typo) as T;
+  if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typo(x)])) as T;
+  return v;
+}
+
+export const site = typo(nullify(siteJson)) as unknown as SiteContent;
+export const services = typo(nullify(servicesJson)) as unknown as ServicesContent;
+export const story = typo(nullify(storyJson)) as unknown as StoryContent;
+export const processContent = typo(nullify(processJson)) as unknown as ProcessContent;
+export const signs = typo(signsJson) as unknown as SignsContent;
+export const gallery = typo(nullify(galleryJson)) as unknown as GalleryContent;
+export const zone = typo(nullify(zoneJson)) as unknown as ZoneContent;
+export const testimonials = typo(nullify(testimonialsJson)) as unknown as TestimonialsContent;
+export const faq = typo(faqJson) as unknown as FaqContent;
+export const social = typo(nullify(socialJson)) as unknown as SocialContent;
+export const anatomy = typo(anatomyJson) as unknown as AnatomyContent;
 
 /** Pages du site (menu principal, menu plein écran, pied de page). */
 export const navLinks = [

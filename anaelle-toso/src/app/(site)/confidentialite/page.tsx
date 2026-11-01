@@ -15,14 +15,14 @@ export default function Confidentialite() {
     <LegalPage title="Politique de confidentialité" updated={l.lastUpdate}>
       <LegalBlock title="Responsable du traitement">
         <p>
-          <V value={l.businessName ?? site.identity.fullName} label="Nom" />, {site.identity.profession.toLowerCase()} — <V value={l.address} label="Adresse" />. Contact :{" "}
+          <V value={l.businessName ?? site.identity.fullName} label="Nom" />, {site.identity.profession.toLowerCase()} — <V value={l.address} label="Adresse" />. Contact :{" "}
           <V value={c.email} label="E-mail" />.
         </p>
       </LegalBlock>
 
       <LegalBlock title="Données collectées">
         <p>
-          Via le formulaire de demande de rendez-vous : nom et prénom, téléphone, adresse e-mail, informations sur le ou les chevaux (nom, âge, type, nombre, informations
+          Via le formulaire de demande de rendez-vous : nom et prénom, téléphone, adresse e-mail, informations sur le ou les chevaux (nom, âge, type, nombre, informations
           complémentaires), lieu d&apos;intervention (écurie, adresse, code postal, ville), type de demande, date et créneau souhaités, message libre.
         </p>
         <p>Seules les informations nécessaires au traitement de votre demande sont demandées. Merci de ne pas transmettre de données sensibles dans les champs libres.</p>
@@ -41,7 +41,7 @@ export default function Confidentialite() {
           service d&apos;envoi d&apos;e-mails), tenus à la confidentialité. Elles ne sont ni vendues, ni cédées, ni utilisées à des fins publicitaires.
         </p>
         <p>
-          Le site ne stocke pas les demandes dans une base de données : elles sont acheminées par e-mail{" "}
+          Le site ne stocke pas les demandes dans une base de données : elles sont acheminées par e-mail{" "}
           <span className="text-cream/50">(ou vers l&apos;outil de suivi configuré par l&apos;éditrice)</span>.
         </p>
       </LegalBlock>
@@ -54,8 +54,8 @@ export default function Confidentialite() {
 
       <LegalBlock title="Vos droits">
         <p>
-          Conformément au RGPD et à la loi « Informatique et Libertés », vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement, de limitation,
-          d&apos;opposition et de portabilité de vos données, ainsi que du droit de retirer votre consentement à tout moment. Pour exercer ces droits : <V value={c.email} label="E-mail" />.
+          Conformément au RGPD et à la loi « Informatique et Libertés », vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement, de limitation,
+          d&apos;opposition et de portabilité de vos données, ainsi que du droit de retirer votre consentement à tout moment. Pour exercer ces droits : <V value={c.email} label="E-mail" />.
         </p>
         <p>
           Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>).
@@ -65,9 +65,9 @@ export default function Confidentialite() {
       <LegalBlock title="Cookies et services tiers">
         <p>Ce site n&apos;utilise pas de cookie publicitaire ni d&apos;outil de mesure d&apos;audience.</p>
         <p>
-          Certains services tiers ne sont chargés que lorsque vous les utilisez : l&apos;agenda de réservation en ligne (s&apos;il est proposé) ne s&apos;affiche qu&apos;après un clic,
+          Certains services tiers ne sont chargés que lorsque vous les utilisez : l&apos;agenda de réservation en ligne (s&apos;il est proposé) ne s&apos;affiche qu&apos;après un clic,
           et la carte de la zone d&apos;intervention utilise les fonds de carte OpenStreetMap. Les publications Instagram éventuellement affichées sont des images hébergées par
-          Meta ; un clic vous redirige vers Instagram.
+          Meta ; un clic vous redirige vers Instagram.
         </p>
         <p>
           Une protection anti-spam (Cloudflare Turnstile) peut être utilisée lors de l&apos;envoi du formulaire afin de distinguer les humains des robots.

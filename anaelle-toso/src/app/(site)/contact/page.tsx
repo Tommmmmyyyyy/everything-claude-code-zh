@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contacter ${site.identity.fullName}, ${site.identity.profession.toLowerCase()} : téléphone, e-mail, Instagram, Facebook, formulaire de contact et avis.`,
+  description: `Contacter ${site.identity.fullName}, ${site.identity.profession.toLowerCase()} : téléphone, e-mail, Instagram, Facebook, formulaire de contact et avis.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -31,7 +31,7 @@ export default function Contact() {
             Parlons de votre <em className="italic text-sand">cheval.</em>
           </>
         }
-        intro={`Basée à ${c.addressLocality}, j'interviens dans toute la ${zone.main.label ?? "région"}. Une question, une demande particulière, un retour après une visite : je vous lis avec attention.`}
+        intro={`Basée à ${c.addressLocality}, j'interviens dans toute la ${zone.main.label ?? "région"}. Une question, une demande particulière, un retour après une visite : je vous lis avec attention.`}
         image="/images/contact/cheval-pas-dane.jpg"
         imagePosition="35% 40%"
         tone="leather"
@@ -83,7 +83,7 @@ export default function Contact() {
               Un message, <em className="italic text-sand">une question.</em>
             </h2>
             <p className="body mt-6 text-cream/70" data-reveal="up">
-              Pour une demande de rendez-vous, le formulaire dédié est plus rapide&nbsp;: il recueille toutes les informations utiles sur votre cheval.
+              Pour une demande de rendez-vous, le formulaire dédié est plus rapide : il recueille toutes les informations utiles sur votre cheval.
             </p>
             <div className="mt-8" data-reveal="up" data-delay="0.1">
               <ButtonLink href="/rendez-vous" variant="ghost">
@@ -110,7 +110,7 @@ export default function Contact() {
               Partagez votre <em className="italic text-sand">expérience.</em>
             </h2>
             <p className="body mt-6 text-cream/70" data-reveal="up">
-              Votre retour aide d&apos;autres propriétaires à choisir en confiance. Chaque avis est relu par Anaëlle avant publication&nbsp;: seuls des témoignages réels figurent sur ce site.
+              Votre retour aide d&apos;autres propriétaires à choisir en confiance. Chaque avis est relu par Anaëlle avant publication : seuls des témoignages réels figurent sur ce site.
             </p>
             <ol className="mt-8 grid gap-3 text-[0.92rem] text-cream/65" data-reveal="up" data-delay="0.1">
               {["Vous laissez votre avis", "Anaëlle le relit", "Il est publié sur le site"].map((s, i) => (

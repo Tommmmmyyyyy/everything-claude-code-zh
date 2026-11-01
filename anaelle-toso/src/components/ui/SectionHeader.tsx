@@ -40,7 +40,7 @@ export function SectionHeader({ index, label, title, intro, provisional, align =
 
 export function ProvisionalTag({ children = "Contenu à valider" }: { children?: ReactNode }) {
   return (
-    <span className="ph-tag" title="Contenu provisoire : à valider avant la mise en ligne">
+    <span className="ph-tag" title="Contenu provisoire : à valider avant la mise en ligne">
       <span aria-hidden="true">✦</span>
       {children}
     </span>

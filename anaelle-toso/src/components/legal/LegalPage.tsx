@@ -6,7 +6,7 @@ export function LegalPage({ title, updated, children }: { title: string; updated
     <article className="container-x pb-32 pt-[calc(var(--header-h)+10vh)]">
       <p className="label text-cream/50">Informations légales</p>
       <h1 className="display mt-8 max-w-4xl">{title}</h1>
-      <p className="label mt-8 text-cream/45">Dernière mise à jour : {updated ?? <span className="ph-tag">date à renseigner</span>}</p>
+      <p className="label mt-8 text-cream/45">Dernière mise à jour : {updated ?? <span className="ph-tag">date à renseigner</span>}</p>
       <div className="legal mt-16 grid max-w-3xl gap-12">{children}</div>
     </article>
   );

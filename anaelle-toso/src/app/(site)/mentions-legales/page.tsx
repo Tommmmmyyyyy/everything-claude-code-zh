@@ -19,19 +19,19 @@ export default function MentionsLegales() {
           <V value={l.businessName ?? site.identity.fullName} label="Nom commercial" /> — {site.identity.profession}
         </p>
         <p>
-          Statut : <V value={l.status} label="Statut juridique (ex. entrepreneur individuel)" />
+          Statut : <V value={l.status} label="Statut juridique (ex. entrepreneur individuel)" />
           <br />
-          SIRET : <V value={l.siret} label="Numéro SIRET" />
+          SIRET : <V value={l.siret} label="Numéro SIRET" />
           <br />
-          Adresse : <V value={l.address} label="Adresse professionnelle" />
+          Adresse : <V value={l.address} label="Adresse professionnelle" />
         </p>
         <p>
-          Téléphone : <V value={c.phoneDisplay ?? c.phone} label="Téléphone" />
+          Téléphone : <V value={c.phoneDisplay ?? c.phone} label="Téléphone" />
           <br />
-          E-mail : <V value={c.email} label="E-mail" />
+          E-mail : <V value={c.email} label="E-mail" />
         </p>
         <p>
-          Directrice de la publication : <V value={l.publicationDirector} label="Directeur de la publication" />
+          Directrice de la publication : <V value={l.publicationDirector} label="Directeur de la publication" />
         </p>
       </LegalBlock>
 
@@ -57,7 +57,7 @@ export default function MentionsLegales() {
         </p>
         {site.credits.studio && (
           <p>
-            Conception et développement : {site.credits.studio}
+            Conception et développement : {site.credits.studio}
             {site.credits.url ? (
               <>
                 {" "}
@@ -79,7 +79,7 @@ export default function MentionsLegales() {
           Le site peut contenir des liens vers des sites tiers (réseaux sociaux, service de réservation, fonds de carte OpenStreetMap). L&apos;éditeur n&apos;est pas responsable de leur
           contenu.
         </p>
-        <p>Adresse du site : {SITE_URL}</p>
+        <p>Adresse du site : {SITE_URL}</p>
       </LegalBlock>
     </LegalPage>
   );

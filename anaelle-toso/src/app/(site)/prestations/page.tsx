@@ -10,7 +10,7 @@ import { PageCta } from "@/components/pages/PageCta";
 
 export const metadata: Metadata = {
   title: "Mes prestations",
-  description: `Examen de la dentition, entretien des tables dentaires, pointes d'émail, surdents, dents de loup : les soins proposés par ${site.identity.fullName}, dans le cadre des actes autorisés aux techniciens dentaires équins.`,
+  description: `Examen de la dentition, entretien des tables dentaires, pointes d'émail, surdents, dents de loup : les soins proposés par ${site.identity.fullName}, dans le cadre des actes autorisés aux techniciens dentaires équins.`,
   alternates: { canonical: "/prestations" },
 };
 
@@ -64,10 +64,10 @@ export default function Prestations() {
         index="05"
         title={
           <>
-            Un contrôle à <em className="italic text-sand">prévoir&nbsp;?</em>
+            Un contrôle à <em className="italic text-sand">prévoir ?</em>
           </>
         }
-        text="Décrivez votre demande en quelques étapes : je vous recontacte pour convenir ensemble d'une date."
+        text="Décrivez votre demande en quelques étapes : je vous recontacte pour convenir ensemble d'une date."
         primary={{ href: "/rendez-vous", label: "Prendre rendez-vous" }}
         secondary={{ href: "/faq", label: "Lire la FAQ" }}
       />
