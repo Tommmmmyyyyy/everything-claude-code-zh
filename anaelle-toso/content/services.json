@@ -1,7 +1,7 @@
 {
-  "provisional": true,
+  "provisional": false,
   "title": "Des soins pensés pour le confort de votre cheval.",
-  "intro": "Chaque intervention commence par un examen attentif. Les soins sont ensuite adaptés à l'âge, à l'activité et à l'état de la bouche de votre cheval — toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
+  "intro": "Chaque intervention commence par un examen attentif. Les soins sont ensuite adaptés à l'âge, à l'activité et à l'état de la bouche de votre cheval, au box comme au pré, toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
   "items": [
     {
       "id": "examen",
@@ -14,7 +14,7 @@
         "Compte rendu expliqué au propriétaire"
       ],
       "diagram": "exam",
-      "image": "/images/prestations/examen-pas-dane.jpg",
+      "image": "",
       "imageAlt": "Cheval alezan examiné au pas-d'âne, en extérieur",
       "price": ""
     },
@@ -125,5 +125,5 @@
     }
   ],
   "regulatoryNote": "Les actes réalisés par un technicien dentaire équin sont encadrés par l'article L.243-3 du Code rural et de la pêche maritime et ses textes d'application. Le diagnostic et le traitement des pathologies, la sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent du vétérinaire.",
-  "pricingNote": ""
+  "pricingNote": "Tarifs communiqués sur demande, selon le nombre de chevaux et le déplacement. Regrouper plusieurs chevaux d'une même écurie ou d'un même secteur permet de limiter les frais."
 }

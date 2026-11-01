@@ -18,27 +18,37 @@
     },
     {
       "q": "Comment se déroule une intervention ?",
-      "a": "Après un temps de prise de contact avec le cheval, l'examen commence par l'observation et la palpation externe, puis se poursuit dans la bouche à l'aide d'un pas-d'âne (ouvre-bouche) et d'un éclairage. Les soins autorisés sont ensuite réalisés si nécessaire, puis je vous explique ce qui a été observé et réalisé. Durée moyenne par cheval : [à préciser].",
-      "provisional": true
+      "a": "Après un temps de prise de contact avec le cheval, l'examen commence par l'observation et la palpation externe, puis se poursuit dans la bouche à l'aide d'un pas-d'âne (ouvre-bouche) et d'un éclairage. Les soins autorisés sont ensuite réalisés si nécessaire, puis je vous explique ce que j'ai observé et réalisé. Comptez en moyenne 30 à 45 minutes par cheval, selon son âge, son tempérament et les soins nécessaires.",
+      "provisional": false
     },
     {
       "q": "Faut-il préparer son cheval ?",
-      "a": "Il suffit que votre cheval soit disponible, au licol, dans un endroit calme, propre et suffisamment éclairé, idéalement à l'abri. Un point d'eau à proximité est apprécié. Évitez de lui distribuer son repas juste avant le rendez-vous, afin que sa bouche ne soit pas encombrée.",
-      "provisional": true
+      "a": "Il suffit que votre cheval soit disponible, au licol, dans un endroit calme, plat et suffisamment éclairé, idéalement à l'abri. Un point d'eau à proximité est apprécié. Évitez de lui distribuer son repas juste avant le rendez-vous, afin que sa bouche ne soit pas encombrée.",
+      "provisional": false
     },
     {
       "q": "Anaëlle intervient-elle dans les écuries privées ?",
-      "a": "[À confirmer] Oui : je me déplace auprès de vos chevaux, que ce soit en écurie privée, en pension, en centre équestre ou en élevage, dans ma zone d'intervention.",
-      "provisional": true
+      "a": "Oui. Je me déplace là où vit votre cheval : écurie privée, pension, centre équestre, élevage, ou directement au pré chez vous. Un endroit calme et plat suffit.",
+      "provisional": false
+    },
+    {
+      "q": "Dans quelle zone intervenez-vous ?",
+      "a": "Je suis basée à Cardonnette (80260), au nord d'Amiens, et j'interviens dans toute la Somme : Amiens, Abbeville, Albert, Doullens, Péronne, Montdidier, la baie de Somme… Je me déplace aussi dans les Hauts-de-France sur demande.",
+      "provisional": false
+    },
+    {
+      "q": "Mon cheval vit au pré, est-ce un problème ?",
+      "a": "Pas du tout. J'interviens aussi en pâture : il suffit de pouvoir attraper votre cheval et de le tenir au licol dans un endroit plat et calme, si possible à l'abri du vent et du soleil direct.",
+      "provisional": false
     },
     {
       "q": "Peut-elle examiner plusieurs chevaux lors d'un déplacement ?",
-      "a": "[À confirmer] Oui, plusieurs chevaux d'une même écurie peuvent être vus lors d'un même déplacement. Indiquez simplement leur nombre dans votre demande de rendez-vous pour que l'organisation de la visite en tienne compte.",
-      "provisional": true
+      "a": "Oui, et c'est même l'idéal : regrouper plusieurs chevaux d'une même écurie ou d'un même secteur permet d'optimiser les déplacements. Indiquez simplement leur nombre dans votre demande.",
+      "provisional": false
     },
     {
       "q": "Comment prendre rendez-vous ?",
-      "a": "Via le formulaire de demande de rendez-vous de ce site, par téléphone ou par e-mail. Votre demande m'est transmise directement et je vous recontacte pour convenir ensemble d'une date. Un rendez-vous n'est confirmé qu'après ma réponse.",
+      "a": "Via le formulaire de demande de rendez-vous de ce site, ou par message sur Instagram (@anaelle_ts). Je vous recontacte pour convenir ensemble d'une date. Un rendez-vous n'est confirmé qu'après ma réponse.",
       "provisional": false
     },
     {

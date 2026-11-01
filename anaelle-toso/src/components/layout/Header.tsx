@@ -263,6 +263,13 @@ export function ContactLines({ className = "mt-3" }: { className?: string }) {
           SHOW_PLACEHOLDERS && <span className="ph-tag">E-mail à renseigner</span>
         )}
       </li>
+      {site.social.instagram && (
+        <li>
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="link-u body-lg">
+            @{site.social.instagramHandle || "instagram"}
+          </a>
+        </li>
+      )}
     </ul>
   );
 }

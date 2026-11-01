@@ -1,17 +1,123 @@
 {
   "title": "Je viens à la rencontre de vos chevaux.",
-  "intro": "Écuries privées, pensions, centres équestres : j'interviens directement là où vivent vos chevaux.",
+  "intro": "Basée à Cardonnette, au nord d'Amiens, je me déplace dans toute la Somme : écuries, pensions, centres équestres, élevages, mais aussi directement au pré, chez les propriétaires.",
   "main": {
-    "label": ""
+    "label": "Somme (80)",
+    "baseLabel": "Cardonnette (80260)",
+    "lat": 49.9564,
+    "lng": 2.3608,
+    "radiusKm": 60
   },
-  "cities": [],
-  "extended": [],
-  "travelNote": "",
+  "cities": [
+    {
+      "name": "Amiens",
+      "lat": 49.8941,
+      "lng": 2.2958
+    },
+    {
+      "name": "Abbeville",
+      "lat": 50.1054,
+      "lng": 1.8332
+    },
+    {
+      "name": "Albert",
+      "lat": 50.0016,
+      "lng": 2.6522
+    },
+    {
+      "name": "Doullens",
+      "lat": 50.1567,
+      "lng": 2.3406
+    },
+    {
+      "name": "Péronne",
+      "lat": 49.9323,
+      "lng": 2.9363
+    },
+    {
+      "name": "Montdidier",
+      "lat": 49.6477,
+      "lng": 2.5694
+    },
+    {
+      "name": "Corbie",
+      "lat": 49.9089,
+      "lng": 2.5103
+    },
+    {
+      "name": "Villers-Bocage",
+      "lat": 50.0003,
+      "lng": 2.3253
+    },
+    {
+      "name": "Ailly-sur-Somme",
+      "lat": 49.9282,
+      "lng": 2.1979
+    },
+    {
+      "name": "Poix-de-Picardie",
+      "lat": 49.7811,
+      "lng": 1.9775
+    },
+    {
+      "name": "Roye",
+      "lat": 49.6997,
+      "lng": 2.79
+    },
+    {
+      "name": "Ham",
+      "lat": 49.7469,
+      "lng": 3.0731
+    },
+    {
+      "name": "Saint-Valery-sur-Somme",
+      "lat": 50.1846,
+      "lng": 1.6362
+    },
+    {
+      "name": "Rue",
+      "lat": 50.2715,
+      "lng": 1.6693
+    }
+  ],
+  "extended": [
+    {
+      "name": "Arras",
+      "lat": 50.291,
+      "lng": 2.7775,
+      "radiusKm": 25
+    },
+    {
+      "name": "Beauvais",
+      "lat": 49.4295,
+      "lng": 2.0807,
+      "radiusKm": 28
+    },
+    {
+      "name": "Saint-Quentin",
+      "lat": 49.8465,
+      "lng": 3.2876,
+      "radiusKm": 25
+    },
+    {
+      "name": "Montreuil-sur-Mer",
+      "lat": 50.4643,
+      "lng": 1.7637,
+      "radiusKm": 22
+    },
+    {
+      "name": "Lille",
+      "lat": 50.6292,
+      "lng": 3.0573,
+      "radiusKm": 28
+    }
+  ],
+  "travelNote": "Au-delà de la Somme, je me déplace dans les Hauts-de-France sur demande — idéalement en regroupant plusieurs chevaux d'une même écurie ou d'un même secteur.",
   "map": {
-    "defaultLat": 46.6,
+    "defaultLat": 49.95,
     "defaultLng": 2.4,
-    "defaultZoom": 5,
-    "tileUrl": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>"
+    "defaultZoom": 8,
+    "tileUrl": "",
+    "attribution": "Contours : © IGN – Admin Express (via france-geojson)"
   }
 }

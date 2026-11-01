@@ -634,6 +634,7 @@ html.intro-seen [data-preloader] {
 
 /* ── Carte (Leaflet) teintée chambre noire ────────────────── */
 .map-dark .leaflet-tile-pane {
+  opacity: 0.55;
   filter: grayscale(1) invert(1) sepia(0.55) hue-rotate(50deg) saturate(0.6) brightness(0.62) contrast(1.15);
 }
 .map-dark .leaflet-container {
@@ -667,6 +668,64 @@ html.intro-seen [data-preloader] {
 }
 .map-dark .leaflet-tooltip::before {
   display: none;
+}
+.map-dark .leaflet-container {
+  background: #0b140e;
+}
+.map-dark .leaflet-tooltip.is-major {
+  background: transparent;
+  border: 0;
+  padding: 0 0 2px;
+  color: var(--color-cream);
+}
+.map-dark .leaflet-tooltip.is-base {
+  background: var(--color-cognac);
+  border-color: var(--color-cognac);
+  color: var(--color-ink);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  line-height: 1.25;
+  border-radius: 10px;
+  padding: 7px 10px;
+}
+.map-dept span,
+.map-sea span {
+  display: block;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(244 234 219 / 0.45);
+}
+.map-sea span {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgb(156 174 142 / 0.5);
+}
+.map-base {
+  position: relative;
+}
+.map-base-dot,
+.map-base-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+.map-base-dot {
+  inset: 3px;
+  background: var(--color-cognac);
+  border: 2px solid var(--color-cream);
+}
+.map-base-pulse {
+  background: rgb(192 122 67 / 0.5);
+  animation: pulse-ring 2s ease-out infinite;
 }
 
 /* ── Accessibilité : mouvement réduit ─────────────────────── */

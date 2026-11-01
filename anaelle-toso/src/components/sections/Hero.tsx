@@ -184,7 +184,7 @@ export function Hero({ firstName, lastName, tagline, subtitle, profession, video
               </span>
             </a>
             <p data-hero-fade className="micro hidden max-w-[220px] text-right text-cream/55 sm:block lg:mr-10">
-              Soins dentaires équins, directement à l&apos;écurie
+              Soins dentaires équins, à l&apos;écurie comme au pré
             </p>
           </div>
           <div data-hero-namewrap aria-hidden="true">

@@ -28,7 +28,7 @@ const CHAPTERS = [
     n: "01",
     label: "La route",
     title: "Chaque rendez-vous commence sur la route.",
-    text: "Mon camion est mon cabinet itinérant : le matériel voyage avec moi, jusqu'à vos chevaux.",
+    text: "Mon camion est mon cabinet itinérant : le matériel voyage avec moi, partout dans la Somme.",
   },
   {
     n: "02",

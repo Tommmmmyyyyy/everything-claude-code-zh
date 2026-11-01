@@ -1,7 +1,7 @@
 {
-  "provisional": true,
+  "provisional": false,
   "title": "Derrière chaque intervention, une passion.",
-  "intro": "[Texte à personnaliser] Une ou deux phrases d'introduction, à la première personne, pour donner le ton : qui vous êtes, ce qui vous anime, pourquoi les chevaux.",
+  "intro": "Je m'appelle Anaëlle. Les chevaux rythment ma vie depuis toujours : je les monte, je les soigne, je les observe. Aujourd'hui, je mets cette passion au service de leur confort, une bouche après l'autre.",
   "portrait": {
     "image": "/images/histoire/portrait-poney.jpg",
     "alt": "Portrait d'Anaëlle Toso avec un poney bai",
@@ -13,7 +13,7 @@
       "id": "passion",
       "label": "La passion",
       "title": "Les chevaux, depuis toujours",
-      "text": "[Texte à personnaliser] Racontez votre première rencontre avec les chevaux : un souvenir d'enfance, une écurie, un cheval qui a compté.",
+      "text": "J'ai grandi entre les écuries et les terrains de concours. Monter, préparer, panser, passer des heures au pré : très tôt, les chevaux sont devenus bien plus qu'un loisir. C'est auprès d'eux que j'ai appris la patience, l'observation et le respect du rythme de chacun.",
       "image": "/images/histoire/cso-la-falize-2024.jpg",
       "hint": "Photo personnelle : vous et un cheval qui a marqué votre histoire",
       "motif": "horse",
@@ -23,26 +23,27 @@
       "id": "decouverte",
       "label": "La découverte du métier",
       "title": "Le jour où tout a commencé",
-      "text": "[Texte à personnaliser] Comment avez-vous découvert la dentisterie équine ? Une rencontre, une observation, une évidence ?",
+      "text": "Un cheval qui se défendait au mors, du foin qui tombait de sa bouche… et une visite dentaire qui a tout changé. Ce jour-là, j'ai compris qu'une bouche inconfortable pouvait expliquer bien des comportements. La dentisterie équine s'est imposée comme une évidence.",
       "image": "",
       "hint": "Photo d'archive ou de vos débuts",
-      "motif": "tools"
+      "motif": "tools",
+      "caption": ""
     },
     {
       "id": "parcours",
       "label": "Le parcours",
       "title": "Un chemin construit pas à pas",
-      "text": "[Texte à personnaliser] Les grandes étapes de votre parcours professionnel, en restant factuelle (lieux, expériences, rencontres).",
+      "text": "D'écurie en écurie, de rencontre en rencontre, j'ai appris auprès de professionnels exigeants. Chaque cheval m'a enseigné quelque chose : un tempérament, une morphologie, une façon de réagir. Aujourd'hui, j'interviens au box comme au pré, en plaine comme en montagne.",
       "image": "/images/histoire/intervention-montagne.jpg",
       "hint": "Photo en écurie ou en déplacement",
       "motif": "stable",
-      "caption": "Examen au pas-d'âne"
+      "caption": "Examen au pas-d'âne, à l'écurie"
     },
     {
       "id": "formation",
       "label": "La formation",
       "title": "Apprendre, et continuer d'apprendre",
-      "text": "[Texte à personnaliser] Votre formation et votre titre exacts, tels qu'ils figurent sur vos documents officiels. Ne mentionnez que des qualifications réellement obtenues.",
+      "text": "La dentisterie équine demande de la rigueur et des gestes précis. Formée à la technique dentaire équine, je continue d'apprendre pour suivre l'évolution des pratiques et du matériel, toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
       "image": "/images/galerie/materiel-pas-dane.jpg",
       "hint": "Photo de matériel ou de formation",
       "motif": "tools",
@@ -52,24 +53,25 @@
       "id": "vision",
       "label": "La vision",
       "title": "Le bien-être comme boussole",
-      "text": "[Texte à personnaliser] Votre vision du bien-être équin : ce qui compte pour vous lors de chaque intervention.",
-      "image": "/images/histoire/paturage-complicite.jpg",
+      "text": "Pour moi, un soin réussi est un soin que le cheval a bien vécu. Je prends le temps de l'approcher, de le rassurer, de travailler à son rythme. Une bouche saine, c'est un cheval plus confortable, plus disponible et plus serein, au travail comme au pré.",
+      "image": "",
       "hint": "Photo d'un cheval détendu, en pâture",
       "motif": "pasture",
-      "caption": "Au pré"
+      "caption": ""
     },
     {
       "id": "proprietaires",
       "label": "L'approche avec les propriétaires",
       "title": "Expliquer, rassurer, accompagner",
-      "text": "[Texte à personnaliser] Comment vous accompagnez les propriétaires : explications, conseils, suivi dans le temps.",
+      "text": "Après chaque intervention, je vous montre ce que j'ai observé et je vous explique ce que j'ai fait. Vous repartez avec des repères simples pour suivre la bouche de votre cheval, et la date de son prochain contrôle. Si une situation dépasse mon champ d'action, je vous oriente vers votre vétérinaire.",
       "image": "",
       "hint": "Photo d'un échange avec un propriétaire",
-      "motif": "intervention"
+      "motif": "intervention",
+      "caption": ""
     }
   ],
   "quote": {
-    "text": "[Citation à personnaliser] Une phrase qui vous ressemble.",
+    "text": "Un cheval qui mâche bien est un cheval qui vit bien. Mon travail, c'est de veiller à ce que rien ne l'en empêche.",
     "author": "Anaëlle Toso"
   }
 }

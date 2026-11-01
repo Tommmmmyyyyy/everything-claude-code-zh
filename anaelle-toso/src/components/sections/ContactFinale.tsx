@@ -18,7 +18,7 @@ const Missing = ({ children }: { children: string }) => (SHOW_PLACEHOLDERS ? <sp
 /** Dernière scène : grand portrait de cheval au soleil couchant, invitation au contact. */
 export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneContent }) {
   const c = site.contact;
-  const contactHref = c.email ? `mailto:${c.email}` : c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : "#rendez-vous";
+  const contactHref = c.email ? `mailto:${c.email}` : c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : site.social.instagram || "#rendez-vous";
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-ink">
       {/* Grand cheval à contre-jour */}
@@ -55,15 +55,20 @@ export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneCon
             <ButtonLink href="#rendez-vous" variant="cream">
               Prendre rendez-vous
             </ButtonLink>
-            <ButtonLink href={contactHref} variant="ghost" icon={false} data-booking-type={contactHref === "#rendez-vous" ? "information" : undefined}>
+            <ButtonLink href={contactHref} variant="ghost" icon={false} data-booking-type={contactHref === "#rendez-vous" ? "information" : undefined} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noopener noreferrer" : undefined}>
               Contacter Anaëlle
             </ButtonLink>
           </div>
         </div>
 
-        <div className="grid max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-5" data-reveal="stagger">
-          <Item label="Téléphone">{c.phone ? <a className="link-u" href={`tel:${c.phone.replace(/\s/g, "")}`}>{c.phoneDisplay || c.phone}</a> : <Missing>À renseigner</Missing>}</Item>
-          <Item label="E-mail">{c.email ? <a className="link-u break-all" href={`mailto:${c.email}`}>{c.email}</a> : <Missing>À renseigner</Missing>}</Item>
+        <div className="grid max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-4" data-reveal="stagger">
+          {(c.phone || SHOW_PLACEHOLDERS) && (
+            <Item label="Téléphone">{c.phone ? <a className="link-u" href={`tel:${c.phone.replace(/\s/g, "")}`}>{c.phoneDisplay || c.phone}</a> : <Missing>À renseigner</Missing>}</Item>
+          )}
+          {(c.email || SHOW_PLACEHOLDERS) && (
+            <Item label="E-mail">{c.email ? <a className="link-u break-all" href={`mailto:${c.email}`}>{c.email}</a> : <Missing>À renseigner</Missing>}</Item>
+          )}
+          {c.addressLocality && <Item label="Basée à">{c.addressLocality}</Item>}
           <Item label="Zone">{zone.main.label ?? <Missing>À renseigner</Missing>}</Item>
           <Item label="Instagram">
             {site.social.instagram ? (
@@ -74,7 +79,7 @@ export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneCon
               <Missing>À renseigner</Missing>
             )}
           </Item>
-          <Item label="Facebook">
+          {(site.social.facebook || SHOW_PLACEHOLDERS) && <Item label="Facebook">
             {site.social.facebook ? (
               <a className="link-u inline-flex items-center gap-2" href={site.social.facebook} target="_blank" rel="noopener noreferrer">
                 <SocialIcon id="facebook" className="h-4 w-4" /> Facebook
@@ -82,7 +87,7 @@ export function ContactFinale({ site, zone }: { site: SiteContent; zone: ZoneCon
             ) : (
               <Missing>À renseigner</Missing>
             )}
-          </Item>
+          </Item>}
         </div>
       </div>
     </section>

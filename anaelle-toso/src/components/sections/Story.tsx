@@ -1,6 +1,7 @@
 import type { StoryContent } from "@/lib/content";
 import { SectionHeader, ProvisionalText } from "@/components/ui/SectionHeader";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
+import { SHOW_PLACEHOLDERS } from "@/lib/config";
 
 /** « Derrière chaque intervention, une passion. » — récit éditorial en chapitres. */
 export function Story({ content }: { content: StoryContent }) {
@@ -58,6 +59,27 @@ export function Story({ content }: { content: StoryContent }) {
         <div className="grid gap-24 md:col-span-9 md:gap-40">
           {content.chapters.map((c, i) => {
             const flip = i % 2 === 1;
+            if (!c.image && !SHOW_PLACEHOLDERS) {
+              // Chapitre sans photo : composition typographique
+              return (
+                <article key={c.id} id={`chapitre-${c.id}`} className="grid scroll-mt-28 gap-6 border-t border-dashed border-line-strong pt-10 md:grid-cols-9">
+                  <p className="font-serif text-[clamp(5rem,11vw,10rem)] leading-[0.75] text-sand/25 md:col-span-3" aria-hidden="true" data-reveal="up">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <div className="md:col-span-6">
+                    <p className="label text-sand" data-reveal="up">
+                      {String(i + 1).padStart(2, "0")} — {c.label}
+                    </p>
+                    <h3 className="heading mt-5" data-reveal="lines">
+                      {c.title}
+                    </h3>
+                    <p className="body-lg mt-6 max-w-2xl text-cream/75" data-reveal="up" data-delay="0.1">
+                      <ProvisionalText text={c.text} />
+                    </p>
+                  </div>
+                </article>
+              );
+            }
             return (
               <article key={c.id} id={`chapitre-${c.id}`} className="grid scroll-mt-28 gap-8 md:grid-cols-9 md:gap-6">
                 <div className={`md:col-span-5 ${flip ? "md:order-2 md:col-start-5" : ""}`}>

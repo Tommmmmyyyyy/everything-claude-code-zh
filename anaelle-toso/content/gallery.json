@@ -21,43 +21,15 @@
     {
       "id": "materiel",
       "label": "Le matériel"
-    },
-    {
-      "id": "coulisses",
-      "label": "Les coulisses"
     }
   ],
   "items": [
     {
-      "src": "/images/galerie/portrait-poney.jpg",
-      "alt": "Anaëlle Toso et un poney bai, portrait en studio",
+      "src": "/images/galerie/complicite-poney.jpg",
+      "alt": "Main tendue vers un poney bai, en studio",
       "category": "chevaux",
-      "layout": "landscape",
-      "caption": "Complicité, en studio — photo : LD",
-      "motif": "horse"
-    },
-    {
-      "src": "/images/galerie/intervention-montagne.jpg",
-      "alt": "Examen dentaire d'un cheval alezan au pas-d'âne, dans une écurie de montagne",
-      "category": "interventions",
-      "layout": "tall",
-      "caption": "Examen au pas-d'âne, à l'écurie",
-      "motif": "intervention"
-    },
-    {
-      "src": "/images/galerie/materiel-ensemble.jpg",
-      "alt": "Illustration du matériel : pas-d'âne, râpes dentaires, miroir, lampe frontale et seringue de rinçage",
-      "category": "materiel",
-      "layout": "wide",
-      "caption": "Le matériel (illustration)",
-      "motif": "tools"
-    },
-    {
-      "src": "/images/galerie/cso-la-falize-2024.jpg",
-      "alt": "Cavalière et cheval bai au saut d'obstacle, CSO La Falize 2024",
-      "category": "chevaux",
-      "layout": "tall",
-      "caption": "CSO La Falize, 6 octobre 2024",
+      "layout": "square",
+      "caption": "Complicité — photo : LD",
       "motif": "horse"
     },
     {
@@ -69,12 +41,28 @@
       "motif": "intervention"
     },
     {
-      "src": "/images/galerie/paturage-carre.jpg",
-      "alt": "Cheval bai au pré, à contre-jour",
-      "category": "chevaux",
+      "src": "/images/galerie/materiel-ensemble.jpg",
+      "alt": "Illustration du matériel : pas-d'âne, râpes dentaires, miroir, lampe frontale et seringue de rinçage",
+      "category": "materiel",
+      "layout": "wide",
+      "caption": "Le matériel (illustration)",
+      "motif": "tools"
+    },
+    {
+      "src": "/images/galerie/ecurie-montagne.jpg",
+      "alt": "Cour d'écurie en montagne, attelages et chiens",
+      "category": "ecuries",
       "layout": "square",
-      "caption": "Au pré, à contre-jour",
-      "motif": "pasture"
+      "caption": "Une écurie en montagne",
+      "motif": "stable"
+    },
+    {
+      "src": "/images/galerie/concours.jpg",
+      "alt": "Cheval bai au saut d'obstacle en concours",
+      "category": "chevaux",
+      "layout": "tall",
+      "caption": "En concours — CSO La Falize",
+      "motif": "horse"
     },
     {
       "src": "/images/galerie/materiel-rapes.jpg",
@@ -89,39 +77,7 @@
       "alt": "",
       "category": "camion",
       "layout": "wide",
-      "caption": "Le camion à l'entrée d'une écurie",
-      "motif": "truck"
-    },
-    {
-      "src": "/images/galerie/materiel-pas-dane.jpg",
-      "alt": "Illustration d'un pas-d'âne",
-      "category": "materiel",
-      "layout": "square",
-      "caption": "Le pas-d'âne (illustration)",
-      "motif": "tools"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "ecuries",
-      "layout": "tall",
-      "caption": "Allée d'écurie, chevaux aux boxes",
-      "motif": "stable"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "coulisses",
-      "layout": "square",
-      "caption": "Sur la route, entre deux rendez-vous",
-      "motif": "road"
-    },
-    {
-      "src": "",
-      "alt": "",
-      "category": "camion",
-      "layout": "square",
-      "caption": "Le camion, porte latérale ouverte",
+      "caption": "Le camion d'intervention",
       "motif": "truck"
     }
   ]

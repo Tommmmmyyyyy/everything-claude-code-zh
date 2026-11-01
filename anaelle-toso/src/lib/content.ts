@@ -169,7 +169,7 @@ export interface ZonePoint {
 export interface ZoneContent {
   title: string;
   intro: string;
-  main: { label: string | null; lat?: number | null; lng?: number | null; radiusKm?: number | null };
+  main: { label: string | null; baseLabel?: string | null; lat?: number | null; lng?: number | null; radiusKm?: number | null };
   cities: ZonePoint[];
   extended: ZonePoint[];
   travelNote: string | null;

@@ -83,6 +83,33 @@ export function Social({ site, content, posts }: { site: SiteContent; content: S
             </li>
           ))}
         </ul>
+      ) : site.social.instagram && !SHOW_PLACEHOLDERS ? (
+        <div className="container-x mt-12 md:mt-16" data-reveal="up">
+          <a
+            href={site.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="Suivre"
+            className="group relative grid overflow-hidden rounded-[12px] border border-line p-8 transition-colors duration-500 hover:border-cream/60 md:grid-cols-12 md:items-end md:p-14"
+          >
+            <span className="pointer-events-none absolute -right-10 -top-16 text-cream/[0.05] transition-transform duration-[1.2s] ease-[var(--ease-expo)] group-hover:-rotate-6 group-hover:scale-105" aria-hidden="true">
+              <SocialIcon id="instagram" className="h-[22rem] w-[22rem]" />
+            </span>
+            <span className="relative md:col-span-8">
+              <span className="label block text-sand">Instagram</span>
+              <span className="display mt-6 block break-words">@{handle || "instagram"}</span>
+              <span className="body-lg mt-6 block max-w-xl text-cream/70">Interventions, chevaux rencontrés, coulisses de la route : le quotidien d&apos;une technicienne dentaire équine dans la Somme.</span>
+            </span>
+            <span className="relative mt-10 md:col-span-4 md:mt-0 md:justify-self-end">
+              <span className="btn btn-cream">
+                <span className="btn-label">
+                  <span>Suivre sur Instagram</span>
+                  <span aria-hidden="true">Suivre sur Instagram</span>
+                </span>
+              </span>
+            </span>
+          </a>
+        </div>
       ) : (
         SHOW_PLACEHOLDERS && (
           <ul className="container-x mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-3 md:gap-6" aria-label="Emplacements de publications">

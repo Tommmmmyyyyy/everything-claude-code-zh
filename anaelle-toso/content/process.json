@@ -1,11 +1,11 @@
 {
-  "provisional": true,
+  "provisional": false,
   "title": "Une intervention, étape par étape.",
   "intro": "De votre premier message au conseil de suivi, voici comment se déroule une visite.",
   "steps": [
     {
       "title": "Prise de contact",
-      "text": "Par téléphone, par e-mail ou via le formulaire en ligne, vous décrivez votre demande : nombre de chevaux, âge, date du dernier contrôle, comportement observé.",
+      "text": "Par message sur Instagram ou via le formulaire en ligne, vous décrivez votre demande : nombre de chevaux, âge, date du dernier contrôle, comportement observé.",
       "image": "",
       "motif": "phone"
     },
@@ -17,13 +17,13 @@
     },
     {
       "title": "Arrivée du camion",
-      "text": "J'arrive à l'écurie avec mon camion équipé. Le matériel est préparé avant chaque cheval.",
+      "text": "J'arrive avec mon camion équipé, à l'écurie comme au pré. Le matériel est préparé et nettoyé avant chaque cheval.",
       "image": "",
       "motif": "truck"
     },
     {
       "title": "Préparation du cheval",
-      "text": "Le cheval est installé au licol, dans un endroit calme, propre et éclairé. On prend le temps de faire connaissance, à son rythme.",
+      "text": "Le cheval est installé au licol — au box, à l'attache ou directement au pré — dans un endroit calme et plat. On prend le temps de faire connaissance, à son rythme.",
       "image": "",
       "motif": "halter"
     },

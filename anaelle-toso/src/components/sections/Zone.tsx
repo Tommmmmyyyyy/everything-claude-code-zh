@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ZoneContent } from "@/lib/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ButtonLink } from "@/components/ui/Button";
@@ -17,6 +17,10 @@ export function Zone({ zone }: { zone: ZoneContent }) {
   // La carte (Leaflet + tuiles) n'est chargée qu'à l'approche de la section.
   const mapBox = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
+  const api = useRef<{ recenter: () => void } | null>(null);
+  const onReady = useCallback((a: { recenter: () => void }) => {
+    api.current = a;
+  }, []);
   useEffect(() => {
     const el = mapBox.current;
     if (!el) return;
@@ -39,12 +43,24 @@ export function Zone({ zone }: { zone: ZoneContent }) {
 
       <div className="container-x mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-6">
         <div className="flex flex-col gap-10 md:col-span-4">
+          {zone.main.baseLabel && (
+            <div data-reveal="up">
+              <p className="label text-cream/50">Ma base</p>
+              <p className="heading-sm mt-3 flex items-center gap-3">
+                <span className="relative inline-flex h-3 w-3" aria-hidden="true">
+                  <span className="absolute inset-0 animate-ping rounded-full bg-cognac/60" />
+                  <span className="relative h-3 w-3 rounded-full bg-cognac" />
+                </span>
+                {zone.main.baseLabel}
+              </p>
+            </div>
+          )}
           <div data-reveal="up">
             <p className="label text-cream/50">Zone principale</p>
             {zone.main.label ? (
               <p className="heading-sm mt-3">
                 {zone.main.label}
-                {zone.main.radiusKm ? <span className="text-sand"> — {zone.main.radiusKm} km</span> : null}
+                {zone.main.radiusKm ? <span className="text-sand"> — environ {zone.main.radiusKm} km autour de ma base</span> : null}
               </p>
             ) : (
               SHOW_PLACEHOLDERS && <p className="mt-3"><span className="ph-tag">Zone principale à renseigner</span></p>
@@ -71,7 +87,9 @@ export function Zone({ zone }: { zone: ZoneContent }) {
             {zone.travelNote || zone.extended.length ? (
               <p className="body mt-3 text-cream/75">
                 {zone.travelNote}
-                {zone.extended.length > 0 && <> Sur demande : {zone.extended.map((z) => z.name).join(", ")}.</>}
+                {zone.extended.length > 0 && (
+                  <span className="mt-3 block text-[0.95rem] text-cream/60">Secteurs sur demande : {zone.extended.map((z) => z.name).join(", ")}.</span>
+                )}
               </p>
             ) : (
               <p className="body mt-3 text-cream/75">
@@ -88,8 +106,26 @@ export function Zone({ zone }: { zone: ZoneContent }) {
         </div>
 
         <div className="relative md:col-span-8" data-reveal="fade">
-          <div ref={mapBox} className="map-dark relative aspect-[4/5] overflow-hidden rounded-[12px] border border-line sm:aspect-[4/3]">
-            {near ? <ZoneMap zone={zone} /> : <div className="h-full w-full bg-forest-2" />}
+          <div ref={mapBox} className="map-dark relative aspect-[4/5] overflow-hidden rounded-[12px] border border-line bg-forest sm:aspect-[4/3]">
+            {near ? <ZoneMap zone={zone} onReady={onReady} /> : <div className="h-full w-full bg-forest" />}
+            {configured && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => api.current?.recenter()}
+                  className="label absolute left-4 top-4 z-[500] rounded-[22.5px] border border-line-strong bg-ink/80 px-4 py-2.5 backdrop-blur-sm transition-colors hover:border-cream"
+                >
+                  Recentrer sur la Somme
+                </button>
+                <ul className="micro pointer-events-none absolute bottom-4 left-4 z-[500] grid gap-2 rounded-[12px] border border-line bg-ink/80 p-4 text-cream/75 backdrop-blur-sm" aria-label="Légende">
+                  <li className="flex items-center gap-2.5"><span className="h-2.5 w-2.5 rounded-full bg-cognac" />Ma base</li>
+                  <li className="flex items-center gap-2.5"><span className="h-2.5 w-4 rounded-full border border-dashed border-cognac" />Zone principale</li>
+                  <li className="flex items-center gap-2.5"><span className="h-2 w-2 rounded-full bg-cream" />Villes desservies</li>
+                  <li className="flex items-center gap-2.5"><span className="h-2.5 w-4 rounded-full border border-dotted border-sand" />Sur demande</li>
+                </ul>
+                <p className="micro pointer-events-none absolute right-4 top-[92px] z-[500] hidden text-cream/45 md:block">Cliquez pour zoomer à la molette</p>
+              </>
+            )}
             {!configured && (
               <div className="pointer-events-none absolute inset-0 z-[500] flex items-end p-5 md:p-8">
                 <div className="pointer-events-auto max-w-sm rounded-[12px] border border-line bg-ink/85 p-5 backdrop-blur-sm">

@@ -383,7 +383,8 @@ export default config({
         intro: fields.text({ label: "Introduction", multiline: true }),
         main: fields.object(
           {
-            label: fields.text({ label: "Nom de la zone principale (ex. Pays de la Loire)" }),
+            label: fields.text({ label: "Nom de la zone principale (ex. Somme (80))" }),
+            baseLabel: fields.text({ label: "Lieu de base affiché sur la carte (ex. Cardonnette (80260))" }),
             lat: fields.number({ label: "Latitude du centre (ex. 47.47)", step: 0.0001 }),
             lng: fields.number({ label: "Longitude du centre (ex. -0.55)", step: 0.0001 }),
             radiusKm: fields.integer({ label: "Rayon (km)" }),
@@ -413,7 +414,7 @@ export default config({
             defaultLat: fields.number({ label: "Latitude par défaut", step: 0.0001 }),
             defaultLng: fields.number({ label: "Longitude par défaut", step: 0.0001 }),
             defaultZoom: fields.integer({ label: "Zoom par défaut" }),
-            tileUrl: fields.text({ label: "Fond de carte (URL des tuiles)" }),
+            tileUrl: fields.text({ label: "Fond de carte en tuiles (facultatif — vide : carte vectorielle intégrée)" }),
             attribution: fields.text({ label: "Attribution du fond de carte" }),
           },
           { label: "Carte" },
