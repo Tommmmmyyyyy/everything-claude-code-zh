@@ -38,7 +38,7 @@ export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string
   }, []);
 
   return (
-    <section id="zone" aria-labelledby="zone-title" className="relative section-y bg-ink">
+    <section id="zone" aria-labelledby="zone-title" className="theme-light tone-white relative section-y bg-ink">
       <SectionHeader index={index} label="Zone d'intervention" title={zone.title} intro={zone.intro} titleId="zone-title" />
 
       <div className="container-x mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-6">

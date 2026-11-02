@@ -30,7 +30,7 @@ export default function Home() {
       />
       <Approach index="02" />
 
-      <section id="soins" aria-labelledby="soins-title" className="relative section-y overflow-hidden bg-ink">
+      <section id="soins" aria-labelledby="soins-title" className="theme-light tone-white relative section-y overflow-hidden bg-ink">
         <SectionHeader index="03" label="Prestations" title={services.title} intro="Faites défiler les soins : chaque carte ouvre sa fiche détaillée." titleId="soins-title" />
         <div className="mt-14 md:mt-20">
           <ServicesCarousel

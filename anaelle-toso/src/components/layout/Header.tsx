@@ -93,7 +93,7 @@ export function Header() {
       >
         <div
           className={`pointer-events-none absolute inset-0 transition-opacity duration-700 ${scrolled && !open ? "opacity-100" : "opacity-0"}`}
-          style={{ background: "linear-gradient(to bottom, rgba(13,10,7,0.88), rgba(13,10,7,0))" }}
+          style={{ background: "rgba(18,36,26,0.94)", boxShadow: "0 1px 0 rgba(244,234,219,0.08)" }}
           aria-hidden="true"
         />
         <div className="container-x relative flex h-[72px] items-center justify-between gap-6">

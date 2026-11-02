@@ -116,7 +116,7 @@ export function Services({ content }: { content: ServicesContent }) {
   const hovered = hover !== null ? content.items[hover] : null;
 
   return (
-    <section id="prestations" aria-labelledby="prestations-title" className="relative section-y bg-ink">
+    <section id="prestations" aria-labelledby="prestations-title" className="theme-light relative section-y bg-ink">
       <SectionHeader index="05" label="Prestations" title={content.title} intro={content.intro} provisional={content.provisional} titleId="prestations-title" />
 
       <ul ref={listRef} className="container-x mt-16 md:mt-24" onPointerLeave={() => setHover(null)}>

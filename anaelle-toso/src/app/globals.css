@@ -13,8 +13,8 @@
   --color-bark: #3a2618; /* Surface du seul bouton plein */
   --color-leather: #7a4b2a; /* Brun cuir */
   --color-cognac: #c07a43; /* Accent — crédits, étiquettes (rare) */
-  --color-forest: #101c14; /* Vert forêt profond */
-  --color-forest-2: #172a1e;
+  --color-forest: #12241a; /* Vert forêt profond */
+  --color-forest-2: #193222;
   --color-moss: #2a4232;
   --color-sage: #9cae8e; /* Vert sauge */
   --color-sage-2: #c5cfb8;
@@ -47,7 +47,7 @@
   :root {
     color-scheme: dark;
     --gutter: clamp(16px, 2.2vw, 32px);
-    --section-y: clamp(96px, 14vw, 200px);
+    --section-y: clamp(104px, 15vw, 216px);
     --header-h: 72px;
   }
 
@@ -765,4 +765,60 @@ html.nav-in [data-curtain] {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Sections claires : ivoire et vert profond.
+   Les jetons sont redéfinis localement : les composants existants
+   (textes « crème », fonds « encre », filets, boutons) s'inversent
+   sans être réécrits. Accent : cuivre, plus vif que le sable.
+   ────────────────────────────────────────────────────────────── */
+.theme-light {
+  --color-ink: #f7f2e9;
+  --color-ink-2: #fffdf8;
+  --color-umber: #ede5d6;
+  --color-bark: #12241a;
+  --color-cream: #13241a;
+  --color-sand: #b0612e;
+  --color-cognac: #a8582a;
+  --color-sage: #4e6a47;
+  --color-sage-2: #6c8460;
+  --color-forest: #e6ebdf;
+  --color-forest-2: #dbe2d2;
+  --color-moss: #c8d3be;
+  --color-line: rgb(19 36 26 / 0.13);
+  --color-line-strong: rgb(19 36 26 / 0.28);
+  color-scheme: light;
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+.theme-light.tone-white {
+  --color-ink: #fffdf8;
+  --color-ink-2: #f7f2e9;
+}
+/* textes courants un peu plus contrastés sur fond clair */
+.theme-light .body,
+.theme-light .body-lg {
+  color: rgb(19 36 26 / 0.82);
+}
+.theme-light ::selection {
+  background: #b0612e;
+  color: #fffdf8;
+}
+/* bouton plein sur fond clair : vert profond, texte ivoire, survol cuivre */
+.theme-light .btn-filled {
+  background: #12241a;
+  color: #fffdf8;
+}
+.theme-light .btn-filled::before {
+  background: #b0612e;
+}
+.theme-light .btn-filled:hover {
+  color: #fffdf8;
+}
+.theme-light .btn-cream::before {
+  background: #b0612e;
+}
+.theme-light .btn-cream:hover {
+  color: #fffdf8;
 }

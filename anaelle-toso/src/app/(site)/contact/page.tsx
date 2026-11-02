@@ -44,7 +44,7 @@ export default function Contact() {
         </ButtonLink>
       </PageHero>
 
-      <section aria-label="Coordonnées" className="relative bg-ink py-20 md:py-28">
+      <section aria-label="Coordonnées" className="theme-light relative bg-ink py-20 md:py-28">
         <ul className="container-x grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal="stagger">
           {cards.map((k) => (
             <li key={k.label}>
@@ -71,7 +71,7 @@ export default function Contact() {
         </ul>
       </section>
 
-      <section id="ecrire" aria-labelledby="ecrire-title" className="relative scroll-mt-20 bg-ink pb-24 md:pb-36">
+      <section id="ecrire" aria-labelledby="ecrire-title" className="theme-light relative scroll-mt-20 bg-ink pb-24 md:pb-36">
         <div className="container-x grid gap-12 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-4">
             <div className="flex items-center gap-4">
@@ -91,7 +91,7 @@ export default function Contact() {
               </ButtonLink>
             </div>
           </div>
-          <div className="rounded-[12px] border border-line bg-ink-2/60 p-6 md:col-span-7 md:col-start-6 md:p-10">
+          <div className="rounded-[12px] border border-line bg-ink-2 p-6 shadow-[0_24px_60px_-40px_rgba(19,36,26,0.35)] md:col-span-7 md:col-start-6 md:p-10">
             <ContactForm />
           </div>
         </div>

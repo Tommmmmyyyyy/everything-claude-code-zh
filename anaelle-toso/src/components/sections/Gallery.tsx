@@ -163,7 +163,7 @@ export function Gallery({ content, index = "09", header = true }: { content: Gal
   );
 
   return (
-    <section ref={root} id="galerie" aria-labelledby="galerie-title" className="relative section-y bg-ink">
+    <section ref={root} id="galerie" aria-labelledby="galerie-title" className="theme-light relative section-y bg-ink">
       {header ? (
         <SectionHeader index={index} label="Galerie" title={content.title} intro={content.intro} titleId="galerie-title" />
       ) : (

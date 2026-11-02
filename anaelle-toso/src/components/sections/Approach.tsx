@@ -23,7 +23,7 @@ const PILLARS = [
 
 export function Approach({ index = "02" }: { index?: string }) {
   return (
-    <section id="approche" aria-labelledby="approche-title" className="relative section-y bg-ink">
+    <section id="approche" aria-labelledby="approche-title" className="theme-light relative section-y bg-ink">
       <div className="container-x">
         <div className="flex items-center gap-4">
           <span className="label text-cream/50">({index})</span>

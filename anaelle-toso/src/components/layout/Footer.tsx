@@ -7,7 +7,7 @@ export function Footer() {
   const socials = socialLinks().filter((s) => s.url);
   const c = site.contact;
   return (
-    <footer className="relative border-t border-line bg-ink">
+    <footer className="relative border-t border-line bg-forest">
       <div className="container-x grid gap-12 py-16 md:grid-cols-12 md:gap-6 md:py-20">
         <div className="md:col-span-4">
           <p className="font-serif text-[2.6rem] leading-none">

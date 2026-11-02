@@ -38,7 +38,7 @@ export function Social({ site, content, posts, index = "12" }: { site: SiteConte
   const handle = site.social.instagramHandle;
 
   return (
-    <section id="reseaux" aria-labelledby="reseaux-title" className="relative section-y bg-ink">
+    <section id="reseaux" aria-labelledby="reseaux-title" className="relative section-y bg-forest">
       <SectionHeader index={index} label="Réseaux" title={content.title} intro={content.intro} titleId="reseaux-title" />
 
       <div className="container-x mt-12 flex flex-wrap gap-3 md:mt-16">

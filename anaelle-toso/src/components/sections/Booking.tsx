@@ -26,7 +26,7 @@ export function Booking({ site, index = "11", header = true }: { site: SiteConte
   })();
 
   return (
-    <section id="rendez-vous" aria-labelledby="rdv-title" className="relative section-y bg-forest">
+    <section id="rendez-vous" aria-labelledby="rdv-title" className="theme-light relative section-y bg-ink">
       {header ? (
       <SectionHeader
         index={index}

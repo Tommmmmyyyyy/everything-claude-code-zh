@@ -6,7 +6,7 @@ import { SHOW_PLACEHOLDERS } from "@/lib/config";
 /** « Derrière chaque intervention, une passion. » — récit éditorial en chapitres. */
 export function Story({ content, index = "06", header = true }: { content: StoryContent; index?: string; header?: boolean }) {
   return (
-    <section id="histoire" aria-labelledby="histoire-title" className="relative section-y overflow-clip bg-forest">
+    <section id="histoire" aria-labelledby="histoire-title" className="theme-light relative section-y overflow-clip bg-ink">
       {header ? (
         <SectionHeader index={index} label="Mon histoire" title={content.title} provisional={content.provisional} titleId="histoire-title" align="left" />
       ) : (

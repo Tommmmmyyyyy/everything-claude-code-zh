@@ -7,7 +7,7 @@ import { siteAsset, SHOW_PLACEHOLDERS } from "@/lib/config";
 /** Fiches détaillées des soins (page Prestations), une composition par soin. */
 export function ServiceSheets({ content }: { content: ServicesContent }) {
   return (
-    <section aria-label="Fiches des prestations" className="relative bg-ink">
+    <section aria-label="Fiches des prestations" className="theme-light relative bg-ink">
       {content.items.map((s, i) => {
         const flip = i % 2 === 1;
         return (

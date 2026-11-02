@@ -69,7 +69,7 @@ export function Process({ content, index = "07" }: { content: ProcessContent; in
   );
 
   return (
-    <section ref={root} id="deroulement" aria-labelledby="deroulement-title" className="relative bg-ink">
+    <section ref={root} id="deroulement" aria-labelledby="deroulement-title" className="relative bg-forest">
       <div data-pin className="relative md:flex md:h-[100svh] md:flex-col md:justify-center md:overflow-hidden">
         <div className="section-y md:py-0">
           <SectionHeader index={index} label="Déroulement" title={content.title} intro={content.intro} provisional={content.provisional} titleId="deroulement-title" />

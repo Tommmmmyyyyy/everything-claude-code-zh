@@ -22,7 +22,7 @@ export function Stars({ value, className = "h-4 w-4" }: { value: number; classNa
 /** Témoignages réels uniquement (validés avant publication). Sans témoignage : invitation à en laisser un. */
 export function Testimonials({ content, index = "07", id = "temoignages" }: { content: TestimonialsContent; index?: string; id?: string }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="relative section-y overflow-hidden bg-forest">
+    <section id={id} aria-labelledby={`${id}-title`} className="theme-light relative section-y overflow-hidden bg-ink">
       <SectionHeader index={index} label="Témoignages" title={content.title} titleId={`${id}-title`} align="left" />
 
       {content.items.length > 0 ? (

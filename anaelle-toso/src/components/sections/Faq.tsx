@@ -13,7 +13,7 @@ export function Faq({ content }: { content: FaqContent }) {
     .filter((g) => g.items.length);
 
   return (
-    <section id="faq" aria-label="Questions fréquentes" className="relative section-y bg-ink">
+    <section id="faq" aria-label="Questions fréquentes" className="theme-light relative section-y bg-ink">
       <div className="container-x grid gap-10 md:grid-cols-12 md:gap-6">
         <nav aria-label="Catégories" className="md:col-span-3">
           <div className="md:sticky md:top-[calc(var(--header-h)+40px)]">

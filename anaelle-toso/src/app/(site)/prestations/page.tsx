@@ -40,7 +40,7 @@ export default function Prestations() {
 
       <Anatomy content={anatomy} index="02" />
 
-      <section id="fiches" aria-labelledby="fiches-title" className="relative overflow-hidden bg-ink pt-24 md:pt-36">
+      <section id="fiches" aria-labelledby="fiches-title" className="theme-light relative overflow-hidden bg-ink pt-24 md:pt-36">
         <div className="container-x">
           <div className="flex items-center gap-4">
             <span className="label tabular-nums text-cream/50">(03)</span>
