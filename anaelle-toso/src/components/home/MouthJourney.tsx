@@ -138,7 +138,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
       }
       last = now;
       const d = target - current;
-      current = Math.abs(d) < 0.0004 ? target : current + d * (1 - Math.exp(-dt / 0.11));
+      current = Math.abs(d) < 0.0004 ? target : current + d * (1 - Math.exp(-dt / 0.15));
       scene.setProgress(current);
       scene.render();
       paintOverlay(current);

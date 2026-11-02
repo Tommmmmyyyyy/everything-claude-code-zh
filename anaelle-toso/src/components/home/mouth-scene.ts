@@ -11,7 +11,7 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
-import { buildHead } from "./head";
+import { buildHead, buildSkull } from "./head";
 
 export type AnchorId = "incisives" | "barres" | "loup" | "premolaires" | "molaires" | "pointes-haut" | "pointes-bas" | "tables" | "crochet" | "rampe";
 
@@ -64,21 +64,23 @@ const CAM: [number, THREE.Vector3, THREE.Vector3][] = [
   [0.745, V(-0.7, 2.2, -16.2), V(-3.9, -2.2, -23)], // tables
   [0.775, V(0, -1.6, -2.5), V(-3.6, -1.6, -20)], // recul entre les mâchoires ouvertes
   [0.8, V(-6, -1.4, 9), V(-4.2, -0.8, -18)], // sortie par l'avant, trois-quarts
-  [0.835, V(-24, 0.6, -21.5), V(-4.2, -0.4, -21.5)], // profil : surdents (peau en transparence)
-  [0.9, V(-24.5, 0.9, -21.8), V(-4.2, -0.4, -21.8)],
+  [0.835, V(-47, 3, -23.5), V(-4, 2.4, -23.5)], // profil : crâne et dentition en radiographie, surdents
+  [0.9, V(-48, 3.4, -24), V(-4, 2.6, -24)],
   [1.0, V(-78, 14, 46), V(-6, 3, -27)], // retour à la tête entière, de trois-quarts
 ];
 
-const PIVOT = V(0, 3.2, -36); // articulation temporo-mandibulaire (approx.)
+const PIVOT = V(0, 10.5, -43); // articulation temporo-mandibulaire : haute, juste derrière l'orbite
 
 /* Dimensions (unités ≈ cm) */
 const ROW_START = -14;
 const TOOTH_D = 2.55;
 const TOOTH_GAP = 0.06;
-const UPPER_X = 4.4;
-const LOWER_X = 3.5;
 const TOOTH_W = 2.5;
-const TOOTH_H = 3.2;
+const TOOTH_HU = 5.4; // couronne de réserve (maxillaire)
+const TOOTH_HL = 5.4; // couronne de réserve (mandibule)
+/** Demi-écart des arcades : la supérieure plus large, la mandibule en V (plus étroite à l'avant). */
+const upperX = (i: number) => 4.3 + i * 0.08 + 0.12 * Math.sin((Math.PI * i) / 5);
+const lowerX = (i: number) => 3.15 + i * 0.17;
 const TILT = 0.21; // inclinaison des tables (≈ 12°)
 
 function zOf(i: number) {
@@ -431,7 +433,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     emissiveIntensity: 0.1,
   });
   const cut = new THREE.MeshBasicMaterial({ color: 0xb39472, side: THREE.BackSide });
-  const gum = new THREE.MeshPhysicalMaterial({
+  const gum = new THREE.MeshPhysicalMaterial({ transparent: true,
     color: 0xffffff,
     vertexColors: true,
     roughness: 0.42,
@@ -445,8 +447,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     bumpScale: 0.8,
   });
   const gumCut = new THREE.MeshBasicMaterial({ color: 0x5e2620, side: THREE.BackSide });
-  const palateMat = new THREE.MeshPhysicalMaterial({ color: 0x5c2823, roughness: 0.5, clearcoat: 0.7, clearcoatRoughness: 0.28, sheen: 0.4, sheenColor: 0xe0a090, side: THREE.DoubleSide });
-  const tongueMat = new THREE.MeshPhysicalMaterial({
+  const softTissues: THREE.Material[] = [];
+  const palateMat = new THREE.MeshPhysicalMaterial({ transparent: true, color: 0x5c2823, roughness: 0.5, clearcoat: 0.7, clearcoatRoughness: 0.28, sheen: 0.4, sheenColor: 0xe0a090, side: THREE.DoubleSide });
+  const tongueMat = new THREE.MeshPhysicalMaterial({ transparent: true,
     color: 0xffffff,
     vertexColors: true,
     roughness: 0.74,
@@ -467,6 +470,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   const lineMat = new THREE.LineBasicMaterial({ color: 0xf4eadb, transparent: true, opacity: 0, depthWrite: false, fog: true });
   const materials: THREE.Material[] = [enamel, cut, gum, gumCut, palateMat, tongueMat, glow, hookMat, wolfMat, tableUp, tableLow, lineMat];
   const textures: THREE.Texture[] = [streaks, papillae, gumGrain, backdrop];
+  softTissues.push(gum, palateMat, tongueMat);
   const geometries: THREE.BufferGeometry[] = [];
   const cutMeshes: THREE.Mesh[] = [];
 
@@ -544,7 +548,10 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   };
 
   /* Incisives : 6 en haut, 6 en bas, en arc */
-  const incGeo = keep(toothShade(new RoundedBoxGeometry(1.1, 2.8, 0.9, 4, 0.26), 2.8, false, 0.2, 0.45));
+  const INC_HU = 4.6;
+  const INC_HL = 4.1;
+  const incGeoU = keep(toothShade(new RoundedBoxGeometry(1.1, INC_HU, 0.9, 4, 0.26), INC_HU, false, 0.22, 1.1));
+  const incGeoL = keep(toothShade(new RoundedBoxGeometry(1.05, INC_HL, 0.88, 4, 0.26), INC_HL, false, 0.22, 0.9));
   const R = 3.7;
   const C = -3.3;
   for (const jaw of ["up", "low"] as const) {
@@ -554,12 +561,12 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       g.position.set(Math.sin(a) * R, 0, C + Math.cos(a) * R);
       g.rotation.y = a;
       (jaw === "up" ? upper : lower).add(g);
-      const m = solid(incGeo, enamel, g);
+      const m = solid(jaw === "up" ? incGeoU : incGeoL, enamel, g);
       if (jaw === "up") {
-        m.position.y = 1.35;
+        m.position.y = INC_HU / 2;
         m.rotation.x = -0.12;
       } else {
-        m.position.y = -1.35;
+        m.position.y = -INC_HL / 2;
         m.rotation.x = 0.12;
         m.rotation.z = Math.PI;
       }
@@ -593,9 +600,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       y0: (lowerJaw ? 1.05 : 0.95) + 0.5 * cheek + 0.6 * inc,
     };
   };
-  const upRidge = keep(ridgeGeometry(ridgePath(UPPER_X, UPPER_X - 0.35), 1, ridgeDims(false)));
+  const upRidge = keep(ridgeGeometry(ridgePath(upperX(4.5), upperX(0) - 0.25), 1, ridgeDims(false)));
   solid(upRidge, gum, upper, gumCut, false);
-  const lowRidge = keep(ridgeGeometry(ridgePath(LOWER_X + 0.05, LOWER_X - 0.15), -1, ridgeDims(true)));
+  const lowRidge = keep(ridgeGeometry(ridgePath(lowerX(4.5), lowerX(0) - 0.05), -1, ridgeDims(true)));
   solid(lowRidge, gum, lower, gumCut, false);
   anchor("barres", lower, -3.3, -1.1, -8.5);
 
@@ -626,7 +633,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   }
 
   /* Dents jugales */
-  const cheekGeo = keep(toothShade(new RoundedBoxGeometry(TOOTH_W, TOOTH_H, TOOTH_D, 3, 0.22), TOOTH_H, true, 0.1));
+  const cheekGeoU = keep(toothShade(new RoundedBoxGeometry(TOOTH_W, TOOTH_HU, TOOTH_D, 3, 0.22), TOOTH_HU, true, 0.12));
+  const cheekGeoL = keep(toothShade(new RoundedBoxGeometry(TOOTH_W * 0.9, TOOTH_HL, TOOTH_D * 1.04, 3, 0.22), TOOTH_HL, true, 0.12));
+  const shear = new THREE.Matrix4();
   const tableGeo = keep(new THREE.PlaneGeometry(TOOTH_W - 0.42, TOOTH_D - 0.42));
   const spikeGeo = keep(new THREE.ConeGeometry(0.11, 0.42, 4));
   const hookGeo = keep(new RoundedBoxGeometry(TOOTH_W - 0.3, 1.0, 0.9, 2, 0.2));
@@ -638,18 +647,26 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       const isUp = jaw === "up";
       for (let i = 0; i < 6; i++) {
         const g = new THREE.Group();
-        const x = side * ((isUp ? UPPER_X : LOWER_X) + i * 0.1);
+        const x = side * (isUp ? upperX(i) : lowerX(i));
         g.position.set(x, 0, zOf(i));
         // tables inclinées : bord externe plus bas en haut, bord interne plus haut en bas
         g.rotation.z = -side * TILT;
         (isUp ? upper : lower).add(g);
-        const m = solid(cheekGeo, enamel, g);
+        const m = solid(isUp ? cheekGeoU : cheekGeoL, enamel, g);
+        const H = isUp ? TOOTH_HU : TOOTH_HL;
         // géométrie : occlusion en -y ; retournée pour la mâchoire inférieure
-        m.position.y = isUp ? TOOTH_H / 2 : -TOOTH_H / 2;
+        m.position.y = isUp ? H / 2 : -H / 2;
         if (!isUp) m.rotation.x = Math.PI;
         // légères irrégularités naturelles
         m.scale.set(1 + (vary() - 0.5) * 0.06, 1, 1 + (vary() - 0.5) * 0.04);
         m.rotation.y = (vary() - 0.5) * 0.05;
+        // couronnes de réserve en éventail (comme sur le crâne) : tables à plat, racines inclinées
+        // vers l'avant pour les prémolaires, vers l'arrière pour les molaires
+        const k = (0.14 - 0.056 * i) * (isUp ? 1 : -1);
+        m.updateMatrix();
+        shear.set(1, 0, 0, 0, 0, 1, 0, 0, 0, k, 1, 0, 0, 0, 0, 1);
+        m.matrix.premultiply(shear);
+        m.matrixAutoUpdate = false;
         // table dentaire
         const t = new THREE.Mesh(tableGeo, isUp ? tableUp : tableLow);
         t.rotation.x = isUp ? Math.PI / 2 : -Math.PI / 2;
@@ -690,8 +707,32 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     if (side === -1) anchor("loup", upper, -3.75, 0.55, ROW_START + 0.95);
   }
 
+  /* Canines (« crochets » des mâles), dans les barres près des incisives */
+  const canineGeo = keep(new THREE.ConeGeometry(0.36, 1.7, 14));
+  canineGeo.translate(0, 0.85, 0);
+  {
+    // teinte ivoire (le matériau de l'émail lit les couleurs de sommet)
+    const n = canineGeo.attributes.position.count;
+    const col = new Float32Array(n * 3);
+    const c = new THREE.Color();
+    for (let i = 0; i < n; i++) {
+      c.set(0xf0e6d2).lerp(new THREE.Color(0xc9ab7e), 1 - canineGeo.attributes.position.getY(i) / 1.7);
+      col.set([c.r, c.g, c.b], i * 3);
+    }
+    canineGeo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+  }
+  for (const side of [-1, 1] as const) {
+    for (const isUp of [true, false]) {
+      const c = solid(canineGeo, enamel, isUp ? upper : lower);
+      c.position.set(side * (isUp ? 3.0 : 2.75), isUp ? 1.4 : -1.25, isUp ? -4.4 : -3.5);
+      c.rotation.set(isUp ? Math.PI + 0.25 : -0.2, 0, side * (isUp ? -0.12 : 0.12));
+    }
+  }
+
   /* Tête : chanfrein, naseaux, lèvres, yeux, oreilles, joues */
   const head = buildHead(upper, lower, PIVOT, opts);
+  /* Squelette : crâne et mandibule, visibles en rayons X et en coupe */
+  const skull = buildSkull(upper, lower);
 
   /* Poussière lumineuse dans le faisceau */
   const dustGeo = keep(new THREE.BufferGeometry());
@@ -726,7 +767,9 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   function camAt(p: number) {
     let i = 0;
     while (i < CAM.length - 2 && p > CAM[i + 1][0]) i++;
-    const local = smooth(CAM[i][0], CAM[i + 1][0], p);
+    // mouvement continu : léger ralenti aux points d'intérêt, sans arrêt complet
+    const lin = clamp01((p - CAM[i][0]) / (CAM[i + 1][0] - CAM[i][0]));
+    const local = lin * 0.45 + smooth(CAM[i][0], CAM[i + 1][0], p) * 0.55;
     const u = (i + local) / (CAM.length - 1);
     camPos.getPoint(u, camera.position);
     camTgt.getPoint(u, tgt);
@@ -778,20 +821,20 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     // ouverture de la mâchoire : les lèvres s'écartent, la bouche s'ouvre largement puis se stabilise
     const jaw = track(
       [
-        [0, 0],
-        [0.05, 0],
-        [0.135, 0.16],
-        [0.2, 0.12],
-        [0.3, 0.1],
-        [0.45, 0.1],
-        [0.52, 0.085],
-        [0.64, 0.085],
-        [0.71, 0.25],
-        [0.78, 0.25],
-        [0.835, 0.06],
-        [0.9, 0.06],
-        [0.97, 0.008],
-        [1, 0.008],
+        [0, 0.0],
+        [0.05, 0.0],
+        [0.135, 0.131],
+        [0.2, 0.098],
+        [0.3, 0.082],
+        [0.45, 0.082],
+        [0.52, 0.07],
+        [0.64, 0.07],
+        [0.71, 0.205],
+        [0.78, 0.205],
+        [0.835, 0.049],
+        [0.9, 0.049],
+        [0.97, 0.007],
+        [1, 0.007],
       ],
       p,
     );
@@ -804,6 +847,20 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         win(0.785, 0.82, 0.9, 0.95, p),
       ),
     );
+    // os : radiographie au début et sur le profil des surdents, opaques dans la coupe
+    const xrayBone = Math.max(1 - smooth(0.05, 0.11, p), win(0.79, 0.825, 0.9, 0.95, p));
+    const cutBone = win(0.47, 0.53, 0.66, 0.72, p);
+    skull.setOpacity(Math.max(0.36 * xrayBone, 0.96 * cutBone));
+    skull.setGlow(0.3 * xrayBone);
+    // émail lumineux en radiographie
+    enamel.emissive.setHex(0x4a3f30);
+    enamel.emissiveIntensity = 0.12 + 2.6 * xrayBone;
+    // en rayons X, les tissus mous s'effacent : restent les os et les dents
+    const soft = 1 - 0.78 * xrayBone;
+    for (const m of softTissues) {
+      m.opacity = soft;
+      m.depthWrite = soft > 0.98;
+    }
     // brouillard : lointain pour les plans extérieurs, plus dense dans la bouche
     const ext = Math.max(1 - smooth(0.1, 0.2, p), smooth(0.9, 0.98, p));
     (scene.fog as THREE.Fog).near = 18 + 62 * ext;
@@ -888,6 +945,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       lowerTex.dispose();
       textures.forEach((t) => t.dispose());
       head.dispose();
+      skull.dispose();
       envRT.dispose();
       composer?.dispose();
       renderer.dispose();
