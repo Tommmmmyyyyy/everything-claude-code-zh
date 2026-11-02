@@ -22,6 +22,7 @@ export default function Home() {
         tagline={id.tagline}
         subtitle={id.subtitle}
         profession={id.profession}
+        diploma={id.diploma}
         video={site.hero.video}
         image={site.hero.image}
         imageMobile={site.hero.imageMobile}
@@ -43,7 +44,7 @@ export default function Home() {
         </div>
       </section>
 
-      <AboutTeaser story={story} index="04" />
+      <AboutTeaser story={story} index="04" diploma={site.identity.diploma} />
       <TruckJourney index="05" livery={site.truck.livery} liverySub={site.truck.liverySub} truckImage={site.truck.image} truckImageAlt={site.truck.imageAlt} />
       <MouthJourney index="06" />
       <Testimonials content={testimonials} index="07" />

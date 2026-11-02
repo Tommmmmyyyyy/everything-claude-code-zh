@@ -135,10 +135,10 @@ export function Header() {
             <Link href="/rendez-vous" className="btn btn-cream !min-h-[42px] !px-5 !py-2.5 max-sm:!px-4" data-magnetic="0.2">
               <span className="btn-label">
                 <span>
-                  <span className="max-sm:hidden">Prendre </span>rendez-vous
+                  <span className="max-sm:hidden">Demander un </span>rendez-vous
                 </span>
                 <span aria-hidden="true">
-                  <span className="max-sm:hidden">Prendre </span>rendez-vous
+                  <span className="max-sm:hidden">Demander un </span>rendez-vous
                 </span>
               </span>
             </Link>
@@ -216,8 +216,8 @@ export function Header() {
               <div data-menu-item>
                 <Link href="/rendez-vous" onClick={() => setOpen(false)} className="btn btn-cream">
                   <span className="btn-label">
-                    <span>Prendre rendez-vous</span>
-                    <span aria-hidden="true">Prendre rendez-vous</span>
+                    <span>Demander un rendez-vous</span>
+                    <span aria-hidden="true">Demander un rendez-vous</span>
                   </span>
                 </Link>
               </div>

@@ -1,7 +1,7 @@
 {
   "provisional": false,
-  "title": "Derrière chaque intervention, une passion.",
-  "intro": "Je m'appelle Anaëlle. Les chevaux rythment ma vie depuis toujours : je les monte, je les soigne, je les observe. Aujourd'hui, je mets cette passion au service de leur confort, une bouche après l'autre.",
+  "title": "Derrière chaque intervention, un savoir-faire.",
+  "intro": "Je m'appelle Anaëlle Toso. Technicienne dentaire équine diplômée de l'École de Mancy, j'interviens à l'écurie comme au pré pour préserver le confort buccal de vos chevaux : un examen attentif, des gestes précis et des explications claires.",
   "portrait": {
     "image": "/images/histoire/portrait-poney.jpg",
     "alt": "Portrait d'Anaëlle Toso avec un poney bai",
@@ -10,63 +10,53 @@
   },
   "chapters": [
     {
-      "id": "passion",
-      "label": "La passion",
-      "title": "Les chevaux, depuis toujours",
-      "text": "J'ai grandi entre les écuries et les terrains de concours. Monter, préparer, panser, passer des heures au pré : très tôt, les chevaux sont devenus bien plus qu'un loisir. C'est auprès d'eux que j'ai appris la patience, l'observation et le respect du rythme de chacun.",
-      "image": "/images/histoire/cso-la-falize-2024.jpg",
-      "hint": "Photo personnelle : vous et un cheval qui a marqué votre histoire",
-      "motif": "horse",
-      "caption": "CSO La Falize, 6 octobre 2024"
-    },
-    {
-      "id": "decouverte",
-      "label": "La découverte du métier",
-      "title": "Le jour où tout a commencé",
-      "text": "Un cheval qui se défendait au mors, du foin qui tombait de sa bouche… et une visite dentaire qui a tout changé. Ce jour-là, j'ai compris qu'une bouche inconfortable pouvait expliquer bien des comportements. La dentisterie équine s'est imposée comme une évidence.",
-      "image": "",
-      "hint": "Photo d'archive ou de vos débuts",
-      "motif": "tools",
-      "caption": ""
-    },
-    {
-      "id": "parcours",
-      "label": "Le parcours",
-      "title": "Un chemin construit pas à pas",
-      "text": "D'écurie en écurie, de rencontre en rencontre, j'ai appris auprès de professionnels exigeants. Chaque cheval m'a enseigné quelque chose : un tempérament, une morphologie, une façon de réagir. Aujourd'hui, j'interviens au box comme au pré, en plaine comme en montagne.",
-      "image": "/images/histoire/intervention-montagne.jpg",
-      "hint": "Photo en écurie ou en déplacement",
-      "motif": "stable",
-      "caption": "Examen au pas-d'âne, à l'écurie"
+      "id": "metier",
+      "label": "Le métier",
+      "title": "Un métier de précision",
+      "text": "La dentisterie équine consiste à examiner la bouche du cheval et à entretenir sa dentition : tables dentaires, pointes d'émail, surdents. Des gestes précis, réalisés dans le cadre des actes autorisés aux techniciens dentaires équins, au service du confort et de la mastication.",
+      "image": "/images/galerie/au-travail.jpg",
+      "hint": "Photo d'une intervention",
+      "motif": "intervention",
+      "caption": "Examen au pas-d'âne"
     },
     {
       "id": "formation",
       "label": "La formation",
-      "title": "Apprendre, et continuer d'apprendre",
-      "text": "La dentisterie équine demande de la rigueur et des gestes précis. Formée à la technique dentaire équine, je continue d'apprendre pour suivre l'évolution des pratiques et du matériel, toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
-      "image": "",
-      "hint": "Photo de formation ou de vos gestes (à venir)",
+      "title": "Diplômée de l'École de Mancy",
+      "text": "Je suis diplômée de l'École de Mancy, en tant que technicien dentaire équin : une formation consacrée à l'anatomie de la bouche du cheval et aux gestes d'entretien de sa dentition.",
+      "image": "/images/histoire/crane-etude.jpg",
+      "hint": "Photo d'une pièce d'étude",
       "motif": "tools",
-      "caption": ""
+      "caption": "Pièce d'étude : crâne de cheval"
     },
     {
-      "id": "vision",
-      "label": "La vision",
-      "title": "Le bien-être comme boussole",
-      "text": "Pour moi, un soin réussi est un soin que le cheval a bien vécu. Je prends le temps de l'approcher, de le rassurer, de travailler à son rythme. Une bouche saine, c'est un cheval plus confortable, plus disponible et plus serein, au travail comme au pré.",
-      "image": "",
-      "hint": "Photo d'un cheval détendu, en pâture",
-      "motif": "pasture",
-      "caption": ""
+      "id": "approche",
+      "label": "L'approche",
+      "title": "Le confort du cheval comme boussole",
+      "text": "Un soin réussi est un soin que le cheval a bien vécu. Je prends le temps de l'approcher, de le rassurer et de travailler à son rythme, dans un environnement calme. Une bouche entretenue, c'est un cheval plus à l'aise pour s'alimenter et plus disponible au travail.",
+      "image": "/images/histoire/intervention-montagne.jpg",
+      "hint": "Photo en écurie",
+      "motif": "stable",
+      "caption": "À l'écurie, le cheval au licol"
     },
     {
       "id": "proprietaires",
-      "label": "L'approche avec les propriétaires",
+      "label": "L'accompagnement",
       "title": "Expliquer, rassurer, accompagner",
-      "text": "Après chaque intervention, je vous montre ce que j'ai observé et je vous explique ce que j'ai fait. Vous repartez avec des repères simples pour suivre la bouche de votre cheval, et la date de son prochain contrôle. Si une situation dépasse mon champ d'action, je vous oriente vers votre vétérinaire.",
+      "text": "Après chaque intervention, je vous montre ce que j'ai observé et je vous explique ce que j'ai réalisé. Vous repartez avec des repères simples pour suivre la bouche de votre cheval, et la date de son prochain contrôle.",
       "image": "",
       "hint": "Photo d'un échange avec un propriétaire",
       "motif": "intervention",
+      "caption": ""
+    },
+    {
+      "id": "route",
+      "label": "Sur la route",
+      "title": "Au box comme au pré",
+      "text": "Basée à Cardonnette, je me déplace avec mon camion équipé dans toute la Somme : écuries, pensions, élevages, propriétaires particuliers, et directement au pré.",
+      "image": "",
+      "hint": "Photo du camion",
+      "motif": "truck",
       "caption": ""
     }
   ],

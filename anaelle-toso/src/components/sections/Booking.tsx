@@ -77,9 +77,35 @@ export function Booking({ site, index = "11", header = true }: { site: SiteConte
         </div>
       )}
 
-      <div className={`container-x ${header || calendarSrc ? "mt-14 md:mt-20" : ""}`}>
+      <div className={`container-x ${header || calendarSrc ? "mt-14 md:mt-16" : ""}`}>
+        <RequestSteps />
+      </div>
+
+      <div className="container-x mt-10 md:mt-14">
         <BookingForm contactFallback={<ContactLines className="" />} />
       </div>
     </section>
+  );
+}
+
+/** Rappel du fonctionnement : une demande de contact, puis un rappel d'Anaëlle. */
+function RequestSteps() {
+  const steps = [
+    { n: "01", title: "Vous envoyez votre demande", text: "Quelques informations sur vous, votre cheval et votre écurie." },
+    { n: "02", title: "Anaëlle vous recontacte", text: "Par téléphone ou par e-mail, selon votre préférence." },
+    { n: "03", title: "Le rendez-vous est confirmé", text: "La date est fixée ensemble : rien n'est réservé automatiquement." },
+  ];
+  return (
+    <ol aria-label="Comment se passe une demande de rendez-vous" className="grid gap-4 rounded-[12px] border border-line p-5 sm:grid-cols-3 sm:gap-6 md:p-7" data-reveal="up">
+      {steps.map((s) => (
+        <li key={s.n} className="flex gap-4">
+          <span className="label grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line-strong tabular-nums text-sand">{s.n}</span>
+          <span>
+            <span className="block font-serif text-[1.25rem] leading-tight">{s.title}</span>
+            <span className="mt-1 block text-[0.9rem] leading-relaxed text-cream/65">{s.text}</span>
+          </span>
+        </li>
+      ))}
+    </ol>
   );
 }

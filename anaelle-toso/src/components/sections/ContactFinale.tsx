@@ -52,7 +52,7 @@ export function ContactFinale({ site, zone, index = "15" }: { site: SiteContent;
           </h2>
           <div className="mt-12 flex flex-wrap gap-3" data-reveal="up" data-delay="0.2">
             <ButtonLink href="/rendez-vous" variant="cream">
-              Prendre rendez-vous
+              Demander un rendez-vous
             </ButtonLink>
             <ButtonLink href="/contact" variant="ghost" icon={false}>
               Contacter Anaëlle

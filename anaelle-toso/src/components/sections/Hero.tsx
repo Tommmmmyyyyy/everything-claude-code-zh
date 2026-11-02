@@ -12,13 +12,14 @@ interface Props {
   tagline: string;
   subtitle: string;
   profession: string;
+  diploma?: string | null;
   video: string | null;
   image: string | null;
   imageMobile?: string | null;
   imageAlt: string;
 }
 
-export function Hero({ firstName, lastName, tagline, subtitle, profession, video, image, imageMobile, imageAlt }: Props) {
+export function Hero({ firstName, lastName, tagline, subtitle, profession, diploma, video, image, imageMobile, imageAlt }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -168,7 +169,7 @@ export function Hero({ firstName, lastName, tagline, subtitle, profession, video
               Découvrir mon approche
             </ButtonLink>
             <ButtonLink href="/rendez-vous" variant="filled">
-              Prendre rendez-vous
+              Demander un rendez-vous
             </ButtonLink>
           </div>
         </div>
@@ -183,8 +184,15 @@ export function Hero({ firstName, lastName, tagline, subtitle, profession, video
                 Suivre le camion
               </span>
             </a>
-            <p data-hero-fade className="micro hidden max-w-[220px] text-right text-cream/55 sm:block lg:mr-10">
-              Soins dentaires équins, à l&apos;écurie comme au pré
+            <p data-hero-fade className="micro hidden max-w-[240px] text-right text-cream/60 sm:block lg:mr-10">
+              {diploma ? (
+                <>
+                  <span className="block text-cream/85">{diploma.split(" — ")[0]}</span>
+                  <span className="mt-1 block">{diploma.split(" — ")[1] ?? "Soins dentaires équins, à l'écurie comme au pré"}</span>
+                </>
+              ) : (
+                <>Soins dentaires équins, à l&apos;écurie comme au pré</>
+              )}
             </p>
           </div>
           <div data-hero-namewrap aria-hidden="true">

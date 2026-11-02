@@ -7,7 +7,7 @@ import { Process } from "@/components/sections/Process";
 import { Zone } from "@/components/sections/Zone";
 
 export const metadata: Metadata = {
-  title: "Prendre rendez-vous",
+  title: "Demander un rendez-vous",
   description: `Demande de rendez-vous avec ${site.identity.fullName}, ${site.identity.profession.toLowerCase()} basée à ${site.contact.addressLocality} : à l'écurie comme au pré, dans toute la Somme.`,
   alternates: { canonical: "/rendez-vous" },
 };
@@ -25,7 +25,7 @@ export default function RendezVous() {
         }
         intro={
           <>
-            Votre demande est transmise directement à Anaëlle, qui vous recontacte pour fixer ensemble la date. Un rendez-vous n&apos;est confirmé qu&apos;après sa réponse.
+            Ce formulaire est une demande de contact, pas une réservation automatique&nbsp;: après l&apos;envoi, Anaëlle vous recontacte par téléphone ou par e-mail pour confirmer le rendez-vous avec vous.
           </>
         }
         image="/images/galerie/ecurie-montagne.jpg"

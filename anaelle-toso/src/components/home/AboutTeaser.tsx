@@ -4,7 +4,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { siteAsset } from "@/lib/config";
 
 /** Accueil : présentation d'Anaëlle, lien vers « Mon histoire ». */
-export function AboutTeaser({ story, index = "04" }: { story: StoryContent; index?: string }) {
+export function AboutTeaser({ story, index = "04", diploma }: { story: StoryContent; index?: string; diploma?: string | null }) {
   return (
     <section aria-labelledby="qui-title" className="relative section-y overflow-clip bg-forest">
       <div className="container-x grid gap-12 md:grid-cols-12 md:items-end md:gap-6">
@@ -27,6 +27,15 @@ export function AboutTeaser({ story, index = "04" }: { story: StoryContent; inde
           <h2 id="qui-title" className="heading mt-8" data-reveal="lines">
             Anaëlle, à l&apos;écoute de vos <em className="italic text-sand">chevaux.</em>
           </h2>
+          {diploma && (
+            <p className="mt-6 inline-flex items-center gap-3 rounded-full border border-line-strong px-4 py-2" data-reveal="up">
+              <svg viewBox="0 0 20 20" className="h-4 w-4 text-sand" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
+                <path d="M10 2.5 2.5 6.5 10 10.5l7.5-4L10 2.5Z" />
+                <path d="M5.5 8.2v4.3c0 1.4 2 2.8 4.5 2.8s4.5-1.4 4.5-2.8V8.2M17.5 6.5v5" />
+              </svg>
+              <span className="label text-cream/85">{diploma}</span>
+            </p>
+          )}
           <p className="body-lg mt-6 text-cream/80" data-reveal="up">
             {story.intro}
           </p>

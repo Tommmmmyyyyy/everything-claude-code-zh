@@ -46,7 +46,7 @@ export default function MentionsLegales() {
       <LegalBlock title="Activité réglementée">
         <p>
           L&apos;activité de technicien dentaire équin est encadrée par l&apos;article L.243-3 du Code rural et de la pêche maritime et ses textes d&apos;application. Les informations
-          publiées sur ce site ont une vocation pédagogique et ne remplacent ni un examen, ni l&apos;avis d&apos;un vétérinaire.
+          publiées sur ce site ont une vocation pédagogique et ne remplacent pas l&apos;examen de la bouche de votre cheval.
         </p>
       </LegalBlock>
 

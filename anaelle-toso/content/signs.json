@@ -1,56 +1,49 @@
 {
   "title": "Et si votre cheval essayait de vous dire quelque chose ?",
-  "intro": "Un cheval ne dit pas qu'il a mal aux dents. Il le montre. Voici quelques signes qui peuvent justifier un contrôle dentaire — ou un avis vétérinaire.",
+  "intro": "Un cheval ne dit pas qu'il a mal aux dents. Il le montre. Voici quelques signes qui peuvent justifier un contrôle dentaire.",
   "items": [
     {
       "id": "mastication",
       "title": "Difficultés de mastication",
       "text": "Une mastication lente ou inhabituelle, la tête penchée, des arrêts fréquents pendant le repas.",
-      "icon": "chew",
-      "vet": false
+      "icon": "chew"
     },
     {
       "id": "boulettes",
       "title": "Aliments qui tombent de la bouche",
       "text": "Des boulettes de foin ou des grains qui tombent pendant le repas : le cheval « fait des boulettes ».",
-      "icon": "drop-food",
-      "vet": false
+      "icon": "drop-food"
     },
     {
       "id": "condition",
       "title": "Perte de condition corporelle",
-      "text": "Un amaigrissement progressif, sans changement de ration ni d'activité. De nombreuses causes sont possibles : un avis vétérinaire est recommandé.",
-      "icon": "condition",
-      "vet": true
+      "text": "Un amaigrissement progressif, sans changement de ration ni d'activité : une bouche inconfortable peut gêner la prise alimentaire.",
+      "icon": "condition"
     },
     {
       "id": "mors",
       "title": "Résistance inhabituelle au mors",
       "text": "Encensement, bouche ouverte, tête qui se dérobe, défenses nouvelles au contact du mors.",
-      "icon": "bit",
-      "vet": false
+      "icon": "bit"
     },
     {
       "id": "salivation",
       "title": "Salivation excessive",
       "text": "Une bave abondante, en dehors de l'effort ou de la mise en bouche du mors.",
-      "icon": "saliva",
-      "vet": false
+      "icon": "saliva"
     },
     {
       "id": "haleine",
       "title": "Mauvaise haleine",
-      "text": "Une odeur forte ou inhabituelle de la bouche ou des naseaux peut traduire une infection : contactez votre vétérinaire.",
-      "icon": "breath",
-      "vet": true
+      "text": "Une odeur forte ou inhabituelle de la bouche peut signaler des débris alimentaires coincés ou une zone irritée.",
+      "icon": "breath"
     },
     {
       "id": "fibres",
       "title": "Aliments partiellement mastiqués",
       "text": "Des fibres longues ou des grains entiers visibles dans le crottin.",
-      "icon": "fibers",
-      "vet": false
+      "icon": "fibers"
     }
   ],
-  "disclaimer": "Ces signes ne constituent pas un diagnostic. Ils peuvent avoir d'autres origines que dentaires. En cas de douleur, de gonflement, d'écoulement, de perte d'appétit ou au moindre doute, contactez votre vétérinaire."
+  "disclaimer": "Ces signes ne constituent pas un diagnostic : ils peuvent avoir d'autres origines que dentaires. Ils indiquent simplement qu'un contrôle de la bouche est utile."
 }

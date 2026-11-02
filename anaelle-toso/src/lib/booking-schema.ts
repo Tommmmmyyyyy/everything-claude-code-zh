@@ -19,6 +19,12 @@ export const EQUID_TYPES = [
   { id: "autre", label: "Autre" },
 ] as const;
 
+export const CONTACT_PREFS = [
+  { id: "telephone", label: "Par téléphone" },
+  { id: "email", label: "Par e-mail" },
+  { id: "indifferent", label: "Indifférent" },
+] as const;
+
 export const SLOTS = [
   { id: "matin", label: "Matin" },
   { id: "apres-midi", label: "Après-midi" },
@@ -44,6 +50,7 @@ export const bookingSchema = z
       fullName: required(120, "Indiquez vos nom et prénom.").refine((v) => v.length >= 2, "Indiquez vos nom et prénom."),
       phone: required(24, "Indiquez un numéro de téléphone.").refine((v) => PHONE_RE.test(v), "Ce numéro ne semble pas valide."),
       email: trimmed(160).pipe(z.email({ message: "Cette adresse e-mail ne semble pas valide." })),
+      contactPref: z.enum(ids(CONTACT_PREFS)).default("indifferent"),
     }),
     horse: z.object({
       name: optional(80),

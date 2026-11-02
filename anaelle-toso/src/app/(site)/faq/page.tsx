@@ -34,7 +34,7 @@ export default function FaqPage() {
         }
         text="Écrivez-moi : je vous réponds personnellement."
         primary={{ href: "/contact", label: "Me contacter" }}
-        secondary={{ href: "/rendez-vous", label: "Prendre rendez-vous" }}
+        secondary={{ href: "/rendez-vous", label: "Demander un rendez-vous" }}
       />
     </>
   );

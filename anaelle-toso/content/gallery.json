@@ -1,6 +1,6 @@
 {
   "title": "Instants d'écurie.",
-  "intro": "Les chevaux, les gestes, la route : quelques images du quotidien, au box comme au pré.",
+  "intro": "Les chevaux, les gestes, l'anatomie : quelques images du quotidien, au box comme au pré.",
   "categories": [
     {
       "id": "chevaux",
@@ -13,6 +13,10 @@
     {
       "id": "interventions",
       "label": "Les interventions"
+    },
+    {
+      "id": "anatomie",
+      "label": "Anatomie"
     },
     {
       "id": "ecuries",
@@ -29,12 +33,12 @@
   ],
   "items": [
     {
-      "src": "/images/galerie/concours.jpg",
-      "alt": "Cheval bai au saut d'obstacle en concours",
-      "category": "chevaux",
+      "src": "/images/galerie/au-travail.jpg",
+      "alt": "Anaëlle Toso examine la bouche d'un cheval alezan au pas-d'âne",
+      "category": "interventions",
       "layout": "tall",
-      "caption": "En concours — CSO La Falize",
-      "motif": "horse"
+      "caption": "En intervention, au pas-d'âne",
+      "motif": "intervention"
     },
     {
       "src": "/images/hero/paturage-contre-jour.jpg",
@@ -67,6 +71,30 @@
       "layout": "square",
       "caption": "Une écurie en montagne",
       "motif": "stable"
+    },
+    {
+      "src": "/images/galerie/crane-profil.jpg",
+      "alt": "Crâne de cheval de profil, dents jugales visibles",
+      "category": "anatomie",
+      "layout": "tall",
+      "caption": "Crâne de cheval : les dents jugales",
+      "motif": "tools"
+    },
+    {
+      "src": "/images/galerie/mandibule.jpg",
+      "alt": "Mandibule de cheval vue de dessus, les deux arcades en V",
+      "category": "anatomie",
+      "layout": "tall",
+      "caption": "La mandibule et ses arcades",
+      "motif": "tools"
+    },
+    {
+      "src": "/images/galerie/dent-jugale.jpg",
+      "alt": "Dent jugale de cheval tenue en main devant une mandibule",
+      "category": "anatomie",
+      "layout": "tall",
+      "caption": "Une dent jugale : couronne de réserve et tables",
+      "motif": "tools"
     }
   ]
 }

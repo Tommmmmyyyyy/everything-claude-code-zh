@@ -9,6 +9,7 @@ import {
   REQUEST_TYPES,
   SLOTS,
   STEP_FIELDS,
+  CONTACT_PREFS,
   type BookingInput,
 } from "@/lib/booking-schema";
 import { DEMO, TURNSTILE_SITE_KEY, siteHref } from "@/lib/config";
@@ -26,7 +27,7 @@ type StepId = (typeof STEPS)[number]["id"];
 
 const EMPTY: BookingInput = {
   request: { type: "premier-rdv" },
-  owner: { fullName: "", phone: "", email: "" },
+  owner: { fullName: "", phone: "", email: "", contactPref: "indifferent" },
   horse: { name: "", age: "", type: "cheval", count: 1, notes: "" },
   location: { stable: "", address: "", postalCode: "", city: "" },
   schedule: { preferredDate: "", slot: "indifferent", message: "" },
@@ -260,6 +261,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
           ["Nom", data.owner.fullName],
           ["Téléphone", data.owner.phone],
           ["E-mail", data.owner.email],
+          ["Recontact", labelOf(CONTACT_PREFS, String(data.owner.contactPref ?? "indifferent"))],
         ],
       },
       {
@@ -313,9 +315,9 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
             Merci{data.owner.fullName ? `, ${String(data.owner.fullName).split(" ")[0]}` : ""}.
           </h3>
           <p className="body-lg mt-5 max-w-xl text-cream/80">
-            Votre demande a bien été transmise à Anaëlle. Elle vous recontacte rapidement pour convenir ensemble d&apos;un rendez-vous.
+            Votre demande a bien été transmise à Anaëlle. Elle vous recontacte par téléphone ou par e-mail pour confirmer le rendez-vous avec vous.
           </p>
-          <p className="mt-3 max-w-xl text-cream/55">Votre demande ne vaut pas confirmation : le rendez-vous est fixé après échange avec Anaëlle.</p>
+          <p className="mt-3 max-w-xl text-cream/60">Il ne s&apos;agit pas d&apos;une réservation automatique : aucun créneau n&apos;est bloqué tant qu&apos;Anaëlle ne vous a pas recontacté.</p>
           {status.dev && (
             <p className="mt-6">
               <span className="ph-tag">{DEMO ? "Démonstration — aucune donnée n\u2019a été envoyée" : "Mode développement — demande enregistrée dans .data/demandes.jsonl"}</span>
@@ -426,6 +428,21 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
                     {field("owner.phone", "Téléphone", { type: "tel", autoComplete: "tel", inputMode: "tel" })}
                     {field("owner.email", "Adresse e-mail", { type: "email", autoComplete: "email", inputMode: "email" })}
                   </div>
+                  <fieldset className="field">
+                    <legend className="field-label">Comment préférez-vous être recontacté&#8239;?</legend>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {CONTACT_PREFS.map((c) => {
+                        const on = data.owner.contactPref === c.id;
+                        return (
+                          <label key={c.id} className={`label cursor-pointer rounded-[22.5px] border px-4 py-2.5 transition-colors ${on ? "border-cream bg-cream text-ink" : "border-line-strong hover:border-cream"}`}>
+                            <input type="radio" name="owner.contactPref" value={c.id} checked={on} onChange={() => set("owner.contactPref", c.id)} className="sr-only" />
+                            {c.label}
+                          </label>
+                        );
+                      })}
+                    </div>
+                    <p className="mt-3 text-[0.88rem] text-cream/55">Anaëlle vous recontacte pour convenir ensemble de la date&nbsp;: aucun rendez-vous n&apos;est fixé automatiquement.</p>
+                  </fieldset>
                 </>
               )}
 

@@ -14,6 +14,7 @@ export function Footer() {
             {site.identity.firstName} <em className="italic text-sand">{site.identity.lastName}</em>
           </p>
           <p className="label mt-4 text-cream/55">{site.identity.profession}</p>
+          {site.identity.diploma && <p className="mt-2 text-[0.85rem] text-cream/50">{site.identity.diploma}</p>}
           {socials.length > 0 && (
             <ul className="mt-8 flex gap-3">
               {socials.map((s) => (

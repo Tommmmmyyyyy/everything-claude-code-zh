@@ -91,11 +91,17 @@ await step("tous les liens internes et ancres existent", async () => {
   assert.deepEqual(broken, []);
 });
 
-await step("aucune photo de matériel n'est publiée", async () => {
+await step("aucune photo de matériel ni de concours, aucune mention du vétérinaire", async () => {
   for (const p of PAGES) {
     const html = await (await fetch(BASE + p)).text();
-    assert.ok(!/materiel-[a-z-]+\.jpg/.test(html), p);
+    assert.ok(!/materiel-[a-z-]+\.jpg|concours\.jpg|cso-la-falize/.test(html), p);
+    assert.ok(!/vétérinaire/i.test(html), `mention du vétérinaire sur ${p}`);
   }
+});
+
+await step("le diplôme de l'École de Mancy est indiqué", async () => {
+  const html = await (await fetch(BASE + "/mon-histoire")).text();
+  assert.ok(html.includes("École de Mancy"));
 });
 
 await go("/");
@@ -109,7 +115,7 @@ await step("le hero affiche le nom et l'accroche", async () => {
 await step("le menu principal compte 7 pages et le bouton Prendre rendez-vous", async () => {
   const nav = page.getByRole("navigation", { name: "Navigation principale" });
   assert.equal(await nav.locator("a").count(), 7);
-  assert.equal(await page.locator("header a", { hasText: /prendre rendez-vous/i }).first().getAttribute("href"), "/rendez-vous");
+  assert.equal(await page.locator("header a", { hasText: /demander un rendez-vous/i }).first().getAttribute("href"), "/rendez-vous");
 });
 
 await step("le carrousel des prestations avance (flèche)", async () => {
@@ -186,11 +192,11 @@ await step("les 8 fiches de soins sont présentes", async () => {
   assert.equal(await page.locator("article[id^=fiche-]").count(), 8);
 });
 
-await step("l'auto-observation oriente vers le vétérinaire si besoin", async () => {
+await step("l'auto-observation propose un contrôle", async () => {
   await jump("signes");
   await page.locator("#signes label", { hasText: "Mauvaise haleine" }).click();
   await page.waitForTimeout(300);
-  assert.match(await page.locator("#signes [aria-live]").textContent(), /avis vétérinaire/);
+  assert.match(await page.locator("#signes [aria-live]").textContent(), /contrôle/);
 });
 
 /* ── Galerie ── */
@@ -210,15 +216,15 @@ await step("galerie : carrousel, mosaïque et visionneuse", async () => {
   assert.ok((await page.locator("#galerie [aria-roledescription=carrousel] img").count()) >= 4);
   await page.getByRole("button", { name: "Mosaïque" }).click();
   await page.waitForTimeout(1200);
-  await page.getByRole("button", { name: /^Les chevaux/ }).click();
+  await page.getByRole("button", { name: /^Anatomie/ }).click();
   await page.waitForTimeout(1400);
-  assert.equal(await page.locator("#galerie li[data-cell]:not(.hidden) img").count(), 2);
+  assert.equal(await page.locator("#galerie li[data-cell]:not(.hidden) img").count(), 3);
   await page.locator("#galerie li[data-cell]:not(.hidden) button").first().click();
   await page.waitForTimeout(600);
   assert.equal(await page.getByRole("dialog").count(), 1);
   await page.keyboard.press("ArrowRight");
   await page.waitForTimeout(300);
-  assert.match(await page.getByRole("dialog").textContent(), /02 \/ 02/);
+  assert.match(await page.getByRole("dialog").textContent(), /02 \/ 03/);
   await page.keyboard.press("Escape");
   await page.waitForTimeout(400);
   assert.equal(await page.getByRole("dialog").count(), 0);
@@ -285,6 +291,7 @@ await step("parcours complet de demande de rendez-vous", async () => {
   await page.locator('input[name="consent"]').check();
   await page.getByRole("button", { name: /envoyer la demande/i }).click();
   await page.waitForSelector("text=Votre demande a bien été transmise", { timeout: 8000 });
+  assert.match(await page.locator("#rendez-vous").textContent(), /par téléphone ou par e-mail/);
 });
 
 /* ── Contact & avis ── */

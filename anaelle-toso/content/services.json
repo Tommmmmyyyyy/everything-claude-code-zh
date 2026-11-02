@@ -14,8 +14,8 @@
         "Compte rendu expliqué au propriétaire"
       ],
       "diagram": "exam",
-      "image": "",
-      "imageAlt": "Cheval alezan examiné au pas-d'âne, en extérieur",
+      "image": "/images/galerie/au-travail.jpg",
+      "imageAlt": "Anaëlle examine la bouche d'un cheval alezan maintenue ouverte au pas-d'âne",
       "price": ""
     },
     {
@@ -44,8 +44,8 @@
         "Équilibre entre les arcades"
       ],
       "diagram": "tables",
-      "image": "",
-      "imageAlt": "Tables dentaires d'un cheval",
+      "image": "/images/prestations/tables-dentaires.jpg",
+      "imageAlt": "Tables dentaires d'une mandibule de cheval et dent jugale tenue en main",
       "price": ""
     },
     {
@@ -59,8 +59,8 @@
         "Prévention des ulcérations des joues et de la langue"
       ],
       "diagram": "points",
-      "image": "",
-      "imageAlt": "Correction des pointes d'émail",
+      "image": "/images/prestations/arcades-superieures.jpg",
+      "imageAlt": "Arcades dentaires supérieures d'un crâne de cheval, vue de dessous",
       "price": ""
     },
     {
@@ -71,11 +71,11 @@
       "details": [
         "Réduction des crochets et rampes",
         "Rééquilibrage des tables",
-        "Orientation vers le vétérinaire si nécessaire"
+        "Contrôle de l'équilibre après intervention"
       ],
       "diagram": "level",
-      "image": "",
-      "imageAlt": "Nivellement des tables dentaires",
+      "image": "/images/prestations/arcades-profil.jpg",
+      "imageAlt": "Crâne de cheval de profil : dents jugales supérieures et inférieures",
       "price": ""
     },
     {
@@ -101,7 +101,7 @@
       "details": [
         "Évaluation de la position de la dent",
         "Extraction lorsque c'est justifié",
-        "La sédation éventuelle relève du vétérinaire"
+        "Explications avant et après le geste"
       ],
       "diagram": "wolf",
       "image": "",
@@ -112,11 +112,11 @@
       "id": "conseils",
       "title": "Conseils et accompagnement",
       "kicker": "Comprendre pour mieux prendre soin",
-      "description": "Chaque visite est l'occasion d'expliquer ce qui a été observé, de répondre à vos questions et de vous donner des repères : alimentation, signes à surveiller, fréquence des contrôles — et orientation vers votre vétérinaire lorsque c'est nécessaire.",
+      "description": "Chaque visite est l'occasion d'expliquer ce qui a été observé, de répondre à vos questions et de vous donner des repères : alimentation, signes à surveiller, fréquence des contrôles.",
       "details": [
         "Explications claires après chaque visite",
         "Repères d'alimentation et d'observation",
-        "Lien avec votre vétérinaire"
+        "Date du prochain contrôle"
       ],
       "diagram": "advice",
       "image": "",
@@ -124,6 +124,6 @@
       "price": ""
     }
   ],
-  "regulatoryNote": "Les actes réalisés par un technicien dentaire équin sont encadrés par l'article L.243-3 du Code rural et de la pêche maritime et ses textes d'application. Le diagnostic et le traitement des pathologies, la sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent du vétérinaire.",
+  "regulatoryNote": "Les actes réalisés par un technicien dentaire équin sont encadrés par l'article L.243-3 du Code rural et de la pêche maritime et ses textes d'application. Anaëlle Toso intervient dans ce cadre, en technicienne dentaire équine diplômée de l'École de Mancy.",
   "pricingNote": "Tarifs communiqués sur demande, selon le nombre de chevaux et le déplacement. Regrouper plusieurs chevaux d'une même écurie ou d'un même secteur permet de limiter les frais."
 }

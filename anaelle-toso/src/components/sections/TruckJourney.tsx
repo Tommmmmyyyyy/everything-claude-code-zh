@@ -353,7 +353,7 @@ export function TruckJourney({ livery, liverySub, truckImage, truckImageAlt, ind
           <div className="container-x flex flex-col items-start gap-6 md:items-end md:text-right">
             <p className="heading max-w-md">Votre cheval est le prochain sur ma route ?</p>
             <ButtonLink href="/rendez-vous" variant="cream">
-              Prendre rendez-vous
+              Demander un rendez-vous
             </ButtonLink>
           </div>
         </div>

@@ -35,6 +35,8 @@ export interface SiteContent {
     tagline: string;
     subtitle: string;
     seoDescription: string;
+    /** Diplôme (texte exact fourni par Anaëlle) */
+    diploma: string | null;
   };
   contact: {
     phone: string | null;
@@ -131,7 +133,6 @@ export interface Sign {
   title: string;
   text: string;
   icon: string;
-  vet: boolean;
 }
 
 export interface SignsContent {
@@ -273,7 +274,7 @@ export const navLinks = [
   { href: "/mon-histoire", label: "Mon histoire", sub: "Mon parcours, ma passion", image: "/images/histoire/portrait-poney.jpg" },
   { href: "/prestations", label: "Mes prestations", sub: "Soins et anatomie", image: "/images/galerie/pas-dane-detail.jpg" },
   { href: "/rendez-vous", label: "Rendez-vous", sub: "Demande et réservation", image: "/images/galerie/ecurie-montagne.jpg" },
-  { href: "/galerie", label: "Galerie", sub: "Chevaux, écuries, interventions", image: "/images/galerie/concours.jpg" },
+  { href: "/galerie", label: "Galerie", sub: "Chevaux, interventions, anatomie", image: "/images/galerie/au-travail.jpg" },
   { href: "/faq", label: "FAQ", sub: "Vos questions, mes réponses", image: "/images/galerie/complicite-poney.jpg" },
   { href: "/contact", label: "Contact", sub: "Me joindre, laisser un avis", image: "/images/contact/cheval-pas-dane.jpg" },
 ] as const;

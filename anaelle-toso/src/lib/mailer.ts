@@ -1,6 +1,6 @@
 import "server-only";
 import type { Booking } from "./booking-schema";
-import { EQUID_TYPES, REQUEST_TYPES, SLOTS, labelOf } from "./booking-schema";
+import { CONTACT_PREFS, EQUID_TYPES, REQUEST_TYPES, SLOTS, labelOf } from "./booking-schema";
 
 /**
  * Transmission de la demande de rendez-vous.
@@ -24,6 +24,7 @@ export function summarize(b: Booking) {
     ["Nom et prénom", b.owner.fullName],
     ["Téléphone", b.owner.phone],
     ["E-mail", b.owner.email],
+    ["Préférence de recontact", labelOf(CONTACT_PREFS, b.owner.contactPref ?? "indifferent")],
     ["Cheval", b.horse.name || "—"],
     ["Âge", b.horse.age || "—"],
     ["Type d'équidé", labelOf(EQUID_TYPES, b.horse.type)],
@@ -63,8 +64,8 @@ export function renderEmail(b: Booking) {
 
 export function renderAck(b: Booking) {
   const subject = "Votre demande de rendez-vous a bien été transmise";
-  const text = `Bonjour ${b.owner.fullName},\n\nVotre demande (${labelOf(REQUEST_TYPES, b.request.type)}) a bien été transmise. Je vous recontacte rapidement pour convenir ensemble d'un rendez-vous. Votre demande ne vaut pas confirmation de rendez-vous.\n\nÀ très vite,\nAnaëlle Toso`;
-  const html = `<p>Bonjour ${esc(b.owner.fullName)},</p><p>Votre demande (<strong>${esc(labelOf(REQUEST_TYPES, b.request.type))}</strong>) a bien été transmise. Je vous recontacte rapidement pour convenir ensemble d'un rendez-vous. Votre demande ne vaut pas confirmation de rendez-vous.</p><p>À très vite,<br>Anaëlle Toso</p>`;
+  const text = `Bonjour ${b.owner.fullName},\n\nVotre demande (${labelOf(REQUEST_TYPES, b.request.type)}) a bien été transmise. Je vous recontacte par téléphone ou par e-mail pour confirmer le rendez-vous avec vous. Il ne s'agit pas d'une réservation automatique.\n\nÀ très vite,\nAnaëlle Toso`;
+  const html = `<p>Bonjour ${esc(b.owner.fullName)},</p><p>Votre demande (<strong>${esc(labelOf(REQUEST_TYPES, b.request.type))}</strong>) a bien été transmise. Je vous recontacte par téléphone ou par e-mail pour confirmer le rendez-vous avec vous. Il ne s'agit pas d'une réservation automatique.</p><p>À très vite,<br>Anaëlle Toso</p>`;
   return { subject, text, html };
 }
 

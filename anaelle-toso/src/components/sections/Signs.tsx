@@ -65,20 +65,10 @@ export function Signs({ content, index = "08" }: { content: SignsContent; index?
 
   const verdict = useMemo(() => {
     if (checked.length === 0) return null;
-    const vet = content.items.filter((i) => checked.includes(i.id) && i.vet);
-    if (vet.length > 0)
-      return {
-        tone: "vet" as const,
-        text: `Vous avez coché ${vet.map((v) => `« ${v.title.toLowerCase()} »`).join(" et ")}. Ce type de signe justifie d'abord un avis vétérinaire. Un contrôle dentaire pourra ensuite être envisagé, en lien avec votre vétérinaire.`,
-      };
-    return {
-      tone: "check" as const,
-      text:
-        checked.length === 1
-          ? "Ce signe peut avoir une origine dentaire — ou non. Un contrôle permet de faire le point, et je vous oriente vers votre vétérinaire si nécessaire."
-          : `${checked.length} signes observés : un contrôle dentaire est une bonne idée. En cas de douleur, d'aggravation ou de doute, contactez votre vétérinaire.`,
-    };
-  }, [checked, content.items]);
+    return checked.length === 1
+      ? "Ce signe peut avoir une origine dentaire. Un contrôle de la bouche permet de faire le point et d'agir tôt."
+      : `${checked.length} signes observés : un contrôle dentaire est conseillé. Plus il a lieu tôt, plus les soins sont simples.`;
+  }, [checked]);
 
   const toggle = (id: string) => setChecked((c) => (c.includes(id) ? c.filter((x) => x !== id) : [...c, id]));
 
@@ -139,10 +129,10 @@ export function Signs({ content, index = "08" }: { content: SignsContent; index?
               <p className="label text-cream/50">Votre observation</p>
               {verdict ? (
                 <>
-                  <p className={`mt-3 text-[1.05rem] leading-relaxed ${verdict.tone === "vet" ? "text-[#f0b48f]" : "text-cream/90"}`}>{verdict.text}</p>
+                  <p className="mt-3 text-[1.05rem] leading-relaxed text-cream/90">{verdict}</p>
                   <div className="mt-5">
                     <ButtonLink href="/rendez-vous" variant="ghost">
-                      {verdict.tone === "vet" ? "Me contacter ensuite" : "Demander un contrôle"}
+                      Demander un contrôle
                     </ButtonLink>
                   </div>
                 </>

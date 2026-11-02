@@ -8,6 +8,12 @@
       "category": "dentisterie"
     },
     {
+      "q": "Quelle est votre formation ?",
+      "a": "Je suis diplômée de l'École de Mancy, en tant que technicien dentaire équin.",
+      "provisional": false,
+      "category": "dentisterie"
+    },
+    {
       "q": "À quelle fréquence prévoir un contrôle ?",
       "a": "Pour un cheval adulte, un contrôle annuel est généralement recommandé. Les jeunes chevaux (pendant le remplacement des dents de lait), les chevaux âgés et ceux dont la dentition présente des particularités peuvent nécessiter un suivi plus rapproché, par exemple tous les six mois. La fréquence est ajustée à chaque cheval après le premier examen.",
       "provisional": false,
@@ -15,7 +21,7 @@
     },
     {
       "q": "Comment savoir si mon cheval présente une gêne dentaire ?",
-      "a": "Certains signes peuvent alerter : difficultés de mastication, aliments qui tombent de la bouche, perte d'état, résistance au mors, salivation excessive, mauvaise haleine ou fibres longues dans le crottin. Ces signes ne constituent pas un diagnostic et peuvent avoir d'autres causes. En cas de douleur, d'aggravation ou de doute, consultez votre vétérinaire.",
+      "a": "Certains signes peuvent alerter : difficultés de mastication, aliments qui tombent de la bouche, perte d'état, résistance au mors, salivation excessive, mauvaise haleine ou fibres longues dans le crottin. Ces signes ne constituent pas un diagnostic et peuvent avoir d'autres causes : un contrôle permet de faire le point.",
       "provisional": false,
       "category": "dentisterie"
     },
@@ -26,12 +32,6 @@
       "category": "dentisterie"
     },
     {
-      "q": "Quand faut-il faire appel à un vétérinaire ?",
-      "a": "Le vétérinaire est votre interlocuteur pour tout ce qui relève du diagnostic et du traitement : douleur importante, gonflement de la face ou de la mâchoire, écoulement nasal, odeur fétide, refus de s'alimenter, dent mobile ou fracturée, infection. La sédation, la prescription et les extractions autres que celles des dents de lait et des dents de loup relèvent également du vétérinaire. Le technicien dentaire équin intervient dans le cadre des actes que lui autorise la réglementation et vous oriente vers votre vétérinaire dès que la situation le nécessite.",
-      "provisional": false,
-      "category": "soins"
-    },
-    {
       "q": "Quels soins réalisez-vous ?",
       "a": "Examen de la dentition, entretien des tables dentaires, élimination des pointes d'émail et des aspérités, nivellement des surdents, extraction des dents de lait et des dents de loup, et conseils de suivi — toujours dans le cadre des actes autorisés aux techniciens dentaires équins.",
       "provisional": false,
@@ -39,13 +39,7 @@
     },
     {
       "q": "Les soins sont-ils douloureux pour le cheval ?",
-      "a": "En principe non : les pointes d'émail et les surdents sont des parties usées de la dent, sans sensibilité particulière. Les soins peuvent toutefois impressionner un cheval qui n'en a pas l'habitude ; je prends le temps de le mettre en confiance et de travailler à son rythme. Si une sédation est nécessaire, elle relève exclusivement du vétérinaire.",
-      "provisional": false,
-      "category": "soins"
-    },
-    {
-      "q": "Que se passe-t-il si un problème relève du vétérinaire ?",
-      "a": "Je vous l'explique clairement et vous oriente vers votre vétérinaire. Je peux lui transmettre mes observations pour faciliter sa prise en charge.",
+      "a": "En principe non : les pointes d'émail et les surdents sont des parties usées de la dent, sans sensibilité particulière. Les soins peuvent toutefois impressionner un cheval qui n'en a pas l'habitude ; je prends le temps de le mettre en confiance et de travailler à son rythme.",
       "provisional": false,
       "category": "soins"
     },

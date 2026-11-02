@@ -23,7 +23,7 @@ export default function MonHistoire() {
           </>
         }
         text="Une question sur votre cheval, un premier contrôle à prévoir ? Je vous réponds avec plaisir."
-        primary={{ href: "/rendez-vous", label: "Prendre rendez-vous" }}
+        primary={{ href: "/rendez-vous", label: "Demander un rendez-vous" }}
         secondary={{ href: "/prestations", label: "Découvrir les prestations" }}
       />
     </>

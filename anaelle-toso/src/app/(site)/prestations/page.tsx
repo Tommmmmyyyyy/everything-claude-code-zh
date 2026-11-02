@@ -68,7 +68,7 @@ export default function Prestations() {
           </>
         }
         text="Décrivez votre demande en quelques étapes : je vous recontacte pour convenir ensemble d'une date."
-        primary={{ href: "/rendez-vous", label: "Prendre rendez-vous" }}
+        primary={{ href: "/rendez-vous", label: "Demander un rendez-vous" }}
         secondary={{ href: "/faq", label: "Lire la FAQ" }}
       />
     </>
