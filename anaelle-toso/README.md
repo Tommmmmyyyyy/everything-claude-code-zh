@@ -29,8 +29,9 @@ dans `.data/demandes.jsonl` pour pouvoir tester le parcours.
 
 ## Direction artistique
 
-« Chambre noire équestre » : un noir chaud, des verts de pâture, le cuir et le sable ; la crème
-est la seule lumière. Titres en Instrument Serif, textes et étiquettes en Geist (capitales 500).
+Vert forêt profond et ivoire, accent cuivre : les sections claires (classe `theme-light`, qui
+redéfinit localement les jetons de couleur) alternent avec les sections vert profond et les scènes
+animées sombres (camion, anatomie en mouvement). Titres en Instrument Serif, textes et étiquettes en Geist (capitales 500).
 Filets pointillés, boutons en pilule, rayons limités à 12 / 22,5 / 36 px, aucune ombre portée.
 Les jetons sont dans `src/app/globals.css` (`@theme`).
 

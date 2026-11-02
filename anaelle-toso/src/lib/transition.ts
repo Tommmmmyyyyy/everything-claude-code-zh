@@ -60,6 +60,13 @@ export function uncover() {
         .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.58, ease: "expo.inOut" }, ">-0.1"),
     ),
   );
+  // filet de sécurité : le rideau ne doit jamais rester devant la page
+  window.setTimeout(() => {
+    if (!covered && el.style.visibility !== "hidden") {
+      gsap.killTweensOf(el);
+      gsap.set(el, { visibility: "hidden", clipPath: "inset(0% 0% 100% 0%)" });
+    }
+  }, 1800);
 }
 
 export function isCovered() {

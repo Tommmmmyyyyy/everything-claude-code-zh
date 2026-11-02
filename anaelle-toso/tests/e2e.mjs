@@ -157,7 +157,7 @@ await step("navigation par le menu avec transition", async () => {
   await page.waitForURL("**/mon-histoire", { timeout: 8000 });
   // le rideau doit se relever rapidement après l'arrivée sur la page
   await page.waitForFunction(() => getComputedStyle(document.querySelector("[data-curtain]")).visibility === "hidden", null, { timeout: 9000 });
-  assert.match(await page.locator("h1").textContent(), /passion/);
+  assert.match(await page.locator("h1").textContent(), /savoir-faire/);
 });
 
 await step("menu plein écran (tablette) : 7 vignettes, fermeture Échap", async () => {
