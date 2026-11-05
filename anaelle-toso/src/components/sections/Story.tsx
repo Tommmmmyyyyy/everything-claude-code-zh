@@ -18,7 +18,7 @@ export function Story({ content, index = "06", header = true }: { content: Story
       {/* Ouverture : portrait + introduction */}
       <div className={`container-x grid gap-10 md:grid-cols-12 md:gap-6 ${header ? "mt-16 md:mt-24" : ""}`}>
         <figure className={content.portrait.image ? "md:col-span-6 md:col-start-1" : "md:col-span-5 md:col-start-1"}>
-          <div data-reveal="mask" className={`relative overflow-hidden rounded-[12px] ${content.portrait.image ? "aspect-[3/2]" : "aspect-[4/5]"}`}>
+          <div data-reveal="mask" className={`relative overflow-hidden rounded-[18px] ${content.portrait.image ? "aspect-[3/2]" : "aspect-[4/5]"}`}>
             <PhotoSlot
               src={content.portrait.image}
               alt={content.portrait.alt}
@@ -89,7 +89,7 @@ export function Story({ content, index = "06", header = true }: { content: Story
             return (
               <article key={c.id} id={`chapitre-${c.id}`} className="grid scroll-mt-28 gap-8 md:grid-cols-9 md:gap-6">
                 <div className={`md:col-span-5 ${flip ? "md:order-2 md:col-start-5" : ""}`}>
-                  <div data-reveal="mask" className={`relative overflow-hidden rounded-[12px] ${i % 3 === 0 ? "aspect-[4/5]" : i % 3 === 1 ? "aspect-[5/4]" : "aspect-square"}`}>
+                  <div data-reveal="mask" className={`relative overflow-hidden rounded-[18px] ${i % 3 === 0 ? "aspect-[4/5]" : i % 3 === 1 ? "aspect-[5/4]" : "aspect-square"}`}>
                     <PhotoSlot
                       src={c.image}
                       alt={c.title}

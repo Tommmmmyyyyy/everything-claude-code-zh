@@ -17,7 +17,7 @@ export function HorsesCarousel({ slides, label = "Les chevaux" }: { slides: Hors
     <Carousel label={label} itemClass="w-[84vw] sm:w-[58vw] lg:w-[38vw]">
       {slides.map((s) => (
         <figure key={s.src} className="group">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[12px] bg-umber">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-umber">
             <Image
               src={siteAsset(s.src)}
               alt={s.alt}

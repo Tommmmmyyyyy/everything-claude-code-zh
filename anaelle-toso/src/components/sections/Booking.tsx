@@ -52,7 +52,7 @@ export function Booking({ site, index = "11", header = true }: { site: SiteConte
 
       {calendarSrc && (
         <div className={`container-x ${header ? "mt-14" : ""}`}>
-          <div className="rounded-[12px] border border-line p-6 md:p-8">
+          <div data-spotlight className="rounded-[18px] border border-line p-6 md:p-8">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="label text-sand">Réservation en ligne</p>
@@ -96,7 +96,7 @@ function RequestSteps() {
     { n: "03", title: "Le rendez-vous est confirmé", text: "La date est fixée ensemble : rien n'est réservé automatiquement." },
   ];
   return (
-    <ol aria-label="Comment se passe une demande de rendez-vous" className="grid gap-4 rounded-[12px] border border-line p-5 sm:grid-cols-3 sm:gap-6 md:p-7" data-reveal="up">
+    <ol aria-label="Comment se passe une demande de rendez-vous" className="grid gap-4 rounded-[18px] border border-line p-5 sm:grid-cols-3 sm:gap-6 md:p-7" data-reveal="up">
       {steps.map((s) => (
         <li key={s.n} className="flex gap-4">
           <span className="label grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line-strong tabular-nums text-sand">{s.n}</span>

@@ -27,6 +27,10 @@ export default function Home() {
         image={site.hero.image}
         imageMobile={site.hero.imageMobile}
         imageAlt={site.hero.imageAlt}
+        base={zone.main.baseLabel ?? undefined}
+        area={zone.main.label ?? undefined}
+        lat={zone.main.lat ?? undefined}
+        lng={zone.main.lng ?? undefined}
       />
       <Approach index="02" />
 

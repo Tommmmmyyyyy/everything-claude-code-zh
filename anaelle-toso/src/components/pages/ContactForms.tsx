@@ -122,7 +122,7 @@ export function ContactForm() {
         <textarea id="c-message" rows={5} className="field-input" value={d.message} onChange={(e) => set("message", e.target.value)} {...inv("message")} />
       </Field>
       <label className="flex cursor-pointer items-start gap-4">
-        <input id="c-consent" type="checkbox" checked={d.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[#d9c4a0]" {...inv("consent")} />
+        <input id="c-consent" type="checkbox" checked={d.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[#7ef7c6]" {...inv("consent")} />
         <span className="text-[0.92rem] leading-relaxed text-cream/75">
           J&apos;accepte que ces informations soient transmises à Anaëlle Toso pour répondre à mon message.{" "}
           <a href={siteHref("/confidentialite")} className="underline underline-offset-4 hover:text-cream">
@@ -132,7 +132,7 @@ export function ContactForm() {
       </label>
       {errors.consent && <p id="c-consent-err" className="field-error -mt-5">{errors.consent}</p>}
       {honeypot}
-      {status.kind === "error" && <p role="alert" className="rounded-[12px] border border-[#e08a6a]/40 bg-[#e08a6a]/10 p-4 text-[0.95rem] text-[#f6c2a8]">{status.message}</p>}
+      {status.kind === "error" && <p role="alert" className="rounded-[18px] border border-[#e08a6a]/40 bg-[#e08a6a]/10 p-4 text-[0.95rem] text-[#f6c2a8]">{status.message}</p>}
       <div>
         <button type="submit" className="btn btn-filled" disabled={status.kind === "sending"} aria-busy={status.kind === "sending"}>
           <span className="btn-label">
@@ -205,12 +205,12 @@ export function ReviewForm() {
         <input id="r-email" type="email" className="field-input" autoComplete="email" value={d.email} onChange={(e) => set("email", e.target.value)} {...inv("email")} />
       </Field>
       <label className="flex cursor-pointer items-start gap-4">
-        <input id="r-consent" type="checkbox" checked={d.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[#d9c4a0]" {...inv("consent")} />
+        <input id="r-consent" type="checkbox" checked={d.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[#7ef7c6]" {...inv("consent")} />
         <span className="text-[0.92rem] leading-relaxed text-cream/75">J&apos;accepte que mon prénom, le nom de mon cheval, ma note et mon avis soient publiés sur le site après validation.</span>
       </label>
       {errors.consent && <p id="r-consent-err" className="field-error -mt-5">{errors.consent}</p>}
       {honeypot}
-      {status.kind === "error" && <p role="alert" className="rounded-[12px] border border-[#e08a6a]/40 bg-[#e08a6a]/10 p-4 text-[0.95rem] text-[#f6c2a8]">{status.message}</p>}
+      {status.kind === "error" && <p role="alert" className="rounded-[18px] border border-[#e08a6a]/40 bg-[#e08a6a]/10 p-4 text-[0.95rem] text-[#f6c2a8]">{status.message}</p>}
       <div>
         <button type="submit" className="btn btn-cream" disabled={status.kind === "sending"} aria-busy={status.kind === "sending"}>
           <span className="btn-label">

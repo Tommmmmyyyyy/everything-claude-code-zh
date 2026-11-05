@@ -12,14 +12,18 @@ interface Props {
   titleId?: string;
 }
 
-/** En-tête éditorial : index « (03) », étiquette, filet pointillé, grand titre serif. */
+/** En-tête « instrument » : index, étiquette décodée, filet de mesure, grand titre. */
 export function SectionHeader({ index, label, title, intro, provisional, align = "split", className = "", titleId }: Props) {
   return (
     <header className={`container-x ${className}`}>
-      <div className="flex items-center gap-4">
-        <span className="label tabular-nums text-cream/50">({index})</span>
-        <span className="label">{label}</span>
-        <span className="rule-dashed flex-1" data-reveal="line" aria-hidden="true" />
+      <div className="flex items-center gap-3">
+        <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
+        <span className="label" data-reveal="decode">
+          {label}
+        </span>
+        <span className="relative h-px flex-1 bg-line" aria-hidden="true">
+          <span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_60%)] opacity-70" data-reveal="line" />
+        </span>
         {provisional && SHOW_PLACEHOLDERS && <ProvisionalTag />}
       </div>
       <div className={align === "split" ? "mt-10 grid gap-8 md:mt-14 md:grid-cols-12 md:gap-6" : "mt-10 md:mt-14"}>

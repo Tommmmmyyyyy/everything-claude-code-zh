@@ -1,21 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Unbounded } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/content";
 import { SITE_URL } from "@/lib/config";
 
-const serif = Instrument_Serif({
+const display = Unbounded({
   subsets: ["latin", "latin-ext"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
+  weight: ["200", "300", "400"],
+  variable: "--font-unbounded",
   display: "swap",
 });
 
 const sans = Geist({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500"],
   variable: "--font-geist",
+  display: "swap",
+});
+
+const mono = Geist_Mono({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -52,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d0a07",
+  themeColor: "#040806",
   colorScheme: "dark",
 };
 
@@ -61,7 +67,7 @@ const bootScript = `(function(){var d=document.documentElement;d.classList.add('
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="fr" className={`${display.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>

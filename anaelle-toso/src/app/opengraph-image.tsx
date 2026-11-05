@@ -17,15 +17,15 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "radial-gradient(ellipse at 75% 70%, #c4834a 0%, #3b2618 38%, #0d0a07 75%)",
-          color: "#f4eadb",
-          fontFamily: "serif",
+          background: "radial-gradient(ellipse at 75% 70%, #1f8f73 0%, #0a3329 38%, #040806 75%)",
+          color: "#e9f3ee",
+          fontFamily: "sans-serif",
         }}
       >
         <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", opacity: 0.7, fontFamily: "sans-serif" }}>{site.identity.profession}</div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 132, lineHeight: 0.9, letterSpacing: -2 }}>{site.identity.fullName}</div>
-          <div style={{ fontSize: 40, marginTop: 28, color: "#d9c4a0", fontStyle: "italic" }}>{site.identity.tagline}</div>
+          <div style={{ fontSize: 124, lineHeight: 0.9, letterSpacing: -5, fontWeight: 300 }}>{site.identity.fullName}</div>
+          <div style={{ fontSize: 40, marginTop: 28, color: "#7ef7c6" }}>{site.identity.tagline}</div>
         </div>
       </div>
     ),

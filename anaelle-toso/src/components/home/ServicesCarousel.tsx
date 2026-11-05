@@ -14,7 +14,7 @@ export function ServicesCarousel({ content, linkBase = "/prestations", aside }: 
         <a
           key={s.id}
           href={siteHref(`${linkBase}#fiche-${s.id}`)}
-          className="group flex h-full flex-col overflow-hidden rounded-[12px] border border-line bg-ink-2 transition-colors duration-500 hover:border-cream/50"
+          className="group flex h-full flex-col overflow-hidden rounded-[18px] border border-line bg-ink-2 transition-colors duration-500 hover:border-cream/50"
           data-cursor="Découvrir"
           draggable={false}
         >

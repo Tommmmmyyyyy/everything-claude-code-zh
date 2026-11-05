@@ -4,9 +4,9 @@ import { siteAsset } from "@/lib/config";
 type Tone = "ink" | "forest" | "leather";
 
 const TONES: Record<Tone, string> = {
-  ink: "radial-gradient(ellipse at 80% 20%, #1f1710 0%, #0d0a07 60%)",
-  forest: "radial-gradient(ellipse at 75% 30%, #1d3326 0%, #101c14 55%, #0b120d 100%)",
-  leather: "radial-gradient(ellipse at 70% 25%, #4a2e1b 0%, #24170e 45%, #0d0a07 100%)",
+  ink: "radial-gradient(ellipse at 80% 15%, #0f2a20 0%, #06100c 45%, #040806 75%)",
+  forest: "radial-gradient(ellipse at 75% 25%, #0f3326 0%, #071710 50%, #040806 100%)",
+  leather: "radial-gradient(ellipse at 70% 20%, #0c2a33 0%, #061317 45%, #040806 100%)",
 };
 
 interface Props {
@@ -33,22 +33,29 @@ export function PageHero({ index, label, title, intro, image, imagePosition = "5
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={siteAsset(image)} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} fetchPriority="high" />
           </div>
-          <div className="absolute inset-0 mix-blend-soft-light" style={{ background: "linear-gradient(200deg, rgba(240,180,110,0.45), rgba(13,10,7,0.5))" }} />
-          <div className="absolute inset-0 md:[background:linear-gradient(to_right,var(--color-ink)_0%,rgba(13,10,7,0.35)_45%,rgba(13,10,7,0.05)_100%)] max-md:[background:linear-gradient(to_top,var(--color-ink)_8%,rgba(13,10,7,0.55)_55%,rgba(13,10,7,0.25)_100%)]" />
+          <div className="absolute inset-0 opacity-50 mix-blend-color" style={{ background: "linear-gradient(200deg, rgba(40,120,100,0.6), rgba(4,24,16,0.7))" }} />
+          <div className="absolute inset-0 mix-blend-soft-light" style={{ background: "radial-gradient(ellipse at 70% 25%, rgba(150,255,215,0.4), rgba(4,8,6,0) 60%)" }} />
+          <div className="absolute inset-0 md:[background:linear-gradient(to_right,var(--color-ink)_0%,rgba(4,8,6,0.4)_45%,rgba(4,8,6,0.05)_100%)] max-md:[background:linear-gradient(to_top,var(--color-ink)_8%,rgba(4,8,6,0.55)_55%,rgba(4,8,6,0.25)_100%)]" />
+          <div className="hud-corners absolute inset-4 md:inset-6" />
         </div>
       )}
       {art && <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">{art}</div>}
+      <div className="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-70" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <div className="grain" />
       </div>
 
       <div className="container-x">
-        <div className="flex items-center gap-4">
-          <span className="label tabular-nums text-cream/50">({index})</span>
-          <span className="label">{label}</span>
-          <span className="rule-dashed max-w-[220px] flex-1" data-reveal="line" aria-hidden="true" />
+        <div className="flex items-center gap-3">
+          <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
+          <span className="label" data-reveal="decode">
+            {label}
+          </span>
+          <span className="relative h-px max-w-[220px] flex-1 bg-line" aria-hidden="true">
+            <span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent)]" data-reveal="line" />
+          </span>
         </div>
-        <h1 className="display mt-8 max-w-[14ch] md:mt-10" data-reveal="lines">
+        <h1 className="display mt-8 max-w-[16ch] md:mt-10" data-reveal="lines">
           {title}
         </h1>
         {intro && (

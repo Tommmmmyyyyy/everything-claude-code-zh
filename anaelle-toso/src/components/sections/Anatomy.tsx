@@ -148,9 +148,9 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
         {/* Colonne texte */}
         <div data-anat-text className="relative z-10 flex min-w-0 flex-col md:col-span-5 lg:col-span-4">
           <div className="flex items-center gap-4">
-            <span className="label text-cream/50">({index})</span>
+            <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
             <span className="label">Anatomie</span>
-            <span className="rule-dashed flex-1" aria-hidden="true" />
+            <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" /></span>
           </div>
           <h2 id="dentition-title" className="heading mt-4 max-md:text-[2rem] md:mt-10">
             {content.title}
@@ -183,7 +183,7 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
                 ))}
               </div>
 
-              <div id="anat-detail" role="tabpanel" aria-labelledby={`tab-${current.id}`} className="mt-4 rounded-[12px] border border-line p-4 md:mt-6 md:p-5">
+              <div id="anat-detail" role="tabpanel" aria-labelledby={`tab-${current.id}`} className="mt-4 rounded-[18px] border border-line p-4 md:mt-6 md:p-5">
                 <div key={current.id} className="grid grid-cols-[1fr_110px] gap-4 animate-[fadeup_0.6s_var(--ease-expo)] md:block">
                   <div>
                     <p className="label text-sand">{current.short}</p>
@@ -219,7 +219,7 @@ export function Anatomy({ content, index = "04" }: { content: AnatomyContent; in
             <g data-cam>
               <path data-exterior d={HEAD_OUTLINE} fill="url(#anatHead)" stroke="var(--color-sage)" strokeWidth="1.5" />
               <g data-eye>
-                <path d="M 668 200 C 680 188, 704 188, 716 200 C 704 212, 680 212, 668 200 Z" fill="#0d0a07" stroke="var(--color-sage)" strokeOpacity="0.6" />
+                <path d="M 668 200 C 680 188, 704 188, 716 200 C 704 212, 680 212, 668 200 Z" fill="#040806" stroke="var(--color-sage)" strokeOpacity="0.6" />
                 <path d="M 58 296 C 70 286, 92 290, 96 304" fill="none" stroke="var(--color-sage)" strokeOpacity="0.6" strokeWidth="2" />
               </g>
               <circle data-lamp cx="200" cy="400" r="200" fill="url(#anatLamp)" />

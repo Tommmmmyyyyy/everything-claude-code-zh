@@ -17,9 +17,9 @@ export function PageCta({ index, title, text, primary, secondary }: Props) {
       <div className="container-x relative grid gap-10 py-24 md:grid-cols-12 md:items-end md:gap-6 md:py-36">
         <div className="md:col-span-7">
           <div className="flex items-center gap-4">
-            <span className="label tabular-nums text-cream/50">({index})</span>
+            <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
             <span className="label">Et maintenant</span>
-            <span className="rule-dashed max-w-[200px] flex-1" data-reveal="line" aria-hidden="true" />
+            <span className="relative h-px max-w-[200px] flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" data-reveal="line" /></span>
           </div>
           <p className="display mt-8 max-w-[11ch]" data-reveal="lines">
             {title}

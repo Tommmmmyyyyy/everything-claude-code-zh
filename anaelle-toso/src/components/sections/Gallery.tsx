@@ -142,7 +142,7 @@ export function Gallery({ content, index = "09", header = true }: { content: Gal
     <button
       type="button"
       onClick={(e) => open(e, it.i)}
-      className="group relative block w-full overflow-hidden rounded-[12px] text-left"
+      className="group relative block w-full overflow-hidden rounded-[18px] text-left"
       data-cursor="Ouvrir"
       aria-label={`Agrandir : ${it.src ? it.alt || it.caption : `emplacement photo — ${it.caption}`}`}
     >
@@ -273,7 +273,7 @@ export function Gallery({ content, index = "09", header = true }: { content: Gal
             </button>
           </div>
           <div className="container-x relative flex min-h-0 flex-1 items-center justify-center pb-6">
-            <div key={current.i} className="relative h-full w-full max-w-6xl animate-[fadeup_0.5s_var(--ease-expo)] overflow-hidden rounded-[12px]">
+            <div key={current.i} className="relative h-full w-full max-w-6xl animate-[fadeup_0.5s_var(--ease-expo)] overflow-hidden rounded-[18px]">
               {current.src ? (
                 <Image src={siteAsset(current.src)} alt={current.alt} fill sizes="100vw" className="object-contain" />
               ) : (
@@ -299,7 +299,7 @@ export function Gallery({ content, index = "09", header = true }: { content: Gal
 /** Vignette réservée à une catégorie qui n'a pas encore de photo (aucune image générique). */
 function UpcomingTile({ label, className = "" }: { label: string; className?: string }) {
   return (
-    <div className={`relative grid place-items-center overflow-hidden rounded-[12px] border border-dashed border-line-strong bg-[radial-gradient(ellipse_at_50%_35%,rgba(217,196,160,0.07),transparent_70%)] ${className}`}>
+    <div className={`relative grid place-items-center overflow-hidden rounded-[18px] border border-dashed border-line-strong bg-[radial-gradient(ellipse_at_50%_35%,rgba(217,196,160,0.07),transparent_70%)] ${className}`}>
       <div className="grid justify-items-center gap-4 px-6 text-center">
         <svg viewBox="0 0 48 48" className="h-10 w-10 text-sand/70" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
           <path d="M 6 14 h 8 l 3 -4 h 14 l 3 4 h 8 v 24 H 6 Z" />

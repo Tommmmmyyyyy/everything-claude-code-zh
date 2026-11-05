@@ -9,7 +9,7 @@ export function AboutTeaser({ story, index = "04", diploma }: { story: StoryCont
     <section aria-labelledby="qui-title" className="relative section-y overflow-clip bg-forest">
       <div className="container-x grid gap-12 md:grid-cols-12 md:items-end md:gap-6">
         <figure className="md:col-span-6">
-          <div data-reveal="mask" className="relative aspect-[3/2] overflow-hidden rounded-[12px]">
+          <div data-reveal="mask" className="relative aspect-[3/2] overflow-hidden rounded-[18px]">
             {story.portrait.image && (
               <div data-reveal-inner className="absolute inset-0">
                 <Image src={siteAsset(story.portrait.image)} alt={story.portrait.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
@@ -20,9 +20,9 @@ export function AboutTeaser({ story, index = "04", diploma }: { story: StoryCont
         </figure>
         <div className="md:col-span-5 md:col-start-8">
           <div className="flex items-center gap-4">
-            <span className="label text-cream/50">({index})</span>
+            <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
             <span className="label">Qui suis-je</span>
-            <span className="rule-dashed flex-1" data-reveal="line" aria-hidden="true" />
+            <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" data-reveal="line" /></span>
           </div>
           <h2 id="qui-title" className="heading mt-8" data-reveal="lines">
             Anaëlle, à l&apos;écoute de vos <em className="italic text-sand">chevaux.</em>

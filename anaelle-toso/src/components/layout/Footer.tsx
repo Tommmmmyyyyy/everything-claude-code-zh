@@ -7,19 +7,26 @@ export function Footer() {
   const socials = socialLinks().filter((s) => s.url);
   const c = site.contact;
   return (
-    <footer className="relative border-t border-line bg-forest">
-      <div className="container-x grid gap-12 py-16 md:grid-cols-12 md:gap-6 md:py-20">
+    <footer className="relative overflow-hidden border-t border-line bg-ink">
+      <div className="bg-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
+      <div className="aurora -bottom-40 left-1/2 h-[380px] w-[900px] -translate-x-1/2 opacity-35" aria-hidden="true" />
+      <div className="container-x relative grid gap-12 py-16 md:grid-cols-12 md:gap-6 md:py-20">
         <div className="md:col-span-4">
-          <p className="font-serif text-[2.6rem] leading-none">
-            {site.identity.firstName} <em className="italic text-sand">{site.identity.lastName}</em>
+          <p className="flex items-center gap-3">
+            <span className="grid h-11 w-11 place-items-center rounded-[13px] border border-line-strong bg-[linear-gradient(145deg,rgb(126_247_198/0.18),rgb(99_216_255/0.05))] font-serif text-[0.95rem] tracking-[-0.04em] shadow-[0_0_26px_-6px_rgb(126_247_198/0.6)]" aria-hidden="true">
+              AT
+            </span>
+            <span className="font-serif text-[1.6rem] leading-none tracking-[-0.04em]">
+              {site.identity.firstName} <em className="text-sand">{site.identity.lastName}</em>
+            </span>
           </p>
-          <p className="label mt-4 text-cream/55">{site.identity.profession}</p>
+          <p className="label mt-5 text-cream/55">{site.identity.profession}</p>
           {site.identity.diploma && <p className="mt-2 text-[0.85rem] text-cream/50">{site.identity.diploma}</p>}
           {socials.length > 0 && (
             <ul className="mt-8 flex gap-3">
               {socials.map((s) => (
                 <li key={s.id}>
-                  <a href={s.url!} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="grid h-10 w-10 place-items-center rounded-full border border-line-strong transition-colors hover:border-cream">
+                  <a href={s.url!} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="grid h-10 w-10 place-items-center rounded-full border border-line-strong transition-colors hover:border-cognac hover:text-sand">
                     <SocialIcon id={s.id} className="h-4 w-4" />
                   </a>
                 </li>
@@ -65,7 +72,10 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="container-x flex flex-col gap-4 border-t border-dashed border-line-strong py-6 text-[0.8rem] text-cream/50 md:flex-row md:items-center md:justify-between">
+      <p className="container-x relative select-none whitespace-nowrap pb-2 font-serif text-[clamp(2.6rem,10.6vw,15rem)] font-extralight uppercase leading-[0.82] tracking-[-0.06em] text-transparent [background:linear-gradient(180deg,rgb(233_243_238/0.16),rgb(233_243_238/0.015)_85%)] [-webkit-background-clip:text] [background-clip:text]" aria-hidden="true">
+        {site.identity.fullName}
+      </p>
+      <div className="container-x relative flex flex-col gap-4 border-t border-line py-6 text-[0.8rem] text-cream/50 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {site.legal.businessName ?? site.identity.fullName}. Tous droits réservés.
         </p>

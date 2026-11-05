@@ -12,6 +12,7 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { buildHead, buildSkull } from "./head";
+import { siteAsset } from "@/lib/config";
 
 export type AnchorId = "incisives" | "barres" | "loup" | "premolaires" | "molaires" | "pointes-haut" | "pointes-bas" | "tables" | "crochet" | "rampe";
 
@@ -87,75 +88,6 @@ function zOf(i: number) {
   return ROW_START - TOOTH_D / 2 - i * (TOOTH_D + TOOTH_GAP);
 }
 
-/** Texture des tables dentaires : dentine, replis d'émail, cément. */
-function tableTexture(kind: "upper" | "lower") {
-  const c = document.createElement("canvas");
-  c.width = c.height = 256;
-  const g = c.getContext("2d")!;
-  g.fillStyle = "#a88a63";
-  g.fillRect(0, 0, 256, 256);
-  // halo de dentine
-  const rg = g.createRadialGradient(128, 128, 20, 128, 128, 160);
-  rg.addColorStop(0, "#c2a47a");
-  rg.addColorStop(1, "#8d7150");
-  g.fillStyle = rg;
-  g.fillRect(0, 0, 256, 256);
-  g.strokeStyle = "#f6ecd9";
-  g.lineCap = "round";
-  g.lineJoin = "round";
-  // contour d'émail ondulé
-  g.lineWidth = 7;
-  g.beginPath();
-  for (let a = 0; a <= Math.PI * 2 + 0.01; a += 0.05) {
-    const r = 104 + Math.sin(a * (kind === "upper" ? 5 : 7)) * 7 + Math.sin(a * 2) * 4;
-    const x = 128 + Math.cos(a) * r * 1.02;
-    const y = 128 + Math.sin(a) * r * 0.96;
-    if (a === 0) g.moveTo(x, y);
-    else g.lineTo(x, y);
-  }
-  g.closePath();
-  g.stroke();
-  if (kind === "upper") {
-    // deux infundibulums
-    for (const cx of [86, 170]) {
-      g.fillStyle = "#4e3c2a";
-      g.lineWidth = 6;
-      g.beginPath();
-      for (let a = 0; a <= Math.PI * 2 + 0.01; a += 0.06) {
-        const r = 30 + Math.sin(a * 4 + cx) * 6;
-        const x = cx + Math.cos(a) * r * 0.62;
-        const y = 128 + Math.sin(a) * r * 1.35;
-        if (a === 0) g.moveTo(x, y);
-        else g.lineTo(x, y);
-      }
-      g.closePath();
-      g.fill();
-      g.stroke();
-    }
-  } else {
-    // replis profonds de la dent inférieure
-    g.lineWidth = 6;
-    for (const [x0, dir] of [
-      [60, 1],
-      [196, -1],
-    ] as const) {
-      g.beginPath();
-      g.moveTo(x0, 40);
-      g.bezierCurveTo(x0 + dir * 60, 80, x0 - dir * 10, 120, x0 + dir * 46, 150);
-      g.bezierCurveTo(x0 + dir * 70, 170, x0 + dir * 10, 200, x0 + dir * 20, 220);
-      g.stroke();
-    }
-    g.beginPath();
-    g.moveTo(128, 30);
-    g.bezierCurveTo(100, 90, 156, 140, 128, 226);
-    g.stroke();
-  }
-  const t = new THREE.CanvasTexture(c);
-  t.colorSpace = THREE.SRGBColorSpace;
-  t.anisotropy = 4;
-  return t;
-}
-
 /** Générateur pseudo-aléatoire déterministe (rendu identique à chaque visite). */
 function rng(seed: number) {
   let x = seed;
@@ -203,15 +135,15 @@ function reliefTexture(kind: "streaks" | "papillae" | "gum") {
   return t;
 }
 
-/** Fond : halo chaud au centre, noir chaud sur les bords. */
+/** Fond : halo vert profond au centre, noir abyssal sur les bords. */
 function backdropTexture() {
   const c = document.createElement("canvas");
   c.width = c.height = 512;
   const g = c.getContext("2d")!;
   const grd = g.createRadialGradient(256, 290, 10, 256, 290, 360);
-  grd.addColorStop(0, "#22170f");
-  grd.addColorStop(0.55, "#140e09");
-  grd.addColorStop(1, "#0b0806");
+  grd.addColorStop(0, "#0d2620");
+  grd.addColorStop(0.55, "#071512");
+  grd.addColorStop(1, "#030807");
   g.fillStyle = grd;
   g.fillRect(0, 0, 512, 512);
   const t = new THREE.CanvasTexture(c);
@@ -357,19 +289,19 @@ function tongueGeometry() {
   return geo;
 }
 
-export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: boolean }): MouthScene {
+export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: boolean; onAsset?: () => void }): MouthScene {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
   const maxDpr = Math.min(window.devicePixelRatio || 1, opts.mobile ? 1.5 : 2);
   renderer.setPixelRatio(maxDpr);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.9;
-  renderer.setClearColor(0x0d0a07, 1);
+  renderer.setClearColor(0x040806, 1);
 
   const scene = new THREE.Scene();
   const backdrop = backdropTexture();
   scene.background = backdrop;
-  scene.fog = new THREE.Fog(0x110c08, 18, 66);
+  scene.fog = new THREE.Fog(0x061310, 18, 66);
   // reflets doux d'un environnement neutre : surfaces humides, émail brillant
   const pmrem = new THREE.PMREMGenerator(renderer);
   const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
@@ -391,24 +323,24 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     composer.addPass(new OutputPass());
   }
 
-  /* Lumières : lampe frontale (sur la caméra), ambiance chaude, contre-jour cognac */
-  const lamp = new THREE.SpotLight(0xffe4bf, 0, 0, 0.62, 0.7, 0.8);
+  /* Lumières : lampe frontale (sur la caméra), ambiance neutre, contre-jours menthe et cyan */
+  const lamp = new THREE.SpotLight(0xfff3e6, 0, 0, 0.62, 0.7, 0.8);
   lamp.position.set(0, 0.25, 0);
   camera.add(lamp);
   const lampTarget = new THREE.Object3D();
   lampTarget.position.set(0, -0.1, -1);
   camera.add(lampTarget);
   lamp.target = lampTarget;
-  const hemi = new THREE.HemisphereLight(0xf4eadb, 0x2a160e, 0);
+  const hemi = new THREE.HemisphereLight(0xe4f4ee, 0x12201b, 0);
   scene.add(hemi);
-  const rim = new THREE.DirectionalLight(0xc07a43, 0);
+  const rim = new THREE.DirectionalLight(0x7ef7c6, 0);
   rim.position.set(-6, 10, -40);
   scene.add(rim);
-  const rim2 = new THREE.DirectionalLight(0x9cae8e, 0);
+  const rim2 = new THREE.DirectionalLight(0x63d8ff, 0);
   rim2.position.set(10, -4, 10);
   scene.add(rim2);
   // lumière de modelé pour les plans extérieurs de la tête (avant et après le voyage)
-  const key = new THREE.DirectionalLight(0xffe2bd, 0);
+  const key = new THREE.DirectionalLight(0xfff0e0, 0);
   key.position.set(-30, 26, 22);
   key.target.position.set(0, 2, -20);
   scene.add(key, key.target);
@@ -432,7 +364,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     emissive: 0x2a1c10,
     emissiveIntensity: 0.1,
   });
-  const cut = new THREE.MeshBasicMaterial({ color: 0xb39472, side: THREE.BackSide });
+  const cut = new THREE.MeshBasicMaterial({ color: 0xd2c19c, side: THREE.BackSide });
   const gum = new THREE.MeshPhysicalMaterial({ transparent: true,
     color: 0xffffff,
     vertexColors: true,
@@ -460,16 +392,38 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     bumpMap: papillae,
     bumpScale: 1.6,
   });
-  const glow = new THREE.MeshPhysicalMaterial({ color: 0xeee2cb, roughness: 0.28, clearcoat: 0.7, emissive: 0xff8a3d, emissiveIntensity: 0 });
-  const hookMat = new THREE.MeshPhysicalMaterial({ color: 0xeee3cd, roughness: 0.33, clearcoat: 0.5, emissive: 0xff8f45, emissiveIntensity: 0 });
-  const wolfMat = new THREE.MeshPhysicalMaterial({ color: 0xd8c098, roughness: 0.33, clearcoat: 0.5, emissive: 0xff8f45, emissiveIntensity: 0 });
-  const upperTex = tableTexture("upper");
-  const lowerTex = tableTexture("lower");
-  const tableUp = new THREE.MeshStandardMaterial({ map: upperTex, emissiveMap: upperTex, emissive: 0xffe6c4, emissiveIntensity: 0, roughness: 0.5 });
-  const tableLow = new THREE.MeshStandardMaterial({ map: lowerTex, emissiveMap: lowerTex, emissive: 0xffe6c4, emissiveIntensity: 0, roughness: 0.5 });
-  const lineMat = new THREE.LineBasicMaterial({ color: 0xf4eadb, transparent: true, opacity: 0, depthWrite: false, fog: true });
-  const materials: THREE.Material[] = [enamel, cut, gum, gumCut, palateMat, tongueMat, glow, hookMat, wolfMat, tableUp, tableLow, lineMat];
-  const textures: THREE.Texture[] = [streaks, papillae, gumGrain, backdrop];
+  const glow = new THREE.MeshPhysicalMaterial({ color: 0xeee2cb, roughness: 0.28, clearcoat: 0.7, emissive: 0x58f2b4, emissiveIntensity: 0 });
+  const hookMat = new THREE.MeshPhysicalMaterial({ color: 0xeee3cd, roughness: 0.33, clearcoat: 0.5, emissive: 0x58f2b4, emissiveIntensity: 0 });
+  const wolfMat = new THREE.MeshPhysicalMaterial({ color: 0xd8c098, roughness: 0.33, clearcoat: 0.5, emissive: 0x58f2b4, emissiveIntensity: 0 });
+  /* Textures photographiques : tables dentaires et couronne réelles (photos du crâne et d'une dent jugale) */
+  const loader = new THREE.TextureLoader();
+  const photo = (src: string) => {
+    const t = loader.load(siteAsset(src), () => opts.onAsset?.());
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 8;
+    return t;
+  };
+  const atlasTex = photo("/images/3d/tables-dentaires.jpg");
+  const faceTex = photo("/images/3d/dent-face.jpg");
+  faceTex.flipY = false; // le haut de la photo (bord d'usure) correspond à la table
+  faceTex.wrapS = THREE.RepeatWrapping;
+  const tableUp = new THREE.MeshPhysicalMaterial({ map: atlasTex, emissiveMap: atlasTex, emissive: 0xffffff, emissiveIntensity: 0, roughness: 0.5, clearcoat: 0.3, clearcoatRoughness: 0.35, bumpMap: atlasTex, bumpScale: 1.1 });
+  const cheekMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    vertexColors: true,
+    map: faceTex,
+    roughness: 0.42,
+    clearcoat: 0.6,
+    clearcoatRoughness: 0.24,
+    bumpMap: faceTex,
+    bumpScale: 0.9,
+    emissive: 0x2a1c10,
+    emissiveMap: faceTex,
+    emissiveIntensity: 0.1,
+  });
+  const lineMat = new THREE.LineBasicMaterial({ color: 0xa8ffe0, transparent: true, opacity: 0, depthWrite: false, fog: true });
+  const materials: THREE.Material[] = [enamel, cheekMat, cut, gum, gumCut, palateMat, tongueMat, glow, hookMat, wolfMat, tableUp, lineMat];
+  const textures: THREE.Texture[] = [streaks, papillae, gumGrain, backdrop, atlasTex, faceTex];
   softTissues.push(gum, palateMat, tongueMat);
   const geometries: THREE.BufferGeometry[] = [];
   const cutMeshes: THREE.Mesh[] = [];
@@ -483,11 +437,11 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
    * Prépare une géométrie de dent (axe y : -h/2 = surface d'occlusion, +h/2 = côté gencive) :
    * léger effilement vers la racine, stries verticales, teinte ivoire → jaunie vers la gencive.
    */
-  function toothShade(geo: THREE.BufferGeometry, h: number, ridges: boolean, taper: number, bend = 0) {
+  function toothShade(geo: THREE.BufferGeometry, h: number, ridges: boolean, taper: number, bend = 0, tones: [number, number] = [0xebdec6, 0xbb9a6d]) {
     const pos = geo.attributes.position;
     const colors = new Float32Array(pos.count * 3);
-    const tip = new THREE.Color(0xebdec6);
-    const base = new THREE.Color(0xbb9a6d);
+    const tip = new THREE.Color(tones[0]);
+    const base = new THREE.Color(tones[1]);
     const c = new THREE.Color();
     geo.computeBoundingBox();
     const bb = geo.boundingBox!;
@@ -550,8 +504,8 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   /* Incisives : 6 en haut, 6 en bas, en arc */
   const INC_HU = 4.6;
   const INC_HL = 4.1;
-  const incGeoU = keep(toothShade(new RoundedBoxGeometry(1.1, INC_HU, 0.9, 4, 0.26), INC_HU, false, 0.22, 1.1));
-  const incGeoL = keep(toothShade(new RoundedBoxGeometry(1.05, INC_HL, 0.88, 4, 0.26), INC_HL, false, 0.22, 0.9));
+  const incGeoU = keep(toothShade(new RoundedBoxGeometry(1.02, INC_HU, 0.84, 5, 0.32), INC_HU, false, 0.3, 1.2, [0xffffff, 0xe2d2b2]));
+  const incGeoL = keep(toothShade(new RoundedBoxGeometry(0.98, INC_HL, 0.82, 5, 0.32), INC_HL, false, 0.3, 1.0, [0xffffff, 0xe2d2b2]));
   const R = 3.7;
   const C = -3.3;
   for (const jaw of ["up", "low"] as const) {
@@ -561,7 +515,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       g.position.set(Math.sin(a) * R, 0, C + Math.cos(a) * R);
       g.rotation.y = a;
       (jaw === "up" ? upper : lower).add(g);
-      const m = solid(jaw === "up" ? incGeoU : incGeoL, enamel, g);
+      const m = solid(jaw === "up" ? incGeoU : incGeoL, cheekMat, g);
       if (jaw === "up") {
         m.position.y = INC_HU / 2;
         m.rotation.x = -0.12;
@@ -633,10 +587,22 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   }
 
   /* Dents jugales */
-  const cheekGeoU = keep(toothShade(new RoundedBoxGeometry(TOOTH_W, TOOTH_HU, TOOTH_D, 3, 0.22), TOOTH_HU, true, 0.12));
-  const cheekGeoL = keep(toothShade(new RoundedBoxGeometry(TOOTH_W * 0.9, TOOTH_HL, TOOTH_D * 1.04, 3, 0.22), TOOTH_HL, true, 0.12));
+  const cheekGeoU = keep(toothShade(new RoundedBoxGeometry(TOOTH_W, TOOTH_HU, TOOTH_D, 4, 0.22), TOOTH_HU, true, 0.12, 0, [0xffffff, 0xd9c7a6]));
+  const cheekGeoL = keep(toothShade(new RoundedBoxGeometry(TOOTH_W * 0.9, TOOTH_HL, TOOTH_D * 1.04, 4, 0.22), TOOTH_HL, true, 0.12, 0, [0xffffff, 0xd9c7a6]));
+  /** Table d'une dent : sa propre case de l'atlas photographique (vestibulaire → lingual, rostral en haut). */
+  const tableGeoFor = (i: number, isUp: boolean, side: -1 | 1) => {
+    const g = keep(new THREE.PlaneGeometry(TOOTH_W - 0.36, TOOTH_D - 0.36));
+    const uv = g.attributes.uv;
+    for (let k = 0; k < uv.count; k++) {
+      let u = uv.getX(k);
+      let v = uv.getY(k);
+      if (side === 1) u = 1 - u;
+      if (!isUp) v = 1 - v;
+      uv.setXY(k, (i + 0.03 + u * 0.94) / 6, (isUp ? 0.5 : 0) + (0.03 + v * 0.94) * 0.5);
+    }
+    return g;
+  };
   const shear = new THREE.Matrix4();
-  const tableGeo = keep(new THREE.PlaneGeometry(TOOTH_W - 0.42, TOOTH_D - 0.42));
   const spikeGeo = keep(new THREE.ConeGeometry(0.11, 0.42, 4));
   const hookGeo = keep(new RoundedBoxGeometry(TOOTH_W - 0.3, 1.0, 0.9, 2, 0.2));
   const wolfGeo = keep(new THREE.ConeGeometry(0.3, 1.05, 12));
@@ -652,7 +618,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         // tables inclinées : bord externe plus bas en haut, bord interne plus haut en bas
         g.rotation.z = -side * TILT;
         (isUp ? upper : lower).add(g);
-        const m = solid(isUp ? cheekGeoU : cheekGeoL, enamel, g);
+        const m = solid(isUp ? cheekGeoU : cheekGeoL, cheekMat, g);
         const H = isUp ? TOOTH_HU : TOOTH_HL;
         // géométrie : occlusion en -y ; retournée pour la mâchoire inférieure
         m.position.y = isUp ? H / 2 : -H / 2;
@@ -668,7 +634,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         m.matrix.premultiply(shear);
         m.matrixAutoUpdate = false;
         // table dentaire
-        const t = new THREE.Mesh(tableGeo, isUp ? tableUp : tableLow);
+        const t = new THREE.Mesh(tableGeoFor(i, isUp, side), tableUp);
         t.rotation.x = isUp ? Math.PI / 2 : -Math.PI / 2;
         t.position.y = isUp ? -0.012 : 0.012;
         g.add(t);
@@ -748,7 +714,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     }
     dustGeo.setAttribute("position", new THREE.BufferAttribute(arr, 3));
   }
-  const dustMat = new THREE.PointsMaterial({ color: 0xf4d9b0, size: 0.06, transparent: true, opacity: 0, depthWrite: false, sizeAttenuation: true });
+  const dustMat = new THREE.PointsMaterial({ color: 0xc8fff0, size: 0.06, transparent: true, opacity: 0, depthWrite: false, sizeAttenuation: true });
   materials.push(dustMat);
   const dust = new THREE.Points(dustGeo, dustMat);
   scene.add(dust);
@@ -841,20 +807,20 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     jawPivot.rotation.x = jaw;
     head.update(jaw);
     // peau : silhouette lumineuse au début, opaque pendant le voyage, transparente pour le profil
-    head.setXray(
-      Math.max(
-        1 - smooth(0.02, 0.095, p),
-        win(0.785, 0.82, 0.9, 0.95, p),
-      ),
-    );
+    // la tête reste un hologramme au retour : scanner et radiographie, sans « peau de synthèse »
+    head.setXray(Math.max(1 - smooth(0.02, 0.095, p), smooth(0.785, 0.82, p)));
+    // faisceau du scanner : balaie la tête du bout du nez aux oreilles, à l'entrée puis à la sortie
+    head.setScan(p < 0.08 ? 8 - 76 * clamp01(p / 0.07) : p > 0.88 ? 8 - 76 * clamp01((p - 0.88) / 0.1) : 200);
     // os : radiographie au début et sur le profil des surdents, opaques dans la coupe
-    const xrayBone = Math.max(1 - smooth(0.05, 0.11, p), win(0.79, 0.825, 0.9, 0.95, p));
+    const xrayBone = Math.max(1 - smooth(0.05, 0.11, p), smooth(0.79, 0.825, p));
     const cutBone = win(0.47, 0.53, 0.66, 0.72, p);
     skull.setOpacity(Math.max(0.36 * xrayBone, 0.96 * cutBone));
     skull.setGlow(0.3 * xrayBone);
     // émail lumineux en radiographie
-    enamel.emissive.setHex(0x4a3f30);
+    enamel.emissive.setHex(0x2f4a42);
     enamel.emissiveIntensity = 0.12 + 2.6 * xrayBone;
+    cheekMat.emissive.setHex(xrayBone > 0.01 ? 0x5a8f80 : 0x2a1c10);
+    cheekMat.emissiveIntensity = 0.1 + 1.9 * xrayBone;
     // en rayons X, les tissus mous s'effacent : restent les os et les dents
     const soft = 1 - 0.78 * xrayBone;
     for (const m of softTissues) {
@@ -880,10 +846,10 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
 
     // mises en lumière par chapitre
     wolfMat.emissiveIntensity = 1.4 * win(0.3, 0.335, 0.38, 0.41, p);
-    glow.emissiveIntensity = 2.8 * win(0.5, 0.56, 0.64, 0.68, p);
-    tableUp.emissiveIntensity = tableLow.emissiveIntensity = 0.75 * win(0.69, 0.73, 0.78, 0.81, p);
+    glow.emissiveIntensity = 1.5 * win(0.5, 0.56, 0.64, 0.68, p);
+    tableUp.emissiveIntensity = 0.22 * win(0.69, 0.73, 0.78, 0.81, p);
     hookMat.emissiveIntensity = 1.6 * win(0.8, 0.83, 0.9, 0.94, p);
-    if (bloom) bloom.strength = 0.12 + 0.5 * Math.max(win(0.3, 0.335, 0.38, 0.41, p), win(0.5, 0.56, 0.64, 0.68, p), win(0.69, 0.73, 0.78, 0.81, p), win(0.8, 0.83, 0.9, 0.94, p));
+    if (bloom) bloom.strength = 0.12 + 0.32 * Math.max(win(0.3, 0.335, 0.38, 0.41, p), win(0.5, 0.56, 0.64, 0.68, p), win(0.69, 0.73, 0.78, 0.81, p), win(0.8, 0.83, 0.9, 0.94, p));
 
     // plan de coupe : balaie la bouche d'avant en arrière, puis se retire
     const zc = track(
@@ -941,8 +907,6 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     dispose() {
       geometries.forEach((g) => g.dispose());
       materials.forEach((m) => m.dispose());
-      upperTex.dispose();
-      lowerTex.dispose();
       textures.forEach((t) => t.dispose());
       head.dispose();
       skull.dispose();

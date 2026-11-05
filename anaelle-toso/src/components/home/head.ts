@@ -5,6 +5,7 @@
  * Unités ≈ cm ; plan d'occlusion en y = 0 ; incisives à l'avant (z ≈ 0), ATM en arrière (z ≈ -36).
  */
 import * as THREE from "three";
+import { siteAsset } from "@/lib/config";
 
 type Key = [number, number];
 type WKey = [number, number, number, number]; // z, largeur bas, milieu, haut
@@ -283,6 +284,24 @@ function coatTexture(lower: boolean) {
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   t.anisotropy = 8;
+  // détail réel de la robe (photo d'un poney bai, filtrée passe-haut) : reflets et texture du poil
+  if (typeof Image !== "undefined") {
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => {
+      const pat = g.createPattern(img, "repeat");
+      if (!pat) return;
+      pat.setTransform(new DOMMatrix().scale(0.34, 0.34));
+      g.save();
+      g.globalCompositeOperation = "overlay";
+      g.globalAlpha = 0.6;
+      g.fillStyle = pat;
+      g.fillRect(0, H * 0.08, W, H * 0.92);
+      g.restore();
+      t.needsUpdate = true;
+    };
+    img.src = siteAsset("/images/3d/robe.jpg");
+  }
   return t;
 }
 
@@ -335,7 +354,7 @@ function hairNormalTexture() {
  * - face interne : muqueuse rose, humide ;
  * - uXray (0 → 1) : la peau devient une silhouette lumineuse translucide (vue « rayons X »).
  */
-function skinMaterial(map: THREE.Texture, normalMap: THREE.Texture, xray: { value: number }) {
+function skinMaterial(map: THREE.Texture, normalMap: THREE.Texture, xray: { value: number }, scan: { value: number }) {
   const m = new THREE.MeshPhysicalMaterial({
     map,
     normalMap,
@@ -352,8 +371,12 @@ function skinMaterial(map: THREE.Texture, normalMap: THREE.Texture, xray: { valu
   m.forceSinglePass = true;
   m.onBeforeCompile = (sh) => {
     sh.uniforms.uXray = xray;
+    sh.uniforms.uScan = scan;
+    sh.vertexShader = sh.vertexShader
+      .replace("void main() {", "varying vec3 vScanPos;\nvoid main() {")
+      .replace("#include <project_vertex>", "#include <project_vertex>\n  vScanPos = (modelMatrix * vec4(transformed, 1.0)).xyz;");
     sh.fragmentShader = sh.fragmentShader
-      .replace("void main() {", "uniform float uXray;\nvoid main() {")
+      .replace("void main() {", "uniform float uXray;\nuniform float uScan;\nvarying vec3 vScanPos;\nvoid main() {")
       .replace(
         "#include <map_fragment>",
         "#include <map_fragment>\n  if (!gl_FrontFacing) { float lipEdge = smoothstep(0.0, 0.07, min(vMapUv.x, 1.0 - vMapUv.x)); diffuseColor.rgb = mix(vec3(0.05, 0.03, 0.026), vec3(0.29, 0.075, 0.07), lipEdge); }",
@@ -373,8 +396,12 @@ function skinMaterial(map: THREE.Texture, normalMap: THREE.Texture, xray: { valu
       .replace(
         "#include <opaque_fragment>",
         `float fres = pow(1.0 - abs(dot(normalize(normal), normalize(vViewPosition))), 2.2);
-  outgoingLight = mix(outgoingLight, vec3(0.98, 0.84, 0.64) * (0.12 + 2.2 * fres), uXray);
+  // hologramme : silhouette fresnel, fines lignes de balayage, faisceau du scanner
+  float scanLines = 0.82 + 0.18 * sin(vScanPos.y * 7.0);
+  float band = exp(-pow((vScanPos.z - uScan) / 1.5, 2.0));
+  outgoingLight = mix(outgoingLight, vec3(0.5, 0.98, 0.84) * (0.1 + 2.1 * fres) * scanLines + vec3(0.6, 1.0, 0.9) * band * 1.8, uXray);
   diffuseColor.a *= mix(1.0, 0.02 + 0.6 * pow(fres, 1.3), uXray);
+  diffuseColor.a = min(1.0, diffuseColor.a + band * 0.5 * uXray);
   #include <opaque_fragment>`,
       );
   };
@@ -385,6 +412,8 @@ export interface Head {
   /** À appeler quand l'angle de la mâchoire change (joues et commissures). */
   update(jawAngle: number): void;
   setXray(v: number): void;
+  /** Position (z, repère monde) du faisceau du scanner sur la peau holographique. */
+  setScan(z: number): void;
   dispose(): void;
 }
 
@@ -397,13 +426,14 @@ export function buildHead(upper: THREE.Object3D, lower: THREE.Object3D, pivot: T
   const mats: THREE.Material[] = [];
   const texs: THREE.Texture[] = [];
   const xray = { value: 0 };
+  const scan = { value: 200 };
 
   const coatUp = coatTexture(false);
   const coatLow = coatTexture(true);
   const hair = hairNormalTexture();
   texs.push(coatUp, coatLow, hair);
-  const skinUp = skinMaterial(coatUp, hair, xray);
-  const skinLow = skinMaterial(coatLow, hair, xray);
+  const skinUp = skinMaterial(coatUp, hair, xray, scan);
+  const skinLow = skinMaterial(coatLow, hair, xray, scan);
   mats.push(skinUp, skinLow);
 
   const NZ = opts.mobile ? 130 : 200;
@@ -602,6 +632,9 @@ export function buildHead(upper: THREE.Object3D, lower: THREE.Object3D, pivot: T
 
   return {
     update,
+    setScan(z: number) {
+      scan.value = z;
+    },
     setXray(v: number) {
       xray.value = v;
       const opaque = v < 0.02;
@@ -749,7 +782,7 @@ export function buildSkull(upper: THREE.Object3D, lower: THREE.Object3D): Skull 
       roughness: 0.72,
       sheen: 0.4,
       sheenColor: new THREE.Color(0xffe9c8),
-      emissive: new THREE.Color(0xe8dcc4),
+      emissive: new THREE.Color(0x9ff2d6),
       emissiveIntensity: 0,
       alphaMap: alpha,
       alphaTest: 0.01,

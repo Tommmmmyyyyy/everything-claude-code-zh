@@ -37,7 +37,7 @@ export function Testimonials({ content, index = "07", id = "temoignages" }: { co
           }
         >
           {content.items.map((t, i) => (
-            <figure key={i} className="flex h-full flex-col justify-between rounded-[12px] border border-line bg-ink/40 p-7 md:p-10">
+            <figure key={i} data-spotlight className="flex h-full flex-col justify-between rounded-[18px] border border-line bg-ink/40 p-7 md:p-10">
               <div>
                 {t.rating ? <Stars value={t.rating} /> : null}
                 <blockquote className="mt-6 font-serif text-[clamp(1.45rem,2vw,2rem)] leading-[1.15]">« {t.text} »</blockquote>
@@ -58,7 +58,7 @@ export function Testimonials({ content, index = "07", id = "temoignages" }: { co
         </Carousel>
       ) : (
         <div className="container-x mt-14 md:mt-20">
-          <div className="grid gap-10 rounded-[12px] border border-dashed border-line-strong p-8 md:grid-cols-12 md:p-14" data-reveal="up">
+          <div className="grid gap-10 rounded-[18px] border border-dashed border-line-strong p-8 md:grid-cols-12 md:p-14" data-reveal="up">
             <span className="font-serif text-[7rem] leading-[0.6] text-sand md:col-span-2" aria-hidden="true">
               “
             </span>

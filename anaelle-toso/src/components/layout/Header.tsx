@@ -89,41 +89,50 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[100] transition-transform duration-700 ease-[var(--ease-expo)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"}`}
+        className={`fixed inset-x-0 top-0 z-[100] px-[max(10px,calc(var(--gutter)-10px))] pt-3 transition-transform duration-700 ease-[var(--ease-expo)] ${hidden && !open ? "-translate-y-[130%]" : "translate-y-0"}`}
       >
         <div
-          className={`pointer-events-none absolute inset-0 transition-opacity duration-700 ${scrolled && !open ? "opacity-100" : "opacity-0"}`}
-          style={{ background: "rgba(18,36,26,0.94)", boxShadow: "0 1px 0 rgba(244,234,219,0.08)" }}
-          aria-hidden="true"
-        />
-        <div className="container-x relative flex h-[72px] items-center justify-between gap-6">
-          <Link href="/" className="flex items-baseline gap-2" aria-label={`${site.identity.fullName}, accueil`}>
-            <span className="font-serif text-[1.35rem]">{site.identity.fullName}</span>
-            <span className="label hidden text-cream/50 2xl:inline">— Dentisterie équine</span>
+          className={`relative mx-auto flex h-[58px] max-w-[1480px] items-center justify-between gap-6 rounded-full border pl-4 pr-2 transition-[background-color,border-color,box-shadow] duration-700 md:pl-5 ${
+            scrolled && !open
+              ? "border-line bg-[rgb(5_11_8/0.78)] shadow-[0_18px_50px_-24px_rgb(0_0_0/0.9)] backdrop-blur-xl"
+              : "border-transparent bg-transparent"
+          }`}
+        >
+          <Link href="/" className="group flex items-center gap-3" aria-label={`${site.identity.fullName}, accueil`}>
+            <span
+              className="relative grid h-9 w-9 place-items-center rounded-[11px] border border-line-strong bg-[linear-gradient(145deg,rgb(126_247_198/0.18),rgb(99_216_255/0.05))] font-serif text-[0.8rem] tracking-[-0.04em] text-cream shadow-[inset_0_1px_0_rgb(255_255_255/0.15),0_0_22px_-6px_rgb(126_247_198/0.6)]"
+              aria-hidden="true"
+            >
+              AT
+              <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-cognac shadow-[0_0_8px_var(--color-cognac)]" />
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="font-serif text-[1rem] tracking-[-0.04em]">{site.identity.fullName}</span>
+              <span className="micro mt-1 text-cream/45 max-sm:hidden">Dentisterie équine</span>
+            </span>
           </Link>
 
           <nav aria-label="Navigation principale" className="hidden xl:block">
-            <ul className="flex items-center gap-6">
+            <ul className="flex items-center gap-1">
               {primaryNav.map((l) => {
                 const on = isActive(l.href);
                 return (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className={`label group relative block py-2 transition-colors ${on ? "text-cream" : "text-cream/70 hover:text-cream"}`}
+                      className={`label group relative flex items-center gap-2 rounded-full px-3.5 py-2 transition-colors duration-500 ${on ? "bg-[rgb(126_247_198/0.08)] text-cream" : "text-cream/65 hover:bg-[rgb(255_255_255/0.04)] hover:text-cream"}`}
                       aria-current={on ? "page" : undefined}
                     >
+                      <span
+                        className={`h-1 w-1 rounded-full bg-cognac transition-[opacity,transform] duration-500 ${on ? "scale-100 opacity-100 shadow-[0_0_8px_var(--color-cognac)]" : "scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-60"}`}
+                        aria-hidden="true"
+                      />
                       <span className="relative block overflow-hidden">
                         <span className="block transition-transform duration-500 ease-[var(--ease-expo)] group-hover:-translate-y-full">{l.label}</span>
                         <span className="absolute inset-0 block translate-y-full text-sand transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-y-0" aria-hidden="true">
                           {l.label}
                         </span>
                       </span>
-                      <span
-                        className={`absolute inset-x-0 bottom-0 h-px transition-opacity duration-500 ${on ? "opacity-100" : "opacity-0"}`}
-                        style={{ backgroundImage: "linear-gradient(to right, var(--color-cream) 50%, transparent 0)", backgroundSize: "6px 1px" }}
-                        aria-hidden="true"
-                      />
                     </Link>
                   </li>
                 );
@@ -131,8 +140,8 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <Link href="/rendez-vous" className="btn btn-cream !min-h-[42px] !px-5 !py-2.5 max-sm:!px-4" data-magnetic="0.2">
+          <div className="flex items-center gap-2">
+            <Link href="/rendez-vous" className="btn btn-filled !min-h-[44px] !px-5 !py-2.5 max-sm:!px-4" data-magnetic="0.2">
               <span className="btn-label">
                 <span>
                   <span className="max-sm:hidden">Demander un </span>rendez-vous
@@ -149,7 +158,7 @@ export function Header() {
               aria-expanded={open}
               aria-controls="menu-plein-ecran"
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-              className="label flex h-[42px] items-center gap-3 rounded-[22.5px] border border-line-strong px-4 transition-colors hover:border-cream xl:hidden"
+              className="label flex h-[44px] items-center gap-3 rounded-full border border-line-strong bg-[rgb(255_255_255/0.03)] px-4 transition-colors hover:border-cognac xl:hidden"
             >
               <span className="relative block h-2.5 w-4" aria-hidden="true">
                 <span className={`absolute left-0 top-0 h-px w-full bg-cream transition-transform duration-500 ${open ? "translate-y-[5px] rotate-45" : ""}`} />
@@ -163,8 +172,9 @@ export function Header() {
 
       {/* Menu plein écran : une vignette par page */}
       <div ref={menuRef} id="menu-plein-ecran" role="dialog" aria-modal="true" aria-label="Menu" hidden className="fixed inset-0 z-[90] overflow-y-auto bg-ink" data-lenis-prevent>
-        <div className="container-x pb-10 pt-24 md:pt-28">
-          <p className="label text-cream/45">Navigation</p>
+        <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="container-x relative pb-10 pt-24 md:pt-28">
+          <p className="label flex items-center gap-3 text-cream/45"><span className="status-dot" aria-hidden="true" />Navigation</p>
           <nav aria-label="Pages du site" className="mt-6">
             <ul className="grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-3 md:gap-x-5 lg:grid-cols-4">
               {navLinks.map((l, i) => {
@@ -172,12 +182,12 @@ export function Header() {
                 return (
                   <li key={l.href} data-menu-card>
                     <Link href={l.href} onClick={() => setOpen(false)} className="group block" aria-current={on ? "page" : undefined}>
-                      <span className="relative block aspect-[4/3] overflow-hidden rounded-[12px] bg-umber">
+                      <span className="relative block aspect-[4/3] overflow-hidden rounded-[16px] border border-line bg-umber">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={siteAsset(l.image)} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-expo)] group-hover:scale-[1.06]" />
                         <span className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" aria-hidden="true" />
                         <span className="label absolute left-3 top-3 tabular-nums text-cream/80">{String(i + 1).padStart(2, "0")}</span>
-                        {on && <span className="micro absolute right-3 top-3 rounded-full bg-cream px-2 py-1 text-ink">Ici</span>}
+                        {on && <span className="micro absolute right-3 top-3 rounded-full bg-cognac px-2 py-1 text-ink">Ici</span>}
                       </span>
                       <span className="mt-3 block font-serif text-[clamp(1.35rem,2.4vw,2rem)] leading-none transition-colors group-hover:text-sand">{l.label}</span>
                       <span className="mt-1.5 block text-[0.85rem] text-cream/55">{l.sub}</span>
@@ -214,7 +224,7 @@ export function Header() {
             </div>
             <div className="overflow-hidden md:text-right">
               <div data-menu-item>
-                <Link href="/rendez-vous" onClick={() => setOpen(false)} className="btn btn-cream">
+                <Link href="/rendez-vous" onClick={() => setOpen(false)} className="btn btn-filled">
                   <span className="btn-label">
                     <span>Demander un rendez-vous</span>
                     <span aria-hidden="true">Demander un rendez-vous</span>

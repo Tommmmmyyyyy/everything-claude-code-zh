@@ -65,6 +65,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
     const intro = section.querySelector<HTMLElement>("[data-mj-intro]");
     const outro = section.querySelector<HTMLElement>("[data-mj-outro]");
     const bar = section.querySelector<HTMLElement>("[data-mj-progress]");
+    const readout = section.querySelector<HTMLElement>("[data-mj-readout]");
     const hint = section.querySelector<HTMLElement>("[data-mj-hint]");
     const labelEls = Array.from(labelsRef.current?.querySelectorAll<HTMLElement>("[data-mj-label]") ?? []);
 
@@ -90,6 +91,10 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
         outro.style.pointerEvents = o > 0.5 ? "auto" : "none";
       }
       if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
+      if (readout) {
+        const v = String(Math.round(p * 100)).padStart(3, "0");
+        if (readout.textContent !== v) readout.textContent = v;
+      }
     };
 
     const paintLabels = (p: number) => {
@@ -167,7 +172,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
         return;
       }
       try {
-        scene = mod.createMouthScene(canvas, { mobile: window.innerWidth < 768 });
+        scene = mod.createMouthScene(canvas, { mobile: window.innerWidth < 768, onAsset: () => kick() });
       } catch {
         setMode("fallback");
         return;
@@ -239,7 +244,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
         <div
           ref={stage}
           className={still ? "relative mx-auto aspect-[4/3] w-full max-w-6xl md:aspect-[16/8]" : "absolute inset-0"}
-          style={{ background: "radial-gradient(ellipse at 50% 55%, #1c140d 0%, #0d0a07 70%)" }}
+          style={{ background: "radial-gradient(ellipse at 50% 55%, #0d2620 0%, #040806 70%)" }}
         >
           <canvas ref={canvasRef} className={`absolute inset-0 h-full w-full ${mode === "fallback" ? "hidden" : ""}`} aria-hidden="true" />
           {mode === "fallback" && (
@@ -250,9 +255,9 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
           <div ref={labelsRef} className="pointer-events-none absolute inset-0" aria-hidden="true">
             {LABELS.map((l) => (
               <div key={l.id} data-mj-label data-side={l.side} className="group invisible absolute left-0 top-0 opacity-0 will-change-transform">
-                <span className="absolute -left-[5px] -top-[5px] h-2.5 w-2.5 rounded-full bg-sand shadow-[0_0_0_4px_rgba(217,196,160,0.18),0_0_18px_rgba(255,170,90,0.6)]" />
-                <span className="absolute left-2 top-0 h-px w-10 border-t border-dashed border-cream/60 group-data-[side=l]:left-auto group-data-[side=l]:right-2 md:w-16" />
-                <span data-mj-pill className="label absolute -top-[13px] left-12 whitespace-nowrap rounded-full border border-cream/25 bg-ink/80 px-3 py-1.5 text-[10px] text-cream group-data-[side=l]:left-auto group-data-[side=l]:right-12 md:left-[4.5rem] md:text-[11px] md:group-data-[side=l]:left-auto md:group-data-[side=l]:right-[4.5rem]">
+                <span className="absolute -left-[5px] -top-[5px] h-2.5 w-2.5 rounded-full bg-cognac shadow-[0_0_0_4px_rgba(126,247,198,0.16),0_0_18px_rgba(126,247,198,0.7)]" />
+                <span className="absolute left-2 top-0 h-px w-10 bg-[linear-gradient(90deg,rgba(126,247,198,0.9),rgba(126,247,198,0.25))] group-data-[side=l]:left-auto group-data-[side=l]:right-2 group-data-[side=l]:bg-[linear-gradient(270deg,rgba(126,247,198,0.9),rgba(126,247,198,0.25))] md:w-16" />
+                <span data-mj-pill className="label absolute -top-[13px] left-12 whitespace-nowrap rounded-full border border-[rgba(126,247,198,0.35)] bg-[rgba(4,8,6,0.82)] px-3 py-1.5 text-[10px] text-cream shadow-[0_0_24px_-8px_rgba(126,247,198,0.6)] group-data-[side=l]:left-auto group-data-[side=l]:right-12 md:left-[4.5rem] md:text-[11px] md:group-data-[side=l]:left-auto md:group-data-[side=l]:right-[4.5rem]">
                   <span className="md:hidden">{l.short ?? l.text}</span>
                   <span className="max-md:hidden">{l.text}</span>
                 </span>
@@ -260,9 +265,10 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
             ))}
           </div>
           {/* lisibilité des légendes */}
-          {!still && <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%]" style={{ background: "linear-gradient(to top, rgba(13,10,7,0.78), rgba(13,10,7,0))" }} aria-hidden="true" />}
+          {!still && <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%]" style={{ background: "linear-gradient(to top, rgba(4,8,6,0.8), rgba(4,8,6,0))" }} aria-hidden="true" />}
           {/* vignettage + grain */}
-          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(8,6,4,0.75))" }} aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(2,6,5,0.75))" }} aria-hidden="true" />
+          {!still && <div className="hud-corners pointer-events-none absolute inset-4 md:inset-6" style={{ ["--hl" as string]: "20px" }} aria-hidden="true" />}
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="grain" />
           </div>
@@ -275,12 +281,15 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
             {/* En-tête */}
             <div className="pointer-events-none absolute inset-x-0 top-0 pt-[calc(var(--header-h,72px)+3vh)]">
               <div className="container-x flex items-center gap-4">
-                <span className="label text-cream/60">({index})</span>
+                <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
                 <span className="label">L&apos;anatomie en mouvement</span>
-                <span className="rule-dashed flex-1" aria-hidden="true" />
+                <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" /></span>
+                <span className="micro tabular-nums text-cream/55 max-sm:hidden" aria-hidden="true">
+                  Scan <span data-mj-readout className="text-sand">000</span> %
+                </span>
                 <ol className="flex items-center gap-2" aria-hidden="true">
                   {CHAPTERS.map((c) => (
-                    <li key={c.n} data-mj-dot className="h-1.5 w-1.5 rounded-full bg-cream/25 transition-colors duration-500 [&.is-active]:bg-sand" />
+                    <li key={c.n} data-mj-dot className="h-1.5 w-1.5 rounded-full bg-cream/25 transition-[background-color,box-shadow] duration-500 [&.is-active]:bg-cognac [&.is-active]:shadow-[0_0_8px_var(--color-cognac)]" />
                   ))}
                 </ol>
               </div>
@@ -300,7 +309,7 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
             {/* Chapitres */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-10 md:pb-14">
               <div className="container-x">
-                <div className="grid max-w-md transition-opacity duration-300 max-md:rounded-[12px] max-md:bg-ink/80 max-md:p-5 [&:not(:has(.is-active))]:opacity-0">
+                <div className="grid max-w-md transition-opacity duration-300 max-md:rounded-[16px] max-md:border max-md:border-line max-md:bg-[rgba(4,8,6,0.85)] max-md:p-5 [&:not(:has(.is-active))]:opacity-0">
                 {CHAPTERS.map((c) => (
                   <article
                     key={c.n}
@@ -320,19 +329,19 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
             <p data-mj-hint className="label pointer-events-none absolute bottom-8 right-[var(--gutter)] flex items-center gap-3 text-cream/55">
               Défiler
               <span className="relative h-8 w-px overflow-hidden bg-line-strong" aria-hidden="true">
-                <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_1.8s_var(--ease-expo)_infinite] bg-cream" />
+                <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_1.8s_var(--ease-expo)_infinite] bg-cognac" />
               </span>
             </p>
 
             {/* Sortie : ouverture sur les prestations */}
-            <div data-mj-outro className="invisible absolute inset-0 flex items-center opacity-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(13,10,7,0.82), rgba(13,10,7,0.2) 70%)" }}>
+            <div data-mj-outro className="invisible absolute inset-0 flex items-center opacity-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(4,8,6,0.8), rgba(4,8,6,0.15) 70%)" }}>
               <div className="container-x">
                 <p className="label text-sand">Et pour chacune de ces structures</p>
                 <p className="display mt-6 max-w-[12ch]">
                   Un soin <em className="italic text-sand">adapté.</em>
                 </p>
                 <div className="mt-10 flex flex-wrap gap-3">
-                  <ButtonLink href="/prestations" variant="cream">
+                  <ButtonLink href="/prestations" variant="filled">
                     Découvrir les prestations
                   </ButtonLink>
                   <ButtonLink href="/prestations#dentition" variant="ghost" icon={false}>
@@ -342,10 +351,10 @@ export function MouthJourney({ index = "06" }: { index?: string }) {
               </div>
             </div>
 
-            <p className="micro pointer-events-none absolute bottom-3 left-[var(--gutter)] text-cream/35 max-md:hidden">Modèle simplifié, à visée pédagogique.</p>
+            <p className="micro pointer-events-none absolute bottom-3 left-[var(--gutter)] text-cream/35 max-md:hidden">Modèle simplifié, à visée pédagogique — tables dentaires d&apos;après photographies d&apos;un crâne réel.</p>
 
             <div className="absolute inset-x-0 bottom-0 h-px bg-line" aria-hidden="true">
-              <div data-mj-progress className="h-full origin-left scale-x-0 bg-cream" />
+              <div data-mj-progress className="h-full origin-left scale-x-0 bg-cognac shadow-[0_0_10px_var(--color-cognac)]" />
             </div>
           </>
         )}
@@ -359,16 +368,16 @@ function StillContent({ index }: { index: string }) {
   return (
     <div className="container-x section-y">
       <div className="flex items-center gap-4">
-        <span className="label text-cream/50">({index})</span>
+        <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">{index}</span>
         <span className="label">L&apos;anatomie en mouvement</span>
-        <span className="rule-dashed flex-1" aria-hidden="true" />
+        <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" /></span>
       </div>
       <h2 id="mj-title" className="heading mt-8 max-w-3xl">
         Au cœur de la bouche <em className="italic text-sand">du cheval.</em>
       </h2>
       <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {CHAPTERS.map((c) => (
-          <li key={c.n} className="border-t border-dashed border-line-strong pt-5">
+          <li key={c.n} className="rounded-[16px] border border-line bg-ink-2 p-5">
             <p className="label text-sand">
               {c.n} — {c.title}
             </p>
@@ -377,7 +386,7 @@ function StillContent({ index }: { index: string }) {
         ))}
       </ol>
       <div className="mt-12 flex flex-wrap gap-3">
-        <ButtonLink href="/prestations" variant="cream">
+        <ButtonLink href="/prestations" variant="filled">
           Découvrir les prestations
         </ButtonLink>
       </div>

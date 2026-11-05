@@ -43,9 +43,9 @@ export default function Prestations() {
       <section id="fiches" aria-labelledby="fiches-title" className="theme-light relative overflow-hidden bg-ink pt-24 md:pt-36">
         <div className="container-x">
           <div className="flex items-center gap-4">
-            <span className="label tabular-nums text-cream/50">(03)</span>
+            <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">03</span>
             <span className="label">Les soins, un par un</span>
-            <span className="rule-dashed flex-1" data-reveal="line" aria-hidden="true" />
+            <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" data-reveal="line" /></span>
           </div>
           <h2 id="fiches-title" className="heading mt-10 max-w-4xl md:mt-14" data-reveal="lines">
             Choisissez un soin, <em className="italic text-sand">découvrez sa fiche.</em>

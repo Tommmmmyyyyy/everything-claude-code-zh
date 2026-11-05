@@ -15,6 +15,18 @@ export function registerCurtain(el: HTMLElement | null) {
   curtain = el;
 }
 
+/** Faisceau lumineux qui accompagne le bord du rideau (de bas en haut). */
+function sweepEdge(duration: number, delay = 0) {
+  const edge = document.querySelector<HTMLElement>("[data-curtain-edge]");
+  if (!edge) return;
+  gsap.killTweensOf(edge);
+  gsap.fromTo(
+    edge,
+    { y: window.innerHeight, autoAlpha: 1 },
+    { y: 0, duration, delay, ease: "expo.inOut", onComplete: () => gsap.to(edge, { autoAlpha: 0, duration: 0.25 }) },
+  );
+}
+
 export function cover(label: string, then: () => void) {
   const el = curtain;
   if (!el || prefersReducedMotion()) {
@@ -31,6 +43,7 @@ export function cover(label: string, then: () => void) {
   covered = true;
   gsap.killTweensOf(el);
   gsap.set(el, { visibility: "visible" });
+  sweepEdge(0.42);
   gsap
     .timeline({ onComplete: then })
     .fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.42, ease: "expo.inOut" })
@@ -53,12 +66,13 @@ export function uncover() {
   gsap.set(el, { visibility: "visible", clipPath: "inset(0% 0% 0% 0%)" });
   // relevé après le premier affichage de la nouvelle page (aucun flash de contenu non stylé)
   requestAnimationFrame(() =>
-    requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      sweepEdge(0.58, 0.12);
       gsap
         .timeline({ onComplete: () => gsap.set(el, { visibility: "hidden", clearProps: "willChange" }) })
         .to(el.querySelectorAll("[data-curtain-in]"), { yPercent: -110, duration: 0.22, stagger: 0.025, ease: "expo.in" })
-        .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.58, ease: "expo.inOut" }, ">-0.1"),
-    ),
+        .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.58, ease: "expo.inOut" }, ">-0.1");
+    }),
   );
   // filet de sécurité : le rideau ne doit jamais rester devant la page
   window.setTimeout(() => {

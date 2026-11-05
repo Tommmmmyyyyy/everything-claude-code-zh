@@ -305,7 +305,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
 
   if (status.kind === "sent") {
     return (
-      <div ref={panel} className="rounded-[12px] border border-line bg-ink/40 p-8 md:p-14" role="status">
+      <div ref={panel} className="rounded-[18px] border border-line bg-ink/40 p-8 md:p-14" role="status">
         <div className="animate-[fadeup_0.8s_var(--ease-expo)]">
           <svg viewBox="0 0 64 64" className="h-14 w-14 text-sand" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
             <circle cx="32" cy="32" r="30" strokeOpacity="0.4" />
@@ -379,7 +379,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
 
       {/* Contenu de l'étape */}
       <div ref={panel} className="min-w-0 md:col-span-8">
-        <div className="rounded-[12px] border border-line bg-ink/40 p-6 md:p-10">
+        <div className="rounded-[18px] border border-line bg-ink/40 p-6 md:p-10">
           <p ref={live} className="sr-only" aria-live="polite" />
           <div key={current} className="animate-[fadeup_0.6s_var(--ease-expo)]">
             <p className="label text-sand">
@@ -408,7 +408,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
                       return (
                         <label
                           key={t.id}
-                          className={`group relative cursor-pointer rounded-[12px] border p-5 transition-colors duration-300 ${on ? "border-cream bg-cream/[0.06]" : "border-line-strong hover:border-cream/70"}`}
+                          className={`group relative cursor-pointer rounded-[18px] border p-5 transition-colors duration-300 ${on ? "border-cream bg-cream/[0.06]" : "border-line-strong hover:border-cream/70"}`}
                         >
                           <input type="radio" name="request.type" value={t.id} checked={on} onChange={() => set("request.type", t.id)} className="peer sr-only" />
                           <span className={`absolute right-4 top-4 h-4 w-4 rounded-full border transition-colors peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-cream ${on ? "border-sand bg-sand" : "border-line-strong"}`} aria-hidden="true" />
@@ -563,7 +563,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
                       name="consent"
                       checked={data.consent === true}
                       onChange={(e) => set("consent", e.target.checked)}
-                      className="mt-1 h-5 w-5 shrink-0 accent-[#d9c4a0]"
+                      className="mt-1 h-5 w-5 shrink-0 accent-[#7ef7c6]"
                       aria-invalid={errors.consent ? true : undefined}
                       aria-describedby={errors.consent ? "f-consent-err" : undefined}
                     />
@@ -591,7 +591,7 @@ export function BookingForm({ contactFallback }: { contactFallback: React.ReactN
             </div>
 
             {status.kind === "error" && (
-              <div role="alert" className="mt-8 rounded-[12px] border border-[#e08a6a]/40 bg-[#e08a6a]/10 p-4 text-[0.95rem] text-[#f6c2a8]">
+              <div role="alert" className="mt-8 rounded-[18px] border border-[#e08a6a]/40 bg-[#e08a6a]/10 p-4 text-[0.95rem] text-[#f6c2a8]">
                 {status.message}
                 <div className="mt-2 text-cream/70">{contactFallback}</div>
               </div>

@@ -106,7 +106,7 @@ export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string
         </div>
 
         <div className="relative md:col-span-8" data-reveal="fade">
-          <div ref={mapBox} className="map-dark relative aspect-[4/5] overflow-hidden rounded-[12px] border border-line bg-forest sm:aspect-[4/3]">
+          <div ref={mapBox} className="map-dark relative aspect-[4/5] overflow-hidden rounded-[18px] border border-line bg-forest sm:aspect-[4/3]">
             {near ? <ZoneMap zone={zone} onReady={onReady} /> : <div className="h-full w-full bg-forest" />}
             {configured && (
               <>
@@ -117,7 +117,7 @@ export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string
                 >
                   Recentrer sur la Somme
                 </button>
-                <ul className="micro pointer-events-none absolute bottom-4 left-4 z-[500] grid gap-2 rounded-[12px] border border-line bg-ink/80 p-4 text-cream/75 backdrop-blur-sm" aria-label="Légende">
+                <ul className="micro pointer-events-none absolute bottom-4 left-4 z-[500] grid gap-2 rounded-[18px] border border-line bg-ink/80 p-4 text-cream/75 backdrop-blur-sm" aria-label="Légende">
                   <li className="flex items-center gap-2.5"><span className="h-2.5 w-2.5 rounded-full bg-cognac" />Ma base</li>
                   <li className="flex items-center gap-2.5"><span className="h-2.5 w-4 rounded-full border border-dashed border-cognac" />Zone principale</li>
                   <li className="flex items-center gap-2.5"><span className="h-2 w-2 rounded-full bg-cream" />Villes desservies</li>
@@ -128,7 +128,7 @@ export function Zone({ zone, index = "10" }: { zone: ZoneContent; index?: string
             )}
             {!configured && (
               <div className="pointer-events-none absolute inset-0 z-[500] flex items-end p-5 md:p-8">
-                <div className="pointer-events-auto max-w-sm rounded-[12px] border border-line bg-ink/85 p-5 backdrop-blur-sm">
+                <div className="pointer-events-auto max-w-sm rounded-[18px] border border-line bg-ink/85 p-5 backdrop-blur-sm">
                   <p className="label text-sand">Carte en préparation</p>
                   <p className="mt-2 text-[0.95rem] leading-relaxed text-cream/75">
                     La zone d&apos;intervention sera affichée ici. En attendant, indiquez l&apos;adresse de votre écurie dans votre demande : je vous confirme si je peux me déplacer.

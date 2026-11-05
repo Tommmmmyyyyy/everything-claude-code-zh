@@ -44,8 +44,8 @@ function Viewfinder() {
     <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full text-cream" fill="none" stroke="currentColor">
       <defs>
         <radialGradient id="vf-glow" cx="0.72" cy="0.5" r="0.4">
-          <stop offset="0" stopColor="#e7b072" stopOpacity="0.16" />
-          <stop offset="1" stopColor="#e7b072" stopOpacity="0" />
+          <stop offset="0" stopColor="#7ef7c6" stopOpacity="0.16" />
+          <stop offset="1" stopColor="#7ef7c6" stopOpacity="0" />
         </radialGradient>
       </defs>
       <rect width="1000" height="600" fill="url(#vf-glow)" stroke="none" />

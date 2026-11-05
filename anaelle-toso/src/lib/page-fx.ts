@@ -1,6 +1,7 @@
 "use client";
 
 import { gsap, ScrollTrigger, SplitText, prefersReducedMotion, isFinePointer } from "./gsap";
+import { scramble } from "./scramble";
 
 /**
  * Effets déclaratifs d'une page : révélations (data-reveal), parallaxe (data-parallax),
@@ -39,7 +40,8 @@ export function setupPageFX(): () => void {
               const targets = kind === "chars" ? self.chars : kind === "words" ? self.words : self.lines;
               return gsap.from(targets, {
                 yPercent: 110,
-                duration: kind === "chars" ? 1.2 : 1.25,
+                opacity: 0,
+                duration: kind === "chars" ? 1.2 : 1.35,
                 stagger: kind === "chars" ? 0.025 : kind === "words" ? 0.03 : 0.09,
                 delay,
                 ease: "expo.out",
@@ -101,6 +103,20 @@ export function setupPageFX(): () => void {
             delay,
             scrollTrigger: st,
           });
+          break;
+        }
+        case "decode": {
+          el.classList.add("is-in");
+          let stop = () => {};
+          ScrollTrigger.create({
+            trigger: el,
+            start,
+            once: true,
+            onEnter: () => {
+              stop = scramble(el, { duration: parseFloat(el.dataset.duration || "0.9"), delay });
+            },
+          });
+          cleanups.push(() => stop());
           break;
         }
         case "fade": {
@@ -165,6 +181,19 @@ export function setupPageFX(): () => void {
     });
   }
 
+
+  /* ── Halo qui suit le pointeur sur les cartes ─────── */
+  if (!reduce && isFinePointer()) {
+    gsap.utils.toArray<HTMLElement>("[data-spotlight]").forEach((el) => {
+      const move = (e: PointerEvent) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+      };
+      el.addEventListener("pointermove", move);
+      cleanups.push(() => el.removeEventListener("pointermove", move));
+    });
+  }
 
   requestAnimationFrame(() => ScrollTrigger.refresh());
   /* ── Grain argentique : animé seulement lorsqu'il est à l'écran ── */

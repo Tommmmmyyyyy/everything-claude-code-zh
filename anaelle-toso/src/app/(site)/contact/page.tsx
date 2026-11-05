@@ -51,7 +51,7 @@ export default function Contact() {
               <a
                 href={k.href}
                 {...(k.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="group relative flex h-full flex-col justify-between gap-10 overflow-hidden rounded-[12px] border border-line bg-ink-2 p-6 transition-colors duration-500 hover:border-cream/50 md:p-7"
+                className="group relative flex h-full flex-col justify-between gap-10 overflow-hidden rounded-[18px] border border-line bg-ink-2 p-6 transition-colors duration-500 hover:border-cream/50 md:p-7"
                 data-cursor={k.external ? "Ouvrir" : undefined}
               >
                 <span className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100" style={{ background: "radial-gradient(circle at 85% 0%, rgba(192,122,67,0.22), transparent 60%)" }} aria-hidden="true" />
@@ -75,9 +75,9 @@ export default function Contact() {
         <div className="container-x grid gap-12 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-4">
             <div className="flex items-center gap-4">
-              <span className="label tabular-nums text-cream/50">(02)</span>
+              <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">02</span>
               <span className="label">Écrire</span>
-              <span className="rule-dashed flex-1" data-reveal="line" aria-hidden="true" />
+              <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" data-reveal="line" /></span>
             </div>
             <h2 id="ecrire-title" className="heading mt-8" data-reveal="lines">
               Un message, <em className="italic text-sand">une question.</em>
@@ -91,20 +91,20 @@ export default function Contact() {
               </ButtonLink>
             </div>
           </div>
-          <div className="rounded-[12px] border border-line bg-ink-2 p-6 shadow-[0_24px_60px_-40px_rgba(19,36,26,0.35)] md:col-span-7 md:col-start-6 md:p-10">
+          <div className="rounded-[18px] border border-line bg-ink-2 p-6 shadow-[0_24px_60px_-40px_rgba(19,36,26,0.35)] md:col-span-7 md:col-start-6 md:p-10">
             <ContactForm />
           </div>
         </div>
       </section>
 
       <section id="avis" aria-labelledby="avis-title" className="relative scroll-mt-20 overflow-hidden bg-forest py-24 md:py-36">
-        <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(217,196,160,0.1), transparent 55%)" }} aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(126,247,198,0.08), transparent 55%)" }} aria-hidden="true" />
         <div className="container-x relative grid gap-12 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-4">
             <div className="flex items-center gap-4">
-              <span className="label tabular-nums text-cream/50">(03)</span>
+              <span className="label inline-flex h-6 items-center rounded-full border border-line-strong px-2.5 tabular-nums text-sand">03</span>
               <span className="label">Votre avis</span>
-              <span className="rule-dashed flex-1" data-reveal="line" aria-hidden="true" />
+              <span className="relative h-px flex-1 bg-line" aria-hidden="true"><span className="absolute inset-0 origin-left bg-[linear-gradient(90deg,var(--color-cognac),transparent_70%)] opacity-70" data-reveal="line" /></span>
             </div>
             <h2 id="avis-title" className="heading mt-8" data-reveal="lines">
               Partagez votre <em className="italic text-sand">expérience.</em>
@@ -121,7 +121,7 @@ export default function Contact() {
               ))}
             </ol>
           </div>
-          <div className="rounded-[12px] border border-line bg-ink/40 p-6 md:col-span-7 md:col-start-6 md:p-10">
+          <div className="rounded-[18px] border border-line bg-ink/40 p-6 md:col-span-7 md:col-start-6 md:p-10">
             <ReviewForm />
           </div>
         </div>

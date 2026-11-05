@@ -296,8 +296,8 @@ export function DentalArch({ highlight = "none", className = "" }: { highlight?:
           <rect x="40" y="42" width="220" height="40" fill="url(#scanFade)" />
           <defs>
             <linearGradient id="scanFade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#c07a43" stopOpacity="0.3" />
-              <stop offset="1" stopColor="#c07a43" stopOpacity="0" />
+              <stop offset="0" stopColor="#7ef7c6" stopOpacity="0.3" />
+              <stop offset="1" stopColor="#7ef7c6" stopOpacity="0" />
             </linearGradient>
           </defs>
         </g>

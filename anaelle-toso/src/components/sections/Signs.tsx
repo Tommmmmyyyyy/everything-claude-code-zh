@@ -115,7 +115,7 @@ export function Signs({ content, index = "08" }: { content: SignsContent; index?
 
         <div className="md:col-span-4 md:col-start-9">
           <div className="md:sticky md:top-[calc(var(--header-h)+32px)]">
-            <div className="hidden rounded-[12px] border border-line p-6 md:block">
+            <div className="hidden rounded-[18px] border border-line p-6 md:block">
               <div key={current.id} className="animate-[fadeup_0.6s_var(--ease-expo)]">
                 <svg viewBox="0 0 120 120" className="h-28 w-28 text-sand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   {ICONS[current.icon]}
@@ -125,7 +125,7 @@ export function Signs({ content, index = "08" }: { content: SignsContent; index?
               </div>
             </div>
 
-            <div className="mt-4 rounded-[12px] bg-ink/60 p-6" aria-live="polite">
+            <div className="mt-4 rounded-[18px] bg-ink/60 p-6" aria-live="polite">
               <p className="label text-cream/50">Votre observation</p>
               {verdict ? (
                 <>

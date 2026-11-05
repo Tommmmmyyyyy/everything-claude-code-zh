@@ -66,7 +66,7 @@ export function Social({ site, content, posts, index = "12" }: { site: SiteConte
           {list.map((p, i) => (
             <li key={p.url + i} data-reveal="up" data-delay={String((i % 3) * 0.06)}>
               <a href={p.url} target="_blank" rel="noopener noreferrer" className="group block" data-cursor="Voir">
-                <div className="relative aspect-square overflow-hidden rounded-[12px] bg-umber">
+                <div className="relative aspect-square overflow-hidden rounded-[18px] bg-umber">
                   <Image
                     src={p.image}
                     alt={p.caption ? p.caption.slice(0, 120) : "Publication"}
@@ -90,7 +90,7 @@ export function Social({ site, content, posts, index = "12" }: { site: SiteConte
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="Suivre"
-            className="group relative grid overflow-hidden rounded-[12px] border border-line p-8 transition-colors duration-500 hover:border-cream/60 md:grid-cols-12 md:items-end md:p-14"
+            data-spotlight className="group relative grid overflow-hidden rounded-[18px] border border-line p-8 transition-colors duration-500 hover:border-cream/60 md:grid-cols-12 md:items-end md:p-14"
           >
             <span className="pointer-events-none absolute -right-10 -top-16 text-cream/[0.05] transition-transform duration-[1.2s] ease-[var(--ease-expo)] group-hover:-rotate-6 group-hover:scale-105" aria-hidden="true">
               <SocialIcon id="instagram" className="h-[22rem] w-[22rem]" />
@@ -115,7 +115,7 @@ export function Social({ site, content, posts, index = "12" }: { site: SiteConte
           <ul className="container-x mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-3 md:gap-6" aria-label="Emplacements de publications">
             {(["horse", "truck", "intervention", "stable", "tools", "pasture"] as const).map((m, i) => (
               <li key={m} data-reveal="up" data-delay={String((i % 3) * 0.06)}>
-                <PhotoSlot src={null} alt="" motif={m} label="Publication à venir" className="aspect-square rounded-[12px]" />
+                <PhotoSlot src={null} alt="" motif={m} label="Publication à venir" className="aspect-square rounded-[18px]" />
               </li>
             ))}
           </ul>

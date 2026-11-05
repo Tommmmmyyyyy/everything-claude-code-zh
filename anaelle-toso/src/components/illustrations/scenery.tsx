@@ -118,18 +118,18 @@ export function StableInterior({ x0, x1, y, seed = 4 }: { x0: number; x1: number
   const boxW = 300;
   const boxes: number[] = [];
   for (let x = x0 + 80; x + boxW <= x1 - 40; x += boxW + 30) boxes.push(x);
-  const coats = ["#4a2e1b", "#2a1a10", "#6b4a2e", "#1a120c", "#5c3b24"];
+  const coats = ["#1d3e39", "#112320", "#2f5b54", "#0c1615", "#254e47"];
   return (
     <g>
       {/* Mur, s'étendant vers le haut pour couvrir le ciel sur écran haut */}
-      <rect x={x0} y={y - 2400} width={x1 - x0} height={2400} fill="#1b130c" />
-      <rect x={x0} y={y - 430} width={x1 - x0} height={430} fill="#24180f" />
+      <rect x={x0} y={y - 2400} width={x1 - x0} height={2400} fill="#0c1715" />
+      <rect x={x0} y={y - 430} width={x1 - x0} height={430} fill="#0f1f1c" />
       {/* Bardage */}
       {Array.from({ length: Math.floor((x1 - x0) / 46) }, (_, i) => (
-        <rect key={i} x={x0 + i * 46} y={y - 430} width={1.5} height={430} fill="#140d08" opacity="0.6" />
+        <rect key={i} x={x0 + i * 46} y={y - 430} width={1.5} height={430} fill="#081110" opacity="0.6" />
       ))}
       {/* Poutre haute */}
-      <rect x={x0} y={y - 452} width={x1 - x0} height={24} fill="#120c07" />
+      <rect x={x0} y={y - 452} width={x1 - x0} height={24} fill="#070f0e" />
       {boxes.map((bx) => {
         const hasHorse = rand() > 0.22;
         const coat = coats[Math.floor(rand() * coats.length)];
@@ -138,32 +138,32 @@ export function StableInterior({ x0, x1, y, seed = 4 }: { x0: number; x1: number
         return (
           <g key={bx}>
             {/* Ouverture haute du box */}
-            <rect x={bx} y={y - 330} width={boxW} height={150} fill="#0c0805" />
-            <rect x={bx + 10} y={y - 322} width={boxW - 20} height={140} fill="#1a110a" />
+            <rect x={bx} y={y - 330} width={boxW} height={150} fill="#050a09" />
+            <rect x={bx + 10} y={y - 322} width={boxW - 20} height={140} fill="#0a1614" />
             {hasHorse && (
               <g transform={`translate(${bx + (flip ? 230 : 70)} ${y - 382}) scale(${flip ? -0.78 : 0.78} 0.78) rotate(${tilt} 150 300)`}>
                 <path d={HORSE_HEAD_DOOR} fill={coat} />
-                <circle cx="190" cy="140" r="5" fill="#0a0604" />
+                <circle cx="190" cy="140" r="5" fill="#040808" />
               </g>
             )}
             {/* Porte basse avec croisillon */}
-            <rect x={bx} y={y - 182} width={boxW} height={182} fill="#3a2618" />
-            <rect x={bx + 12} y={y - 170} width={boxW - 24} height={158} fill="none" stroke="#2a1b10" strokeWidth="8" />
-            <path d={`M ${bx + 16} ${y - 166} L ${bx + boxW - 16} ${y - 16} M ${bx + boxW - 16} ${y - 166} L ${bx + 16} ${y - 16}`} stroke="#2a1b10" strokeWidth="8" />
-            <rect x={bx - 4} y={y - 190} width={boxW + 8} height={10} fill="#4b3220" />
+            <rect x={bx} y={y - 182} width={boxW} height={182} fill="#19312d" />
+            <rect x={bx + 12} y={y - 170} width={boxW - 24} height={158} fill="none" stroke="#112320" strokeWidth="8" />
+            <path d={`M ${bx + 16} ${y - 166} L ${bx + boxW - 16} ${y - 16} M ${bx + boxW - 16} ${y - 166} L ${bx + 16} ${y - 16}`} stroke="#112320" strokeWidth="8" />
+            <rect x={bx - 4} y={y - 190} width={boxW + 8} height={10} fill="#21403b" />
             {/* Plaque nominative (vierge) */}
-            <rect x={bx + boxW / 2 - 30} y={y - 350} width={60} height={14} rx={2} fill="#c07a43" opacity="0.8" />
+            <rect x={bx + boxW / 2 - 30} y={y - 350} width={60} height={14} rx={2} fill="#7ef7c6" opacity="0.8" />
             {/* Grille latérale */}
             {Array.from({ length: 6 }, (_, k) => (
-              <rect key={k} x={bx + boxW + 6 + k * 4} y={y - 330} width={1.5} height={150} fill="#3a2a1c" />
+              <rect key={k} x={bx + boxW + 6 + k * 4} y={y - 330} width={1.5} height={150} fill="#1c322e" />
             ))}
           </g>
         );
       })}
       {/* Balle de foin et seau */}
       <g transform={`translate(${x0 + 40} ${y})`}>
-        <rect x={boxes.length ? boxW + 100 : 0} y={-70} width={110} height={70} rx={6} fill="#a8854f" />
-        <path d={`M ${boxW + 104} -46 h 102 M ${boxW + 104} -24 h 102`} stroke="#7d6036" strokeWidth="3" />
+        <rect x={boxes.length ? boxW + 100 : 0} y={-70} width={110} height={70} rx={6} fill="#4f8f89" />
+        <path d={`M ${boxW + 104} -46 h 102 M ${boxW + 104} -24 h 102`} stroke="#376a65" strokeWidth="3" />
       </g>
     </g>
   );
@@ -173,9 +173,9 @@ export function HangingLamp({ x, y, len = 120 }: { x: number; y: number; len?: n
   return (
     <g>
       <circle cx={x} cy={y + len + 30} r={190} fill="url(#lampGlow)" />
-      <rect x={x - 1} y={y} width={2} height={len} fill="#0d0905" />
-      <path d={`M ${x - 26} ${y + len + 18} L ${x - 12} ${y + len} L ${x + 12} ${y + len} L ${x + 26} ${y + len + 18} Z`} fill="#140d08" />
-      <ellipse cx={x} cy={y + len + 20} rx={14} ry={5} fill="#ffe2a8" />
+      <rect x={x - 1} y={y} width={2} height={len} fill="#050b0a" />
+      <path d={`M ${x - 26} ${y + len + 18} L ${x - 12} ${y + len} L ${x + 12} ${y + len} L ${x + 26} ${y + len + 18} Z`} fill="#081110" />
+      <ellipse cx={x} cy={y + len + 20} rx={14} ry={5} fill="#aff8d3" />
     </g>
   );
 }

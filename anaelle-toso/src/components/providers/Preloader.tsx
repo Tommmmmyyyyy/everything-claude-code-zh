@@ -65,23 +65,29 @@ export function Preloader() {
 
   return (
     <div ref={root} data-preloader className="fixed inset-0 z-[150]" aria-hidden="true">
-      <div data-pl-top className="absolute inset-x-0 top-0 h-1/2 bg-ink" />
+      <div data-pl-top className="absolute inset-x-0 top-0 h-1/2 border-b border-line bg-ink" />
       <div data-pl-bottom className="absolute inset-x-0 bottom-0 h-1/2 bg-ink" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 text-cream">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-7 text-cream">
+        <div className="bg-grid pointer-events-none absolute inset-0 opacity-80" />
         <div className="overflow-hidden">
-          <p data-pl-in className="font-serif text-[clamp(2.4rem,6vw,4.5rem)] leading-none">
-            Anaëlle <em className="italic text-sand">Toso</em>
-          </p>
+          <div data-pl-in className="flex items-center gap-4">
+            <span className="grid h-12 w-12 place-items-center rounded-[14px] border border-line-strong bg-[linear-gradient(145deg,rgb(126_247_198/0.2),rgb(99_216_255/0.05))] font-serif text-[1rem] tracking-[-0.04em] shadow-[0_0_34px_-6px_rgb(126_247_198/0.7)]">
+              AT
+            </span>
+            <p className="font-serif text-[clamp(1.9rem,4.6vw,3.6rem)] font-light leading-none tracking-[-0.05em]">
+              Anaëlle <em className="font-extralight text-sand">Toso</em>
+            </p>
+          </div>
         </div>
-        <div className="flex w-[min(320px,70vw)] items-center gap-4">
+        <div className="relative flex w-[min(380px,78vw)] items-center gap-4">
           <div className="overflow-hidden">
-            <span data-pl-in className="micro block text-cream/60">Dentisterie équine</span>
+            <span data-pl-in className="micro block text-cream/55">Dentisterie équine</span>
           </div>
           <span className="relative h-px flex-1 bg-line">
-            <span data-pl-bar className="absolute inset-0 origin-left bg-cream" />
+            <span data-pl-bar className="absolute inset-0 origin-left bg-cognac shadow-[0_0_10px_var(--color-cognac)]" />
           </span>
           <div className="overflow-hidden">
-            <span data-pl-in data-counter className="micro block tabular-nums text-cream/60">
+            <span data-pl-in data-counter className="micro block tabular-nums text-sand">
               000
             </span>
           </div>

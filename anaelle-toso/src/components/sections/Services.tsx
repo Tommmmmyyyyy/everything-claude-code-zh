@@ -176,7 +176,7 @@ export function Services({ content }: { content: ServicesContent }) {
                         )}
                       </div>
                     </div>
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-[12px] border border-line bg-forest">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-line bg-forest">
                       {s.image ? (
                         <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
                       ) : (
@@ -204,7 +204,7 @@ export function Services({ content }: { content: ServicesContent }) {
       <div
         ref={preview}
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-[260px] w-[340px] overflow-hidden rounded-[12px] border border-line bg-forest opacity-0 md:block"
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-[260px] w-[340px] overflow-hidden rounded-[18px] border border-line bg-forest opacity-0 md:block"
         style={{ clipPath: "inset(50% 50% 50% 50%)" }}
       >
         {hovered &&

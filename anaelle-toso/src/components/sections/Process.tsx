@@ -84,7 +84,7 @@ export function Process({ content, index = "07" }: { content: ProcessContent; in
                 <span className="relative z-10 grid h-10 w-10 place-items-center rounded-full border border-line-strong bg-ink md:hidden" aria-hidden="true">
                   <span className="label tabular-nums">{i + 1}</span>
                 </span>
-                <div className="md:h-full md:rounded-[12px] md:border md:border-line md:p-8">
+                <div className="md:h-full md:rounded-[18px] md:border md:border-line md:p-8">
                   <div className="flex items-start justify-between">
                     <span data-num className="hidden font-serif text-[clamp(4rem,7vw,7.5rem)] leading-[0.8] text-sand md:block">
                       {String(i + 1).padStart(2, "0")}
@@ -112,8 +112,8 @@ export function Process({ content, index = "07" }: { content: ProcessContent; in
               <div data-van className="absolute -top-[13px] -translate-x-full">
                 <svg viewBox="0 0 48 26" className="h-[24px] w-[44px] text-cream" fill="currentColor">
                   <path d="M 2 18 V 5 c 0 -1 1 -2 2 -2 h 26 c 2 0 3 1 4 2 l 6 7 c 1 0 4 1 5 3 v 3 c 0 1 -1 2 -2 2 H 4 c -1 0 -2 -1 -2 -2 Z" />
-                  <circle cx="12" cy="21" r="4" fill="#0d0a07" stroke="currentColor" strokeWidth="1.5" />
-                  <circle cx="36" cy="21" r="4" fill="#0d0a07" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="12" cy="21" r="4" fill="#040806" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="36" cy="21" r="4" fill="#040806" stroke="currentColor" strokeWidth="1.5" />
                 </svg>
               </div>
             </div>

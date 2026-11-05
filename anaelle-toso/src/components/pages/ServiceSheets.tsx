@@ -14,7 +14,7 @@ export function ServiceSheets({ content }: { content: ServicesContent }) {
           <article key={s.id} id={`fiche-${s.id}`} className="container-x scroll-mt-24 border-t border-dashed border-line-strong py-20 md:py-28" aria-labelledby={`fiche-${s.id}-titre`}>
             <div className="grid gap-10 md:grid-cols-12 md:items-center md:gap-6">
               <div className={`md:col-span-6 ${flip ? "md:order-2 md:col-start-7" : ""}`}>
-                <div data-reveal="mask" className="relative aspect-[4/3] overflow-hidden rounded-[12px] border border-line bg-forest">
+                <div data-reveal="mask" className="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-line bg-forest">
                   <div data-reveal-inner className="absolute inset-0">
                     {s.image ? (
                       <Image src={siteAsset(s.image)} alt={s.imageAlt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
