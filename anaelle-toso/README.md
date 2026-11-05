@@ -29,11 +29,20 @@ dans `.data/demandes.jsonl` pour pouvoir tester le parcours.
 
 ## Direction artistique
 
-Vert forêt profond et ivoire, accent cuivre : les sections claires (classe `theme-light`, qui
-redéfinit localement les jetons de couleur) alternent avec les sections vert profond et les scènes
-animées sombres (camion, anatomie en mouvement). Titres en Instrument Serif, textes et étiquettes en Geist (capitales 500).
-Filets pointillés, boutons en pilule, rayons limités à 12 / 22,5 / 36 px, aucune ombre portée.
-Les jetons sont dans `src/app/globals.css` (`@theme`).
+« Clinique du futur » : noir abyssal teinté de vert, lumière phosphore (menthe `#7ef7c6`) et
+halo ionique (cyan) pour les dégradés ; des sections « laboratoire » en blanc clinique (classe
+`theme-light`, qui redéfinit localement les jetons) alternent avec les scènes sombres.
+Titres en Unbounded (graisses fines), textes en Geist, étiquettes et instruments en Geist Mono.
+Langage d'instrument : coins de viseur (`.hud-corners`), grille de laboratoire (`.bg-grid`), verre
+fumé (`.glass`), pastilles d'état, étiquettes qui se « décodent » (`data-reveal="decode"`),
+halo qui suit le pointeur sur les cartes (`data-spotlight`), faisceau de scanner à l'ouverture
+et sur le rideau de transition. Les jetons sont dans `src/app/globals.css` (`@theme`).
+
+Voyage 3D : les tables dentaires et les couronnes sont texturées d'après les photographies d'un
+crâne réel (`public/images/3d/`, générées à partir de `public/images/prestations` et
+`public/images/galerie/dent-jugale.jpg`) ; la tête est présentée en hologramme balayé par un
+scanner. Pour une tête photoréaliste, un scan 3D sous licence (fichier `.glb`) pourra remplacer
+la tête procédurale de `src/components/home/head.ts`.
 
 Les scènes (lever de soleil, route, écurie, pâture, crâne) sont des illustrations vectorielles
 dessinées pour le site : elles restent cohérentes tant que les vraies photos ne sont pas

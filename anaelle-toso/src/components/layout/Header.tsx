@@ -107,7 +107,7 @@ export function Header() {
               <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-cognac shadow-[0_0_8px_var(--color-cognac)]" />
             </span>
             <span className="flex flex-col leading-none">
-              <span className="font-serif text-[1rem] tracking-[-0.04em]">{site.identity.fullName}</span>
+              <span className="whitespace-nowrap font-serif text-[0.92rem] tracking-[-0.04em] sm:text-[1rem]">{site.identity.fullName}</span>
               <span className="micro mt-1 text-cream/45 max-sm:hidden">Dentisterie équine</span>
             </span>
           </Link>
