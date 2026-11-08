@@ -10,6 +10,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { ServicesCarousel } from "@/components/home/ServicesCarousel";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { MouthJourney } from "@/components/home/MouthJourney";
+import { SkullScanner } from "@/components/home/SkullScanner";
 
 export default function Home() {
   const id = site.identity;
@@ -33,9 +34,10 @@ export default function Home() {
         lng={zone.main.lng ?? undefined}
       />
       <Approach index="02" />
+      <SkullScanner index="03" />
 
       <section id="soins" aria-labelledby="soins-title" className="theme-light tone-white relative section-y overflow-hidden bg-ink">
-        <SectionHeader index="03" label="Prestations" title={services.title} intro="Faites défiler les soins : chaque carte ouvre sa fiche détaillée." titleId="soins-title" />
+        <SectionHeader index="04" label="Prestations" title={services.title} intro="Faites défiler les soins : chaque carte ouvre sa fiche détaillée." titleId="soins-title" />
         <div className="mt-14 md:mt-20">
           <ServicesCarousel
             content={services}
@@ -48,11 +50,11 @@ export default function Home() {
         </div>
       </section>
 
-      <AboutTeaser story={story} index="04" diploma={site.identity.diploma} />
-      <TruckJourney index="05" livery={site.truck.livery} liverySub={site.truck.liverySub} truckImage={site.truck.image} truckImageAlt={site.truck.imageAlt} />
-      <MouthJourney index="06" />
-      <Testimonials content={testimonials} index="07" />
-      <ContactFinale site={site} zone={zone} index="08" />
+      <AboutTeaser story={story} index="05" diploma={site.identity.diploma} />
+      <TruckJourney index="06" livery={site.truck.livery} liverySub={site.truck.liverySub} truckImage={site.truck.image} truckImageAlt={site.truck.imageAlt} />
+      <MouthJourney index="07" />
+      <Testimonials content={testimonials} index="08" />
+      <ContactFinale site={site} zone={zone} index="09" />
     </>
   );
 }

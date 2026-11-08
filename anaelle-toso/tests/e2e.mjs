@@ -126,6 +126,16 @@ await step("le carrousel des prestations avance (flèche)", async () => {
   assert.match(await region.locator("[aria-live]").textContent(), /^02/);
 });
 
+await step("le scanner du crâne réel se charge et nomme les structures", async () => {
+  await jump("scanner", 1.4);
+  await page.waitForTimeout(3000);
+  const sec = page.locator("#scanner");
+  assert.equal(await sec.locator("canvas").count(), 1);
+  const shown = await sec.locator("[data-sk-label]").evaluateAll((els) => els.filter((e) => getComputedStyle(e).visibility === "visible").length);
+  assert.ok(shown >= 2, `repères visibles : ${shown}`);
+  assert.match(await sec.textContent(), /Articulation temporo-mandibulaire/);
+});
+
 await step("l'animation « anatomie en mouvement » se charge et mène aux prestations", async () => {
   await jump("anatomie-en-mouvement", 0.5);
   await page.waitForTimeout(2500);
@@ -164,13 +174,12 @@ await step("menu plein écran (tablette) : 7 vignettes, fermeture Échap", async
   await page.setViewportSize({ width: 1024, height: 800 });
   await page.waitForTimeout(500);
   await page.getByRole("button", { name: /ouvrir le menu/i }).click();
-  await page.waitForTimeout(1000);
   const menu = page.locator("#menu-plein-ecran");
-  assert.equal(await menu.isVisible(), true);
+  await menu.waitFor({ state: "visible", timeout: 4000 });
   assert.equal(await menu.getByRole("navigation", { name: "Pages du site" }).locator("a").count(), 7);
+  await page.waitForTimeout(800);
   await page.keyboard.press("Escape");
-  await page.waitForTimeout(900);
-  assert.equal(await menu.isVisible(), false);
+  await menu.waitFor({ state: "hidden", timeout: 4000 });
   await page.setViewportSize({ width: 1440, height: 900 });
 });
 

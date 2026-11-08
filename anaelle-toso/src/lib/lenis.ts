@@ -16,7 +16,15 @@ export function getLenis() {
 export function scrollToTarget(target: string | HTMLElement | number, opts: { offset?: number; immediate?: boolean } = {}) {
   const lenis = instance;
   if (lenis) {
-    lenis.scrollTo(target, { offset: opts.offset ?? 0, immediate: opts.immediate, duration: 1.25, easing: (t) => 1 - Math.pow(1 - t, 4) });
+    // position absolue calculée depuis la page réelle : après un changement de page, la
+    // position interne de Lenis peut encore être celle de la page précédente
+    let dest: number | string | HTMLElement = target;
+    if (typeof target !== "number") {
+      const el = typeof target === "string" ? document.querySelector<HTMLElement>(target) : target;
+      if (!el) return;
+      dest = el.getBoundingClientRect().top + window.scrollY + (opts.offset ?? 0);
+    }
+    lenis.scrollTo(dest, { offset: typeof target === "number" ? (opts.offset ?? 0) : 0, immediate: opts.immediate, force: true, duration: 1.25, easing: (t) => 1 - Math.pow(1 - t, 4) });
     return;
   }
   if (typeof target === "number") {

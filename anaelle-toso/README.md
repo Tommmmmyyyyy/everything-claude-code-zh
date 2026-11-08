@@ -38,7 +38,15 @@ fumé (`.glass`), pastilles d'état, étiquettes qui se « décodent » (`data-r
 halo qui suit le pointeur sur les cartes (`data-spotlight`), faisceau de scanner à l'ouverture
 et sur le rideau de transition. Les jetons sont dans `src/app/globals.css` (`@theme`).
 
-Voyage 3D : les tables dentaires et les couronnes sont texturées d'après les photographies d'un
+Lecture du crâne (`#scanner`, `src/components/home/SkullScanner.tsx` + `skull-scene.ts`) : la
+photographie d'un crâne d'étude réel (`public/images/histoire/crane-etude.jpg`), détourée, posée
+en relief sur un plan WebGL (carte de relief calculée depuis le détourage) et parcourue par un
+faisceau qui la révèle en radiographie ; huit repères anatomiques réels (incisives, barres,
+foramen infra-orbitaire, prémolaires, molaires, crête faciale, orbite, ATM) sont ancrés sur la
+photo. Fichiers générés dans `public/images/3d/crane/` (couleur détourée, relief, radiographie).
+
+Voyage 3D : les dents sont modélisées (`tooth-geo.ts` : section à crêtes, couronne longue et
+courbe, extrémité radiculaire) ; les tables dentaires et les couronnes sont texturées d'après les photographies d'un
 crâne réel (`public/images/3d/`, générées à partir de `public/images/prestations` et
 `public/images/galerie/dent-jugale.jpg`) ; la tête est présentée en hologramme balayé par un
 scanner. Pour une tête photoréaliste, un scan 3D sous licence (fichier `.glb`) pourra remplacer

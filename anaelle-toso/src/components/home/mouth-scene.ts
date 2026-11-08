@@ -5,13 +5,13 @@
  * crochet et rampe. La caméra suit un trajet piloté par la progression du défilement (0 → 1).
  */
 import * as THREE from "three";
-import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { buildHead, buildSkull } from "./head";
+import { toothGeometry, incisorTableTexture } from "./tooth-geo";
 import { siteAsset } from "@/lib/config";
 
 export type AnchorId = "incisives" | "barres" | "loup" | "premolaires" | "molaires" | "pointes-haut" | "pointes-bas" | "tables" | "crochet" | "rampe";
@@ -433,42 +433,8 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     return g;
   };
 
-  /**
-   * Prépare une géométrie de dent (axe y : -h/2 = surface d'occlusion, +h/2 = côté gencive) :
-   * léger effilement vers la racine, stries verticales, teinte ivoire → jaunie vers la gencive.
-   */
-  function toothShade(geo: THREE.BufferGeometry, h: number, ridges: boolean, taper: number, bend = 0, tones: [number, number] = [0xebdec6, 0xbb9a6d]) {
-    const pos = geo.attributes.position;
-    const colors = new Float32Array(pos.count * 3);
-    const tip = new THREE.Color(tones[0]);
-    const base = new THREE.Color(tones[1]);
-    const c = new THREE.Color();
-    geo.computeBoundingBox();
-    const bb = geo.boundingBox!;
-    const halfW = (bb.max.x - bb.min.x) / 2;
-    for (let i = 0; i < pos.count; i++) {
-      const y = pos.getY(i);
-      const t = Math.min(1, Math.max(0, (y + h / 2) / h)); // 0 occlusion → 1 gencive
-      let x = pos.getX(i);
-      let z = pos.getZ(i);
-      if (ridges && Math.abs(x) > halfW - 0.08) x += Math.sign(x) * 0.055 * Math.sin(z * 8.5);
-      const k = 1 - t * taper;
-      x *= k;
-      z *= 1 - t * taper * 0.5;
-      z -= bend * t * t; // courbure (face vestibulaire bombée)
-      pos.setXYZ(i, x, y, z);
-      c.copy(tip).lerp(base, smooth(0.25, 1, t));
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
-    }
-    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    geo.computeVertexNormals();
-    return geo;
-  }
-
   /** Maillage solide + contour lumineux + face de coupe. */
-  function solid(geo: THREE.BufferGeometry, mat: THREE.Material, parent: THREE.Object3D, capMat: THREE.Material = cut, edges = true) {
+  function solid(geo: THREE.BufferGeometry, mat: THREE.Material | THREE.Material[], parent: THREE.Object3D, capMat: THREE.Material = cut, edges = true) {
     const m = new THREE.Mesh(geo, mat);
     parent.add(m);
     if (edges) {
@@ -504,8 +470,12 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   /* Incisives : 6 en haut, 6 en bas, en arc */
   const INC_HU = 4.6;
   const INC_HL = 4.1;
-  const incGeoU = keep(toothShade(new RoundedBoxGeometry(1.02, INC_HU, 0.84, 5, 0.32), INC_HU, false, 0.3, 1.2, [0xffffff, 0xe2d2b2]));
-  const incGeoL = keep(toothShade(new RoundedBoxGeometry(0.98, INC_HL, 0.82, 5, 0.32), INC_HL, false, 0.3, 1.0, [0xffffff, 0xe2d2b2]));
+  const incTex = incisorTableTexture();
+  const incTable = new THREE.MeshPhysicalMaterial({ map: incTex, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.3, emissive: 0x2f4a42, emissiveIntensity: 0 });
+  materials.push(incTable);
+  textures.push(incTex);
+  const incGeoU = keep(toothGeometry({ kind: "incisor", w: 1.0, d: 0.86, h: INC_HU, side: -1, bend: 1.2, taper: 0.34, tones: [0xffffff, 0xe0cfae], seed: 3 }));
+  const incGeoL = keep(toothGeometry({ kind: "incisor", w: 0.96, d: 0.82, h: INC_HL, side: -1, bend: 1.0, taper: 0.34, tones: [0xffffff, 0xe0cfae], seed: 9 }));
   const R = 3.7;
   const C = -3.3;
   for (const jaw of ["up", "low"] as const) {
@@ -515,7 +485,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
       g.position.set(Math.sin(a) * R, 0, C + Math.cos(a) * R);
       g.rotation.y = a;
       (jaw === "up" ? upper : lower).add(g);
-      const m = solid(jaw === "up" ? incGeoU : incGeoL, cheekMat, g);
+      const m = solid(jaw === "up" ? incGeoU : incGeoL, [cheekMat, incTable], g);
       if (jaw === "up") {
         m.position.y = INC_HU / 2;
         m.rotation.x = -0.12;
@@ -587,24 +557,10 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
   }
 
   /* Dents jugales */
-  const cheekGeoU = keep(toothShade(new RoundedBoxGeometry(TOOTH_W, TOOTH_HU, TOOTH_D, 4, 0.22), TOOTH_HU, true, 0.12, 0, [0xffffff, 0xd9c7a6]));
-  const cheekGeoL = keep(toothShade(new RoundedBoxGeometry(TOOTH_W * 0.9, TOOTH_HL, TOOTH_D * 1.04, 4, 0.22), TOOTH_HL, true, 0.12, 0, [0xffffff, 0xd9c7a6]));
-  /** Table d'une dent : sa propre case de l'atlas photographique (vestibulaire → lingual, rostral en haut). */
-  const tableGeoFor = (i: number, isUp: boolean, side: -1 | 1) => {
-    const g = keep(new THREE.PlaneGeometry(TOOTH_W - 0.36, TOOTH_D - 0.36));
-    const uv = g.attributes.uv;
-    for (let k = 0; k < uv.count; k++) {
-      let u = uv.getX(k);
-      let v = uv.getY(k);
-      if (side === 1) u = 1 - u;
-      if (!isUp) v = 1 - v;
-      uv.setXY(k, (i + 0.03 + u * 0.94) / 6, (isUp ? 0.5 : 0) + (0.03 + v * 0.94) * 0.5);
-    }
-    return g;
-  };
   const shear = new THREE.Matrix4();
   const spikeGeo = keep(new THREE.ConeGeometry(0.11, 0.42, 4));
-  const hookGeo = keep(new RoundedBoxGeometry(TOOTH_W - 0.3, 1.0, 0.9, 2, 0.2));
+  // surdent : même section que la dent, extrémité arrondie (dôme) tournée vers la dent opposée
+  const hookGeo = keep(toothGeometry({ kind: "upper", w: TOOTH_W - 0.4, d: 1.05, h: 1.3, side: -1, bend: 0, taper: 0.3, seed: 4 }));
   const wolfGeo = keep(new THREE.ConeGeometry(0.3, 1.05, 12));
 
   const vary = rng(5);
@@ -618,13 +574,28 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         // tables inclinées : bord externe plus bas en haut, bord interne plus haut en bas
         g.rotation.z = -side * TILT;
         (isUp ? upper : lower).add(g);
-        const m = solid(isUp ? cheekGeoU : cheekGeoL, cheekMat, g);
         const H = isUp ? TOOTH_HU : TOOTH_HL;
+        // dent modélisée : section à crêtes, couronne courbe, table photographique (case i de l'atlas)
+        const geo = keep(
+          toothGeometry({
+            kind: isUp ? "upper" : "lower",
+            w: isUp ? TOOTH_W : TOOTH_W * 0.86,
+            d: isUp ? TOOTH_D : TOOTH_D * 1.04,
+            h: H,
+            side,
+            flipZ: !isUp,
+            bend: 0.3,
+            taper: 0.14,
+            seed: i * 7 + (isUp ? 1 : 3) + (side + 1),
+            capUv: (u, v) => [(i + 0.04 + u * 0.92) / 6, (isUp ? 0.5 : 0) + (0.04 + v * 0.92) * 0.5],
+          }),
+        );
+        const m = solid(geo, [cheekMat, tableUp], g);
         // géométrie : occlusion en -y ; retournée pour la mâchoire inférieure
         m.position.y = isUp ? H / 2 : -H / 2;
         if (!isUp) m.rotation.x = Math.PI;
         // légères irrégularités naturelles
-        m.scale.set(1 + (vary() - 0.5) * 0.06, 1, 1 + (vary() - 0.5) * 0.04);
+        m.scale.set(1 + (vary() - 0.5) * 0.05, 1, 1 + (vary() - 0.5) * 0.04);
         m.rotation.y = (vary() - 0.5) * 0.05;
         // couronnes de réserve en éventail (comme sur le crâne) : tables à plat, racines inclinées
         // vers l'avant pour les prémolaires, vers l'arrière pour les molaires
@@ -633,11 +604,6 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         shear.set(1, 0, 0, 0, 0, 1, 0, 0, 0, k, 1, 0, 0, 0, 0, 1);
         m.matrix.premultiply(shear);
         m.matrixAutoUpdate = false;
-        // table dentaire
-        const t = new THREE.Mesh(tableGeoFor(i, isUp, side), tableUp);
-        t.rotation.x = isUp ? Math.PI / 2 : -Math.PI / 2;
-        t.position.y = isUp ? -0.012 : 0.012;
-        g.add(t);
         // pointes d'émail : bord externe (haut) / interne (bas)
         const edgeX = isUp ? side * (TOOTH_W / 2 + 0.02) : -side * (TOOTH_W / 2 + 0.02);
         for (const dz of [-0.82, 0, 0.82]) {
@@ -651,12 +617,13 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
         // crochet (1re dent jugale supérieure) et rampe (dernière inférieure)
         if (isUp && i === 0) {
           const h = solid(hookGeo, hookMat, g, cut, true);
-          h.position.set(0, -0.52, TOOTH_D / 2 - 0.45);
+          h.position.set(0, -0.42, TOOTH_D / 2 - 0.5);
+          h.rotation.x = Math.PI;
           if (side === -1) anchor("crochet", g, 0, -0.85, TOOTH_D / 2 - 0.2);
         }
         if (!isUp && i === 5) {
           const h = solid(hookGeo, hookMat, g, cut, true);
-          h.position.set(0, 0.52, -TOOTH_D / 2 + 0.45);
+          h.position.set(0, 0.42, -TOOTH_D / 2 + 0.5);
           if (side === -1) anchor("rampe", g, 0, 0.85, -TOOTH_D / 2 + 0.2);
         }
         if (side === -1 && isUp && i === 1) anchor("premolaires", g, side * -1.3, 2.0, 0);
@@ -821,6 +788,7 @@ export function createMouthScene(canvas: HTMLCanvasElement, opts: { mobile: bool
     enamel.emissiveIntensity = 0.12 + 2.6 * xrayBone;
     cheekMat.emissive.setHex(xrayBone > 0.01 ? 0x5a8f80 : 0x2a1c10);
     cheekMat.emissiveIntensity = 0.1 + 1.9 * xrayBone;
+    incTable.emissiveIntensity = 1.6 * xrayBone;
     // en rayons X, les tissus mous s'effacent : restent les os et les dents
     const soft = 1 - 0.78 * xrayBone;
     for (const m of softTissues) {
