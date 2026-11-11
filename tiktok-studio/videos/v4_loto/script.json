@@ -1,0 +1,19 @@
+{
+ "voice": "fabien", "lead": 0.3, "pause": 0.3, "tail": 1.6,
+ "lines": [
+  {"id":"l1", "text":"Un ^ticket ticket de Loto chaque semaine, ^vie toute votre vie. ^combien Combien ça vous coûte, vraiment ?", "pause":0.4},
+  {"id":"l2", "text":"Une grille, c'est ^g220 {*2,20 €|deux euros vingt}."},
+  {"id":"l3", "text":"Une par semaine, ça fait ^an {*114 €|cent quatorze euros} par an. ^brout Une broutille.", "pause":0.4},
+  {"id":"l4", "text":"Mais sur ^y40 {40 ans|quarante ans}, ça fait ^tot {*4 576 €|quatre mille cinq cent soixante-seize euros}.", "pause":0.45},
+  {"id":"l5", "text":"^jack Et vos chances de décrocher le jackpot ? ^odds Une sur {*19 millions|dix-neuf millions}, à chaque tirage.", "pause":0.4},
+  {"id":"l6", "text":"En quarante ans, vous aurez joué ^grids {*2 080|deux mille quatre-vingts} grilles."},
+  {"id":"l7", "text":"^chance Vos chances de gagner le gros lot au moins une fois : ^n9k à peu près une sur {*9 000|neuf mille}.", "pause":0.45},
+  {"id":"l8", "text":"^crowd Imaginez neuf mille personnes qui font exactement comme vous. ^one Une seule gagne. ^others Toutes les autres ont payé.", "pause":0.45},
+  {"id":"l9", "text":"^inv Maintenant, imaginez que vous placiez ces {2,20 €|deux euros vingt} chaque semaine, ^r5 à {*5 %|cinq pour cent} par an."},
+  {"id":"l10","text":"^fv Après quarante ans, vous auriez environ {*14 500 €|quatorze mille cinq cents euros}. ^pasfort Pas une fortune... ^x3 mais plus de *trois *fois votre mise.", "pause":0.45},
+  {"id":"l11","text":"^warn Attention, c'est une simulation : ^w1 un rendement de cinq pour cent n'est jamais garanti.", "pause":0.4},
+  {"id":"l12","text":"^plaisir Jouer pour le plaisir, pourquoi pas. ^plan Mais le Loto, ce n'est pas un plan pour devenir riche.", "pause":0.45},
+  {"id":"l13","text":"^temps Le vrai gros lot, c'est souvent le *temps.", "pause":0.45},
+  {"id":"l14","text":"^cta Et vous, vous *jouez ?"}
+ ]
+}

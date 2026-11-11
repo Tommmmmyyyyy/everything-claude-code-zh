@@ -1,0 +1,22 @@
+{
+ "voice": "fabien", "lead": 0.3, "pause": 0.3, "tail": 1.6,
+ "lines": [
+  {"id":"l1", "text":"Un ^dist distributeur automatique, c'est de l'argent qui tombe pendant que vous ^dort *dormez ?", "pause":0.35},
+  {"id":"l2", "text":"^calc Faisons le calcul, pour de vrai.", "pause":0.35},
+  {"id":"l3", "text":"Une machine neuve, snacks et boissons, coûte environ ^m5k {*5 000 €|cinq mille euros}."},
+  {"id":"l4", "text":"Vous achetez une canette ^buy {*0,60 €|soixante centimes}, vous la revendez ^sell {*1,50 €|un euro cinquante}."},
+  {"id":"l5", "text":"^marge {*0,90 €|Quatre-vingt-dix centimes} de marge par vente. ^enorme Ça a l'air énorme.", "pause":0.4},
+  {"id":"l6", "text":"Dans un bon emplacement, ^loc disons des bureaux, la machine vend ^v25 {*25|vingt-cinq} produits par jour."},
+  {"id":"l7", "text":"Sur un mois de travail, ça fait ^ca {*825 €|huit cent vingt-cinq euros} de chiffre d'affaires.", "pause":0.4},
+  {"id":"l8", "text":"^ach Mais retirez les produits achetés : {*330 €|trois cent trente euros}."},
+  {"id":"l9", "text":"^comm La commission de l'entreprise qui vous accueille : environ {*80 €|quatre-vingts euros}."},
+  {"id":"l10","text":"^fix L'électricité, le paiement par carte, l'assurance : encore {*80 €|quatre-vingts euros}."},
+  {"id":"l11","text":"^per Les produits périmés et les cotisations sociales : environ {*125 €|cent vingt-cinq euros}.", "pause":0.4},
+  {"id":"l12","text":"^reste Il vous reste environ {*200 €|deux cents euros} par mois.", "pause":0.45},
+  {"id":"l13","text":"^pay À ce rythme, il faut à peu près ^y2 {*2 ans|deux ans} juste pour rembourser la machine.", "pause":0.45},
+  {"id":"l14","text":"^emp Et tout dépend de l'emplacement. ^v8 À {8|huit} ventes par jour, vous ne gagnez presque rien. ^v50 À {50|cinquante}, près de {*500 €|cinq cents euros} par mois.", "pause":0.45},
+  {"id":"l15","text":"^time Sans compter votre temps : ^t1 le réapprovisionnement, ^t2 les pannes, ^t3 les trajets.", "pause":0.45},
+  {"id":"l16","text":"^passif Alors, revenu passif ? Pas vraiment. ^commerce C'est un petit commerce. ^vrai Et ce que vous achetez vraiment, c'est un *emplacement.", "pause":0.45},
+  {"id":"l17","text":"^cta Vous, vous l'installeriez *où ?"}
+ ]
+}

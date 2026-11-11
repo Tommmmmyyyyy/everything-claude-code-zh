@@ -153,6 +153,71 @@ B.house = () => {
   return g;
 };
 
+
+B.vending = () => {
+  const g = new THREE.Group();
+  const W = 2.1, H = 3.5, D = 1.35;
+  const body = mesh(roundedBox(W, H, D, .12, 4), clay(C.mint, { r: .55 })); body.position.y = H / 2; g.add(body);
+  // glass window (dark) with shelves of products
+  const win = mesh(roundedBox(1.35, 2.35, .06, .05, 3), clay(0x0b231b, { r: .6 }));
+  win.position.set(-.3, 2.15, D / 2 + .01); g.add(win);
+  const glass = mesh(roundedBox(1.35, 2.35, .02, .05, 2), new THREE.MeshPhysicalMaterial({ color: 0xdff7ee, roughness: .05, transparent: true, opacity: .16, clearcoat: 1, envMapIntensity: 2, depthWrite: false }), false);
+  glass.position.set(-.3, 2.15, D / 2 + .32); g.add(glass);
+  const cols = [C.gold, C.coral, C.cream, 0x6EE7B7, C.gold, 0xF59E0B];
+  for (let r = 0; r < 4; r++) {
+    const y = 1.18 + r * .55;
+    const shelf = mesh(roundedBox(1.25, .04, .2, .015, 1), clay(C.cream2, { r: .4 })); shelf.position.set(-.3, y - .05, D / 2 + .14); g.add(shelf);
+    for (let c = 0; c < 4; c++) {
+      const col = cols[(r * 2 + c) % cols.length];
+      const isCan = (r + c) % 2 === 0;
+      const it = isCan ? mesh(new THREE.CylinderGeometry(.1, .1, .34, 24), clay(col, { r: .4 })) : mesh(roundedBox(.22, .3, .1, .03, 2), clay(col, { r: .5 }));
+      it.position.set(-.75 + c * .3, y + .15, D / 2 + .16); g.add(it);
+    }
+  }
+  // side panel: screen + keypad + coin slot
+  const panel = mesh(roundedBox(.5, 2.35, .05, .04, 2), clay(C.cream, { r: .5 })); panel.position.set(.73, 2.15, D / 2 + .01); g.add(panel);
+  const scr = mesh(roundedBox(.36, .26, .03, .03, 2), clay(C.ink, { r: .3 })); scr.position.set(.73, 2.95, D / 2 + .05); g.add(scr);
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 3; c++) {
+    const b = mesh(new THREE.CylinderGeometry(.045, .045, .04, 16), clay(C.ink, { r: .5 })); b.rotation.x = Math.PI / 2;
+    b.position.set(.63 + c * .1, 2.6 - r * .12, D / 2 + .05); g.add(b);
+  }
+  const card = mesh(roundedBox(.3, .18, .03, .03, 2), clay(C.mintDark, { r: .4 })); card.position.set(.73, 1.95, D / 2 + .05); g.add(card);
+  // dispenser tray
+  const tray = mesh(roundedBox(1.35, .42, .1, .06, 3), clay(C.ink, { r: .6 })); tray.position.set(-.3, .55, D / 2 + .02); g.add(tray);
+  const top = mesh(roundedBox(W + .06, .14, D + .06, .06, 3), clay(C.cream, { r: .5 })); top.position.y = H + .02; g.add(top);
+  for (const x of [-.85, .85]) { const f = mesh(roundedBox(.25, .12, D - .2, .04, 2), clay(C.ink, { r: .7 })); f.position.set(x, .06, 0); g.add(f); }
+  
+  return g;
+};
+B.can = () => {
+  const g = new THREE.Group(); const R = .55, H = 1.9;
+  const prof = [[0, 0], [R - .1, 0], ...arcPts(R - .1, .1, .1, -Math.PI / 2, 0, 5), [R, H - .25], [R - .08, H - .1], [R - .1, H - .02], [R - .14, H - .02], [0, H - .06]];
+  g.add(mesh(lathe(prof), clay(C.mint, { r: .35, env: 1.2 })));
+  const band = mesh(lathe([[R + .006, .55], [R + .006, 1.15]]), clay(C.cream, { r: .45 })); g.add(band);
+  const lid = mesh(lathe([[0, H - .06], [R - .14, H - .02], [R - .12, H + .01], [0, H - .03]]), metal(0xd9dde0, .25)); g.add(lid);
+  const tab = mesh(roundedBox(.22, .03, .12, .02, 2), metal(0xcfd4d8, .3)); tab.rotation.x = -Math.PI / 2; tab.position.set(.05, H - .01, .1); g.add(tab);
+  return g;
+};
+B.ball = (o = {}) => {
+  const col = { cream: C.cream, gold: C.gold, mint: C.mint, coral: C.coral }[o.color || 'cream'];
+  const s = mesh(new THREE.SphereGeometry(1, 96, 64), new THREE.MeshPhysicalMaterial({ color: col, roughness: .25, clearcoat: .8, clearcoatRoughness: .2, envMapIntensity: 1.1 }));
+  s.position.y = 1; const g = new THREE.Group(); g.add(s);
+  const disc = mesh(new THREE.CylinderGeometry(.52, .52, .02, 64), clay(0xFFFFFF, { r: .4 })); disc.rotation.x = Math.PI / 2; disc.position.set(0, 1.05, .995); disc.lookAt(0, 1.05, 5); disc.rotateX(Math.PI / 2);
+  g.add(disc); return g;
+};
+B.office = () => {
+  const g = new THREE.Group();
+  const body = mesh(roundedBox(2.2, 3.2, 1.8, .08, 3), clay(C.cream)); body.position.y = 1.6; g.add(body);
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 4; c++) {
+    const w = mesh(roundedBox(.34, .3, .05, .04, 2), clay(r === 5 && c > 1 ? C.mintDark : C.ink, { r: .25 }));
+    w.position.set(-.69 + c * .46, .55 + r * .45, .91); g.add(w);
+    const w2 = mesh(roundedBox(.05, .3, .3, .04, 2), clay(C.ink, { r: .25 })); w2.position.set(1.11, .55 + r * .45, -.5 + (c % 3) * .5); if (c < 3) g.add(w2);
+  }
+  const door = mesh(roundedBox(.5, .5, .06, .04, 2), clay(C.mint)); door.position.set(0, .25, .92); g.add(door);
+  const roof = mesh(roundedBox(2.3, .12, 1.9, .05, 2), clay(C.mint)); roof.position.y = 3.26; g.add(roof);
+  return g;
+};
+
 // ---------- staging ----------
 window.renderSprite = (name, o = {}) => {
   const size = o.size ?? 900;

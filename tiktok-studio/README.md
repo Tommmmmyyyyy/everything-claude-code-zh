@@ -9,6 +9,8 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 
 - `videos/v1_cafe` : « Le vrai prix d'un café » (3 € par jour, sur 30 ans, à 5 %/an)
 - `videos/v2_age` : « Sarah et Hugo : commencer à 25 ou à 35 ans » (200 €/mois, 6 %/an)
+- `videos/v3_distributeur` : « Un distributeur automatique, ça rapporte combien ? »
+- `videos/v4_loto` : « Le Loto chaque semaine pendant 40 ans, combien ça coûte ? »
 
 ## Installation (une seule fois)
 
