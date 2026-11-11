@@ -18,6 +18,9 @@ SR_OUT = 48000
 VOICES = {
     # Kyutai TTS 1.6B (CC-BY 4.0), voice "fabien" = Kyutai's own French male recording (CC0)
     'fabien': {'engine': 'kyutai', 'voice': 'unmute-prod-website/fabieng-enhanced-v2.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0},
+    # ElevenLabs (needs a paid plan for library voices; API key injected by the network proxy or ELEVENLABS_API_KEY)
+    'ilan': {'engine': 'eleven', 'voice_id': 'ozVFcYMzEYF561D1IKA0', 'model': 'eleven_multilingual_v2', 'sid': 0, 'speed': 1.0,
+             'settings': {'stability': .45, 'similarity_boost': .8, 'style': .2, 'use_speaker_boost': True}},
     # French female voices (Kyutai TTS): f1 = Kyutai staff recording (CC0), f2-f4 = CML-TTS / LibriVox readers (CC BY 4.0)
     'f1': {'engine': 'kyutai', 'voice': 'unmute-prod-website/developpeuse-3.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
     'f2': {'engine': 'kyutai', 'voice': 'cml-tts/fr/10087_11650_000028-0002_enhanced.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
@@ -33,6 +36,8 @@ def load_tts(voice='pierre'):
     v = VOICES[voice]
     if v['engine'] == 'kyutai':
         return KyutaiTTS(v)
+    if v['engine'] == 'eleven':
+        return ElevenTTS(v)
     d = os.path.join(MODELS, v['dir']) + '/'
     if v['engine'] == 'kokoro':
         mc = sherpa_onnx.OfflineTtsModelConfig(kokoro=sherpa_onnx.OfflineTtsKokoroModelConfig(
@@ -85,6 +90,38 @@ class KyutaiTTS:
             words = [(w, max(0.0, (st - 2) / self.fps)) for w, st in res.all_transcripts[i]]
             out.append((a, words))
         return out
+
+class ElevenTTS:
+    """ElevenLabs text-to-speech with character timestamps (one request per line, with context)."""
+    sample_rate = 44100
+    def __init__(self, v):
+        self.v = v
+    def line(self, text, prev='', nxt=''):
+        import subprocess, base64, tempfile
+        body = {'text': text, 'model_id': self.v['model'], 'voice_settings': self.v['settings']}
+        if prev: body['previous_text'] = prev
+        if nxt: body['next_text'] = nxt
+        cmd = ['curl', '-s', '-X', 'POST',
+               f"https://api.elevenlabs.io/v1/text-to-speech/{self.v['voice_id']}/with-timestamps?output_format=mp3_44100_128",
+               '-H', 'Content-Type: application/json', '-d', json.dumps(body)]
+        if os.environ.get('ELEVENLABS_API_KEY'): cmd += ['-H', 'xi-api-key: ' + os.environ['ELEVENLABS_API_KEY']]
+        d = json.loads(subprocess.run(cmd, capture_output=True, check=True).stdout)
+        if 'audio_base64' not in d: raise RuntimeError(f'ElevenLabs: {d}')
+        with tempfile.TemporaryDirectory() as td:
+            mp3, wav = os.path.join(td, 'a.mp3'), os.path.join(td, 'a.wav')
+            open(mp3, 'wb').write(base64.b64decode(d['audio_base64']))
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', mp3, '-ac', '1', '-ar', str(self.sample_rate), wav], check=True)
+            a, _ = sf.read(wav, dtype='float32')
+        al = d['alignment']; chars, st = al['characters'], al['character_start_times_seconds']
+        words, cur, t0 = [], '', None
+        for c, t in zip(chars, st):
+            if c.isspace():
+                if cur: words.append((cur, t0)); cur = ''
+            else:
+                if not cur: t0 = t
+                cur += c
+        if cur: words.append((cur, t0))
+        return a, words
 
 _NORM = re.compile(r"[^0-9a-zàâäéèêëîïôöùûüœæç']+")
 def norm_tok(x): return _NORM.sub('', x.lower().replace('’', "'"))
@@ -279,6 +316,17 @@ def main(script_path, out_dir):
         words = parse(line['text'])
         parsed.append((line, words, ' '.join(w['spoken'] for w in words)))
     synth = {}
+    if isinstance(tts, ElevenTTS):
+        import hashlib, pickle
+        sr = tts.sample_rate
+        cdir = os.path.join(out_dir, 'tts_cache'); os.makedirs(cdir, exist_ok=True)
+        for i, (_, _, sp) in enumerate(parsed):
+            k = os.path.join(cdir, hashlib.sha1(f'{voice}|{sp}'.encode()).hexdigest()[:16] + '.pkl')
+            if os.path.exists(k): synth[i] = pickle.load(open(k, 'rb')); continue
+            prev = parsed[i - 1][2] if i else ''
+            nxt = parsed[i + 1][2] if i + 1 < len(parsed) else ''
+            synth[i] = tts.line(sp, prev, nxt); pickle.dump(synth[i], open(k, 'wb'))
+            print(f'  eleven {parsed[i][0].get("id")}: {len(sp)} chars', flush=True)
     if isinstance(tts, KyutaiTTS):
         sr = tts.sample_rate
         import hashlib, pickle
@@ -345,7 +393,7 @@ def main(script_path, out_dir):
     buf = np.zeros(int(total * sr) + 1, dtype=np.float32)
     for st, x in chunks:
         i = int(st * sr); buf[i:i + len(x)] += x
-    y = process_voice(buf, sr, male=VOICES[voice]['engine'] != 'kokoro', light=VOICES[voice]['engine'] == 'kyutai')
+    y = process_voice(buf, sr, male=VOICES[voice]['engine'] != 'kokoro', light=VOICES[voice]['engine'] in ('kyutai', 'eleven'))
     y = y / max(1e-6, np.max(np.abs(y))) * 0.89
     sf.write(os.path.join(out_dir, 'voice.wav'), y, SR_OUT, subtype='PCM_16')
     cues = {}
