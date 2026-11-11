@@ -49,7 +49,7 @@ async function openPage(browser, url) {
     while (next < to) {
       const f = next++;
       await p.evaluate(t => window.renderFrame(t), f / FPS);
-      await p.screenshot({ path: path.join(fdir, `${String(f).padStart(5, '0')}.jpg`), type: 'jpeg', quality: 94 });
+      await p.screenshot({ path: path.join(fdir, `${String(f).padStart(5, '0')}.jpg`), type: 'jpeg', quality: 96 });
       if (++done % 150 === 0) console.log(`${done}/${to - from} frames  ${((Date.now() - t0) / done).toFixed(0)} ms/frame`);
     }
   }));

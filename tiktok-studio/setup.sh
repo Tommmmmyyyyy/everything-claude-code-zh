@@ -4,6 +4,7 @@ set -e
 cd "$(dirname "$0")"
 pip install "sherpa-onnx<2" soundfile numpy torch huggingface_hub safetensors sentencepiece einops "sphn<0.3"
 pip install --no-deps "moshi==0.2.13"
+pip install faster-whisper num2words
 npm install
 npx playwright install chromium
 mkdir -p models

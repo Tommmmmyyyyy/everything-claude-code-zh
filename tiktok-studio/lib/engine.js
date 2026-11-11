@@ -170,7 +170,7 @@ export function buildCaptions(root) {
   });
   return t => {
     for (const e of els) {
-      const on = t >= e.t0 && t < e.t1;
+      const on = t >= e.t0 - 1e-6 && t < e.t1 - 1e-6 || (t >= e.t0 - 1e-6 && e === els[els.length - 1]);
       e.el.style.display = on ? 'block' : 'none';
       if (!on) continue;
       const p = ease.outCubic(clamp((t - e.t0) / .12));

@@ -58,6 +58,21 @@ Autres voix possibles dans `script.json` : `"f1"` à `"f4"` (voix de femme Kyuta
 f2 à f4 issues de CML-TTS en CC BY 4.0), `"pierre"` ou `"tom"` (voix d'homme Piper, plus rapides
 mais plus robotiques), `"siwis"` (voix de femme Kokoro).
 
+### Utiliser une voix ElevenLabs (ou ta propre voix)
+
+1. Coller le texte parlé de la vidéo dans ElevenLabs (une phrase par ligne), générer, télécharger le MP3.
+2. Caler le texte sur l'audio, puis fabriquer la vidéo en 60 images/s :
+
+```bash
+python3 align_audio.py videos/v1_cafe/script.json voix.mp3 videos/v1_cafe/build
+node render.js videos/v1_cafe --fps 60
+python3 audio.py videos/v1_cafe
+FPS=60 ./encode.sh videos/v1_cafe out/cafe.mp4
+```
+
+`align_audio.py` retrouve chaque mot dans l'audio (Whisper Turbo avec horodatage au mot) :
+les sous-titres et les animations suivent exactement la voix enregistrée.
+
 ### Contrôle qualité automatique
 
 Chaque phrase générée est réécoutée par une reconnaissance vocale (Whisper Turbo). Si la
