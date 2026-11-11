@@ -1,0 +1,48 @@
+@import url('../fonts/fonts.css');
+:root {
+  --bg0: #0d2a21; --bg1: #081a14; --bg2: #040c09;
+  --mint: #2EE6A0; --mint2: #1FCB8A; --mintGlow: rgba(46, 230, 160, .35);
+  --gold: #F4B740; --cream: #F3ECDF; --ink: #07140F;
+  --red: #FF5A4E; --white: #FFFFFF; --muted: rgba(226, 242, 234, .46); --faint: rgba(226, 242, 234, .16);
+  --line: rgba(226, 242, 234, .22);
+  --fHead: 'Archivo', sans-serif; --fText: 'Inter Tight', sans-serif; --fMono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg2); }
+body { position: relative; font-family: var(--fText); color: var(--white); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#bg { position: absolute; inset: 0; background: radial-gradient(120% 75% at 50% 36%, var(--bg0) 0%, var(--bg1) 46%, var(--bg2) 100%); }
+#glow { position: absolute; width: 1400px; height: 1400px; border-radius: 50%; left: -160px; top: -60px;
+  background: radial-gradient(closest-side, rgba(46, 230, 160, .10), rgba(46, 230, 160, 0)); }
+#grain { position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay; }
+#stage, #hud, #caps { position: absolute; inset: 0; }
+.abs { position: absolute; }
+.center-x { left: 0; right: 0; text-align: center; }
+.mono { font-family: var(--fMono); font-weight: 500; text-transform: uppercase; letter-spacing: .14em; font-size: 24px; color: var(--muted); }
+.head { font-family: var(--fHead); font-weight: 900; font-variation-settings: 'wdth' 72; text-transform: uppercase; font-size: 96px; line-height: .9; letter-spacing: -.005em; }
+.head .a, .a { color: var(--mint); }
+.head .g, .g { color: var(--gold); }
+.head .r, .r { color: var(--red); }
+.num { font-family: var(--fHead); font-weight: 800; font-variation-settings: 'wdth' 108; font-size: 170px; letter-spacing: .015em; line-height: 1; font-feature-settings: 'tnum' 1; white-space: nowrap; }
+.num .u { font-size: .46em; letter-spacing: 0; margin-left: .08em; }
+.num .p { font-size: .5em; margin-right: .06em; }
+.chip { display: inline-block; font-family: var(--fHead); font-weight: 800; font-variation-settings: 'wdth' 85; text-transform: uppercase; font-size: 34px; letter-spacing: .02em;
+  padding: 8px 16px 7px; border-radius: 10px; background: var(--cream); color: var(--ink); white-space: nowrap; line-height: 1.05; }
+.chip.mint { background: var(--mint); color: var(--ink); }
+.chip.gold { background: var(--gold); color: var(--ink); }
+.chip.red { background: var(--red); color: #fff; }
+.chip.ghost { background: transparent; color: var(--cream); box-shadow: inset 0 0 0 2px rgba(243, 236, 223, .55); }
+.chip.dark { background: rgba(7, 20, 15, .75); color: var(--cream); box-shadow: inset 0 0 0 1.5px var(--line); }
+.panel { position: absolute; border-radius: 30px; background: linear-gradient(160deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02) 55%, rgba(255, 255, 255, .035));
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .10), 0 40px 90px rgba(0, 0, 0, .5); }
+.sprite { position: absolute; transform-origin: 50% 80%; will-change: transform; }
+.foot { position: absolute; left: 0; right: 0; top: 1218px; text-align: center; font-family: var(--fMono); font-size: 21px; letter-spacing: .14em; text-transform: uppercase; color: rgba(226, 242, 234, .42); }
+/* captions */
+#caps .cap { position: absolute; left: 72px; top: 1290px; width: 900px; font-family: var(--fText); font-weight: 700; font-size: 56px; line-height: 1.12; letter-spacing: -.012em; }
+#caps .w { color: rgba(226, 242, 234, .34); display: inline; }
+#caps .w.on { color: #fff; }
+#caps .w.hl { border-radius: 9px; padding: 0 10px 2px; margin: 0 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+#caps .w.hl.on { background: var(--mint); color: var(--ink); }
+svg text { font-family: var(--fMono); }
+
+.sp { display: inline-block; width: .2em; }
+#caps .punct { color: inherit; }

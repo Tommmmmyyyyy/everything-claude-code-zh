@@ -1,0 +1,4 @@
+node_modules/
+models/
+videos/*/build/
+out/

@@ -1,0 +1,95 @@
+{
+ "sid": 31,
+ "speed": 1.0,
+ "lead": 0.3,
+ "pause": 0.3,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "Un ^cup café à ^price {*3 €|trois euros} par jour. ^rien Ça n'a l'air de rien.",
+   "pause": 0.22
+  },
+  {
+   "id": "l2",
+   "text": "Mais sur ^y30 {*30 ans|trente années}, il vous coûte ^combien combien, vraiment ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "Faisons le calcul. ^e3 {3 €|Trois euros} par jour, ^e365 fois {*365|trois cent soixante-cinq} jours, ^e1095 ça fait {*1 095 €|mille quatrevingt-quinze euros} par an."
+  },
+  {
+   "id": "l4",
+   "text": "^s10 Sur {10 ans|dix ans}, presque ^v10 {*11 000 €|onze mille euros}. ^s30 Sur {30 ans|trente années}, ^v30 {*32 850 €|trente-deux mille huit cent cinquante euros}.",
+   "pause": 0.38
+  },
+  {
+   "id": "l5",
+   "text": "Ça, c'est ce qui sort de votre ^poche poche. ^pas Mais ce n'est pas le vrai coût.",
+   "pause": 0.25
+  },
+  {
+   "id": "l6",
+   "text": "Le vrai coût, ^devenir c'est ce que cet argent aurait pu *devenir.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "Imaginons qu'au lieu du café, vous ^place placiez cet argent : ^m91 un peu plus de {*90 €|quatrevingt-dix euros} par mois, avec un ^r5 rendement moyen de {*5 %|cinq pour cent} par an."
+  },
+  {
+   "id": "l8",
+   "text": "Les premières années, la différence est ^mini minuscule. ^a10 Après {10 ans|dix ans}, vous avez environ ^k14 {*14 000 €|quatorze mille euros}."
+  },
+  {
+   "id": "l9",
+   "text": "Mais les intérêts produisent ^interets à leur tour des intérêts. ^snow C'est l'effet boule de neige.",
+   "pause": 0.35
+  },
+  {
+   "id": "l10",
+   "text": "^a30 Après {30 ans|trente ans}, vous n'avez plus {32 000 €|trente-deux mille euros}... ^k76 mais environ {*76 000 €|soixante-seize mille}.",
+   "pause": 0.45
+  },
+  {
+   "id": "l11",
+   "text": "^moitie Plus de la moitié de cette somme, vous ne l'avez jamais versée : ^ceint ce sont les *intérêts.",
+   "pause": 0.45
+  },
+  {
+   "id": "l12",
+   "text": "^warn Attention, c'est une simulation : ^w1 rendement constant, ^w2 avant frais et impôts. ^w3 Et le prix du café, lui aussi, augmente avec l'inflation.",
+   "pause": 0.45
+  },
+  {
+   "id": "l13",
+   "text": "Alors, faut-il arrêter le café ?",
+   "pause": 0.35
+  },
+  {
+   "id": "l13b",
+   "text": "^non *Non, pas du tout. ^voit Le café, vous le voyez, ^choisit vous le choisissez.",
+   "pause": 0.4
+  },
+  {
+   "id": "l14",
+   "text": "Le vrai piège, ce sont les dépenses ^invis qu'on ne voit plus : ^sub1 l'abonnement oublié, ^sub2 l'appli qu'on n'ouvre jamais, ^sub3 l'option inutile du forfait.",
+   "pause": 0.35
+  },
+  {
+   "id": "l15",
+   "text": "^x3 {3|Trois} fois {10 €|dix euros} par mois, ^plac placés pareil pendant {30 ans|trente ans}, ^k25 ça ferait près de {*25 000 €|vingt-cinq mille euros}. ^plaisir Sans même le plaisir du café.",
+   "pause": 0.45
+  },
+  {
+   "id": "l16",
+   "text": "^tri Faites le tri une fois par an, ^garde et gardez ce qui vous rend vraiment *heureux.",
+   "pause": 0.4
+  },
+  {
+   "id": "l17",
+   "text": "^cta Et vous, c'est quoi, votre *café ?"
+  }
+ ]
+}

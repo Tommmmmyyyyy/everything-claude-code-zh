@@ -1,0 +1,93 @@
+{
+ "sid": 31,
+ "speed": 1.0,
+ "lead": 0.3,
+ "pause": 0.3,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^lea Léa et ^hugo Hugo placent la même somme : ^m200 {*200 €|deux cents euros} par mois. ^meme Même placement, même rendement.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^diff Une seule différence : ^quand le moment où ils *commencent.",
+   "pause": 0.45
+  },
+  {
+   "id": "l3",
+   "text": "^l25 Léa commence à {*25 ans|vingt-cinq ans}. ^lpay Elle place {200 €|deux cents euros} par mois pendant {10 ans|dix ans}, ^stop puis elle s'arrête. ^tjrs *Définitivement.",
+   "pause": 0.35
+  },
+  {
+   "id": "l4",
+   "text": "Elle aura versé ^l24k {*24 000 €|vingt-quatre mille euros} au total.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^h35 Hugo, lui, commence à {*35 ans|trente-cinq ans}, au moment où Léa s'arrête. ^h65 Et il continue jusqu'à {*65 ans|soixante-cinq ans}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "Trente ans de versements : ^h72k {*72 000 €|soixante-douze mille euros}. ^x3 Trois fois plus que Léa.",
+   "pause": 0.45
+  },
+  {
+   "id": "l7",
+   "text": "^hyp Hypothèse : {*6 %|six pour cent} par an en moyenne, ^reinv gains réinvestis.",
+   "pause": 0.45
+  },
+  {
+   "id": "l8",
+   "text": "^at35 À {35 ans|trente-cinq ans}, Léa a déjà près de ^l33k {*33 000 €|trente-trois mille euros}. ^hzero Hugo, zéro.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^lrest Ensuite, Léa ne verse plus rien. ^work Mais son argent, lui, continue de *travailler.",
+   "pause": 0.35
+  },
+  {
+   "id": "l10",
+   "text": "^hclimb Hugo rattrape son retard, mois après mois... ^cross Il ne dépasse Léa que vers {*64 ans|soixante-quatre ans}.",
+   "pause": 0.45
+  },
+  {
+   "id": "l11",
+   "text": "^at65 À {65 ans|soixante-cinq ans}, ^l197 Léa et Hugo ont chacun environ ^h201 {*200 000 €|deux cent mille euros}.",
+   "pause": 0.45
+  },
+  {
+   "id": "l12",
+   "text": "^egal Presque égalité. ^moins Sauf que Léa a versé *trois *fois *moins.",
+   "pause": 0.5
+  },
+  {
+   "id": "l13",
+   "text": "^pourquoi Pourquoi ? ^temps Parce qu'avec les intérêts composés, le temps compte souvent plus que ^montant le montant.",
+   "pause": 0.4
+  },
+  {
+   "id": "l14",
+   "text": "^grossir Chaque euro de Léa a eu plus de ^y30 {*30 ans|trente années} pour grossir.",
+   "pause": 0.45
+  },
+  {
+   "id": "l15",
+   "text": "^warn Évidemment, c'est une simulation : ^w1 en vrai, les marchés montent et baissent, ^w2 et il y a des frais et des impôts.",
+   "pause": 0.45
+  },
+  {
+   "id": "l16",
+   "text": "^best1 Mais retenez ceci : le meilleur moment pour commencer, c'était il y a {10 ans|dix ans}. ^best2 Le deuxième meilleur, c'est *maintenant.",
+   "pause": 0.5
+  },
+  {
+   "id": "l17",
+   "text": "^cta Et vous, vous avez commencé à quel *âge ?"
+  }
+ ]
+}
