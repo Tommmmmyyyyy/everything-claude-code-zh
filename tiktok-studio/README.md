@@ -26,7 +26,7 @@ AUDIO_ARGS="--seed 11 --root 48 --bpm 100" ./make.sh videos/v2_age out/age.mp4
 ```
 
 Étapes : voix (`tts.py`), images (`render.js`), son (`audio.py`), encodage (`encode.sh`).
-Compter environ 10 minutes par vidéo de 90 secondes sur 4 cœurs.
+Compter environ 15 minutes par vidéo de 90 secondes sur 4 cœurs.
 
 ## Créer une nouvelle vidéo
 
@@ -43,22 +43,32 @@ node render.js videos/v3_mon_sujet --stills 0,5,12.5
 
 ### Syntaxe du texte (`script.json`)
 
-- `{90 €|quatrevin-dix euros}` : le sous-titre affiche `90 €`, la voix lit la partie de droite.
+- `{90 €|quatre-vingt-dix euros}` : le sous-titre affiche `90 €`, la voix lit la partie de droite.
 - `{*30 ans|trente ans}` ou `*mot` : mot mis en valeur (pastille verte) dans les sous-titres.
 - `^repere` : crée un repère temporel au début du mot suivant, utilisable dans `scene.js` avec `cue('repere')`.
 - `pause` : silence après la phrase, en secondes.
 
 ### Voix off
 
-Par défaut : « Pierre », voix d'homme française native (modèle Piper `fr_FR-upmc-medium`,
-enregistrements UPMC sous licence CC BY-SA 4.0). On peut changer de voix dans `script.json`
-avec `"voice": "pierre"`, `"tom"` (autre voix d'homme) ou `"siwis"` (voix de femme Kokoro).
+Par défaut : « fabien », une voix d'homme française très naturelle générée par Kyutai TTS 1.6B
+(modèle sous licence CC BY 4.0, voix enregistrée par l'équipe Kyutai et publiée en CC0).
+Le modèle tourne sur processeur : compter 3 à 4 minutes de calcul par vidéo de 90 secondes.
 
-### Astuces de prononciation (voix « Pierre »)
+Autres voix possibles dans `script.json` : `"voice": "pierre"` ou `"tom"` (voix d'homme Piper,
+plus rapides mais plus robotiques), `"siwis"` (voix de femme Kokoro).
 
-- Écrire `quatrevin-dix` pour 90 : `quatre-vingt-dix` est mal prononcé.
-- Éviter `mille quatre-vingt-quinze` : préférer une formule comme `presque mille cent`.
-- Choisir des prénoms qui passent bien : Sarah, Emma, Hugo, Thomas (éviter Léa).
+### Contrôle qualité automatique
+
+Chaque phrase générée est réécoutée par une reconnaissance vocale (Whisper Turbo). Si la
+transcription s'écarte du texte, ou si un nombre est mal entendu, la phrase est régénérée
+(3 prises maximum) et la meilleure est gardée. Les prises sont mises en cache dans
+`build/tts_cache` : seules les phrases modifiées sont recalculées.
+
+### Astuces de texte
+
+- Écrire les nombres en toutes lettres dans la partie parlée : `{1 000 €|mille euros}`.
+- Éviter `mille quatre-vingt-quinze` (ambigu à l'oral) : préférer `plus de mille`.
+- Choisir des prénoms qui passent bien : Sarah, Emma, Hugo, Thomas.
 - Écouter chaque nouvelle vidéo en entier avant de la publier.
 
 ## Charte graphique

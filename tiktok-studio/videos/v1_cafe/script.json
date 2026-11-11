@@ -15,7 +15,7 @@
   },
   {
    "id": "l3",
-   "text": "Faisons le calcul. ^e3 {3 €|Trois euros} par jour, ^e365 fois {*365|trois cent soixante-cinq} jours, ^e1095 ça fait presque {*1 100 €|mille cent euros} par an."
+   "text": "Faisons le calcul. ^e3 {3 €|Trois euros} par jour, ^e365 fois {*365|trois cent soixante-cinq} jours, ^e1095 ça fait plus de {*1 000 €|mille euros} par an."
   },
   {
    "id": "l4",
@@ -34,7 +34,7 @@
   },
   {
    "id": "l7",
-   "text": "Imaginons qu'au lieu du café, vous ^place placiez cet argent : ^m91 un peu plus de {*90 €|quatrevin-dix euros} par mois, avec un ^r5 rendement moyen de {*5 %|cinq pour cent} par an."
+   "text": "Imaginons qu'au lieu du café, vous ^place placiez cet argent : ^m91 un peu plus de {*90 €|quatre-vingt-dix euros} par mois, avec un ^r5 rendement moyen de {*5 %|cinq pour cent} par an."
   },
   {
    "id": "l8",
@@ -90,5 +90,5 @@
    "text": "^cta Et vous, c'est quoi, votre *café ?"
   }
  ],
- "voice": "pierre"
+ "voice": "fabien"
 }

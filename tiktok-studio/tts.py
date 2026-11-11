@@ -13,9 +13,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS = os.environ.get('TTS_MODELS', os.path.join(HERE, 'models'))
 SR_OUT = 48000
 
-# Voices: "pierre" = native French male (Piper UPMC, default), "tom" = French male (Piper),
+# Voices: "fabien" = natural French male (Kyutai, default), "pierre" = French male (Piper UPMC), "tom" = French male (Piper),
 #         "siwis" = Kokoro French female.
 VOICES = {
+    # Kyutai TTS 1.6B (CC-BY 4.0), voice "fabien" = Kyutai's own French male recording (CC0)
+    'fabien': {'engine': 'kyutai', 'voice': 'unmute-prod-website/fabieng-enhanced-v2.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0},
     'pierre': {'engine': 'piper', 'dir': 'vits-piper-fr_FR-upmc-medium', 'sid': 1, 'speed': .95},
     'tom': {'engine': 'piper', 'dir': 'vits-piper-fr_FR-tom-medium', 'sid': 0, 'speed': 1.0},
     'siwis': {'engine': 'kokoro', 'dir': 'kokoro-multi-lang-v1_0', 'sid': 31, 'speed': 1.0},
@@ -24,6 +26,8 @@ VOICES = {
 def load_tts(voice='pierre'):
     import sherpa_onnx, glob
     v = VOICES[voice]
+    if v['engine'] == 'kyutai':
+        return KyutaiTTS(v)
     d = os.path.join(MODELS, v['dir']) + '/'
     if v['engine'] == 'kokoro':
         mc = sherpa_onnx.OfflineTtsModelConfig(kokoro=sherpa_onnx.OfflineTtsKokoroModelConfig(
@@ -34,6 +38,122 @@ def load_tts(voice='pierre'):
         mc = sherpa_onnx.OfflineTtsModelConfig(vits=sherpa_onnx.OfflineTtsVitsModelConfig(
             model=onnx, tokens=d + 'tokens.txt', data_dir=d + 'espeak-ng-data', noise_scale=.667, noise_scale_w=.8), num_threads=4)
     return sherpa_onnx.OfflineTts(sherpa_onnx.OfflineTtsConfig(model=mc))
+
+
+KYUTAI_REPO = 'kyutai/tts-1.6b-en_fr'
+
+class KyutaiTTS:
+    """Kyutai TTS 1.6B on CPU, batched; returns audio + per-word start times."""
+    def __init__(self, v):
+        import torch
+        from moshi.models import loaders
+        from moshi.models.tts import TTSModel
+        torch.set_num_threads(os.cpu_count() or 4)
+        self.torch = torch
+        d = os.path.join(MODELS, 'kyutai-tts-1.6b-en_fr') + '/'
+        if os.path.exists(d + 'config.json'):
+            ci = loaders.CheckpointInfo.from_hf_repo(
+                KYUTAI_REPO, moshi_weights=d + 'dsm_tts_1e68beda@240.safetensors',
+                mimi_weights=d + 'tokenizer-e351c8d8-checkpoint125.safetensors',
+                tokenizer=d + 'tokenizer_spm_8k_en_fr_audio.model', config_path=d + 'config.json')
+        else:
+            ci = loaders.CheckpointInfo.from_hf_repo(KYUTAI_REPO)
+        self.tts = TTSModel.from_checkpoint_info(ci, n_q=32, temp=v.get('temp', .6), device='cpu',
+                                                 dtype=torch.float32, initial_padding=4)
+        self.voice_path = self.tts.get_voice_path(v['voice'])
+        self.cfg = v.get('cfg', 2.0)
+        self.sample_rate = self.tts.mimi.sample_rate
+        self.fps = self.tts.mimi.frame_rate
+
+    def batch(self, texts):
+        torch, tts = self.torch, self.tts
+        entries = [tts.prepare_script([x], padding_between=1) for x in texts]
+        attrs = [tts.make_condition_attributes([self.voice_path], cfg_coef=self.cfg) for _ in texts]
+        res = tts.generate(entries, attrs)
+        with tts.mimi.streaming(len(texts)), torch.no_grad():
+            pcms = [torch.clip(tts.mimi.decode(fr[:, 1:, :]), -1, 1) for fr in res.frames[tts.delay_steps:]]
+        pcms = pcms[2:]  # same as moshi's simple_generate: avoids a click at the start
+        out = []
+        for i in range(len(texts)):
+            end = res.end_steps[i] or len(pcms)
+            a = torch.cat([p[i, 0] for p in pcms[:end]]).float().numpy()
+            words = [(w, max(0.0, (st - 2) / self.fps)) for w, st in res.all_transcripts[i]]
+            out.append((a, words))
+        return out
+
+_NORM = re.compile(r"[^0-9a-zàâäéèêëîïôöùûüœæç']+")
+def norm_tok(x): return _NORM.sub('', x.lower().replace('’', "'"))
+
+def map_word_times(words, tts_words, dur):
+    """Assign start/end to parsed display words from the TTS word timestamps (fuzzy alignment)."""
+    import difflib
+    toks = []  # (display word index, normalized spoken token)
+    for k, w in enumerate(words):
+        for tk in w['spoken'].split():
+            toks.append((k, norm_tok(tk)))
+    a = [t for _, t in toks]; b = [norm_tok(w) for w, _ in tts_words]
+    times = [None] * len(toks)
+    sm = difflib.SequenceMatcher(a=a, b=b, autojunk=False)
+    for blk in sm.get_matching_blocks():
+        for j in range(blk.size):
+            times[blk.a + j] = tts_words[blk.b + j][1]
+    starts = [None] * len(words)
+    for (k, _), tm in zip(toks, times):
+        if tm is not None and starts[k] is None: starts[k] = tm
+    # fill gaps by interpolation
+    last = 0.0
+    for k in range(len(words)):
+        if starts[k] is None:
+            nxt = next((starts[j] for j in range(k + 1, len(words)) if starts[j] is not None), dur)
+            starts[k] = last + (nxt - last) * .5
+        starts[k] = max(starts[k], last); last = starts[k]
+    ends = starts[1:] + [dur]
+    return [(round(s, 3), round(max(e, s + .05), 3)) for s, e in zip(starts, ends)]
+
+# ---------- automatic quality check (ASR round-trip, best-of-N) ----------
+_ASR = None
+def asr_text(x, sr):
+    global _ASR
+    import sherpa_onnx
+    if _ASR is None:
+        name = 'turbo' if os.path.isdir(os.path.join(MODELS, 'sherpa-onnx-whisper-turbo')) else 'small'
+        W = os.path.join(MODELS, f'sherpa-onnx-whisper-{name}') + '/'
+        _ASR = sherpa_onnx.OfflineRecognizer.from_whisper(
+            encoder=W + f'{name}-encoder.int8.onnx', decoder=W + f'{name}-decoder.int8.onnx', tokens=W + f'{name}-tokens.txt',
+            language='fr', task='transcribe', num_threads=os.cpu_count() or 4)
+    n = int(len(x) * 16000 / sr)
+    y = np.interp(np.linspace(0, len(x) - 1, n), np.arange(len(x)), x).astype(np.float32)
+    y = np.concatenate([np.zeros(4800, np.float32), y, np.zeros(4800, np.float32)])
+    st = _ASR.create_stream(); st.accept_waveform(16000, y); _ASR.decode_stream(st)
+    return st.result.text
+
+def _qa_norm(t):
+    t = t.lower().replace('\u202f', ' ').replace('€', ' euros ').replace('%', ' pour cent ').replace('’', "'")
+    for _ in range(3):
+        t = re.sub(r'(\d)[ .,](\d{3})', r'\1\2', t)
+    t = re.sub(r'\bx\b', 'fois', t)
+    t = re.sub(r"[^0-9a-zàâäéèêëîïôöùûüœæç' ]+", ' ', t)
+    NUMW = {'deux': '2', 'trois': '3', 'quatre': '4', 'cinq': '5', 'six': '6', 'sept': '7', 'huit': '8', 'neuf': '9',
+            'dix': '10', 'onze': '11', 'douze': '12', 'quinze': '15', 'vingt': '20', 'trente': '30', 'zéro': '0'}
+    return [NUMW.get(w, w) for w in t.split()]
+
+def wer(ref, hyp):
+    r, h = _qa_norm(ref), _qa_norm(hyp)
+    d = list(range(len(h) + 1))
+    for i in range(1, len(r) + 1):
+        prev, d[0] = d[0], i
+        for j in range(1, len(h) + 1):
+            cur = min(d[j] + 1, d[j - 1] + 1, prev + (r[i - 1] != h[j - 1]))
+            prev, d[j] = d[j], cur
+    base = d[len(h)] / max(1, len(r))
+    nums = lambda ws: [w for w in ws if any(c.isdigit() for c in w)]
+    hn = nums(h)
+    missing = sum(1 for n in nums(r) if n not in hn)
+    return base + .3 * missing
+
+def long_pause(x, sr, limit=.9):
+    g = gaps(x, sr)
+    return max([b - a for a, b in g], default=0) > limit
 
 TOKEN_RE = re.compile(r'\{(\*?)([^|}]*)\|([^}]*)\}([^\s{]*)|\^(\w+)|(\S+)')
 
@@ -126,14 +246,15 @@ def align(words, dur, gp):
             out[k] = (round(t, 3), round(t + d, 3)); t += d
     return out
 
-def process_voice(x, sr, male=True):
+def process_voice(x, sr, male=True, light=False):
     # gentle polish: high-pass, presence lift, soft compression, peak normalize
     import subprocess, tempfile
     with tempfile.TemporaryDirectory() as td:
         a, b = os.path.join(td, 'a.wav'), os.path.join(td, 'b.wav')
         sf.write(a, x, sr, subtype='PCM_16')
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', a, '-af',
-                        (('highpass=f=65,equalizer=f=130:t=q:w=1.0:g=2.5,equalizer=f=340:t=q:w=1.2:g=-2,equalizer=f=3000:t=q:w=1.4:g=3,'
+                        ('highpass=f=60,equalizer=f=250:t=q:w=1.2:g=-1,equalizer=f=3500:t=q:w=1.5:g=1.5,' if light else
+                         ('highpass=f=65,equalizer=f=130:t=q:w=1.0:g=2.5,equalizer=f=340:t=q:w=1.2:g=-2,equalizer=f=3000:t=q:w=1.4:g=3,'
                          'equalizer=f=6500:t=q:w=2:g=-1,') if male else
                         'highpass=f=75,equalizer=f=220:t=q:w=1.2:g=1.5,equalizer=f=3200:t=q:w=1.5:g=2.5,equalizer=f=7000:t=q:w=2:g=-1.5,')
                         + 'acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2,'
@@ -144,22 +265,72 @@ def process_voice(x, sr, male=True):
 def main(script_path, out_dir):
     spec = json.load(open(script_path))
     os.makedirs(out_dir, exist_ok=True)
-    voice = spec.get('voice', 'pierre')
+    voice = spec.get('voice', 'fabien')
     tts = load_tts(voice)
     sid, speed = spec.get('sid', VOICES[voice]['sid']), spec.get('speed', VOICES[voice]['speed'])
     lead = spec.get('lead', 0.35)
-    chunks, lines, t = [], [], lead
-    sr = None
+    parsed = []
     for li, line in enumerate(spec['lines']):
         words = parse(line['text'])
-        spoken = ' '.join(w['spoken'] for w in words)
-        a = tts.generate(spoken, sid=line.get('sid', sid), speed=line.get('speed', speed))
-        sr = a.sample_rate
-        x = trim(np.array(a.samples, dtype=np.float32), sr)
-        dur = len(x) / sr
-        tm = align(words, dur, gaps(x, sr))
-        for w, (s, e) in zip(words, tm):
-            w['start'] = round(t + s, 3); w['end'] = round(t + e, 3)
+        parsed.append((line, words, ' '.join(w['spoken'] for w in words)))
+    synth = {}
+    if isinstance(tts, KyutaiTTS):
+        sr = tts.sample_rate
+        import hashlib, pickle
+        cdir = os.path.join(out_dir, 'tts_cache'); os.makedirs(cdir, exist_ok=True)
+        key = lambda txt: os.path.join(cdir, hashlib.sha1(f'{voice}|{txt}'.encode()).hexdigest()[:16] + '.pkl')
+        for i, (_, _, sp) in enumerate(parsed):
+            if os.path.exists(key(sp)): synth[i] = pickle.load(open(key(sp), 'rb'))
+        todo = [i for i in range(len(parsed)) if i not in synth]
+        print(f'  {len(parsed) - len(todo)} lines from cache, {len(todo)} to synthesize', flush=True)
+        order = sorted(todo, key=lambda i: len(parsed[i][2]))
+        bs = int(spec.get('batch', 6))
+        for b0 in range(0, len(order), bs):
+            idx = order[b0:b0 + bs]
+            import time as _t; t0 = _t.time()
+            outs = tts.batch([parsed[i][2] for i in idx])
+            for i, o in zip(idx, outs):
+                synth[i] = o; pickle.dump(o, open(key(parsed[i][2]), 'wb'))
+            print(f'  batch {b0 // bs + 1}: {len(idx)} lines in {_t.time() - t0:.0f}s', flush=True)
+        # QA: re-synthesize lines whose transcript drifts from the text, keep the best take
+        tries = int(spec.get('qa_tries', 3))
+        score = {}
+        for rnd in range(tries):
+            bad = []
+            for i, (line, words, sp) in enumerate(parsed):
+                if i in score and score[i] <= .12: continue
+                x = trim(synth[i][0], sr)
+                disp = ' '.join(w['display'] for w in words)
+                sc = wer(disp, asr_text(x, sr)) + (.3 if long_pause(x, sr) else 0)
+                if i not in score or sc < score[i]:
+                    score[i] = sc; best = synth[i]
+                    pickle.dump(best, open(key(sp), 'wb'))
+                else:
+                    synth[i] = pickle.load(open(key(sp), 'rb'))
+                if score[i] > .12: bad.append(i)
+            print(f'  QA round {rnd + 1}: ' + ', '.join(f"{parsed[i][0].get('id')}={score[i]:.2f}" for i in bad) if bad else f'  QA round {rnd + 1}: all lines OK', flush=True)
+            if not bad or rnd == tries - 1: break
+            for b0 in range(0, len(bad), bs):
+                idx = bad[b0:b0 + bs]
+                outs = tts.batch([parsed[i][2] for i in idx])
+                for i, o in zip(idx, outs): synth[i] = o  # candidate, scored next round
+    chunks, lines, t = [], [], lead
+    for li, (line, words, spoken) in enumerate(parsed):
+        if li in synth:
+            raw, tw = synth[li]
+            x = trim(raw, sr)
+            env = np.where(np.abs(raw) > 0.008)[0]
+            off = max(0, env[0] - int(0.07 * sr)) / sr if len(env) else 0.0
+            dur = len(x) / sr
+            tm = map_word_times(words, [(w, max(0.0, s - off)) for w, s in tw], dur)
+        else:
+            a = tts.generate(spoken, sid=line.get('sid', sid), speed=line.get('speed', speed))
+            sr = a.sample_rate
+            x = trim(np.array(a.samples, dtype=np.float32), sr)
+            dur = len(x) / sr
+            tm = align(words, dur, gaps(x, sr))
+        for w, (s_, e_) in zip(words, tm):
+            w['start'] = round(t + s_, 3); w['end'] = round(t + e_, 3)
         lines.append({'id': line.get('id', f'l{li}'), 'start': round(t, 3), 'end': round(t + dur, 3),
                       'words': words, 'spoken': spoken})
         chunks.append((t, x))
@@ -169,7 +340,7 @@ def main(script_path, out_dir):
     buf = np.zeros(int(total * sr) + 1, dtype=np.float32)
     for st, x in chunks:
         i = int(st * sr); buf[i:i + len(x)] += x
-    y = process_voice(buf, sr, male=VOICES[voice]['engine'] == 'piper')
+    y = process_voice(buf, sr, male=VOICES[voice]['engine'] != 'kokoro', light=VOICES[voice]['engine'] == 'kyutai')
     y = y / max(1e-6, np.max(np.abs(y))) * 0.89
     sf.write(os.path.join(out_dir, 'voice.wav'), y, SR_OUT, subtype='PCM_16')
     cues = {}

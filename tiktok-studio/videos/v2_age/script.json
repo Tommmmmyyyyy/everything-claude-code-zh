@@ -75,7 +75,7 @@
   },
   {
    "id": "l15",
-   "text": "^warn Évidemment, c'est une simulation : ^w1 en vrai, les marchés montent et baissent, ^w2 et il y a des frais et des impôts.",
+   "text": "^warn Évidemment, c'est une simulation. ^w1 Dans la vraie vie, les marchés montent et baissent, ^w2 et il y a des frais et des impôts.",
    "pause": 0.45
   },
   {
@@ -88,5 +88,5 @@
    "text": "^cta Et vous, vous avez commencé à quel *âge ?"
   }
  ],
- "voice": "pierre"
+ "voice": "fabien"
 }
