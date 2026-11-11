@@ -1,6 +1,4 @@
 {
- "sid": 31,
- "speed": 1.0,
  "lead": 0.3,
  "pause": 0.3,
  "tail": 1.6,
@@ -12,16 +10,16 @@
   },
   {
    "id": "l2",
-   "text": "Mais sur ^y30 {*30 ans|trente années}, il vous coûte ^combien combien, vraiment ?",
+   "text": "Mais sur ^y30 {*30 ans|trente ans}, il vous coûte ^combien combien, vraiment ?",
    "pause": 0.4
   },
   {
    "id": "l3",
-   "text": "Faisons le calcul. ^e3 {3 €|Trois euros} par jour, ^e365 fois {*365|trois cent soixante-cinq} jours, ^e1095 ça fait {*1 095 €|mille quatrevingt-quinze euros} par an."
+   "text": "Faisons le calcul. ^e3 {3 €|Trois euros} par jour, ^e365 fois {*365|trois cent soixante-cinq} jours, ^e1095 ça fait presque {*1 100 €|mille cent euros} par an."
   },
   {
    "id": "l4",
-   "text": "^s10 Sur {10 ans|dix ans}, presque ^v10 {*11 000 €|onze mille euros}. ^s30 Sur {30 ans|trente années}, ^v30 {*32 850 €|trente-deux mille huit cent cinquante euros}.",
+   "text": "^s10 Sur {10 ans|dix ans}, presque ^v10 {*11 000 €|onze mille euros}. ^s30 Sur {30 ans|trente ans}, ^v30 {*32 850 €|trente-deux mille huit cent cinquante euros}.",
    "pause": 0.38
   },
   {
@@ -36,7 +34,7 @@
   },
   {
    "id": "l7",
-   "text": "Imaginons qu'au lieu du café, vous ^place placiez cet argent : ^m91 un peu plus de {*90 €|quatrevingt-dix euros} par mois, avec un ^r5 rendement moyen de {*5 %|cinq pour cent} par an."
+   "text": "Imaginons qu'au lieu du café, vous ^place placiez cet argent : ^m91 un peu plus de {*90 €|quatrevin-dix euros} par mois, avec un ^r5 rendement moyen de {*5 %|cinq pour cent} par an."
   },
   {
    "id": "l8",
@@ -49,7 +47,7 @@
   },
   {
    "id": "l10",
-   "text": "^a30 Après {30 ans|trente ans}, vous n'avez plus {32 000 €|trente-deux mille euros}... ^k76 mais environ {*76 000 €|soixante-seize mille}.",
+   "text": "^a30 Après {30 ans|trente ans}, vous n'avez plus {32 000 €|trente-deux mille euros}... ^k76 mais environ {*76 000 €|soixante-seize mille euros}.",
    "pause": 0.45
   },
   {
@@ -91,5 +89,6 @@
    "id": "l17",
    "text": "^cta Et vous, c'est quoi, votre *café ?"
   }
- ]
+ ],
+ "voice": "pierre"
 }

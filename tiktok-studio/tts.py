@@ -13,15 +13,27 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS = os.environ.get('TTS_MODELS', os.path.join(HERE, 'models'))
 SR_OUT = 48000
 
-def load_tts():
-    import sherpa_onnx
-    d = os.path.join(MODELS, 'kokoro-multi-lang-v1_0') + '/'
-    cfg = sherpa_onnx.OfflineTtsConfig(model=sherpa_onnx.OfflineTtsModelConfig(
-        kokoro=sherpa_onnx.OfflineTtsKokoroModelConfig(
+# Voices: "pierre" = native French male (Piper UPMC, default), "tom" = French male (Piper),
+#         "siwis" = Kokoro French female.
+VOICES = {
+    'pierre': {'engine': 'piper', 'dir': 'vits-piper-fr_FR-upmc-medium', 'sid': 1, 'speed': .95},
+    'tom': {'engine': 'piper', 'dir': 'vits-piper-fr_FR-tom-medium', 'sid': 0, 'speed': 1.0},
+    'siwis': {'engine': 'kokoro', 'dir': 'kokoro-multi-lang-v1_0', 'sid': 31, 'speed': 1.0},
+}
+
+def load_tts(voice='pierre'):
+    import sherpa_onnx, glob
+    v = VOICES[voice]
+    d = os.path.join(MODELS, v['dir']) + '/'
+    if v['engine'] == 'kokoro':
+        mc = sherpa_onnx.OfflineTtsModelConfig(kokoro=sherpa_onnx.OfflineTtsKokoroModelConfig(
             model=d + 'model.onnx', voices=d + 'voices.bin', tokens=d + 'tokens.txt',
-            data_dir=d + 'espeak-ng-data', lexicon=d + 'lexicon-us-en.txt,' + d + 'lexicon-zh.txt', lang='fr'),
-        num_threads=4))
-    return sherpa_onnx.OfflineTts(cfg)
+            data_dir=d + 'espeak-ng-data', lexicon=d + 'lexicon-us-en.txt,' + d + 'lexicon-zh.txt', lang='fr'), num_threads=4)
+    else:
+        onnx = glob.glob(d + '*.onnx')[0]
+        mc = sherpa_onnx.OfflineTtsModelConfig(vits=sherpa_onnx.OfflineTtsVitsModelConfig(
+            model=onnx, tokens=d + 'tokens.txt', data_dir=d + 'espeak-ng-data', noise_scale=.667, noise_scale_w=.8), num_threads=4)
+    return sherpa_onnx.OfflineTts(sherpa_onnx.OfflineTtsConfig(model=mc))
 
 TOKEN_RE = re.compile(r'\{(\*?)([^|}]*)\|([^}]*)\}([^\s{]*)|\^(\w+)|(\S+)')
 
@@ -114,24 +126,27 @@ def align(words, dur, gp):
             out[k] = (round(t, 3), round(t + d, 3)); t += d
     return out
 
-def process_voice(x, sr):
+def process_voice(x, sr, male=True):
     # gentle polish: high-pass, presence lift, soft compression, peak normalize
     import subprocess, tempfile
     with tempfile.TemporaryDirectory() as td:
         a, b = os.path.join(td, 'a.wav'), os.path.join(td, 'b.wav')
         sf.write(a, x, sr, subtype='PCM_16')
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', a, '-af',
-                        'highpass=f=75,equalizer=f=220:t=q:w=1.2:g=1.5,equalizer=f=3200:t=q:w=1.5:g=2.5,'
-                        'equalizer=f=7000:t=q:w=2:g=-1.5,acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2,'
-                        f'aresample={SR_OUT}', '-ar', str(SR_OUT), b], check=True)
+                        (('highpass=f=65,equalizer=f=130:t=q:w=1.0:g=2.5,equalizer=f=340:t=q:w=1.2:g=-2,equalizer=f=3000:t=q:w=1.4:g=3,'
+                         'equalizer=f=6500:t=q:w=2:g=-1,') if male else
+                        'highpass=f=75,equalizer=f=220:t=q:w=1.2:g=1.5,equalizer=f=3200:t=q:w=1.5:g=2.5,equalizer=f=7000:t=q:w=2:g=-1.5,')
+                        + 'acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2,'
+                        + f'aresample={SR_OUT}', '-ar', str(SR_OUT), b], check=True)
         y, _ = sf.read(b, dtype='float32')
     return y
 
 def main(script_path, out_dir):
     spec = json.load(open(script_path))
     os.makedirs(out_dir, exist_ok=True)
-    tts = load_tts()
-    sid, speed = spec.get('sid', 31), spec.get('speed', 1.0)
+    voice = spec.get('voice', 'pierre')
+    tts = load_tts(voice)
+    sid, speed = spec.get('sid', VOICES[voice]['sid']), spec.get('speed', VOICES[voice]['speed'])
     lead = spec.get('lead', 0.35)
     chunks, lines, t = [], [], lead
     sr = None
@@ -154,7 +169,7 @@ def main(script_path, out_dir):
     buf = np.zeros(int(total * sr) + 1, dtype=np.float32)
     for st, x in chunks:
         i = int(st * sr); buf[i:i + len(x)] += x
-    y = process_voice(buf, sr)
+    y = process_voice(buf, sr, male=VOICES[voice]['engine'] == 'piper')
     y = y / max(1e-6, np.max(np.abs(y))) * 0.89
     sf.write(os.path.join(out_dir, 'voice.wav'), y, SR_OUT, subtype='PCM_16')
     cues = {}

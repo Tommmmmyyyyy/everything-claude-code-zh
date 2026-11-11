@@ -8,7 +8,7 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 ## Vidéos incluses
 
 - `videos/v1_cafe` : « Le vrai prix d'un café » (3 € par jour, sur 30 ans, à 5 %/an)
-- `videos/v2_age` : « Léa et Hugo : commencer à 25 ou à 35 ans » (200 €/mois, 6 %/an)
+- `videos/v2_age` : « Sarah et Hugo : commencer à 25 ou à 35 ans » (200 €/mois, 6 %/an)
 
 ## Installation (une seule fois)
 
@@ -43,17 +43,23 @@ node render.js videos/v3_mon_sujet --stills 0,5,12.5
 
 ### Syntaxe du texte (`script.json`)
 
-- `{1 095 €|mille quatrevingt-quinze euros}` : le sous-titre affiche `1 095 €`, la voix lit la partie de droite.
-- `{*30 ans|trente années}` ou `*mot` : mot mis en valeur (pastille verte) dans les sous-titres.
+- `{90 €|quatrevin-dix euros}` : le sous-titre affiche `90 €`, la voix lit la partie de droite.
+- `{*30 ans|trente ans}` ou `*mot` : mot mis en valeur (pastille verte) dans les sous-titres.
 - `^repere` : crée un repère temporel au début du mot suivant, utilisable dans `scene.js` avec `cue('repere')`.
 - `pause` : silence après la phrase, en secondes.
 
-### Astuces de prononciation (voix Kokoro « ff_siwis »)
+### Voix off
 
-- Écrire `quatrevingt` en un mot (`quatrevingt-dix`, `quatrevingt-quinze`) : la forme
-  avec trait d'union est mal prononcée.
-- Préférer `trente années` à `trente ans` (la liaison est parfois avalée).
-- Éviter les mots isolés très courts dans une phrase à part (`Non.`) : les intégrer à une phrase.
+Par défaut : « Pierre », voix d'homme française native (modèle Piper `fr_FR-upmc-medium`,
+enregistrements UPMC sous licence CC BY-SA 4.0). On peut changer de voix dans `script.json`
+avec `"voice": "pierre"`, `"tom"` (autre voix d'homme) ou `"siwis"` (voix de femme Kokoro).
+
+### Astuces de prononciation (voix « Pierre »)
+
+- Écrire `quatrevin-dix` pour 90 : `quatre-vingt-dix` est mal prononcé.
+- Éviter `mille quatre-vingt-quinze` : préférer une formule comme `presque mille cent`.
+- Choisir des prénoms qui passent bien : Sarah, Emma, Hugo, Thomas (éviter Léa).
+- Écouter chaque nouvelle vidéo en entier avant de la publier.
 
 ## Charte graphique
 

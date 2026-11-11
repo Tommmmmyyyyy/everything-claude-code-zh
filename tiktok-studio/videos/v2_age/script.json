@@ -1,13 +1,11 @@
 {
- "sid": 31,
- "speed": 1.0,
  "lead": 0.3,
  "pause": 0.3,
  "tail": 1.6,
  "lines": [
   {
    "id": "l1",
-   "text": "^lea Léa et ^hugo Hugo placent la même somme : ^m200 {*200 €|deux cents euros} par mois. ^meme Même placement, même rendement.",
+   "text": "^lea Sarah et ^hugo Hugo placent la même somme : ^m200 {*200 €|deux cents euros} par mois. ^meme Même placement, même rendement.",
    "pause": 0.3
   },
   {
@@ -17,7 +15,7 @@
   },
   {
    "id": "l3",
-   "text": "^l25 Léa commence à {*25 ans|vingt-cinq ans}. ^lpay Elle place {200 €|deux cents euros} par mois pendant {10 ans|dix ans}, ^stop puis elle s'arrête. ^tjrs *Définitivement.",
+   "text": "^l25 Sarah commence à {*25 ans|vingt-cinq ans}. ^lpay Elle place {200 €|deux cents euros} par mois pendant {10 ans|dix ans}, ^stop puis elle s'arrête. ^tjrs *Définitivement.",
    "pause": 0.35
   },
   {
@@ -27,12 +25,12 @@
   },
   {
    "id": "l5",
-   "text": "^h35 Hugo, lui, commence à {*35 ans|trente-cinq ans}, au moment où Léa s'arrête. ^h65 Et il continue jusqu'à {*65 ans|soixante-cinq ans}.",
+   "text": "^h35 Hugo, lui, commence à {*35 ans|trente-cinq ans}, au moment où Sarah s'arrête. ^h65 Et il continue jusqu'à {*65 ans|soixante-cinq ans}.",
    "pause": 0.3
   },
   {
    "id": "l6",
-   "text": "Trente ans de versements : ^h72k {*72 000 €|soixante-douze mille euros}. ^x3 Trois fois plus que Léa.",
+   "text": "Trente ans de versements : ^h72k {*72 000 €|soixante-douze mille euros}. ^x3 Trois fois plus que Sarah.",
    "pause": 0.45
   },
   {
@@ -42,37 +40,37 @@
   },
   {
    "id": "l8",
-   "text": "^at35 À {35 ans|trente-cinq ans}, Léa a déjà près de ^l33k {*33 000 €|trente-trois mille euros}. ^hzero Hugo, zéro.",
+   "text": "^at35 À {35 ans|trente-cinq ans}, Sarah a déjà près de ^l33k {*33 000 €|trente-trois mille euros}. ^hzero Hugo est encore à zéro.",
    "pause": 0.4
   },
   {
    "id": "l9",
-   "text": "^lrest Ensuite, Léa ne verse plus rien. ^work Mais son argent, lui, continue de *travailler.",
+   "text": "^lrest Ensuite, Sarah ne verse plus rien. ^work Mais son argent continue de *travailler.",
    "pause": 0.35
   },
   {
    "id": "l10",
-   "text": "^hclimb Hugo rattrape son retard, mois après mois... ^cross Il ne dépasse Léa que vers {*64 ans|soixante-quatre ans}.",
+   "text": "^hclimb Hugo rattrape son retard, mois après mois... ^cross Il ne dépasse Sarah que vers {*64 ans|soixante-quatre ans}.",
    "pause": 0.45
   },
   {
    "id": "l11",
-   "text": "^at65 À {65 ans|soixante-cinq ans}, ^l197 Léa et Hugo ont chacun environ ^h201 {*200 000 €|deux cent mille euros}.",
+   "text": "^at65 À {65 ans|soixante-cinq ans}, Sarah a près de ^l197 {*200 000 €|deux cent mille euros}. ^h201 Hugo, à peine plus.",
    "pause": 0.45
   },
   {
    "id": "l12",
-   "text": "^egal Presque égalité. ^moins Sauf que Léa a versé *trois *fois *moins.",
+   "text": "^egal Presque égalité. ^moins Sauf que Sarah a versé *trois *fois *moins.",
    "pause": 0.5
   },
   {
    "id": "l13",
-   "text": "^pourquoi Pourquoi ? ^temps Parce qu'avec les intérêts composés, le temps compte souvent plus que ^montant le montant.",
+   "text": "^pourquoi Mais pourquoi ? ^temps Parce qu'avec les intérêts composés, le temps compte souvent plus que ^montant le montant.",
    "pause": 0.4
   },
   {
    "id": "l14",
-   "text": "^grossir Chaque euro de Léa a eu plus de ^y30 {*30 ans|trente années} pour grossir.",
+   "text": "^grossir Chaque euro de Sarah a eu plus de ^y30 {*30 ans|trente ans} pour grossir.",
    "pause": 0.45
   },
   {
@@ -89,5 +87,6 @@
    "id": "l17",
    "text": "^cta Et vous, vous avez commencé à quel *âge ?"
   }
- ]
+ ],
+ "voice": "pierre"
 }

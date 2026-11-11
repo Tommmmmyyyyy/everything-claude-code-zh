@@ -22,7 +22,7 @@ boot(async () => {
   // =============== persistent pawns + HUD ===============
   const hud = document.getElementById('hud');
   const P = [
-    { name: 'LÉA', spr: 'pawn_mint', col: 'mint', bigX: 320, smallX: 150, colX: 290 },
+    { name: 'SARAH', spr: 'pawn_mint', col: 'mint', bigX: 320, smallX: 150, colX: 290 },
     { name: 'HUGO', spr: 'pawn_gold', col: 'gold', bigX: 760, smallX: 650, colX: 790 },
   ];
   const BIG = { by: 930, w: 420 }, SMALL = { by: 345, w: 130 };
@@ -108,7 +108,7 @@ boot(async () => {
     }
     const mk = (a0, n, y, col) => { const arr = []; const w = (X(a0 + n / 12) - X(a0)) / n; for (let i = 0; i < n; i++) { const rr = svg('rect', { x: X(a0) + i * w, y: y - th / 2, width: Math.max(1.2, w * .55), height: th, rx: 1, fill: col, opacity: 0 }); s.appendChild(rr); arr.push(rr); } return arr; };
     const tl = mk(25, 120, rowY[0], MINT), thg = mk(35, 360, rowY[1], GOLD);
-    const rl = svg('text', { x: 40, y: rowY[0] + 9, fill: MINT, 'font-size': 26, 'font-weight': 700 }); rl.textContent = 'LÉA'; s.appendChild(rl);
+    const rl = svg('text', { x: 40, y: rowY[0] + 9, fill: MINT, 'font-size': 26, 'font-weight': 700 }); rl.textContent = 'SARAH'; s.appendChild(rl);
     const rh = svg('text', { x: 40, y: rowY[1] + 9, fill: GOLD, 'font-size': 26, 'font-weight': 700 }); rh.textContent = 'HUGO'; s.appendChild(rh);
     // stop + dashed rest
     const dash = svg('line', { x1: X(35) + 14, x2: X(65), y1: rowY[0], y2: rowY[0], stroke: 'rgba(226,242,234,.35)', 'stroke-width': 4, 'stroke-dasharray': '6 12', opacity: 0 }); s.appendChild(dash);
@@ -170,7 +170,7 @@ boot(async () => {
     for (const a of [25, 35, 45, 55, 65]) { const tt = svg('text', { x: X(a), y: y0 + 42, 'text-anchor': 'middle', fill: 'rgba(226,242,234,.55)', 'font-size': 22 }); tt.textContent = a + (a === 65 ? ' ANS' : ''); s.appendChild(tt); }
     const ttl = svg('text', { x: x0, y: 46, fill: 'rgba(226,242,234,.5)', 'font-size': 20, 'letter-spacing': 3 }); ttl.textContent = 'PATRIMOINE · SIMULATION 6 %/AN'; s.appendChild(ttl);
     const band = svg('rect', { x: X(25), y: y1 - 10, width: X(35) - X(25), height: y0 - y1 + 10, fill: 'rgba(46,230,160,.07)' }); s.appendChild(band);
-    const bandT = svg('text', { x: (X(25) + X(35)) / 2, y: y0 - 16, 'text-anchor': 'middle', fill: 'rgba(46,230,160,.6)', 'font-size': 18, 'letter-spacing': 2 }); bandT.textContent = 'LÉA VERSE'; s.appendChild(bandT);
+    const bandT = svg('text', { x: (X(25) + X(35)) / 2, y: y0 - 16, 'text-anchor': 'middle', fill: 'rgba(46,230,160,.6)', 'font-size': 18, 'letter-spacing': 2 }); bandT.textContent = 'SARAH VERSE'; s.appendChild(bandT);
     const cl = svg('path', { fill: 'none', stroke: MINT, 'stroke-width': 8, 'stroke-linecap': 'round', filter: 'url(#gl)' }); s.appendChild(cl);
     const ch = svg('path', { fill: 'none', stroke: GOLD, 'stroke-width': 8, 'stroke-linecap': 'round', filter: 'url(#gl)' }); s.appendChild(ch);
     const dl = svg('circle', { r: 12, fill: MINT }), dh = svg('circle', { r: 12, fill: GOLD }); s.appendChild(dl); s.appendChild(dh);
@@ -259,7 +259,7 @@ boot(async () => {
     const vs = text(root, '>', { cls: 'num', x: 560, y: 780, w: 160, size: 130, style: { color: 'var(--muted)' } });
     const big = new Odo(root, { maxDigits: 2, suffix: '<span class="u">+</span>', style: { position: 'absolute', top: '560px', left: 0, right: 0, textAlign: 'center', color: 'var(--mint)', fontSize: '300px' } });
     const bs = text(root, 'ANS POUR GROSSIR', { cls: 'head', y: 880, size: 84 });
-    const bs2 = text(root, 'CHAQUE EURO DE LÉA A EU', { cls: 'mono', y: 500, size: 28, style: { color: 'var(--mint)' } });
+    const bs2 = text(root, 'CHAQUE EURO DE SARAH A EU', { cls: 'mono', y: 500, size: 28, style: { color: 'var(--mint)' } });
     const T = { tps: C('temps'), mt: C('montant'), gr: C('grossir'), y30: C('y30') };
     sfx('whoosh', t0 + .05, .6); sfx('pop', T.tps + .5, .7); sfx('pop', T.mt, .5); sfx('whoosh', T.gr - .1, .5); sfx('rise', T.gr + .2, .5, T.y30 - T.gr - .2); sfx('ding', T.y30, .8);
     return t => {
@@ -314,7 +314,7 @@ boot(async () => {
 
   // =============== J. CTA ===============
   scene(CTA, TL.duration + 1, (root, t0) => {
-    const top = text(root, 'LÉA OU HUGO ?', { cls: 'mono', y: 228, size: 28 });
+    const top = text(root, 'SARAH OU HUGO ?', { cls: 'mono', y: 228, size: 28 });
     const head = text(root, 'ET VOUS, VOUS AVEZ<br>COMMENCÉ À <span class="a">QUEL ÂGE</span> ?', { y: 1010, size: 86 });
     const sub = text(root, 'RÉPONDEZ EN COMMENTAIRE ↓', { cls: 'mono', y: 1196, size: 24, style: { color: 'var(--cream)' } });
     sfx('whoosh', t0 + .05, .6); sfx('pop', t0 + .15, .6); sfx('pop', t0 + .3, .6);
