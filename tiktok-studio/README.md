@@ -54,8 +54,9 @@ Par défaut : « fabien », une voix d'homme française très naturelle génér�
 (modèle sous licence CC BY 4.0, voix enregistrée par l'équipe Kyutai et publiée en CC0).
 Le modèle tourne sur processeur : compter 3 à 4 minutes de calcul par vidéo de 90 secondes.
 
-Autres voix possibles dans `script.json` : `"voice": "pierre"` ou `"tom"` (voix d'homme Piper,
-plus rapides mais plus robotiques), `"siwis"` (voix de femme Kokoro).
+Autres voix possibles dans `script.json` : `"f1"` à `"f4"` (voix de femme Kyutai : f1 en CC0,
+f2 à f4 issues de CML-TTS en CC BY 4.0), `"pierre"` ou `"tom"` (voix d'homme Piper, plus rapides
+mais plus robotiques), `"siwis"` (voix de femme Kokoro).
 
 ### Contrôle qualité automatique
 

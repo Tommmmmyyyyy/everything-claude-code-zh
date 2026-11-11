@@ -18,6 +18,11 @@ SR_OUT = 48000
 VOICES = {
     # Kyutai TTS 1.6B (CC-BY 4.0), voice "fabien" = Kyutai's own French male recording (CC0)
     'fabien': {'engine': 'kyutai', 'voice': 'unmute-prod-website/fabieng-enhanced-v2.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0},
+    # French female voices (Kyutai TTS): f1 = Kyutai staff recording (CC0), f2-f4 = CML-TTS / LibriVox readers (CC BY 4.0)
+    'f1': {'engine': 'kyutai', 'voice': 'unmute-prod-website/developpeuse-3.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
+    'f2': {'engine': 'kyutai', 'voice': 'cml-tts/fr/10087_11650_000028-0002_enhanced.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
+    'f3': {'engine': 'kyutai', 'voice': 'cml-tts/fr/5207_3078_000031-0002_enhanced.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
+    'f4': {'engine': 'kyutai', 'voice': 'cml-tts/fr/2154_2576_000020-0003_enhanced.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
     'pierre': {'engine': 'piper', 'dir': 'vits-piper-fr_FR-upmc-medium', 'sid': 1, 'speed': .95},
     'tom': {'engine': 'piper', 'dir': 'vits-piper-fr_FR-tom-medium', 'sid': 0, 'speed': 1.0},
     'siwis': {'engine': 'kokoro', 'dir': 'kokoro-multi-lang-v1_0', 'sid': 31, 'speed': 1.0},
