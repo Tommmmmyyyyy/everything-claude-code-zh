@@ -24,7 +24,7 @@ boot(async () => {
     const perDay = text(root, '/ JOUR', { cls: 'mono', x: 668, y: 470, w: 300, align: 'left', size: 32, style: { color: 'var(--cream)' } });
     const cup = obj(root, 'cup', { cx: 540, by: 1040, w: 470 });
     const st = steam(cup, { cx: .47, top: .17, scale: .85 });
-    const tag = text(root, '<span class="chip ghost" style="font-size:40px">ÇA PARAÎT RIEN…</span>', { cls: 'abs', x: 610, y: 610, w: 460, align: 'left', z: 4 });
+    const tag = text(root, '<span class="chip ghost" style="font-size:36px">ÇA N’A L’AIR DE RIEN…</span>', { cls: 'abs', x: 585, y: 612, w: 480, align: 'left', z: 4 });
     const head = text(root, 'COMBIEN SUR<br><span class="a">30 ANS</span> ?', { y: 1035, size: 118 });
     sfx('pop', cue('price') - .05, .8); sfx('pop', cue('rien'), .6); sfx('whoosh', cue('y30') - .1, .7);
     return t => {
