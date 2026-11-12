@@ -1,0 +1,63 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Un cheval, combien ça coûte vraiment par an ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^p1 D'abord, la pension en box : environ {*350 €|trois cent cinquante euros} par mois. ^p2 Soit {*4 200 €|quatre mille deux cents euros} par an.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^mar Le maréchal-ferrant, toutes les six à huit semaines : environ {*600 €|six cents euros} par an.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^vet Le vétérinaire, les vaccins, le dentiste, les vermifuges : environ {*400 €|quatre cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^ass L'assurance : {*300 €|trois cents euros}. ^equ Le matériel qui s'use, la selle, les couvertures : encore {*300 €|trois cents euros}. ^div Et les petits extras : {*200 €|deux cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^tot Total : environ {*6 000 €|six mille euros} par an. ^mois Cinq cents euros par mois.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^colique Et ça, c'est sans pépin. Une colique avec chirurgie, c'est entre {*3 000|trois mille} et {*5 000 €|cinq mille euros} d'un coup.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^vie Un cheval vit souvent plus de vingt-cinq ans. ^y20 Sur vingt ans, ça fait au moins {*120 000 €|cent vingt mille euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^appart Le prix d'un petit appartement.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^concl Mais demandez à n'importe quel cavalier : ^nprix ça n'a pas de prix.",
+   "pause": 0.4
+  },
+  {
+   "id": "l11",
+   "text": "^cta Et vous, votre cheval vous coûte combien par mois ?",
+   "pause": 0.4
+  }
+ ]
+}

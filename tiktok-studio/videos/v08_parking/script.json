@@ -1,0 +1,53 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Acheter un parking pour le louer : bonne idée ou pas ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^prix En province, une place de parking coûte environ {*15 000 €|quinze mille euros}. ^not Avec les frais : {*16 500 €|seize mille cinq cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^loyer Vous la louez {*80 €|quatre-vingts euros} par mois. ^brut Rendement affiché : {*6,4 %|six virgule quatre pour cent}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^pros Les avantages ? ^p1 Pas de travaux, ^p2 presque pas d'usure, ^p3 et en cas d'impayé, c'est bien plus simple qu'avec un logement.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^ch Mais retirez les charges, la taxe foncière, et un mois vide de temps en temps : ^net il reste environ {*580 €|cinq cent quatre-vingts euros} par an.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^mois Soit environ {*48 €|quarante-huit euros} par mois. ^netp Un rendement net autour de {*3,5 %|trois virgule cinq pour cent}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^comp C'est à peu près autant qu'un studio étudiant, ^moins avec beaucoup moins de soucis.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^emp Le secret, encore une fois : l'emplacement. ^gare Près d'une gare, d'un centre-ville, ou d'un quartier où il est impossible de se garer.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^cta Vous, vous préférez un parking ou un studio ?",
+   "pause": 0.4
+  }
+ ]
+}

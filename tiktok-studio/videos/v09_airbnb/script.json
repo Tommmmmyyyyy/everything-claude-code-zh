@@ -1,0 +1,63 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Le même appartement, en Airbnb ou loué à l'année : ^lequel lequel rapporte le plus ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^cl En location classique : {*750 €|sept cent cinquante euros} par mois. ^clan Environ {*8 600 €|huit mille six cents euros} par an, avec un petit mois de vacance.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^air En Airbnb : {*80 €|quatre-vingts euros} la nuit, ^occ rempli deux nuits sur trois. ^ca Ça fait près de {*19 000 €|dix-neuf mille euros} par an.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^wow Plus du double. ^sauf Sauf que…",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^com La commission Airbnb, environ {*15 %|quinze pour cent} : ^comv près de {*2 900 €|deux mille neuf cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^men Le ménage entre chaque voyageur : {*2 800 €|deux mille huit cents euros}. ^chg L'électricité, internet, les abonnements : {*1 800 €|mille huit cents euros}. ^use Le linge et l'usure : {*1 000 €|mille euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^net Il reste environ {*10 500 €|dix mille cinq cents euros}. ^diff Soit environ {*1 800 €|mille huit cents euros} de plus que la location classique.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^conc Et si vous passez par une conciergerie à vingt pour cent ? ^concv Vous tombez à {*6 700 €|six mille sept cents euros}. ^moins Moins que la location classique.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^regle Sans parler des règles : dans beaucoup de villes, la location courte durée est de plus en plus encadrée.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^concl Airbnb rapporte plus… ^seul seulement si vous faites presque tout vous-même.",
+   "pause": 0.4
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous, vous choisissez quoi ?",
+   "pause": 0.4
+  }
+ ]
+}

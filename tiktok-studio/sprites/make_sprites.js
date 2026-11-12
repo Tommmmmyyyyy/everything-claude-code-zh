@@ -25,6 +25,13 @@ const LIST = [
   ['ball_mint', 'ball', { color: 'mint', elev: 6 }],
   ['ball_coral', 'ball', { color: 'coral', elev: 6 }],
   ['office', 'office', { elev: 16, az: 30 }],
+  ['horse', 'horse', { elev: 8, az: 20 }],
+  ['hay', 'hay', { elev: 14, az: 35 }],
+  ['fence', 'fence', { elev: 12, az: 15 }],
+  ['car', 'car', { elev: 18, az: 35 }],
+  ['foodtruck', 'foodtruck', { elev: 14, az: 30 }],
+  ['laptop', 'laptop', { elev: 28, az: -15 }],
+  ['goldbars', 'goldbars', { elev: 24, az: 20 }],
 ];
 (async () => {
   const { srv, url } = await serve(ROOT);

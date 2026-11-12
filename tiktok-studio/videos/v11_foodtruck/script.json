@@ -1,0 +1,68 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Un food truck, ça rapporte combien à la fin du mois ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^camion Un camion aménagé d'occasion : environ {*40 000 €|quarante mille euros}, ^credit remboursé sur cinq ans, ^credv soit environ {*740 €|sept cent quarante euros} par mois.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^repas Disons cinquante repas par jour, à {*12 €|douze euros}, ^jours vingt jours par mois. ^ca Ça fait {*12 000 €|douze mille euros} de chiffre d'affaires.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^mat Les ingrédients : environ trente pour cent, soit {*3 600 €|trois mille six cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^emp Les emplacements, le gaz, le carburant, les emballages : {*2 000 €|deux mille euros}. ^ass L'assurance et l'entretien : {*400 €|quatre cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^cot Les cotisations sociales : près de {*1 500 €|mille cinq cents euros}. ^cred Et le crédit du camion : {*740 €|sept cent quarante euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^reste Il vous reste environ {*3 800 €|trois mille huit cents euros} par mois. ^pasmal Pas mal !",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^heures Sauf que : les courses, la préparation, le service, le nettoyage… ^h60 C'est souvent soixante heures par semaine.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^horaire Rapporté à l'heure : environ {*14,50 €|quatorze euros cinquante}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^meteo Et quand il pleut, ou en plein mois de janvier, les clients ne viennent pas.",
+   "pause": 0.4
+  },
+  {
+   "id": "l11",
+   "text": "^concl Un food truck, ça peut bien marcher… ^metier mais c'est un métier, pas un placement.",
+   "pause": 0.4
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous iriez manger dans quel food truck ?",
+   "pause": 0.4
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Un studio loué à un étudiant, ça rapporte combien, vraiment ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^prix Un studio dans une ville étudiante : {*100 000 €|cent mille euros}. ^not Plus environ {*8 000 €|huit mille euros} de frais de notaire.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^loyer Vous le louez {*450 €|quatre cent cinquante euros} par mois. ^brut Rendement affiché : {*5,4 %|cinq virgule quatre pour cent}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^vac Mais l'été, l'étudiant part : comptez au moins un mois sans loyer.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^tf La taxe foncière : environ {*500 €|cinq cents euros}. ^cop Les charges non récupérables, l'assurance, les petits travaux : environ {*800 €|huit cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^net Il reste environ {*3 650 €|trois mille six cent cinquante euros} par an. ^netp Soit {*3,4 %|trois virgule quatre pour cent}… ^avant et c'est avant impôts.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^mois Concrètement : un peu plus de {*300 €|trois cents euros} par mois, pour cent huit mille euros investis.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^plus Alors pourquoi tout le monde en achète ? ^credit Parce qu'avec un crédit, c'est le locataire qui rembourse une bonne partie, ^patri et dans vingt ans, le studio est à vous.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^concl L'immobilier, ce n'est pas une machine à cash. ^patri2 C'est une machine à *patrimoine.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^cta Vous préférez le studio, ou la bourse ?",
+   "pause": 0.4
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Combien faut-il gagner pour faire partie des {*1 %|un pour cent} les plus riches en France ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^devine Avant la réponse, essayez de deviner.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^med D'abord, le milieu. ^medv La moitié des Français vit avec moins de {*2 228 €|deux mille deux cent vingt-huit euros} par mois. ^medd Pour une personne seule, après impôts.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^riche Selon l'Observatoire des inégalités, on est riche à partir du double : ^richev {*4 456 €|quatre mille quatre cent cinquante-six euros} par mois.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^top Et pour entrer dans le top un pour cent ? ^topv Environ {*7 500 €|sept mille cinq cents euros} par mois, ^apres après impôts.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^couple Attention, c'est pour une personne seule. ^fam Pour un couple avec deux jeunes enfants, ^famv il faut multiplier par environ deux : ^famr plus de {*15 000 €|quinze mille euros} par mois pour le foyer.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^surpr Beaucoup de gens qui se sentent riches ne le sont pas… ^surpr2 et beaucoup de gens qui se sentent moyens sont déjà en haut de l'échelle.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^cta Alors, vous aviez deviné combien ?",
+   "pause": 0.4
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Louer son pré à des chevaux, c'est un vrai placement ? ^calc Faisons le calcul.",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "Prenons ^ha {*5 hectares|cinq hectares} de prairie, à environ {5 000 €|cinq mille euros} l'hectare. ^clot Ajoutez les clôtures, un abri et l'eau : ^inv {*35 000 €|trente-cinq mille euros} au total.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "On compte un cheval par hectare. ^pens Une pension au pré, c'est environ {*170 €|cent soixante-dix euros} par mois et par cheval.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^rev Cinq chevaux, douze mois : {*10 200 €|dix mille deux cents euros} par an.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^foin Mais il faut du foin l'hiver : environ {*1 200 €|mille deux cents euros}. ^ent L'entretien du pré et des clôtures, l'eau, l'assurance : encore {*1 500 €|mille cinq cents euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^cot Et environ {*30 %|trente pour cent} de cotisations et d'impôts.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^reste Il vous reste à peu près {*5 250 €|cinq mille deux cent cinquante euros} par an. ^mois Soit environ {*440 €|quatre cent quarante euros} par mois.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^rend Sur trente-cinq mille euros investis, c'est près de {*15 %|quinze pour cent} par an. ^terre Et le terrain, lui, reste à vous.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^mais Mais attention : ^m1 les chevaux, c'est tous les jours, ^m2 même le dimanche, même à Noël. ^m3 Une heure par jour, ça fait plus de trois cent soixante heures par an.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^heure Rapporté à votre temps, ça fait environ {*14 €|quatorze euros} de l'heure.",
+   "pause": 0.4
+  },
+  {
+   "id": "l11",
+   "text": "^concl Un bon placement… pour ceux qui aiment vraiment les chevaux.",
+   "pause": 0.4
+  },
+  {
+   "id": "l12",
+   "text": "^cta Et vous, vous le feriez ?",
+   "pause": 0.4
+  }
+ ]
+}

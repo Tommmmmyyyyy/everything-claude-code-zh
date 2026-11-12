@@ -1,0 +1,58 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous facturez {*1 000 €|mille euros} en micro-entreprise. ^combien Combien il vous reste, vraiment ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^cot D'abord, les cotisations sociales. Pour une activité de services, c'est environ {*21 %|vingt et un pour cent} : ^cotv {*212 €|deux cent douze euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^imp Ensuite l'impôt. Avec le versement libératoire, environ {*2 %|deux pour cent} : ^impv {*17 €|dix-sept euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^frais Et vos frais : le téléphone, le logiciel, le matériel, les déplacements. ^fraisv Disons {*100 €|cent euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^reste Il vous reste environ {*670 €|six cent soixante-dix euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^pas Et ce n'est pas tout. ^c1 Pas de congés payés, ^c2 pas de chômage si vous arrêtez, ^c3 et les jours où vous ne facturez pas, vous ne gagnez rien.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^besoin Pour vous verser {*2 000 €|deux mille euros} par mois, ^fact il faut facturer environ {*3 000 €|trois mille euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^taux Et si vous ne facturez que deux jours sur trois, votre tarif doit être encore plus haut.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^concl La micro-entreprise, c'est simple. ^prix Mais il faut fixer ses prix en connaissant ce calcul.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^cta Vous facturez combien, vous ?",
+   "pause": 0.4
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.35,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Devenir millionnaire à soixante-cinq ans : ^combien combien faut-il placer par mois ?",
+   "pause": 0.4
+  },
+  {
+   "id": "l2",
+   "text": "^hyp Hypothèse : {*6 %|six pour cent} par an en moyenne, ^reinv gains réinvestis.",
+   "pause": 0.4
+  },
+  {
+   "id": "l3",
+   "text": "^a25 Si vous commencez à {25 ans|vingt-cinq ans} : ^v25 environ {*500 €|cinq cents euros} par mois.",
+   "pause": 0.4
+  },
+  {
+   "id": "l4",
+   "text": "^a35 À {35 ans|trente-cinq ans} : ^v35 environ {*1 000 €|mille euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l5",
+   "text": "^a45 À {45 ans|quarante-cinq ans} : ^v45 plus de {*2 100 €|deux mille cent euros}.",
+   "pause": 0.4
+  },
+  {
+   "id": "l6",
+   "text": "^a55 Et à {55 ans|cinquante-cinq ans} : ^v55 plus de {*6 000 €|six mille euros} par mois.",
+   "pause": 0.4
+  },
+  {
+   "id": "l7",
+   "text": "^x12 Douze fois plus, juste pour avoir attendu trente ans.",
+   "pause": 0.4
+  },
+  {
+   "id": "l8",
+   "text": "^warn Attention : avec l'inflation, ^infl un million dans quarante ans vaudra environ {*450 000 €|quatre cent cinquante mille euros} d'aujourd'hui.",
+   "pause": 0.4
+  },
+  {
+   "id": "l9",
+   "text": "^sim Et un rendement de six pour cent n'est jamais garanti.",
+   "pause": 0.4
+  },
+  {
+   "id": "l10",
+   "text": "^concl Mais la leçon reste la même : ^temps le temps fait la plus grosse partie du travail.",
+   "pause": 0.4
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous avez quel âge, vous ?",
+   "pause": 0.4
+  }
+ ]
+}

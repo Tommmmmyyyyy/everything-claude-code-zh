@@ -218,6 +218,86 @@ B.office = () => {
   return g;
 };
 
+
+const COL2 = { horse: 0xB9763F, mane: 0x4A2E1B, hoof: 0x2A1F18, hay: 0xE6B547, hayDark: 0xC28F2A, wood: 0xE9DCC6 };
+function cap(r, l, m) { return mesh(new THREE.CapsuleGeometry(r, l, 12, 32), m); }
+B.horse = () => {
+  const g = new THREE.Group(); const m = clay(COL2.horse, { r: .55 }), dm = clay(COL2.mane, { r: .7 }), hm = clay(COL2.hoof, { r: .6 });
+  const body = cap(.62, 1.5, m); body.rotation.z = Math.PI / 2; body.position.set(0, 2.05, 0); g.add(body);
+  const neck = cap(.34, .9, m); neck.position.set(1.15, 2.75, 0); neck.rotation.z = -.75; g.add(neck);
+  const head = cap(.27, .62, m); head.position.set(1.62, 3.12, 0); head.rotation.z = -2.0; g.add(head);
+  const muz = mesh(new THREE.SphereGeometry(.24, 32, 24), m); muz.scale.set(1, .85, .95); muz.position.set(1.95, 2.85, 0); g.add(muz);
+  for (const z of [-.12, .12]) { const e = mesh(new THREE.ConeGeometry(.08, .26, 16), m); e.position.set(1.42, 3.5, z); e.rotation.z = -.3; g.add(e); }
+  for (const z of [-.2, .2]) { const eye = mesh(new THREE.SphereGeometry(.045, 16, 12), clay(0x101010, { r: .2 })); eye.position.set(1.66, 3.2, z * 1.05); g.add(eye); }
+  const halter = mesh(new THREE.TorusGeometry(.27, .035, 10, 32), clay(C.mint, { r: .5 })); halter.position.set(1.8, 2.98, 0); halter.rotation.set(0, Math.PI / 2, .9); g.add(halter);
+  // mane along neck
+  for (let i = 0; i < 7; i++) { const k = i / 6; const mn = mesh(new THREE.SphereGeometry(.13, 16, 12), dm); mn.scale.set(1.3, .8, .55); mn.position.set(.78 + k * .7, 2.95 + k * .55, 0); g.add(mn); }
+  // legs
+  for (const [x, z] of [[-.75, -.28], [-.75, .28], [.72, -.28], [.72, .28]]) {
+    const leg = mesh(new THREE.CylinderGeometry(.13, .11, 1.45, 20), m); leg.position.set(x, .9, z); g.add(leg);
+    const hf = mesh(new THREE.CylinderGeometry(.13, .15, .16, 20), hm); hf.position.set(x, .1, z); g.add(hf);
+  }
+  // tail
+  const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(-1.25, 2.35, 0), new THREE.Vector3(-1.55, 2.0, 0), new THREE.Vector3(-1.6, 1.4, .05), new THREE.Vector3(-1.5, 1.0, .1)]);
+  g.add(mesh(new THREE.TubeGeometry(curve, 30, .12, 12, false), dm));
+  return g;
+};
+B.hay = () => {
+  const g = new THREE.Group(); const R = 1.1, L = 1.3;
+  const c = mesh(new THREE.CylinderGeometry(R, R, L, 64, 1, false), clay(COL2.hay, { r: .95 })); c.rotation.z = Math.PI / 2; c.position.y = R; g.add(c);
+  for (const x of [-L / 2 - .001, L / 2 + .001]) for (let k = 1; k <= 4; k++) { const t = mesh(new THREE.TorusGeometry(R * k / 4.6, .025, 8, 64), clay(COL2.hayDark, { r: .9 })); t.rotation.y = Math.PI / 2; t.position.set(x, R, 0); g.add(t); }
+  for (const x of [-.35, .35]) { const t = mesh(new THREE.TorusGeometry(R + .005, .02, 8, 64), clay(C.cream, { r: .6 })); t.rotation.y = Math.PI / 2; t.position.set(x, R, 0); g.add(t); }
+  return g;
+};
+B.fence = () => {
+  const g = new THREE.Group(); const w = clay(COL2.wood, { r: .6 });
+  for (const x of [-1.8, 0, 1.8]) { const p = mesh(roundedBox(.22, 1.5, .22, .05, 2), w); p.position.set(x, .75, 0); g.add(p); }
+  for (const y of [.55, 1.1]) { const r = mesh(roundedBox(3.9, .16, .12, .05, 2), w); r.position.set(0, y, .14); g.add(r); }
+  return g;
+};
+B.car = () => {
+  const g = new THREE.Group();
+  const body = mesh(roundedBox(3.2, .8, 1.6, .28, 4), clay(C.mint, { r: .45 })); body.position.y = .85; g.add(body);
+  const cab = mesh(roundedBox(1.8, .75, 1.45, .3, 4), clay(C.mint, { r: .45 })); cab.position.set(-.15, 1.5, 0); g.add(cab);
+  const glass = clay(0x0b231b, { r: .2 });
+  for (const z of [.73, -.73]) { const wdw = mesh(roundedBox(1.5, .5, .04, .12, 3), glass); wdw.position.set(-.15, 1.52, z); g.add(wdw); }
+  const ws = mesh(roundedBox(.05, .55, 1.25, .12, 3), glass); ws.position.set(.74, 1.5, 0); ws.rotation.z = -.35; g.add(ws);
+  for (const [x, z] of [[1, .78], [1, -.78], [-1.05, .78], [-1.05, -.78]]) { const wh = mesh(new THREE.CylinderGeometry(.38, .38, .28, 32), clay(C.ink, { r: .7 })); wh.rotation.x = Math.PI / 2; wh.position.set(x, .4, z); g.add(wh); const hb = mesh(new THREE.CylinderGeometry(.16, .16, .3, 24), clay(C.cream)); hb.rotation.x = Math.PI / 2; hb.position.set(x, .4, z); g.add(hb); }
+  for (const z of [.5, -.5]) { const l = mesh(new THREE.SphereGeometry(.12, 16, 12), clay(C.gold, { r: .3 })); l.position.set(1.6, .95, z); g.add(l); }
+  return g;
+};
+B.foodtruck = () => {
+  const g = new THREE.Group();
+  const box_ = mesh(roundedBox(3.4, 2.2, 1.9, .15, 4), clay(C.cream, { r: .5 })); box_.position.set(-.4, 1.65, 0); g.add(box_);
+  const stripe = mesh(roundedBox(3.42, .3, 1.92, .05, 2), clay(C.mint)); stripe.position.set(-.4, .78, 0); g.add(stripe);
+  const cabm = mesh(roundedBox(1.2, 1.5, 1.85, .25, 4), clay(C.mint, { r: .45 })); cabm.position.set(1.85, 1.3, 0); g.add(cabm);
+  const ws = mesh(roundedBox(.05, .6, 1.5, .1, 3), clay(0x0b231b, { r: .2 })); ws.position.set(2.42, 1.7, 0); g.add(ws);
+  const win = mesh(roundedBox(2.0, .9, .05, .08, 3), clay(0x0b231b, { r: .3 })); win.position.set(-.4, 1.9, .96); g.add(win);
+  const counter = mesh(roundedBox(2.1, .1, .35, .04, 2), clay(C.cream2)); counter.position.set(-.4, 1.42, 1.1); g.add(counter);
+  for (let i = 0; i < 6; i++) { const aw = mesh(roundedBox(.36, .08, .7, .03, 2), clay(i % 2 ? C.cream : C.coral, { r: .5 })); aw.position.set(-1.25 + i * .34, 2.55, 1.22); aw.rotation.x = .35; g.add(aw); }
+  for (const [x, z] of [[1.6, .95], [1.6, -.95], [-1.4, .95], [-1.4, -.95]]) { const wh = mesh(new THREE.CylinderGeometry(.42, .42, .3, 32), clay(C.ink, { r: .7 })); wh.rotation.x = Math.PI / 2; wh.position.set(x, .42, z); g.add(wh); const hb = mesh(new THREE.CylinderGeometry(.17, .17, .32, 24), clay(C.cream)); hb.rotation.x = Math.PI / 2; hb.position.set(x, .42, z); g.add(hb); }
+  return g;
+};
+B.laptop = () => {
+  const g = new THREE.Group();
+  const base = mesh(roundedBox(2.6, .12, 1.8, .06, 3), clay(C.cream2, { r: .45 })); base.position.y = .06; g.add(base);
+  const pad = mesh(roundedBox(.8, .02, .5, .03, 2), clay(C.cream, { r: .3 })); pad.position.set(0, .13, .55); g.add(pad);
+  const kb = mesh(roundedBox(2.2, .02, .8, .03, 2), clay(0xcfc3ad, { r: .6 })); kb.position.set(0, .13, -.15); g.add(kb);
+  const scr = new THREE.Group(); scr.position.set(0, .12, -.88); scr.rotation.x = -.28;
+  const lid = mesh(roundedBox(2.6, 1.7, .08, .06, 3), clay(C.cream2, { r: .45 })); lid.position.set(0, .85, 0); scr.add(lid);
+  const disp = mesh(roundedBox(2.35, 1.45, .02, .04, 2), clay(0x0b231b, { r: .25 })); disp.position.set(0, .87, .045); scr.add(disp);
+  for (let i = 0; i < 4; i++) { const bar = mesh(roundedBox(.22, .25 + i * .22, .01, .02, 1), clay(i === 3 ? C.mint : C.gold, { r: .4 })); bar.position.set(-.6 + i * .38, .45 + (.25 + i * .22) / 2, .06); scr.add(bar); }
+  g.add(scr); return g;
+};
+B.goldbars = () => {
+  const g = new THREE.Group();
+  const sh = new THREE.Shape(); sh.moveTo(-.75, 0); sh.lineTo(.75, 0); sh.lineTo(.6, .45); sh.lineTo(-.6, .45); sh.closePath();
+  const geo = new THREE.ExtrudeGeometry(sh, { depth: .7, bevelEnabled: true, bevelThickness: .05, bevelSize: .05, bevelSegments: 3 }); geo.translate(0, 0, -.35);
+  const mat = metal(C.gold, .25);
+  for (const [x, y, z] of [[-.82, 0, 0], [.82, 0, 0], [0, .5, 0], [0, 0, .9], [-.82, 0, .9], [.82, 0, .9]]) { const b = mesh(geo, mat); b.position.set(x, y + .05, z); g.add(b); }
+  return g;
+};
+
 // ---------- staging ----------
 window.renderSprite = (name, o = {}) => {
   const size = o.size ?? 900;
