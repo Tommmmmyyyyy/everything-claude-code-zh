@@ -193,7 +193,14 @@ def wer(ref, hyp):
         for j in range(1, len(h) + 1):
             cur = min(d[j] + 1, d[j - 1] + 1, prev + (r[i - 1] != h[j - 1]))
             prev, d[j] = d[j], cur
-    return d[len(h)] / max(1, len(r))
+    base = d[len(h)] / max(1, len(r))
+    NW = {'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze', 'treize', 'quatorze',
+          'quinze', 'seize', 'vingt', 'vingts', 'trente', 'quarante', 'cinquante', 'soixante', 'cent', 'cents', 'mille',
+          'million', 'millions', 'virgule', 'zéro'}
+    from collections import Counter
+    if Counter(w for w in r if w in NW) != Counter(w for w in h if w in NW):
+        base += .25  # a misheard number matters more than any other word
+    return base
 
 def long_pause(x, sr, limit=.9):
     g = gaps(x, sr)
