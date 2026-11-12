@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Une laverie automatique : pas de stock, pas de salarié, ^cash et des clients qui paient d'avance. ^passif Le business passif parfait ?",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop On a fait le calcul. Et la réponse dépend d'un détail que personne ne vous dit.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^invest Pour ouvrir : environ {*120 000 €|cent vingt mille euros}. ^machines Une dizaine de machines, des sèche-linge, les travaux.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^apport Vous apportez {*30 000 €|trente mille euros}, ^credit la banque prête le reste sur sept ans : ^mens environ {*1 270 €|mille deux cent soixante-dix euros} par mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^ca Vingt-cinq lavages par jour, à {*5,50 €|cinq euros cinquante} : ^ca2 environ {*4 000 €|quatre mille euros} par mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^loyer Le loyer : {*1 000 €|mille euros}. ^energie L'eau, l'électricité, le gaz : {*800 €|huit cents euros}. ^entretien Lessive, entretien, réparations : {*300 €|trois cents euros}. ^assur Assurance et télésurveillance : {*200 €|deux cents euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^reste Avant le crédit, il reste {*1 700 €|mille sept cents euros} par mois. ^reste2 Après le crédit… à peine {*430 €|quatre cent trente euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^twist Le détail : ^twist2 pendant sept ans, c'est surtout la banque qui gagne.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^after Mais une fois le crédit remboursé : ^after2 environ {*1 700 €|mille sept cents euros} par mois, ^heure pour une heure de passage par jour.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^empl Tout se joue sur l'emplacement : ^empl2 des étudiants, des petits appartements sans machine, et pas de concurrent dans la rue.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^impots Attention : c'est avant impôts, et les machines s'usent en dix à quinze ans.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous ouvririez une laverie, vous ? ^follow Abonnez-vous pour le prochain business passé au crible.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

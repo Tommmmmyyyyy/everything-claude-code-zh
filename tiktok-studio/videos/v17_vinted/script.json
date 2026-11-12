@@ -1,0 +1,59 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Il y a environ {*320 €|trois cent vingt euros} qui dorment chez vous. ^placard Et ils ne sont pas sur votre compte en banque.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^study En moyenne, {*19 objets|dix-neuf objets} inutilisés par foyer, selon OpinionWay. ^seuls Et seuls dix-sept pour cent des Français les revendent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^vinted Sur Vinted, vendre ne vous coûte rien : ^zero aucune commission pour le vendeur. ^acheteur Ce sont les acheteurs qui paient les frais de protection.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^calc Faisons le calcul. ^jean Un jean de marque : {*15 €|quinze euros}. ^shoes Des baskets peu portées : {*35 €|trente-cinq euros}. ^manteau Un manteau d'hiver : {*40 €|quarante euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^kids Et les vêtements d'enfants, trop petits au bout de six mois, se revendent très bien.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^impots Et les impôts ? ^dac7 Au-delà de trente ventes ou {*2 000 €|deux mille euros} par an, Vinted transmet vos ventes au fisc. ^pastax Mais revendre vos propres affaires d'occasion, ce n'est pas imposable.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^twist Sauf que… ^achat si vous achetez pour revendre, ça change tout. ^pro C'est une activité commerciale : il faut la déclarer, en micro-entreprise par exemple.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^marge Une veste achetée {*3 €|trois euros} en vide-grenier, revendue {*25 €|vingt-cinq euros} : ^marge2 c'est rentable, mais c'est un vrai petit commerce.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^place Faites ce tri chaque année, placez ces trois cent vingt euros à cinq pour cent : ^res en vingt ans, plus de {*10 000 €|dix mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^cta C'est quoi, l'objet le plus improbable que vous ayez vendu en ligne ? ^follow Abonnez-vous pour d'autres idées comme celle-ci.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous empruntez {*250 000 €|deux cent cinquante mille euros} pour votre maison. ^rend Vous allez en rendre plus de {*400 000 €|quatre cent mille}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Et le pire, ce n'est pas ce chiffre. C'est ce qui se passe pendant les dix premières années.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^taux Aujourd'hui, sur vingt-cinq ans, le taux moyen tourne autour de {*3,85 %|trois virgule quatre-vingt-cinq pour cent}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^mens Votre mensualité : {*1 299 €|mille deux cent quatre-vingt-dix-neuf euros} par mois, ^ass plus environ {*60 €|soixante euros} d'assurance.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^int Les intérêts : {*140 000 €|cent quarante mille euros}. ^assu L'assurance : presque {*19 000 €|dix-neuf mille} de plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^first Regardez votre première mensualité : ^first2 {*802 €|huit cent deux euros} partent en intérêts. ^first3 Seulement {*497 €|quatre cent quatre-vingt-dix-sept} remboursent vraiment votre maison.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^ten Au bout de dix ans, vous avez versé {*156 000 €|cent cinquante-six mille euros}. ^ten2 Et vous devez encore {*177 000 €|cent soixante-dix-sept mille euros} à la banque.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^half Il faut attendre plus de quinze ans pour avoir remboursé la moitié de votre maison.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^vingt Sur vingt ans plutôt que vingt-cinq ? ^v2 Environ {*180 €|cent quatre-vingts euros} de plus par mois, ^v3 mais {*35 000 €|trente-cinq mille euros} d'intérêts en moins.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^tips Deux réflexes : ^tip1 changez d'assurance emprunteur, c'est possible à tout moment. ^tip2 Et dès que vous pouvez, remboursez un peu en avance.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous, vous avez emprunté sur combien d'années ? ^follow Abonnez-vous : chaque jour, un chiffre qui change votre regard sur l'argent.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

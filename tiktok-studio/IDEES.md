@@ -36,7 +36,7 @@ ou l'hypothèse à l'écran avant publication.
 - Gagner 1 000 € au loto ou 1 000 € d'augmentation par an : lequel vaut le plus ?
 - Combien d'heures de travail coûte vraiment votre dernier achat ?
 
-## Prochaine série (déjà validée)
+## Série 3 (réalisée, vidéos 15 à 24)
 
 Crédit immobilier sur 25 ans, frais de notaire, revendre sur Vinted, dropshipping, laverie
 automatique, franchise de burgers, un enfant de 0 à 18 ans, panneaux solaires, smartphone payé

@@ -1,0 +1,59 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Changer de smartphone tous les deux ans pourrait vous coûter plus de {*20 000 €|vingt mille euros}. ^demo Je vous montre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^actu Et attention : à partir du 20 novembre 2026, payer en trois ou quatre fois devient un vrai crédit. ^solva Le prêteur devra vérifier que vous pouvez rembourser.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^prix Prenons un smartphone haut de gamme à {*1 200 €|mille deux cents euros}. ^p24 Payé en vingt-quatre fois, avec un taux autour de quinze pour cent, ^mens ça fait environ {*58 €|cinquante-huit euros} par mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^total Au total : {*1 382 €|mille trois cent quatre-vingt-deux euros}. ^cout {*182 €|Cent quatre-vingt-deux euros}, rien que pour le crédit.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^cycle Et deux ans plus tard ? ^neuf Un nouveau modèle sort, et on recommence. ^forever Même payé comptant, ça fait cinquante euros par mois… pour toujours.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^twist Maintenant, gardez le même téléphone quatre ans au lieu de deux. ^moitie Il ne vous coûte plus que {*25 €|vingt-cinq euros} par mois. ^diff Vingt-cinq euros d'écart, chaque mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^place Ces vingt-cinq euros, placés à cinq pour cent par an pendant trente ans : ^res plus de {*20 000 €|vingt mille euros}. ^verse Pour seulement neuf mille euros versés.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^credit Et sans le crédit, ^credit2 vous gardez encore près de deux cents euros à chaque achat.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^astuce Mon astuce : ^coque une bonne coque, une batterie changée au bout de trois ans, ^recond ou un modèle reconditionné.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^cta Vous, vous gardez votre téléphone combien de temps ? ^follow Abonnez-vous pour d'autres calculs du quotidien.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

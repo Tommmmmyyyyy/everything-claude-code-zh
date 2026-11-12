@@ -32,6 +32,23 @@ const LIST = [
   ['foodtruck', 'foodtruck', { elev: 14, az: 30 }],
   ['laptop', 'laptop', { elev: 28, az: -15 }],
   ['goldbars', 'goldbars', { elev: 24, az: 20 }],
+  ['bank', 'bank', { elev: 14, az: 22 }],
+  ['apartment', 'apartment', { elev: 16, az: 28 }],
+  ['deed', 'deed', { elev: 48, az: -10 }],
+  ['sofa', 'sofa', { elev: 16, az: 24 }],
+  ['tshirt', 'tshirt', { elev: 8, az: 12 }],
+  ['sneaker', 'sneaker', { elev: 24, az: 40 }],
+  ['parcel', 'parcel', { elev: 20, az: 26 }],
+  ['lamp', 'lamp', { elev: 10, az: 18 }],
+  ['phone', 'phone', { elev: 10, az: -16 }],
+  ['washer', 'washer', { elev: 12, az: 20 }],
+  ['burger', 'burger', { elev: 18, az: 0 }],
+  ['bottle', 'bottle', { elev: 10, az: 0 }],
+  ['blocks', 'blocks', { elev: 14, az: 10 }],
+  ['solarhouse', 'solarhouse', { elev: 20, az: 34 }],
+  ['mattress', 'mattress', { elev: 30, az: 24 }],
+  ['passbook', 'passbook', { elev: 50, az: -12 }],
+  ['globe', 'globe', { elev: 10, az: 60 }],
 ];
 (async () => {
   const { srv, url } = await serve(ROOT);

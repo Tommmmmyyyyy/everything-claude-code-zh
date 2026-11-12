@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Des panneaux solaires sur votre toit : ^arnaque bonne affaire, ou arnaque ? ^calc On fait le calcul, avec les nouvelles règles de 2026.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^install Une installation de trois kilowatts-crête, posée : environ {*7 000 €|sept mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^prod Elle produit environ {*3 600 kWh|trois mille six cents kilowattheures} par an. ^region Un peu plus dans le Sud, un peu moins dans le Nord.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^auto Ce que vous consommez vous-même, en journée, vous ne l'achetez plus : ^prix environ vingt centimes le kilowattheure. ^eco Soit près de {*470 €|quatre cent soixante-dix euros} d'économie par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^twist Et le reste, le surplus ? ^rachat Depuis juin 2026, EDF vous le rachète… ^cent un virgule un centime le kilowattheure.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^absurde Vous vendez votre électricité un centime, ^soir et vous la rachetez vingt centimes le soir. ^quatorze Le surplus ? Environ {*14 €|quatorze euros} par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^payback Résultat : sans aides, l'installation est remboursée en treize à quinze ans. ^duree Mais les panneaux durent trente ans, ou plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^gain Sur trente ans, avec un prix de l'électricité qui augmente, ^gain2 vous pouvez économiser environ {*20 000 €|vingt mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^regle La règle d'or : ^machines lave-linge, lave-vaisselle et chauffe-eau en plein soleil. ^plus Plus vous consommez à midi, plus c'est rentable.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^arnaq Et fuyez les démarcheurs qui promettent des panneaux gratuits : ^rge comparez plusieurs devis d'installateurs RGE.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous, vous en avez sur votre toit ? ^follow Abonnez-vous pour d'autres calculs comme celui-ci.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

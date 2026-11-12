@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Une lampe achetée {*6 €|six euros} en Chine, revendue {*29,90 €|vingt-neuf euros quatre-vingt-dix}. ^x5 Cinq fois le prix. ^formation C'est ce que promettent les formations au dropshipping.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Mais combien il vous reste vraiment, à la fin ? On fait le calcul, jusqu'au dernier centime.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^principe Le principe : vous vendez sur votre boutique en ligne, ^fourn et le fournisseur envoie le colis directement au client.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^produit Le produit et la livraison : environ {*9 €|neuf euros}. ^pub La publicité sur les réseaux, pour décrocher une vente : environ {*12 €|douze euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^frais Les frais de paiement, l'abonnement à la boutique, les remboursements : {*3 €|trois euros}. ^cotis Les cotisations et les taxes : environ {*4 €|quatre euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^reste Il vous reste… ^reste2 moins de {*2 €|deux euros} par commande.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^smic Pour vous verser {*1 500 €|mille cinq cents euros} par mois, ^ventes il faut près de huit cents commandes. ^jour Plus de vingt-cinq par jour, tous les jours.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^delai Et quand le colis met trois semaines à arriver, ^sav c'est vous que le client appelle. Pas le fournisseur.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^abandon Résultat : selon les acteurs du secteur, la grande majorité des boutiques ferment dès la première année.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^twist Alors, qui gagne vraiment de l'argent avec le dropshipping ? ^vendeurs Souvent… ceux qui vendent les formations.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous avez déjà acheté un produit en dropshipping sans le savoir ? ^follow Abonnez-vous, et dites-moi en commentaire quel business on décortique ensuite.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

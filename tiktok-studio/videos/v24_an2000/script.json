@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous avez {*100 €|cent euros} en l'an 2000. ^quatre Quatre choix : ^matelas le matelas, ^livret le Livret A, ^bourse la bourse, ^or ou l'or. ^quel Lequel vous rend le plus riche aujourd'hui ?",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Le dernier résultat va vous surprendre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^infl D'abord, l'inflation. ^infl2 Pour acheter aujourd'hui ce qui coûtait cent euros en 2000, il faut environ {*150 €|cent cinquante euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^mat Le matelas : ^mat2 vous avez toujours vos cent euros. ^mat3 Mais en pouvoir d'achat, ils ne valent plus que {*65 €|soixante-cinq euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^liv Le Livret A : ^liv2 environ {*160 €|cent soixante euros}. ^liv3 À peine mieux que l'inflation.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^bou La bourse, avec un fonds qui suit les grandes entreprises du monde entier : ^bou2 environ {*500 €|cinq cents euros}. ^krach Et pourtant, il y a eu les krachs de 2001, de 2008 et de 2020.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^gold Et l'or ? ^gold2 En 2000, l'once valait environ trois cents euros. ^gold3 Aujourd'hui, plus de trois mille cinq cents.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^res Vos cent euros d'or valent maintenant environ {*1 200 €|mille deux cents euros}. ^x12 Douze fois plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Alors, il faut tout mettre dans l'or ? ^non Pas si vite. ^gold4 Entre 1980 et 2000, l'or avait perdu plus de la moitié de sa valeur. ^passe Les performances passées ne disent rien de l'avenir.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^lecon La vraie leçon : ^lecon2 l'argent qui dort perd de la valeur. ^diver Celui qui travaille, sur le long terme et bien réparti, en gagne.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Et vous, vous auriez choisi quoi en l'an 2000 ? ^follow Abonnez-vous pour ne rater aucun calcul.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

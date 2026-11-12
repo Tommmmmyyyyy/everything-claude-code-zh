@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous achetez un appartement à {*250 000 €|deux cent cinquante mille euros}. ^bill Le notaire vous réclame près de {*20 000 €|vingt mille euros} de plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Vous pensez qu'il garde tout pour lui ? ^loop2 Attendez de voir sa vraie part.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^dep Le plus gros morceau va au département : {*12 500 €|douze mille cinq cents euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^com Ensuite, la commune : {*3 000 €|trois mille euros}. ^etat Puis l'État : environ {*1 000 €|mille euros}, avec la TVA et les taxes.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^deb Les débours, les documents, les formalités : environ {*1 000 €|mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^not Et le notaire, pour tout son travail ? ^not2 Environ {*2 400 €|deux mille quatre cents euros}. ^not3 À peine {*12 %|douze pour cent} de la facture.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^impot Les frais de notaire, c'est surtout un impôt. ^hausse Et depuis 2025, la plupart des départements l'ont augmenté.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^neuf Dans le neuf, c'est beaucoup moins cher : ^neuf2 deux à trois pour cent du prix, au lieu de huit.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^astuce Mon astuce : ^meubles la cuisine équipée, les meubles, l'électroménager, faites-les chiffrer à part dans l'acte, à leur juste valeur. ^meubles2 Sur dix mille euros de meubles, vous économisez plus de {*600 €|six cents euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^primo Et si c'est votre premier achat, vous échappez à la dernière hausse : ^primo2 près de {*1 300 €|mille trois cents euros} de moins.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^bank Dernier piège : ^bank2 la banque finance rarement ces frais. Il faut les avoir de côté.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous saviez que le notaire gardait si peu ? ^follow Abonnez-vous, et envoyez cette vidéo à quelqu'un qui veut acheter.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

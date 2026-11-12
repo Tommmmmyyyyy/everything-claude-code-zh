@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Un enfant, de sa naissance à ses dix-huit ans, ça coûte combien ? ^chiffre Les estimations tournent autour de {*180 000 €|cent quatre-vingt mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Et il y a un poste auquel presque personne ne pense.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^mois Ça fait environ {*830 €|huit cent trente euros} par mois, pendant dix-huit ans.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^bebe Les premières années : ^couches les couches, entre deux et trois mille euros au total. ^garde Et la garde, crèche ou nounou : souvent plusieurs centaines d'euros par mois, même après les aides.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^ecole Ensuite, l'école : ^cantine la cantine, les fournitures, ^activites le sport, la musique, les vacances…",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^ado Puis l'adolescence, la plus chère : ^ado2 on mange comme un adulte, ^tel on veut un téléphone, des marques, des sorties.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^twist Mais le poste qu'on oublie, c'est… ^logement le logement. ^chambre Une chambre en plus, c'est souvent un appartement plus grand, ^loyer donc un loyer ou un crédit plus élevé, pendant dix-huit ans.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^aides Les aides ? ^af Les allocations familiales ne commencent qu'au deuxième enfant. ^parts La demi-part fiscale, elle, réduit vos impôts.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^conseil Mon conseil : ^cinquante mettez {*50 €|cinquante euros} par mois de côté dès sa naissance. ^cinq À cinq pour cent par an, ^dix8 à ses dix-huit ans, il aura plus de {*17 000 €|dix-sept mille euros}. ^permis De quoi payer son permis, ou ses études.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^fin Un enfant coûte cher. ^fin2 Mais ce qu'il rapporte, aucun tableur ne sait le calculer.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous avez combien d'enfants ? ^follow Abonnez-vous, et envoyez cette vidéo à un futur parent.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

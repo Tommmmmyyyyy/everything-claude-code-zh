@@ -1,6 +1,6 @@
 # TikTok Studio : vidéos explicatives argent & vie quotidienne
 
-Générateur de vidéos verticales (1080 × 1920, 30 i/s) au format « explication chiffrée » :
+Générateur de vidéos verticales (1080 × 1920, 30 ou 60 i/s) au format « explication chiffrée » :
 fond sombre, objets 3D façon pâte à modeler, gros chiffres animés, graphiques, sous-titres
 mot à mot, voix off française, musique et bruitages. Tout est produit localement, sans
 banque d'images ni musique sous licence : la musique et les sons sont générés par le code.
@@ -11,6 +11,21 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 - `videos/v2_age` : « Sarah et Hugo : commencer à 25 ou à 35 ans » (200 €/mois, 6 %/an)
 - `videos/v3_distributeur` : « Un distributeur automatique, ça rapporte combien ? »
 - `videos/v4_loto` : « Le Loto chaque semaine pendant 40 ans, combien ça coûte ? »
+- `videos/v05_pension_pre` à `videos/v14_regle72` : pension au pré, coût d'un cheval, studio étudiant,
+  parking, Airbnb, micro-entreprise, food truck, millionnaire à 65 ans, top 1 %, règle des 72
+- `videos/v15_credit25` à `videos/v24_an2000` (format long, 1 min 05 à 1 min 20) : crédit sur 25 ans,
+  frais de notaire, Vinted, dropshipping, laverie, franchise de burgers, coût d'un enfant,
+  panneaux solaires, smartphone en plusieurs fois, 100 € de l'an 2000
+
+### Modèles d'animation (`lib/beats.js`)
+
+- `stack` : éléments empilés qui apparaissent sur les repères de la voix (titres, chiffres, objets 3D, lignes).
+- `waterfall` : du chiffre d'affaires à ce qu'il reste, charge par charge.
+- `hbars` : comparaison en barres horizontales.
+- `receipt` : ticket de caisse ligne par ligne, total et tampon.
+- `splitbar` : barre de répartition (« où va votre argent ») avec légende et mise en avant.
+- `chart` : courbes tracées en direct, avec étiquettes sur les repères.
+- `cta` : question finale, avec un bouton « S'abonner » animé (`follow: 'repere'`).
 
 ## Installation (une seule fois)
 

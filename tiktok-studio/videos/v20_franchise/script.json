@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Une franchise de burgers : environ {*2 M€|deux millions d'euros} de chiffre d'affaires par an. ^riche Alors pourquoi certains franchisés gagnent si peu ?",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Restez jusqu'au bout : ^loop2 il suffit de perdre un client sur dix pour que tout bascule.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^invest Pour une grande enseigne : près de {*900 000 €|neuf cent mille euros} d'investissement, ^apport dont {*300 000 €|trois cent mille} d'apport.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^ca Disons cinq cent cinquante clients par jour, avec un ticket moyen de dix euros : ^ca2 environ {*2 M€|deux millions d'euros} par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^mat Ingrédients et emballages : {*600 000 €|six cent mille euros}. ^sal Les salaires de l'équipe : {*640 000 €|six cent quarante mille}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^redev Les redevances à la marque, quatorze pour cent : ^redev2 {*280 000 €|deux cent quatre-vingt mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^loyer Le loyer, l'énergie, l'entretien : {*240 000 €|deux cent quarante mille euros}. ^credit Le crédit : environ {*100 000 €|cent mille euros} par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^reste Il vous reste environ {*140 000 €|cent quarante mille euros} par an, avant impôts. ^ok Pas mal. ^marque Mais la marque, elle, a touché deux fois plus… sans prendre de risque.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Et maintenant, le piège. ^moins Vous perdez un client sur dix. ^moins2 Votre chiffre d'affaires baisse de dix pour cent…",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^chute Mais votre bénéfice, lui, tombe à environ {*26 000 €|vingt-six mille euros}. ^chute2 Moins quatre-vingts pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^why Parce que le loyer, les salaires et le crédit, eux, ne baissent pas.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous préférez être la marque, ou le franchisé ? ^follow Abonnez-vous pour d'autres calculs comme celui-ci.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}
