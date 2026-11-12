@@ -35,3 +35,18 @@ ou l'hypothèse à l'écran avant publication.
 - Augmentation de salaire : pourquoi on n'a jamais l'impression d'en profiter.
 - Gagner 1 000 € au loto ou 1 000 € d'augmentation par an : lequel vaut le plus ?
 - Combien d'heures de travail coûte vraiment votre dernier achat ?
+
+## Prochaine série (déjà validée)
+
+Crédit immobilier sur 25 ans, frais de notaire, revendre sur Vinted, dropshipping, laverie
+automatique, franchise de burgers, un enfant de 0 à 18 ans, panneaux solaires, smartphone payé
+en plusieurs fois, 100 € de l'an 2000.
+
+## Recette pour plus de vues, de likes et d'abonnés
+
+- Durée : 70 à 90 secondes (au-delà d'une minute, TikTok rémunère et pousse davantage).
+- Accroche dans les 2 premières secondes : un chiffre choc ou une question qui dérange.
+- Boucle ouverte dès le début : « et le chiffre de la fin va vous surprendre ».
+- Relance visuelle toutes les 5 à 8 secondes (nouvel objet, chiffre qui tombe, tampon).
+- Un retournement au milieu (« sauf que… ») et une révélation finale.
+- Question en commentaire + rappel « abonnez-vous pour la partie 2 » sur les sujets en deux volets.
