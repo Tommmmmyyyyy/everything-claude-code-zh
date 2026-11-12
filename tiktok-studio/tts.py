@@ -17,7 +17,7 @@ SR_OUT = 48000
 #         "siwis" = Kokoro French female.
 VOICES = {
     # Kyutai TTS 1.6B (CC-BY 4.0), voice "fabien" = Kyutai's own French male recording (CC0)
-    'fabien': {'engine': 'kyutai', 'voice': 'unmute-prod-website/fabieng-enhanced-v2.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0},
+    'fabien': {'engine': 'kyutai', 'voice': 'unmute-prod-website/fabieng-enhanced-v2.wav', 'cfg': 2.0, 'temp': .72, 'sid': 0, 'speed': 1.0},
     # ElevenLabs (needs a paid plan for library voices; API key injected by the network proxy or ELEVENLABS_API_KEY)
     'ilan': {'engine': 'eleven', 'voice_id': 'ozVFcYMzEYF561D1IKA0', 'model': 'eleven_multilingual_v2', 'sid': 0, 'speed': 1.0,
              'settings': {'stability': .45, 'similarity_boost': .8, 'style': .2, 'use_speaker_boost': True}},
@@ -170,14 +170,20 @@ def asr_text(x, sr):
     return st.result.text
 
 def _qa_norm(t):
-    t = t.lower().replace('\u202f', ' ').replace('€', ' euros ').replace('%', ' pour cent ').replace('’', "'")
+    """normalize for comparison: digits, %, € spelled out in French words, punctuation removed."""
+    t = t.lower().replace('\u202f', ' ').replace('\xa0', ' ').replace('’', "'")
     for _ in range(3):
-        t = re.sub(r'(\d)[ .,](\d{3})', r'\1\2', t)
+        t = re.sub(r'(\d)[ .](\d{3})\b', r'\1\2', t)
+    t = t.replace('€', ' euros ').replace('%', ' pour cent ')
+    t = re.sub(r'(\d+),(\d+)', r'\1 virgule \2', t)
+    try:
+        from num2words import num2words
+        t = re.sub(r'\d+', lambda m: ' ' + num2words(int(m.group()), lang='fr') + ' ', t)
+    except ImportError:
+        pass
     t = re.sub(r'\bx\b', 'fois', t)
-    t = re.sub(r"[^0-9a-zàâäéèêëîïôöùûüœæç' ]+", ' ', t)
-    NUMW = {'deux': '2', 'trois': '3', 'quatre': '4', 'cinq': '5', 'six': '6', 'sept': '7', 'huit': '8', 'neuf': '9',
-            'dix': '10', 'onze': '11', 'douze': '12', 'quinze': '15', 'vingt': '20', 'trente': '30', 'zéro': '0'}
-    return [NUMW.get(w, w) for w in t.split()]
+    t = re.sub(r"[^a-zàâäéèêëîïôöùûüœæç' ]+", ' ', t.replace('-', ' '))
+    return t.split()
 
 def wer(ref, hyp):
     r, h = _qa_norm(ref), _qa_norm(hyp)
@@ -187,11 +193,7 @@ def wer(ref, hyp):
         for j in range(1, len(h) + 1):
             cur = min(d[j] + 1, d[j - 1] + 1, prev + (r[i - 1] != h[j - 1]))
             prev, d[j] = d[j], cur
-    base = d[len(h)] / max(1, len(r))
-    nums = lambda ws: [w for w in ws if any(c.isdigit() for c in w)]
-    hn = nums(h)
-    missing = sum(1 for n in nums(r) if n not in hn)
-    return base + .3 * missing
+    return d[len(h)] / max(1, len(r))
 
 def long_pause(x, sr, limit=.9):
     g = gaps(x, sr)
@@ -288,6 +290,17 @@ def align(words, dur, gp):
             out[k] = (round(t, 3), round(t + d, 3)); t += d
     return out
 
+def apply_tempo(x, sr, tempo):
+    """speed up speech without changing pitch (ffmpeg atempo)."""
+    if abs(tempo - 1) < 1e-3: return x
+    import subprocess, tempfile
+    with tempfile.TemporaryDirectory() as td:
+        a, b = os.path.join(td, 'a.wav'), os.path.join(td, 'b.wav')
+        sf.write(a, x, sr, subtype='FLOAT')
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', a, '-af', f'atempo={tempo}', b], check=True)
+        y, _ = sf.read(b, dtype='float32')
+    return y
+
 def process_voice(x, sr, male=True, light=False):
     # gentle polish: high-pass, presence lift, soft compression, peak normalize
     import subprocess, tempfile
@@ -371,6 +384,9 @@ def main(script_path, out_dir):
     for li, (line, words, spoken) in enumerate(parsed):
         if li in synth:
             raw, tw = synth[li]
+            tempo = float(spec.get('tempo', 1.0))
+            if tempo != 1.0:
+                raw = apply_tempo(raw, sr, tempo); tw = [(w, s_ / tempo) for w, s_ in tw]
             x = trim(raw, sr)
             env = np.where(np.abs(raw) > 0.008)[0]
             off = max(0, env[0] - int(0.07 * sr)) / sr if len(env) else 0.0

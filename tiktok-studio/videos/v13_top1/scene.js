@@ -27,5 +27,5 @@ boot(async () => seq([
     { kind: 'head', html: 'SE SENTIR RICHE<br><span class="r">≠</span> ÊTRE RICHE', y: 420, size: 120, at: 'surpr' },
     { kind: 'chip', html: 'BEAUCOUP SONT DÉJÀ EN HAUT DE L’ÉCHELLE', style: 'mint', y: 760, size: 34, at: 'surpr2' },
   ]) },
-  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'LES 1 % LES PLUS RICHES', sprites: [{ name: 'goldbars', cx: 540, by: 900, size: 560 }], head: 'VOUS AVIEZ DEVINÉ<br><span class="a">COMBIEN</span> ?', headY: 990, headSize: 108 }) },
+  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'LES 1 % LES PLUS RICHES', sprites: [{ name: 'goldbars', cx: 540, by: 900, size: 560 }], head: 'VOUS AVIEZ DEVINÉ<br><span class="a">COMBIEN</span> ?', headY: 975, headSize: 96 }) },
 ]));

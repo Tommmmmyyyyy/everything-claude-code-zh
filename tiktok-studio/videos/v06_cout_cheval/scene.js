@@ -10,8 +10,8 @@ boot(async () => seq([
     { kind: 'head', html: 'UN CHEVAL, ÇA COÛTE<br><span class="g">COMBIEN</span> PAR AN ?', y: 1040, size: 90, at: -1 },
   ], { sfxIn: false }) },
   { at: 'p1', fn: (a, b) => stack(a, b, [
-    { kind: 'odo', to: 6000, fn: total, digits: 4, y: 250, size: 160, color: 'gold', at: 'p1', sfx: 'rise', dur: 6 },
-    { kind: 'mono', html: 'PAR AN', y: 430, at: at('p1', .3) },
+    { kind: 'odo', to: 6000, fn: total, digits: 4, y: 285, size: 140, color: 'gold', at: 'p1', sfx: 'rise', dur: 6 },
+    { kind: 'mono', html: 'PAR AN', y: 440, at: at('p1', .3) },
     { kind: 'row', icon: 'home', iconColor: 'gold', html: 'PENSION EN BOX', sub: '≈ 350 € PAR MOIS', right: '4 200 €', y: 510, h: 108, size: 40, at: 'p1' },
     { kind: 'row', icon: 'cal', iconColor: 'gold', html: 'MARÉCHAL-FERRANT', sub: 'TOUTES LES 6 À 8 SEMAINES', right: '600 €', y: 626, h: 108, size: 40, at: 'mar' },
     { kind: 'row', icon: 'heart', iconColor: 'gold', html: 'VÉTÉRINAIRE', sub: 'VACCINS · DENTISTE · VERMIFUGES', right: '400 €', y: 742, h: 108, size: 40, at: 'vet' },

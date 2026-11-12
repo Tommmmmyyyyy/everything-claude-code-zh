@@ -25,5 +25,5 @@ boot(async () => seq([
     { kind: 'chip', html: 'ET PLUS SI VOUS NE FACTUREZ PAS TOUS LES JOURS', style: 'ghost', y: 800, size: 28, at: 'taux' },
     { kind: 'head', html: 'FIXEZ VOS PRIX<br>AVEC CE <span class="a">CALCUL</span>', y: 920, size: 84, at: 'prix' },
   ]) },
-  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'MICRO-ENTREPRISE', sprites: [{ name: 'laptop', cx: 540, by: 930, size: 580 }], head: 'VOUS FACTUREZ<br><span class="a">COMBIEN</span>, VOUS ?', headY: 990, headSize: 104 }) },
+  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'MICRO-ENTREPRISE', sprites: [{ name: 'laptop', cx: 540, by: 930, size: 580 }], head: 'VOUS FACTUREZ<br><span class="a">COMBIEN</span>, VOUS ?', headY: 975, headSize: 96 }) },
 ]));

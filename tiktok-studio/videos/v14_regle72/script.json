@@ -1,58 +1,59 @@
 {
  "voice": "fabien",
  "lead": 0.3,
- "pause": 0.35,
+ "pause": 0.28,
  "tail": 1.6,
  "lines": [
   {
    "id": "l1",
    "text": "^hook Il existe une astuce de calcul que presque personne ne connaît : ^r72 la règle des {*72|soixante-douze}.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l2",
    "text": "^q En combien de temps votre argent double-t-il ? ^div Divisez soixante-douze par le taux d'intérêt.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l3",
    "text": "^t2 À {*2 %|deux pour cent} par an : ^y36 {*36 ans|trente-six ans} pour doubler.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l4",
    "text": "^t4 À {*4 %|quatre pour cent} : ^y18 {*18 ans|dix-huit ans}.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l5",
    "text": "^t6 À {*6 %|six pour cent} : ^y12 {*12 ans|douze ans}. ^t8 À {*8 %|huit pour cent} : ^y9 {*9 ans|neuf ans}.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l6",
    "text": "^inv Et ça marche aussi dans l'autre sens.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l7",
    "text": "^infl Avec trois pour cent d'inflation par an, ^half les prix doublent en vingt-quatre ans. ^pouv Votre pouvoir d'achat, lui, est divisé par deux.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l8",
    "text": "^credit Et une dette à vingt pour cent, comme certains crédits renouvelables ? ^cred2 Elle double en à peine plus de trois ans et demi.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l9",
    "text": "^concl Retenez juste ce chiffre : soixante-douze. ^outil C'est l'outil financier le plus simple du monde.",
-   "pause": 0.4
+   "pause": 0.3
   },
   {
    "id": "l10",
    "text": "^cta Partagez-la à quelqu'un qui ne la connaît pas !",
-   "pause": 0.4
+   "pause": 0.3
   }
- ]
+ ],
+ "tempo": 1.12
 }

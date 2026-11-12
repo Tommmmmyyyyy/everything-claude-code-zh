@@ -34,5 +34,5 @@ boot(async () => seq([
     { kind: 'sprite', name: 'hourglass', cx: 540, by: 880, size: 520, at: 'concl' },
     { kind: 'head', html: 'LE <span class="a">TEMPS</span> FAIT<br>LE GROS DU TRAVAIL', y: 940, size: 92, at: 'temps' },
   ]) },
-  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'MILLIONNAIRE À 65 ANS', sprites: [{ name: 'goldbars', cx: 540, by: 920, size: 580 }], head: 'VOUS AVEZ<br><span class="a">QUEL ÂGE</span>, VOUS ?', headY: 990, headSize: 110 }) },
+  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'MILLIONNAIRE À 65 ANS', sprites: [{ name: 'goldbars', cx: 540, by: 920, size: 580 }], head: 'VOUS AVEZ<br><span class="a">QUEL ÂGE</span>, VOUS ?', headY: 975, headSize: 96 }) },
 ]));

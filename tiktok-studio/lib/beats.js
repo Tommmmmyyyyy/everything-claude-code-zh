@@ -200,6 +200,7 @@ export function cta(start, end, { top, sprites = [], head, headY = 1000, headSiz
       const out = end - OUT;
       if (tp) A(tp, t, t0, out, { type: 'fade' });
       sps.forEach((s, i) => A(s, t, t0 + .1 + i * .1, out, { type: 'pop', float: 6, phase: i }));
+      if (sb && !sb.placed && hd.offsetHeight > 0) { sb.placed = true; const bottom = headY + hd.offsetHeight + 14; if (bottom > 1196) sb.style.top = bottom + 'px'; }
       A(hd, t, t0 + .25, out, { type: 'up' }); if (sb) A(sb, t, t0 + .9, out, { type: 'fade' });
     };
   });
