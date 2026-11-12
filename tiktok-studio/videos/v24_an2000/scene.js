@@ -33,7 +33,6 @@ boot(async () => seq([
   ], { foot: 'CONVERTISSEUR DE POUVOIR D’ACHAT INSEE' }) },
   { at: 'mat', fn: (a, b) => stack(a, b, [
     { kind: 'sprite', name: 'mattress', cx: 540, by: 620, size: 460, at: 'mat' },
-    { kind: 'mono', html: 'LE MATELAS', y: 270, at: 'mat', color: 'cream' },
     { kind: 'num', html: '100<span class="u">€</span>', y: 680, size: 190, color: 'cream', at: 'mat2', until: 'mat3' },
     { kind: 'num', html: '≈ 65<span class="u">€</span>', y: 680, size: 190, color: 'red', at: 'mat3', anim: 'stamp', sfx: 'stamp' },
     { kind: 'mono', html: 'EN POUVOIR D’ACHAT', y: 900, at: at('mat3', .3), color: 'cream' },
@@ -54,7 +53,7 @@ boot(async () => seq([
     { kind: 'mono', html: 'L’ONCE D’OR', y: 270, at: 'gold', color: 'cream' },
     { kind: 'num', html: '300<span class="u">€</span>', x: 40, w: 440, y: 660, size: 130, color: 'cream', at: 'gold2' },
     { kind: 'mono', html: 'EN 2000', x: 40, w: 440, y: 800, at: 'gold2' },
-    { kind: 'head', html: '→', y: 660, size: 120, at: 'gold3', color: 'var(--muted)' },
+    { kind: 'head', html: '→', x: 400, w: 160, y: 675, size: 100, at: 'gold3', color: 'var(--muted)' },
     { kind: 'num', html: '3 500<span class="u">€</span>', x: 560, w: 480, y: 660, size: 130, color: 'gold', at: 'gold3' },
     { kind: 'mono', html: 'AUJOURD’HUI', x: 560, w: 480, y: 800, at: 'gold3' },
     { kind: 'odo', to: 1200, digits: 4, prefix: '≈&nbsp;', y: 870, size: 170, color: 'gold', at: 'res' },
