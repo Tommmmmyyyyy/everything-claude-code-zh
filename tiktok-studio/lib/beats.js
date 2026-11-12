@@ -381,7 +381,7 @@ export function chart(start, end, { lab, head, headAt, x: [x0, x1], y: [y0, y1],
       s.style.opacity = fade;
       for (const { sr, pth, len, area, lb } of paths) {
         const p = prog(t, T(sr.at), sr.dur || 1.6, ease.inOutCubic || ease.outCubic);
-        pth.setAttribute('stroke-dashoffset', (len * (1 - p)).toFixed(1));
+        pth.setAttribute('stroke-dashoffset', (len * (1 - p)).toFixed(1)); pth.style.opacity = p > .002 ? 1 : 0;
         if (area) area.setAttribute('opacity', (p * (sr.fillOpacity ?? .12)).toFixed(3));
         if (lb) lb.setAttribute('opacity', clamp((t - T(sr.at) - (sr.dur || 1.6) * .8) / .3));
       }
