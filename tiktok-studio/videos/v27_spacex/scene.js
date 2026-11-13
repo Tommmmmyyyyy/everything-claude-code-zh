@@ -45,7 +45,7 @@ boot(async () => seq([
     { kind: 'row', icon: 'up', iconColor: 'red', html: 'ILS ACHÈTENT APRÈS', sub: 'PLUS CHER', y: 690, h: 180, size: 48, at: 'piege2' },
   ]) },
   { at: 'fb', fn: (a, b) => stack(a, b, [
-    { kind: 'logo', name: 'facebook', cx: 360, cy: 284, size: 74, at: 'fb' },
+    { kind: 'logo', name: 'facebook', cx: 540, cy: 215, size: 70, at: 'fb' },
     { kind: 'mono', html: 'FACEBOOK · 2012', y: 270, at: 'fb', color: 'cream' },
     { kind: 'num', html: '38<span class="u">$</span>', x: 40, w: 440, y: 330, size: 140, color: 'cream', at: 'fb2' },
     { kind: 'mono', html: 'PRIX D’INTRO', x: 40, w: 440, y: 485, at: 'fb2' },
@@ -54,8 +54,8 @@ boot(async () => seq([
     { kind: 'mono', html: '4 MOIS PLUS TARD', x: 580, w: 460, y: 485, at: 'fb3' },
     { kind: 'chip', html: '− 54 %', style: 'red', y: 560, size: 64, at: at('fb3', 1.2), anim: 'stamp', sfx: 'stamp' },
     { kind: 'mono', html: 'ET CEUX QUI ONT GARDÉ ?', y: 720, at: 'fb4', color: 'cream' },
-    { kind: 'logo', name: 'meta', cx: 180, cy: 845, size: 120, at: 'fb5' },
-    { kind: 'num', html: '+ DE 600<span class="u">$</span>', x: 120, w: 1000, y: 770, size: 150, color: 'mint', at: 'fb5' },
+    { kind: 'logo', name: 'meta', cx: 190, cy: 840, size: 100, at: 'fb5' },
+    { kind: 'num', html: '+ DE 600<span class="u">$</span>', x: 170, w: 910, y: 775, size: 128, color: 'mint', at: 'fb5' },
     { kind: 'chip', html: '× 15', style: 'gold', y: 960, size: 90, at: 'x15', anim: 'stamp', sfx: 'stamp' },
   ], { foot: 'FACEBOOK EST DEVENU META · LES PERFORMANCES PASSÉES NE PRÉJUGENT PAS DE L’AVENIR' }) },
   { at: 'lecon', fn: (a, b) => stack(a, b, [
