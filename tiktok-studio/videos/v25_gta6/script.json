@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook GTA 6 sort le 19 novembre, à {*79,99 €|soixante-dix-neuf euros quatre-vingt-dix-neuf}. ^q Mais sur ce prix, combien revient vraiment à Rockstar ?",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Et attendez de voir combien d'exemplaires il faut vendre, juste pour rembourser le jeu.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^pre Avant même sa sortie, les précommandes auraient déjà dépassé {*1 milliard $|un milliard de dollars}, selon les estimations.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^ticket On découpe votre ticket. ^tva D'abord, l'État : la TVA à vingt pour cent, environ {*13 €|treize euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^sony Ensuite, Sony ou Microsoft, qui prennent environ trente pour cent sur chaque jeu vendu en ligne : ^sony2 à peu près {*20 €|vingt euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^reste Il reste environ {*47 €|quarante-sept euros} pour Take-Two, la maison mère de Rockstar. ^moins Moins de six euros sur dix.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^budget Et ce jeu a coûté une fortune. ^gta5 GTA 5, c'était {*265 M$|deux cent soixante-cinq millions de dollars}. ^gta6 Pour GTA 6, les analystes parlent de {*plus d'1 milliard $|plus d'un milliard}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^calc Avec quarante-sept euros par jeu, ^calc2 il faut vendre près de {*20 millions|vingt millions} d'exemplaires, juste pour rembourser un milliard.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Sauf que GTA 5 s'est vendu à près de {*235 millions|deux cent trente-cinq millions} d'exemplaires. ^online Sans compter GTA Online et ses achats dans le jeu, qui rapportent encore chaque année.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^action Et ceux qui ont misé sur l'entreprise ? ^ttwo L'action Take-Two valait environ {*18 $|dix-huit dollars} à la sortie de GTA 5. ^ttwo2 Aujourd'hui, autour de {*220 $|deux cent vingt}. ^x12 Douze fois plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous l'avez précommandé, vous ? ^follow Abonnez-vous : dans la prochaine vidéo, on calcule ce que coûtent GTA 6 et une PS5 sur cinq ans.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

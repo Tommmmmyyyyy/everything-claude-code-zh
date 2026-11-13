@@ -16,6 +16,8 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 - `videos/v15_credit25` à `videos/v24_an2000` (format long, 1 min 05 à 1 min 20) : crédit sur 25 ans,
   frais de notaire, Vinted, dropshipping, laverie, franchise de burgers, coût d'un enfant,
   panneaux solaires, smartphone en plusieurs fois, 100 € de l'an 2000
+- `videos/v25_gta6` à `videos/v30_ps5gta` (actualité, 1 min 15 à 1 min 30) : prix de GTA 6, entrée en bourse
+  d'Anthropic, SpaceX le premier jour, fausses promos du Black Friday, bitcoin, GTA 6 + PS5 sur 5 ans
 
 ### Modèles d'animation (`lib/beats.js`)
 
@@ -25,6 +27,7 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 - `receipt` : ticket de caisse ligne par ligne, total et tampon.
 - `splitbar` : barre de répartition (« où va votre argent ») avec légende et mise en avant.
 - `chart` : courbes tracées en direct, avec étiquettes sur les repères.
+- `notes` (sur `hbars`, `receipt`, `chart`) : pastilles, lignes ou objets 3D ajoutés sur un repère ; `path()` trace une courbe par points.
 - `cta` : question finale, avec un bouton « S'abonner » animé (`follow: 'repere'`).
 
 ## Installation (une seule fois)

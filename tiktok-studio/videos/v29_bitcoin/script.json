@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Le bitcoin a perdu près de la moitié de sa valeur en un an. ^chiffres De {*126 000 $|cent vingt-six mille dollars} en octobre 2025, ^now à environ {*67 500 $|soixante-sept mille cinq cents} aujourd'hui. ^mille Mille euros investis au sommet ? Il en reste à peine plus de cinq cents.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^pourquoi Pourquoi ça bouge autant ? ^pq2 Le bitcoin ne verse ni bénéfices, ni dividendes : ^pq3 son prix dépend uniquement de ce que les acheteurs sont prêts à payer.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^loop Alors, c'est la fin ? ^loop2 Regardez d'abord ce qui s'est passé les fois précédentes.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^y2017 Décembre 2017 : le bitcoin touche presque {*20 000 $|vingt mille dollars}. ^y2018 Un an plus tard : {*3 200 $|trois mille deux cents}. ^p84 Moins quatre-vingt-quatre pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^y2021 Novembre 2021 : {*69 000 $|soixante-neuf mille dollars}. ^y2022 Un an plus tard : {*15 500 $|quinze mille cinq cents}. ^p77 Moins soixante-dix-sept pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^remonte Et pourtant, à chaque fois, il a fini par dépasser son ancien record. ^ans Mais il a fallu attendre plusieurs années.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^maths Attention au piège des pourcentages. ^m1 Quand on perd cinquante pour cent, ^m2 il faut ensuite gagner cent pour cent, juste pour revenir au départ.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^now2 Aujourd'hui, pour retrouver son record, le bitcoin doit prendre près de quatre-vingt-dix pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^passe Mais le passé ne garantit rien : ^p2 une cryptomonnaie peut aussi ne jamais revenir. ^p3 C'est un placement très risqué.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^regle La règle d'or : ^r1 n'y mettez que l'argent que vous pouvez vous permettre de perdre. ^r2 Et plutôt petit à petit, chaque mois, qu'en une seule fois au sommet.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous, vous en avez acheté ? À quel prix ? ^follow Abonnez-vous pour suivre la suite.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

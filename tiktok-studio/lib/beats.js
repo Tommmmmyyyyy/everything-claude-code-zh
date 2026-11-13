@@ -37,6 +37,22 @@ function iconSvg(name, c, size = 120) {
   return s;
 }
 
+
+// extra notes (chips, mono lines, sprites) that can be attached to any template
+function makeNotes(root, notes = []) {
+  return notes.map(n => {
+    sfx(n.sfx || (n.kind === 'mono' ? 'click' : n.anim === 'stamp' || !n.anim ? 'stamp' : 'pop'), T(n.at) + .03, .65);
+    const e = n.kind === 'sprite' ? obj(root, n.name, { cx: n.cx ?? 540, by: n.by, w: n.size || 300 })
+      : n.kind === 'mono' ? text(root, n.html, { cls: 'mono', y: n.y, size: n.size || 24, style: { color: col(n.color || 'cream') }, z: 7 })
+      : n.kind === 'num' ? text(root, n.html, { cls: 'num', y: n.y, size: n.size || 120, color: col(n.color || 'white'), z: 7 })
+      : text(root, `<span class="chip ${n.style || 'mint'}" style="font-size:${n.size || 52}px;padding:${Math.round((n.size || 52) * .22)}px ${Math.round((n.size || 52) * .5)}px">${n.html}</span>`, { cls: 'abs', y: n.y, z: 7 });
+    return { n, e };
+  });
+}
+function updNotes(nts, t, out) {
+  for (const { n, e } of nts) { const until = n.until == null ? out : T(n.until) - .1; A(e, t, T(n.at), until, { type: n.anim || (n.kind === 'sprite' ? 'pop' : n.kind === 'mono' || n.kind === 'num' ? 'up' : 'stamp'), float: n.kind === 'sprite' ? 5 : 0 }); }
+}
+
 // ---------- element factory for the generic "stack" beat ----------
 function makeItem(root, it) {
   const y = it.y ?? 600, x = it.x ?? 0, w = it.w ?? 1080, align = it.align || 'center';
@@ -158,7 +174,7 @@ export function waterfall(start, end, { lab, foot, title = ['', ''], unit = '€
 }
 
 // horizontal comparison bars
-export function hbars(start, end, { lab, head, headAt, rows, max, foot, y0 = 560, gapY = 190, unitLabel = '' }) {
+export function hbars(start, end, { lab, head, headAt, rows, max, foot, y0 = 560, gapY = 190, unitLabel = '', notes = [] }) {
   scene(start, end, (root, t0) => {
     const L = lab ? label(root, lab[0], lab[1]) : null;
     const H = head ? text(root, head, { y: 270, size: 96 }) : null;
@@ -175,9 +191,11 @@ export function hbars(start, end, { lab, head, headAt, rows, max, foot, y0 = 560
       return { r, g, bar, val, per };
     });
     sfx('whoosh', t0 + .05, .45);
+    const nts = makeNotes(root, notes);
     return t => {
       const out = end - OUT;
       if (L) A(L, t, t0, out, { type: 'fade' }); if (H) A(H, t, headAt ? T(headAt) : t0 + .1, out, { type: 'up' }); if (F) A(F, t, t0 + .4, out, { type: 'fade' });
+      updNotes(nts, t, out);
       els.forEach(({ r, g, bar, val, per }) => {
         const tr = T(r.at);
         A(g, t, tr, out, { type: 'left' });
@@ -245,7 +263,7 @@ export function followButton(root, { y = 1150 } = {}) {
 }
 
 // receipt: a paper ticket listing costs line by line, then a total and a stamp
-export function receipt(start, end, { lab, title = 'TICKET', head, rows, total, stamp, dec = 2, unit = '€', foot, y = 330, w = 820, rowH = 84 }) {
+export function receipt(start, end, { lab, title = 'TICKET', head, rows, total, stamp, dec = 2, unit = '€', foot, y = 330, w = 820, rowH = 84, notes = [] }) {
   scene(start, end, (root, t0) => {
     const L = lab ? label(root, lab[0], lab[1]) : null;
     const H = head ? text(root, head.html, { y: head.y ?? 270, size: head.size || 70 }) : null;
@@ -280,8 +298,10 @@ export function receipt(start, end, { lab, title = 'TICKET', head, rows, total, 
       Object.assign(st.style, { left: '50%', width: 'auto', marginLeft: '0', padding: '10px 26px 6px', border: `8px solid ${col(stamp.color || 'red')}`, borderRadius: '16px', whiteSpace: 'nowrap', transform: 'translateX(-50%)' });
       sfx('stamp', T(stamp.at) + .02, .9);
     }
+    const nts = makeNotes(root, notes);
     return t => {
       const out = end - OUT;
+      updNotes(nts, t, out);
       if (L) A(L, t, t0, out, { type: 'fade' }); if (H) A(H, t, head.at ? T(head.at) : t0 + .05, out, { type: 'up' }); if (F) A(F, t, t0 + .4, out, { type: 'fade' });
       A(paper, t, t0 + .05, out, { type: 'up', dist: 160 });
       for (const { r, e } of els) { const p = prog(t, T(r.at), .28); e.style.opacity = p; e.style.transform = `translateX(${(1 - p) * -30}px)`; }
@@ -337,7 +357,7 @@ export function splitbar(start, end, { lab, head, headAt, total, totalLabel, row
 }
 
 // line chart: x/y axes, series drawn progressively, markers on cues
-export function chart(start, end, { lab, head, headAt, x: [x0, x1], y: [y0, y1], xticks = [], yticks = [], xfmt = v => v, yfmt = v => fmt(v), series, marks = [], foot, box: bx = { x: 120, y: 440, w: 860, h: 640 }, legend = [] }) {
+export function chart(start, end, { lab, head, headAt, x: [x0, x1], y: [y0, y1], xticks = [], yticks = [], xfmt = v => v, yfmt = v => fmt(v), series, marks = [], foot, box: bx = { x: 120, y: 440, w: 860, h: 640 }, legend = [], notes = [] }) {
   scene(start, end, (root, t0) => {
     const L = lab ? label(root, lab[0], lab[1]) : null;
     const H = head ? text(root, head, { y: 270, size: 80 }) : null;
@@ -373,10 +393,12 @@ export function chart(start, end, { lab, head, headAt, x: [x0, x1], y: [y0, y1],
     const lg = legend.map((l, i) => { const e = text(root, `<span style="display:inline-block;width:26px;height:26px;border-radius:7px;background:${col(l.color)};vertical-align:-3px;margin-right:12px"></span>${l.html}`, { cls: 'mono', x: 0, y: bx.y + bx.h + 74, w: 1080, size: 22, style: { color: 'var(--cream)' } }); return { l, e }; });
     if (lg.length > 1) { const gap = 1080 / lg.length; lg.forEach(({ e }, i) => { e.style.left = (i * gap) + 'px'; e.style.width = gap + 'px'; }); }
     sfx('whoosh', t0 + .05, .45);
+    const nts = makeNotes(root, notes);
     return t => {
       const out = end - OUT;
       if (L) A(L, t, t0, out, { type: 'fade' }); if (H) A(H, t, headAt ? T(headAt) : t0 + .05, out, { type: 'up' }); if (F) A(F, t, t0 + .4, out, { type: 'fade' });
       A(P, t, t0 + .05, out, { type: 'up', dist: 60 });
+      updNotes(nts, t, out);
       const fade = t > out ? clamp(1 - (t - out) / .12) : clamp((t - t0) / .3);
       s.style.opacity = fade;
       for (const { sr, pth, len, area, lb } of paths) {
@@ -390,3 +412,6 @@ export function chart(start, end, { lab, head, headAt, x: [x0, x1], y: [y0, y1],
     };
   });
 }
+
+// piecewise-linear function through [[x, y], ...] (for stylised price paths)
+export const path = pts => x => { if (x <= pts[0][0]) return pts[0][1]; for (let i = 1; i < pts.length; i++) if (x <= pts[i][0]) { const [xa, ya] = pts[i - 1], [xb, yb] = pts[i]; return ya + (yb - ya) * (x - xa) / (xb - xa); } return pts[pts.length - 1][1]; };

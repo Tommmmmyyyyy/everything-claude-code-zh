@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Le 12 juin 2026, SpaceX entre en bourse. ^record La plus grosse introduction de l'histoire : {*75 milliards $|soixante-quinze milliards de dollars} levés.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Ceux qui ont acheté ce jour-là ont-ils gagné de l'argent ? ^loop2 Pas si simple.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^intro Prix d'introduction : {*135 $|cent trente-cinq dollars}. ^j1 Le premier soir, l'action termine à {*161 $|cent soixante et un dollars}. ^pct Plus dix-neuf pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^peak Quatre jours plus tard, elle touche {*225 $|deux cent vingt-cinq dollars}. ^fomo Tout le monde veut en acheter.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^chute Puis tout s'inverse. ^juillet Fin juillet, l'action repasse sous son prix d'introduction. ^low Elle descend même jusqu'à {*105 $|cent cinq dollars}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^now Aujourd'hui, elle tourne autour de {*140 $|cent quarante dollars}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^calc Faisons les comptes. ^c1 Acheté au prix d'introduction : environ plus quatre pour cent. ^c2 Acheté le premier soir : moins treize pour cent. ^c3 Acheté au sommet : moins trente-huit pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^piege Le problème : au prix d'introduction, les particuliers obtiennent rarement des actions. ^piege2 Ils achètent après, plus cher.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^fb Ce n'est pas nouveau. ^fb2 En 2012, Facebook entre en bourse à {*38 $|trente-huit dollars}. ^fb3 Quatre mois plus tard : {*17,55 $|dix-sept dollars cinquante}. Moins de la moitié.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^fb4 Mais ceux qui ont gardé leurs actions ? ^fb5 Aujourd'hui, l'action vaut plus de {*600 $|six cents dollars}. ^x15 Plus de quinze fois plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^lecon La leçon : le premier jour, on paie surtout l'emballement. ^lecon2 Ce qui compte, c'est l'entreprise, et le temps.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous auriez acheté SpaceX le premier jour ? ^follow Abonnez-vous : Anthropic arrive en bourse, et on suit ça de près.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

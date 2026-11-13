@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook GTA 6 et une PS5 : ^q combien ça coûte vraiment, sur cinq ans ? ^spoil La réponse va vous surprendre… dans les deux sens.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^ps5 La console d'abord. ^ps5b Depuis la hausse d'avril, la PS5 standard coûte {*649,99 €|six cent cinquante euros}. ^jeu Plus le jeu : {*79,99 €|quatre-vingts euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^plus Pour jouer en ligne, il faut l'abonnement PlayStation Plus : ^plus2 {*71,99 €|soixante-douze euros} par an. ^plus5 Sur cinq ans, {*360 €|trois cent soixante euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^achats Et le piège : les achats dans le jeu. ^ach2 Disons {*10 €|dix euros} par mois, pour des voitures ou de l'argent virtuel. ^ach5 Sur cinq ans : {*600 €|six cents euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^astuce Petite astuce : prenez l'abonnement à l'année, pas au mois. ^an Soixante-douze euros, au lieu de {*120 €|cent vingt}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^total Au total : environ {*1 690 €|mille six cent quatre-vingt-dix euros} sur cinq ans. ^mois Soit à peu près {*28 €|vingt-huit euros} par mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^twist Ça paraît énorme. ^heure Mais calculons le prix d'une heure de jeu.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^h1 Une heure par jour pendant cinq ans, ^h2 c'est plus de {*1 800 heures|mille huit cents heures}. ^h3 {*Moins d'1 €|Moins d'un euro} de l'heure.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^cine Au cinéma, une place coûte en moyenne {*11,30 €|onze euros trente}, pour deux heures de film. ^cine2 Plus de cinq euros de l'heure. ^x6 Six fois plus cher.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^sans Et sans les achats dans le jeu, ^sans2 on tombe à environ {*1 090 €|mille quatre-vingt-dix euros}. ^sans3 Moins de soixante centimes de l'heure.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^lecon La leçon : ce n'est pas la console qui coûte cher. ^lecon2 Ce sont les petites dépenses qui se répètent, chaque mois, sans qu'on les voie.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous jouez combien d'heures par semaine ? ^follow Abonnez-vous pour d'autres calculs du quotidien.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

@@ -504,6 +504,119 @@ B.globe = () => {
   return g;
 };
 
+
+// ---------- series 4 (actu) ----------
+B.rocket = () => {
+  const g = new THREE.Group(); const w = clay(0xF4F1EA, { r: .45 });
+  const body = mesh(lathe([[0, 0], [.5, 0], [.55, .2], [.55, 2.6], [.5, 2.95], ...arcPts(0, 2.95, .5, 0, Math.PI / 2, 10).slice(0, 1), [.42, 3.25], [.28, 3.55], [.12, 3.78], [0, 3.85]], 64), w); body.position.y = .35; g.add(body);
+  const band = mesh(lathe([[.565, 2.0], [.565, 2.25]], 64), clay(C.mint, { r: .5 })); band.position.y = .35; g.add(band);
+  const band2 = mesh(lathe([[.565, .45], [.565, .6]], 64), clay(C.mint, { r: .5 })); band2.position.y = .35; g.add(band2);
+  const win = mesh(new THREE.TorusGeometry(.2, .05, 12, 40), metal(0xC9D2CE, .3)); win.position.set(0, 2.55, .53); g.add(win);
+  const glass = mesh(new THREE.CircleGeometry(.18, 32), clay(0x123B4A, { r: .15 })); glass.position.set(0, 2.55, .545); g.add(glass);
+  for (let i = 0; i < 3; i++) { const a = i * Math.PI * 2 / 3 + Math.PI / 6; const fs = new THREE.Shape(); fs.moveTo(0, 0); fs.lineTo(.55, -.25); fs.lineTo(.55, -.75); fs.lineTo(0, -.1); fs.closePath();
+    const f = mesh(new THREE.ExtrudeGeometry(fs, { depth: .08, bevelEnabled: true, bevelThickness: .03, bevelSize: .03, bevelSegments: 3 }), clay(C.coral, { r: .5 })); f.position.y = 1.2; f.rotation.y = -a; f.translateX(.48); f.translateZ(-.04); g.add(f); }
+  const noz = mesh(lathe([[.32, .38], [.42, .1], [.44, 0], [.3, 0]], 48), metal(0x9AA5A1, .35)); g.add(noz);
+  const fl = mesh(new THREE.ConeGeometry(.3, .9, 32), new THREE.MeshStandardMaterial({ color: 0xFFC14D, emissive: 0xFF8A1F, emissiveIntensity: 1.1, roughness: .6 })); fl.rotation.x = Math.PI; fl.position.y = -.4; g.add(fl);
+  g.rotation.z = -.25; return g;
+};
+B.controller = () => {
+  const g = new THREE.Group(); const m = clay(0xF4F1EA, { r: .45 }), dk = clay(0x1B2E28, { r: .4 });
+  const s = new THREE.Shape(); s.moveTo(-1.3, .55); s.quadraticCurveTo(0, .75, 1.3, .55); s.quadraticCurveTo(1.75, .45, 1.85, -.2); s.quadraticCurveTo(1.95, -.95, 1.55, -1.05); s.quadraticCurveTo(1.15, -1.1, .85, -.45);
+  s.lineTo(-.85, -.45); s.quadraticCurveTo(-1.15, -1.1, -1.55, -1.05); s.quadraticCurveTo(-1.95, -.95, -1.85, -.2); s.quadraticCurveTo(-1.75, .45, -1.3, .55);
+  const body = mesh(new THREE.ExtrudeGeometry(s, { depth: .3, bevelEnabled: true, bevelThickness: .18, bevelSize: .16, bevelSegments: 8, curveSegments: 24 }), m); body.rotation.x = -Math.PI / 2 + .35; body.position.y = .6; g.add(body);
+  const top = new THREE.Group(); top.rotation.x = -Math.PI / 2 + .35; top.position.y = .6; g.add(top);
+  const pad = mesh(roundedBox(1.0, .55, .06, .1, 3), dk); pad.position.set(0, .15, .5); top.add(pad);
+  for (const x of [-.5, .5]) { const st = mesh(new THREE.CylinderGeometry(.22, .24, .2, 32), dk); st.rotation.x = Math.PI / 2; st.position.set(x, -.38, .55); top.add(st); const cap_ = mesh(new THREE.CylinderGeometry(.2, .2, .05, 32), clay(0x2A4A40, { r: .6 })); cap_.rotation.x = Math.PI / 2; cap_.position.set(x, -.38, .66); top.add(cap_); }
+  const cols = [C.mint, C.coral, C.gold, 0x6EB6FF]; [[1.3, .1], [1.55, -.15], [1.3, -.4], [1.05, -.15]].forEach(([x, y], i) => { const b = mesh(new THREE.CylinderGeometry(.1, .1, .08, 24), clay(cols[i], { r: .4 })); b.rotation.x = Math.PI / 2; b.position.set(x, y, .5); top.add(b); });
+  const dpH = mesh(roundedBox(.5, .14, .08, .04, 2), dk); dpH.position.set(-1.3, -.15, .5); top.add(dpH); const dpV = mesh(roundedBox(.14, .5, .08, .04, 2), dk); dpV.position.set(-1.3, -.15, .5); top.add(dpV);
+  return g;
+};
+B.console = () => {
+  const g = new THREE.Group(); const w = clay(0xF4F1EA, { r: .4 }), dk = clay(0x1B2E28, { r: .35 });
+  const core = mesh(roundedBox(.7, 3.3, 2.1, .12, 4), dk); core.position.y = 1.75; g.add(core);
+  const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.lineTo(2.1, 0); sh.quadraticCurveTo(2.25, 1.8, 2.0, 3.5); sh.quadraticCurveTo(1.0, 3.3, 0, 3.45); sh.closePath();
+  for (const side of [-1, 1]) { const p_ = mesh(new THREE.ExtrudeGeometry(sh, { depth: .12, bevelEnabled: true, bevelThickness: .05, bevelSize: .05, bevelSegments: 4, curveSegments: 20 }), w); p_.rotation.y = Math.PI / 2; p_.position.set(side * .42 + (side > 0 ? 0 : -.12), .02, 1.05); g.add(p_); }
+  const led = mesh(roundedBox(.06, 2.6, .04, .02, 1), new THREE.MeshStandardMaterial({ color: 0x9FE8FF, emissive: 0x4FC3FF, emissiveIntensity: .9 })); led.position.set(-.36, 1.75, 1.06); g.add(led);
+  const base = mesh(new THREE.CylinderGeometry(.6, .7, .1, 40), dk); base.position.y = .05; g.add(base);
+  const d = mesh(roundedBox(.08, .5, .02, .01, 1), clay(0x0B1814)); d.position.set(.36, 2.6, 1.08); g.add(d);
+  return g;
+};
+B.gamebox = () => {
+  const g = new THREE.Group();
+  const c = mesh(roundedBox(1.9, 2.5, .22, .06, 3), clay(0x1D5BD8, { r: .45 })); c.position.y = 1.25; g.add(c);
+  const art = mesh(roundedBox(1.7, 1.9, .02, .05, 2), clay(C.coral, { r: .5 })); art.position.set(0, 1.1, .115); g.add(art);
+  const sun = mesh(new THREE.CircleGeometry(.36, 40), clay(C.gold, { r: .4 })); sun.position.set(.3, 1.45, .13); g.add(sun);
+  for (let i = 0; i < 4; i++) { const p = mesh(roundedBox(.12, .5 + i * .18, .02, .02, 1), clay(0x0E2A2A, { r: .5 })); p.position.set(-.6 + i * .32, .5 + (.5 + i * .18) / 2 - .2, .135); g.add(p); }
+  const top = mesh(roundedBox(1.7, .32, .02, .04, 2), clay(0xF4F1EA, { r: .5 })); top.position.set(0, 2.27, .115); g.add(top);
+  const n = mesh(roundedBox(.5, .14, .02, .03, 1), clay(C.ink, { r: .5 })); n.position.set(0, 2.27, .13); g.add(n);
+  g.rotation.y = -.1; return g;
+};
+B.btc = () => {
+  const g = new THREE.Group(); const R = 1, T = .22, col = 0xF7931A;
+  const prof = [[0, -T / 2], [R - .07, -T / 2], ...arcPts(R - .07, -T / 2 + .07, .07, -Math.PI / 2, 0, 5), ...arcPts(R - .07, T / 2 - .07, .07, 0, Math.PI / 2, 5), [R - .12, T / 2], [R - .15, T / 2 - .03], [0, T / 2 - .03]];
+  const body = mesh(lathe(prof, 128), metal(col, .32)); body.rotation.x = Math.PI / 2; g.add(body);
+  const rim = mesh(new THREE.TorusGeometry(.82, .03, 10, 96), metal(0xFFB24D, .28)); rim.position.z = T / 2 - .02; g.add(rim);
+  const B_ = new THREE.Shape(); B_.moveTo(-.28, -.45); B_.lineTo(.12, -.45); B_.absarc(.12, -.22, .23, -Math.PI / 2, Math.PI / 2, false); B_.lineTo(.08, .01); B_.absarc(.08, .23, .21, -Math.PI / 2, Math.PI / 2, false); B_.lineTo(-.28, .44); B_.closePath();
+  const h1 = new THREE.Path(); h1.moveTo(-.13, -.3); h1.lineTo(.11, -.3); h1.absarc(.11, -.21, .09, -Math.PI / 2, Math.PI / 2, false); h1.lineTo(-.13, -.12); h1.closePath();
+  const h2 = new THREE.Path(); h2.moveTo(-.13, .12); h2.lineTo(.07, .12); h2.absarc(.07, .2, .08, -Math.PI / 2, Math.PI / 2, false); h2.lineTo(-.13, .28); h2.closePath(); B_.holes.push(h1, h2);
+  const ext = { depth: .05, bevelEnabled: true, bevelThickness: .02, bevelSize: .015, bevelSegments: 3, curveSegments: 24 };
+  const bm = mesh(new THREE.ExtrudeGeometry(B_, ext), clay(0xFFF4E2, { r: .35 })); bm.position.z = T / 2 - .04; bm.rotation.z = -.2; g.add(bm);
+  for (const x of [-.12, .04]) for (const y of [.5, -.5]) { const t = mesh(roundedBox(.07, .14, .06, .02, 1), clay(0xFFF4E2, { r: .35 })); t.position.set(x + (y > 0 ? .1 : -.1) * .2, y, T / 2 - .02); t.rotation.z = -.2; t.position.applyAxisAngle(new THREE.Vector3(0, 0, 1), 0); g.add(t); }
+  return g;
+};
+B.pricetag = () => {
+  const g = new THREE.Group();
+  const s = new THREE.Shape(); s.moveTo(-1.0, -.7); s.lineTo(.7, -.7); s.lineTo(1.3, 0); s.lineTo(.7, .7); s.lineTo(-1.0, .7); s.quadraticCurveTo(-1.15, .7, -1.15, .55); s.lineTo(-1.15, -.55); s.quadraticCurveTo(-1.15, -.7, -1.0, -.7);
+  const hole = new THREE.Path(); hole.absarc(.85, 0, .14, 0, Math.PI * 2, true); s.holes.push(hole);
+  const tag = mesh(new THREE.ExtrudeGeometry(s, { depth: .08, bevelEnabled: true, bevelThickness: .04, bevelSize: .04, bevelSegments: 4, curveSegments: 24 }), clay(C.coral, { r: .5 })); g.add(tag);
+  const ring = mesh(new THREE.TorusGeometry(.17, .03, 10, 32), metal(0xD9DDD9, .3)); ring.position.set(.85, 0, .06); g.add(ring);
+  const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(.85, .14, .06), new THREE.Vector3(1.2, .7, .1), new THREE.Vector3(1.0, 1.3, .05), new THREE.Vector3(1.5, 1.7, 0)]);
+  g.add(mesh(new THREE.TubeGeometry(curve, 30, .025, 8, false), clay(C.cream, { r: .7 })));
+  const pct = new THREE.Shape(); pct.absarc(-.55, .25, .16, 0, Math.PI * 2, false); const p2 = new THREE.Shape(); p2.absarc(.15, -.25, .16, 0, Math.PI * 2, false);
+  const sl = new THREE.Shape(); sl.moveTo(-.55, -.4); sl.lineTo(-.4, -.4); sl.lineTo(.2, .4); sl.lineTo(.05, .4); sl.closePath();
+  const pm = mesh(new THREE.ExtrudeGeometry([pct, p2, sl], { depth: .04, bevelEnabled: true, bevelThickness: .015, bevelSize: .01, bevelSegments: 2, curveSegments: 20 }), clay(0xFFF4E2, { r: .4 })); pm.position.z = .12; g.add(pm);
+  const hm = mesh(new THREE.CircleGeometry(.08, 20), clay(0xFFF4E2)); g.rotation.z = -.25; g.rotation.x = -.15; const gg = new THREE.Group(); gg.add(g); g.position.y = 1.1; return gg;
+};
+B.shopbag = () => {
+  const g = new THREE.Group(); const m = clay(0x111A17, { r: .55 });
+  const bag = mesh(roundedBox(2.0, 2.3, 1.0, .06, 3), m); bag.position.y = 1.15; g.add(bag);
+  const fold = mesh(roundedBox(2.02, .14, 1.02, .03, 2), clay(0x1E2B27, { r: .5 })); fold.position.y = 2.24; g.add(fold);
+  for (const z of [-.3, .3]) { const hnd = mesh(new THREE.TorusGeometry(.45, .04, 10, 40, Math.PI), clay(C.gold, { r: .4 })); hnd.position.set(0, 2.3, z); g.add(hnd); }
+  const lab = mesh(roundedBox(1.3, .5, .03, .06, 2), clay(C.coral, { r: .5 })); lab.position.set(0, 1.25, .51); g.add(lab);
+  const st = mesh(roundedBox(.9, .1, .02, .03, 1), clay(0xFFF4E2)); st.position.set(0, 1.25, .53); g.add(st);
+  return g;
+};
+B.popcorn = () => {
+  const g = new THREE.Group();
+  const N = 12; for (let i = 0; i < N; i++) { const a0 = i / N * Math.PI * 2, a1 = (i + 1) / N * Math.PI * 2;
+    const seg = mesh(new THREE.CylinderGeometry(.85, .6, 1.8, 6, 1, true, a0, a1 - a0), clay(i % 2 ? C.coral : 0xF4F1EA, { r: .5 })); seg.position.y = .9; g.add(seg); }
+  const bot = mesh(new THREE.CircleGeometry(.6, 24), clay(0xF4F1EA)); bot.rotation.x = Math.PI / 2; bot.position.y = .01; g.add(bot);
+  let sd = 5; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 46; i++) { const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * .8; const y = 1.8 + (1 - r / .8) * .45 + rnd() * .15;
+    const k = mesh(new THREE.IcosahedronGeometry(.16 + rnd() * .06, 1), clay(i % 7 ? 0xFFF6DF : 0xF3D58E, { r: .8 })); k.position.set(Math.cos(a) * r, y, Math.sin(a) * r); k.scale.set(1, .85, 1.1); g.add(k); }
+  return g;
+};
+B.chip = () => {
+  const g = new THREE.Group();
+  const board = mesh(roundedBox(2.6, .14, 2.6, .08, 3), clay(0x14523F, { r: .5 })); board.position.y = .07; g.add(board);
+  const die = mesh(roundedBox(1.5, .22, 1.5, .08, 3), clay(0x1B2E28, { r: .3 })); die.position.y = .25; g.add(die);
+  const top = mesh(roundedBox(1.1, .04, 1.1, .05, 2), metal(0xC9D2CE, .25)); top.position.y = .37; g.add(top);
+  const star = new THREE.Shape(); const n = 6; for (let i = 0; i < n * 2; i++) { const a = i / (n * 2) * Math.PI * 2, r = i % 2 ? .12 : .34; const x = Math.cos(a) * r, y = Math.sin(a) * r; i ? star.lineTo(x, y) : star.moveTo(x, y); } star.closePath();
+  const sm = mesh(new THREE.ExtrudeGeometry(star, { depth: .03, bevelEnabled: true, bevelThickness: .01, bevelSize: .01, bevelSegments: 2 }), clay(C.coral, { r: .4 })); sm.rotation.x = -Math.PI / 2; sm.position.y = .4; g.add(sm);
+  for (let i = 0; i < 8; i++) for (const side of [0, 1, 2, 3]) { const p = mesh(roundedBox(.08, .05, .3, .02, 1), metal(C.gold, .3)); const t = -.62 + i * .177;
+    if (side === 0) p.position.set(t, .2, .9); else if (side === 1) p.position.set(t, .2, -.9); else { p.rotation.y = Math.PI / 2; p.position.set(side === 2 ? .9 : -.9, .2, t); } g.add(p); }
+  for (let i = 0; i < 10; i++) { const tr = mesh(roundedBox(.04, .01, .4, .01, 1), clay(C.mint, { r: .5 })); tr.position.set(-1.15 + (i % 2) * .1, .145, -1.0 + i * .22); tr.rotation.y = .6; g.add(tr); }
+  return g;
+};
+B.trophy = () => {
+  const g = new THREE.Group(); const m = metal(C.gold, .25);
+  const base = mesh(roundedBox(1.1, .3, 1.1, .06, 3), clay(C.ink, { r: .4 })); base.position.y = .15; g.add(base);
+  const stem = mesh(lathe([[.32, .3], [.12, .55], [.1, 1.0], [.2, 1.15], [0, 1.15]], 48), m); g.add(stem);
+  const cup = mesh(lathe([[0, 1.15], [.3, 1.15], [.6, 1.5], [.72, 2.2], [.68, 2.2], [.56, 1.55], [0, 1.25]], 64), m); g.add(cup);
+  for (const s of [-1, 1]) { const hnd = mesh(new THREE.TorusGeometry(.28, .06, 12, 32, Math.PI * 1.2), m); hnd.position.set(s * .72, 1.85, 0); hnd.rotation.z = s > 0 ? -1.3 : Math.PI + 1.3 - Math.PI * .2; g.add(hnd); }
+  return g;
+};
+
 // ---------- staging ----------
 window.renderSprite = (name, o = {}) => {
   const size = o.size ?? 900;

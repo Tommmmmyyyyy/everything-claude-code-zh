@@ -1,0 +1,59 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Moins cinquante pour cent pendant le Black Friday ? ^faux Méfiez-vous : selon la Commission européenne, environ une promo sur trois est trompeuse.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Je vous montre la technique des vendeurs, et l'astuce pour ne plus jamais vous faire avoir.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^date Le Black Friday, c'est le vendredi {*27 novembre|vingt-sept novembre}. ^record Cette année, plus d'un Français sur quatre compte y faire l'essentiel de ses achats de Noël. ^rec2 Un record.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^tech La technique la plus courante : ^t1 un casque à {*100 €|cent euros} en octobre. ^t2 Début novembre, son prix monte à {*150 €|cent cinquante euros}. ^t3 Puis, le jour du Black Friday : ^t4 moins trente-trois pour cent, cent euros ! ^t5 Le même prix qu'en octobre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^loi Pourtant, la loi l'interdit. ^loi2 Depuis 2022, une réduction doit se calculer sur le prix le plus bas des trente derniers jours.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^faille Sauf qu'il existe une faille : ^faille2 le prix conseillé, ou la comparaison avec d'autres sites. ^faille3 Là, la règle des trente jours ne s'applique pas.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^astuce Mon astuce : ^a1 notez dès aujourd'hui le prix de ce que vous voulez acheter. ^a2 Ou utilisez un outil qui affiche l'historique des prix. ^a3 Si la baisse n'est pas réelle, passez votre chemin.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^budget Et fixez-vous un budget : ^b1 en moyenne, les Français prévoient environ {*150 €|cent cinquante euros} pour le week-end du Black Friday.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^cash La meilleure promo, c'est celle sur un achat que vous aviez déjà prévu.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^cta C'est quoi, la pire fausse promo que vous ayez vue ? ^follow Abonnez-vous, et envoyez cette vidéo à quelqu'un qui craque à chaque Black Friday.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

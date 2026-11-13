@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Une entreprise créée en 2021 entre en bourse, ^val avec une valeur d'environ {*1 400 milliards $|mille quatre cents milliards de dollars}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop C'est presque la moitié du CAC 40 tout entier. ^loop2 Et pourtant, elle perd encore de l'argent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^qui C'est Anthropic, qui développe l'intelligence artificielle Claude, ^rival concurrente de ChatGPT.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^quand Son entrée en bourse est attendue autour du 19 novembre, à New York, ^ticker sous le code ANT.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^prix Le prix annoncé : entre {*70|soixante-dix} et {*78 $|soixante-dix-huit dollars} par action. ^leve De quoi lever jusqu'à {*64 milliards $|soixante-quatre milliards de dollars}. ^record La deuxième plus grosse introduction de l'histoire, derrière SpaceX.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^lvmh Mille quatre cents milliards de dollars, c'est environ six fois LVMH.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^ca Son chiffre d'affaires explose : ^ca1 {*1,2 milliard $|un virgule deux milliard} au premier semestre 2025, ^ca2 {*16,3 milliards $|seize virgule trois milliards} au premier semestre 2026. ^x14 Quatorze fois plus en un an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^perte Mais elle reste déficitaire : ^perte2 les puces et les centres de données coûtent une fortune.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Alors, faut-il acheter ? ^piege Le piège, c'est le premier jour. ^piege2 Au prix d'introduction, les actions vont surtout aux grands investisseurs. ^piege3 Les particuliers achètent après, souvent plus cher.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^spacex SpaceX a pris dix-neuf pour cent le premier jour… ^spacex2 avant de repasser sous son prix d'introduction un mois plus tard.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^lecon Une entreprise peut être géniale, et son action trop chère. ^disc Ceci n'est pas un conseil d'investissement.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous achèteriez une action Anthropic ? ^follow Abonnez-vous pour suivre son premier jour en bourse.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

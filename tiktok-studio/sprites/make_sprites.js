@@ -49,6 +49,16 @@ const LIST = [
   ['mattress', 'mattress', { elev: 30, az: 24 }],
   ['passbook', 'passbook', { elev: 50, az: -12 }],
   ['globe', 'globe', { elev: 10, az: 60 }],
+  ['rocket', 'rocket', { elev: 10, az: 15 }],
+  ['controller', 'controller', { elev: 22, az: 0 }],
+  ['console', 'console', { elev: 10, az: 32 }],
+  ['gamebox', 'gamebox', { elev: 10, az: 20 }],
+  ['btc', 'btc', { elev: 6, rotY: -0.45, shadow: false }],
+  ['pricetag', 'pricetag', { elev: 12, az: 10, shadow: false }],
+  ['shopbag', 'shopbag', { elev: 14, az: 28 }],
+  ['popcorn', 'popcorn', { elev: 16, az: 10 }],
+  ['chip', 'chip', { elev: 40, az: 25 }],
+  ['trophy', 'trophy', { elev: 10, az: 15 }],
 ];
 (async () => {
   const { srv, url } = await serve(ROOT);
