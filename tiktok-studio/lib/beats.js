@@ -1,6 +1,6 @@
 // Declarative "beats": every video is a list of reusable scene templates driven by voice cues.
 import { scene, cue, h, svg, tf, A, anim, clamp, lerp, ease, prog, Odo, count, fmt, sfx, TL } from './engine.js';
-import { box, text, obj, label, panel, burst, pulse } from './kit.js';
+import { box, text, obj, label, panel, burst, pulse, logo } from './kit.js';
 
 export const MINT = '#2EE6A0', GOLD = '#F4B740', RED = '#FF5A4E', CREAM = '#F3ECDF';
 const COLS = { mint: 'var(--mint)', gold: 'var(--gold)', red: 'var(--red)', cream: 'var(--cream)', white: '#fff', muted: 'var(--muted)' };
@@ -41,16 +41,16 @@ function iconSvg(name, c, size = 120) {
 // extra notes (chips, mono lines, sprites) that can be attached to any template
 function makeNotes(root, notes = []) {
   return notes.map(n => {
-    sfx(n.sfx || (n.kind === 'mono' ? 'click' : n.anim === 'stamp' || !n.anim ? 'stamp' : 'pop'), T(n.at) + .03, .65);
-    const e = n.kind === 'sprite' ? obj(root, n.name, { cx: n.cx ?? 540, by: n.by, w: n.size || 300 })
-      : n.kind === 'mono' ? text(root, n.html, { cls: 'mono', y: n.y, size: n.size || 24, style: { color: col(n.color || 'cream') }, z: 7 })
-      : n.kind === 'num' ? text(root, n.html, { cls: 'num', y: n.y, size: n.size || 120, color: col(n.color || 'white'), z: 7 })
-      : text(root, `<span class="chip ${n.style || 'mint'}" style="font-size:${n.size || 52}px;padding:${Math.round((n.size || 52) * .22)}px ${Math.round((n.size || 52) * .5)}px">${n.html}</span>`, { cls: 'abs', y: n.y, z: 7 });
+    sfx(n.sfx || (n.kind === 'mono' ? 'click' : (n.kind === 'logo' || n.kind === 'sprite') ? 'pop' : n.anim === 'stamp' || !n.anim ? 'stamp' : 'pop'), T(n.at) + .03, .65);
+    const e = n.kind === 'logo' ? logo(root, n.name, { cx: n.cx ?? 540, cy: n.cy, size: n.size || 160, z: 7 }) : n.kind === 'sprite' ? obj(root, n.name, { cx: n.cx ?? 540, by: n.by, w: n.size || 300 })
+      : n.kind === 'mono' ? text(root, n.html, { cls: 'mono', x: n.x ?? 0, y: n.y, size: n.size || 24, style: { color: col(n.color || 'cream') }, z: 7 })
+      : n.kind === 'num' ? text(root, n.html, { cls: 'num', x: n.x ?? 0, y: n.y, size: n.size || 120, color: col(n.color || 'white'), z: 7 })
+      : text(root, `<span class="chip ${n.style || 'mint'}" style="font-size:${n.size || 52}px;padding:${Math.round((n.size || 52) * .22)}px ${Math.round((n.size || 52) * .5)}px">${n.html}</span>`, { cls: 'abs', x: n.x ?? 0, y: n.y, z: 7 });
     return { n, e };
   });
 }
 function updNotes(nts, t, out) {
-  for (const { n, e } of nts) { const until = n.until == null ? out : T(n.until) - .1; A(e, t, T(n.at), until, { type: n.anim || (n.kind === 'sprite' ? 'pop' : n.kind === 'mono' || n.kind === 'num' ? 'up' : 'stamp'), float: n.kind === 'sprite' ? 5 : 0 }); }
+  for (const { n, e } of nts) { const until = n.until == null ? out : T(n.until) - .1; A(e, t, T(n.at), until, { type: n.anim || ((n.kind === 'sprite' || n.kind === 'logo') ? 'pop' : n.kind === 'mono' || n.kind === 'num' ? 'up' : 'stamp'), float: n.kind === 'sprite' ? 5 : n.kind === 'logo' ? 4 : 0 }); }
 }
 
 // ---------- element factory for the generic "stack" beat ----------
@@ -67,6 +67,7 @@ function makeItem(root, it) {
       el = odo.el; break;
     }
     case 'sprite': el = obj(root, it.name, { cx: it.cx ?? 540, by: it.by ?? 900, w: it.size || 500, z: it.z ?? 2 }); break;
+    case 'logo': el = logo(root, it.name, { cx: it.cx ?? 540, cy: it.cy ?? 400, size: it.size || 200, bg: it.bg, fg: it.fg, z: it.z ?? 4 }); break;
     case 'row': {
       el = box(root, { x: 70, y, w: 940, hgt: it.h || 170 });
       el.appendChild(h('div', 'panel', '', { inset: 0, borderRadius: '26px' }));
@@ -92,7 +93,7 @@ export function stack(start, end, items, { lab, foot, sfxIn = true } = {}) {
     for (const { it } of els) {
       if (it.sfx === false) continue;
       const at = it.at == null ? t0 + .1 : T(it.at);
-      const kind = it.sfx || (it.kind === 'odo' ? 'rise' : it.anim === 'stamp' ? 'stamp' : it.kind === 'chip' ? 'pop' : it.kind === 'sprite' ? 'pop' : (it.kind === 'num' || it.kind === 'row') ? 'pop' : null);
+      const kind = it.sfx || (it.kind === 'odo' ? 'rise' : it.anim === 'stamp' ? 'stamp' : it.kind === 'chip' ? 'pop' : (it.kind === 'sprite' || it.kind === 'logo') ? 'pop' : (it.kind === 'num' || it.kind === 'row') ? 'pop' : null);
       if (kind === 'rise') { sfx('rise', at - .3, .45, it.dur || 1.1); sfx('ding', at + (it.dur || 1.1) - .3, .8); }
       else if (kind) sfx(kind, at, kind === 'stamp' ? .85 : .55);
     }
@@ -105,7 +106,7 @@ export function stack(start, end, items, { lab, foot, sfxIn = true } = {}) {
         const until = it.until == null ? out : T(it.until) - .1;
         const base = { ...(it.base || {}) };
         if (it.pulse) base.s = (base.s ?? 1) * pulse(t, T(it.pulse), .07, .45);
-        const r = anim(t, at - (it.kind === 'odo' ? .35 : 0), until, { type: it.anim || (it.kind === 'sprite' ? 'pop' : it.kind === 'chip' ? 'pop' : 'up'), float: it.float ?? (it.kind === 'sprite' ? 5 : 0), rot: it.rot, rot2: it.rot2, dist: it.dist });
+        const r = anim(t, at - (it.kind === 'odo' ? .35 : 0), until, { type: it.anim || ((it.kind === 'sprite' || it.kind === 'logo') ? 'pop' : it.kind === 'chip' ? 'pop' : 'up'), float: it.float ?? (it.kind === 'sprite' ? 5 : it.kind === 'logo' ? 4 : 0), rot: it.rot, rot2: it.rot2, dist: it.dist });
         r.x += base.x || 0; r.y += base.y || 0; r.s *= base.s ?? 1; r.r += base.r || 0;
         if (it.dim) r.o *= lerp(1, .35, prog(t, T(it.dim), .4));
         tf(el, r);
@@ -207,10 +208,11 @@ export function hbars(start, end, { lab, head, headAt, rows, max, foot, y0 = 560
 }
 
 // CTA / statement with sprite(s)
-export function cta(start, end, { top, sprites = [], head, headY = 1000, headSize = 100, sub = 'RÉPONDEZ EN COMMENTAIRE ↓', follow }) {
+export function cta(start, end, { top, sprites = [], logos = [], head, headY = 1000, headSize = 100, sub = 'RÉPONDEZ EN COMMENTAIRE ↓', follow }) {
   scene(start, end, (root, t0) => {
     const tp = top ? text(root, top, { cls: 'mono', y: 228, size: 26 }) : null;
     const sps = sprites.map(sp => obj(root, sp.name, { cx: sp.cx ?? 540, by: sp.by ?? 940, w: sp.size || 560 }));
+    const lgs = logos.map(l => logo(root, l.name, { cx: l.cx ?? 540, cy: l.cy ?? 600, size: l.size || 200 }));
     const hd = text(root, head, { y: headY, size: headSize });
     const sb = sub ? text(root, sub, { cls: 'mono', y: 1196, size: 24, style: { color: 'var(--cream)' } }) : null;
     sfx('whoosh', t0 + .05, .6); sfx('pop', t0 + .2, .7);
@@ -221,6 +223,7 @@ export function cta(start, end, { top, sprites = [], head, headY = 1000, headSiz
       const out = end - OUT;
       if (tp) A(tp, t, t0, out, { type: 'fade' });
       sps.forEach((s, i) => A(s, t, t0 + .1 + i * .1, out, { type: 'pop', float: 6, phase: i }));
+      lgs.forEach((l, i) => A(l, t, t0 + .2 + i * .12, out, { type: 'pop', float: 4, phase: i + 1 }));
       if (sb && !sb.placed && hd.offsetHeight > 0) { sb.placed = true; const bottom = headY + hd.offsetHeight + 14; if (bottom > 1196) sb.style.top = bottom + 'px'; }
       A(hd, t, t0 + .25, out, { type: 'up' }); if (sb) A(sb, t, t0 + .9, fb ? tf0 - .05 : out, { type: 'fade' });
       if (fb) { if (!fb.placed && hd.offsetHeight > 0) { fb.placed = true; const bottom = headY + hd.offsetHeight + 24; if (bottom > 1140) fb.el.style.top = bottom + 'px'; } fb.update(t, tf0, out); }

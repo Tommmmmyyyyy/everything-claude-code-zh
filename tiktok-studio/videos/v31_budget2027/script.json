@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Quatre cent cinquante-huit députés contre. ^zero Zéro pour. ^rejet Le budget 2027 a été rejeté à l'Assemblée, le 4 novembre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Et ça pourrait toucher vos impôts l'an prochain. ^loop2 Je vous explique simplement.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^contenu Que prévoyait ce budget ? ^bareme D'abord, relever les tranches de l'impôt sur le revenu de {*2,1 %|deux virgule un pour cent}, comme l'inflation.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^pourquoi Pourquoi c'est important ? ^ex Si votre salaire suit l'inflation, mais pas les tranches, ^ex2 vous payez plus d'impôt… sans être plus riche.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^chiffre Selon le gouvernement, sans cette mise à jour, ^quatre ce serait environ {*4 milliards €|quatre milliards d'euros} d'impôts en plus, ^vingt pour vingt millions de foyers.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^autres Le projet prévoyait aussi de geler certaines prestations, ^dons et de permettre de donner jusqu'à {*50 000 €|cinquante mille euros} à ses proches, sans impôt.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^suite Et maintenant ? ^senat Le Sénat examine le texte, avec un vote prévu le 9 décembre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^ordo Si rien n'est adopté à temps, le gouvernement peut appliquer son budget par ordonnance. ^jamais Ce serait une première sous la Cinquième République.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^speciale Autre option : une loi spéciale, comme fin 2024. ^speciale2 L'État continue de percevoir les impôts, ^speciale3 mais les tranches ne sont pas mises à jour tout de suite. ^rattrap Fin 2024, elles avaient été rattrapées deux mois plus tard.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^vous Pour vous, concrètement : ^v1 pas de changement immédiat sur votre fiche de paie en janvier. ^v2 Tout se jouera au moment de la déclaration, au printemps.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous pensez que le budget sera voté à temps ? ^follow Abonnez-vous, je vous tiens au courant.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

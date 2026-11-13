@@ -4,7 +4,7 @@ import { seq, stack, hbars, cta, at } from '../../lib/beats.js';
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
     { kind: 'mono', html: 'INTRODUCTION EN BOURSE', y: 228, at: -1 },
-    { kind: 'sprite', name: 'chip', cx: 540, by: 690, size: 470, at: -1 },
+    { kind: 'logo', name: 'anthropic', cx: 540, cy: 460, size: 290, at: -1 },
     { kind: 'mono', html: 'UNE ENTREPRISE CRÉÉE EN 2021', y: 720, at: -1, color: 'cream' },
     { kind: 'num', html: '≈ 1 400<span class="u">MILLIARDS $</span>', y: 770, size: 120, color: 'gold', at: -1 },
     { kind: 'head', html: 'POUR UNE ENTREPRISE<br>DE <span class="a">5 ANS</span> ?', y: 940, size: 92, at: -1 },
@@ -16,10 +16,13 @@ boot(async () => seq([
     ], notes: [{ at: 'loop2', html: 'ET POURTANT, DÉFICITAIRE', style: 'red', y: 1010, size: 52 }],
     foot: 'CAC 40 ≈ 2 470 MD € AU 5 NOVEMBRE 2026 · 1 € ≈ 1,12 $' }) },
   { at: 'qui', fn: (a, b) => stack(a, b, [
-    { kind: 'sprite', name: 'chip', cx: 540, by: 650, size: 430, at: 'qui' },
-    { kind: 'head', html: 'ANTHROPIC', y: 690, size: 130, at: 'qui' },
-    { kind: 'mono', html: 'CRÉATEUR DE L’IA CLAUDE · CONCURRENT DE CHATGPT', y: 830, at: 'rival', color: 'cream' },
-    { kind: 'chip', html: '≈ 19 NOVEMBRE · NASDAQ · « ANT »', style: 'gold', y: 920, size: 48, at: 'quand', pulse: 'ticker' },
+    { kind: 'logo', name: 'anthropic', cx: 400, cy: 430, size: 240, at: 'qui' },
+    { kind: 'logo', name: 'claude', cx: 680, cy: 430, size: 240, at: at('qui', 1.6) },
+    { kind: 'head', html: 'ANTHROPIC', y: 600, size: 120, at: 'qui' },
+    { kind: 'mono', html: 'CRÉATEUR DE L’IA CLAUDE', y: 730, at: at('qui', 1.6), color: 'cream' },
+    { kind: 'logo', name: 'openai', cx: 540, cy: 860, size: 120, at: 'rival' },
+    { kind: 'mono', html: 'CONCURRENT DE CHATGPT (OPENAI)', y: 935, at: 'rival' },
+    { kind: 'chip', html: '≈ 19 NOVEMBRE · NASDAQ · « ANT »', style: 'gold', y: 1010, size: 46, at: 'quand', pulse: 'ticker' },
   ]) },
   { at: 'prix', fn: (a, b) => stack(a, b, [
     { kind: 'num', html: '70 – 78<span class="u">$</span>', y: 290, size: 170, color: 'cream', at: 'prix' },
@@ -53,6 +56,7 @@ boot(async () => seq([
   { at: 'spacex', fn: (a, b) => stack(a, b, [
     { kind: 'mono', html: 'L’EXEMPLE SPACEX', y: 270, at: 'spacex', color: 'cream' },
     { kind: 'sprite', name: 'rocket', cx: 540, by: 660, size: 400, at: 'spacex' },
+    { kind: 'logo', name: 'spacex', cx: 800, cy: 400, size: 130, at: 'spacex' },
     { kind: 'num', html: '+ 19<span class="u">%</span>', x: 40, w: 500, y: 700, size: 140, color: 'mint', at: at('spacex', .5) },
     { kind: 'mono', html: 'LE PREMIER JOUR', x: 40, w: 500, y: 860, at: at('spacex', .5) },
     { kind: 'num', html: '< 135<span class="u">$</span>', x: 540, w: 500, y: 700, size: 140, color: 'red', at: 'spacex2' },
@@ -62,5 +66,5 @@ boot(async () => seq([
     { kind: 'head', html: 'ENTREPRISE GÉNIALE<br>≠ <span class="g">ACTION PAS CHÈRE</span>', y: 330, size: 92, at: 'lecon' },
     { kind: 'chip', html: 'CECI N’EST PAS UN CONSEIL D’INVESTISSEMENT', style: 'ghost', y: 600, size: 40, at: 'disc' },
   ]) },
-  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'ANTHROPIC · NASDAQ', sprites: [{ name: 'chip', cx: 540, by: 900, size: 520 }], head: 'VOUS ACHÈTERIEZ<br>UNE ACTION <span class="a">ANTHROPIC</span> ?', headY: 960, headSize: 80, follow: 'follow' }) },
+  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'ANTHROPIC · NASDAQ', logos: [{ name: 'anthropic', cx: 540, cy: 620, size: 300 }], head: 'VOUS ACHÈTERIEZ<br>UNE ACTION <span class="a">ANTHROPIC</span> ?', headY: 960, headSize: 80, follow: 'follow' }) },
 ]));

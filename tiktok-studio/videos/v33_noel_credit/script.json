@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous comptez payer vos cadeaux de Noël en plusieurs fois ? ^change Depuis le 20 novembre, les règles ont changé.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Et un Noël à crédit peut coûter bien plus cher qu'on ne le croit. ^loop2 Faisons le calcul.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^regle Le paiement en trois ou quatre fois est désormais un vrai crédit. ^solva Le prêteur doit vérifier que vous pouvez rembourser. ^retract Et vous avez un droit de rétractation.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^decouvert Même les petits découverts, de moins de deux cents euros, sont concernés. ^objectif Objectif : éviter que les petits crédits s'empilent sans qu'on s'en rende compte.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^budget Côté budget, ^b43 quarante-trois pour cent des Français prévoient deux cents euros ou moins pour Noël. ^beaucoup Mais beaucoup dépassent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^calcul Prenons {*500 €|cinq cents euros} de cadeaux, payés avec un crédit renouvelable. ^taux Le taux moyen tourne autour de dix-huit pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^douze Remboursés en douze mois, ^mens ça fait environ {*46 €|quarante-six euros} par mois. ^cout Et environ {*45 €|quarante-cinq euros} d'intérêts.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^mars En mars, vous payez encore les cadeaux de décembre. ^cumul Le vrai piège : cumuler plusieurs paiements fractionnés. ^cumul2 Quatre achats en quatre fois, c'est seize prélèvements à suivre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^astuce Mon astuce pour l'an prochain : ^a1 mettez vingt-cinq euros de côté chaque mois, dès janvier. ^a2 En décembre, vous aurez trois cents euros, ^a3 sans un centime d'intérêt. Et sans stress.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^cadeau Le plus beau cadeau, c'est de commencer l'année sans dette, et sans mauvaise surprise sur son compte.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous payez vos cadeaux comptant, ou en plusieurs fois ? ^follow Abonnez-vous pour d'autres calculs comme celui-ci.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

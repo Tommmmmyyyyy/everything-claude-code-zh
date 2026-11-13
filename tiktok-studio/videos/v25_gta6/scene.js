@@ -5,6 +5,7 @@ boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
     { kind: 'mono', html: 'GTA 6 · SORTIE LE 19 NOVEMBRE', y: 228, at: -1 },
     { kind: 'sprite', name: 'gamebox', cx: 540, by: 700, size: 460, at: -1, rot: -4 },
+    { kind: 'logo', name: 'rockstargames', cx: 770, cy: 370, size: 140, at: -1 },
     { kind: 'num', html: '79,99<span class="u">€</span>', y: 730, size: 170, color: 'gold', at: -1 },
     { kind: 'head', html: 'COMBIEN POUR<br><span class="a">ROCKSTAR</span> ?', y: 950, size: 104, at: -1 },
   ], { sfxIn: false }) },
@@ -25,6 +26,7 @@ boot(async () => seq([
       { at: 'sony2', label: 'SONY OU MICROSOFT', sub: '≈ 30 % DU PRIX HORS TAXE', value: 20 },
     ], total: { at: 'reste', label: 'TAKE-TWO', value: 46.66, color: 'mint' },
     stamp: { at: 'moins', html: '58 % DU PRIX', color: 'mint' },
+    notes: [{ kind: 'logo', name: 'playstation', at: 'sony', cx: 1012, cy: 640, size: 100 }, { kind: 'logo', name: 'taketwointeractivesoftware', at: 'reste', cx: 68, cy: 760, size: 100 }],
     foot: 'CALCUL INDICATIF · HORS FRAIS DE DISTRIBUTION ET DE MARKETING' }) },
   { at: 'budget', fn: (a, b) => hbars(a, b, { lab: ['02', 'LE BUDGET'], head: 'UN JEU <span class="r">HORS DE PRIX</span>', headAt: 'budget', max: 1000, y0: 540, gapY: 230,
     rows: [
@@ -45,13 +47,14 @@ boot(async () => seq([
     { kind: 'sprite', name: 'controller', cx: 540, by: 1170, size: 340, at: at('online', .4) },
   ]) },
   { at: 'action', fn: (a, b) => stack(a, b, [
-    { kind: 'head', html: 'ET L’ACTION<br><span class="a">TAKE-TWO</span> ?', y: 280, size: 110, at: 'action' },
-    { kind: 'num', html: '18<span class="u">$</span>', x: 40, w: 440, y: 560, size: 150, color: 'cream', at: 'ttwo' },
-    { kind: 'mono', html: '2013 · SORTIE DE GTA 5', x: 40, w: 440, y: 730, at: 'ttwo' },
-    { kind: 'head', html: '→', x: 400, w: 180, y: 590, size: 100, at: 'ttwo2', color: 'var(--muted)' },
-    { kind: 'num', html: '≈ 220<span class="u">$</span>', x: 580, w: 460, y: 560, size: 150, color: 'mint', at: 'ttwo2' },
-    { kind: 'mono', html: 'AUJOURD’HUI', x: 580, w: 460, y: 730, at: 'ttwo2' },
-    { kind: 'chip', html: '× 12', style: 'gold', y: 830, size: 100, at: 'x12', anim: 'stamp', sfx: 'stamp' },
+    { kind: 'logo', name: 'taketwointeractivesoftware', cx: 540, cy: 320, size: 150, at: 'action' },
+    { kind: 'head', html: 'ET L’ACTION <span class="a">TAKE-TWO</span> ?', y: 420, size: 84, at: 'action' },
+    { kind: 'num', html: '18<span class="u">$</span>', x: 40, w: 440, y: 590, size: 150, color: 'cream', at: 'ttwo' },
+    { kind: 'mono', html: '2013 · SORTIE DE GTA 5', x: 40, w: 440, y: 760, at: 'ttwo' },
+    { kind: 'head', html: '→', x: 400, w: 180, y: 620, size: 100, at: 'ttwo2', color: 'var(--muted)' },
+    { kind: 'num', html: '≈ 220<span class="u">$</span>', x: 580, w: 460, y: 590, size: 150, color: 'mint', at: 'ttwo2' },
+    { kind: 'mono', html: 'AUJOURD’HUI', x: 580, w: 460, y: 760, at: 'ttwo2' },
+    { kind: 'chip', html: '× 12', style: 'gold', y: 860, size: 100, at: 'x12', anim: 'stamp', sfx: 'stamp' },
   ], { foot: 'LES PERFORMANCES PASSÉES NE PRÉJUGENT PAS DES PERFORMANCES FUTURES' }) },
-  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'GTA 6', sprites: [{ name: 'gamebox', cx: 400, by: 900, size: 420 }, { name: 'controller', cx: 730, by: 900, size: 420 }], head: 'VOUS L’AVEZ<br><span class="a">PRÉCOMMANDÉ</span> ?', headY: 960, headSize: 96, follow: 'follow' }) },
+  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'GTA 6', sprites: [{ name: 'gamebox', cx: 400, by: 900, size: 420 }, { name: 'controller', cx: 730, by: 900, size: 420 }], logos: [{ name: 'rockstargames', cx: 540, cy: 380, size: 130 }], head: 'VOUS L’AVEZ<br><span class="a">PRÉCOMMANDÉ</span> ?', headY: 960, headSize: 96, follow: 'follow' }) },
 ]));

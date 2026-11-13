@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Trois entreprises de l'intelligence artificielle valent plus de {*8 000 milliards $|huit mille milliards de dollars}. ^bulle Bulle, ou révolution ?",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Pour répondre, il y a un chiffre que les investisseurs regardent toujours. ^loop2 Je vous le montre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^nvidia Nvidia, qui fabrique les puces de l'IA : ^nv2 environ {*5 500 milliards $|cinq mille cinq cents milliards de dollars} en bourse. ^cac Deux fois tout le CAC 40.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^openai OpenAI, qui a créé ChatGPT : ^oa2 environ {*1 250 milliards $|mille deux cent cinquante milliards}. ^anth Et Anthropic, qui entre en bourse : environ {*1 400 milliards $|mille quatre cents milliards}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^ratio Le chiffre clé, c'est la valeur divisée par le chiffre d'affaires. ^r2 En clair : combien d'années de ventes vous payez en achetant l'entreprise.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^oa3 OpenAI vend environ {*50 milliards $|cinquante milliards} par an, selon les estimations. ^x25 Sa valeur : vingt-cinq fois ses ventes.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^cisco En l'an 2000, une autre star de la tech, Cisco, valait environ trente fois ses ventes. ^krach Puis la bulle internet a éclaté. ^moins89 Son action a chuté de près de quatre-vingt-dix pour cent en deux ans.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^nasdaq Et le Nasdaq, la bourse de la tech américaine, a perdu {*78 %|soixante-dix-huit pour cent}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^diff Sauf qu'il y a une différence. ^d2 Le chiffre d'affaires d'Anthropic a été multiplié par quatorze en un an. ^d3 Si la croissance continue, ces prix peuvent se justifier. ^d4 Sinon, la chute peut être violente.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^lecon La vérité : personne ne sait. ^l2 Une bulle, on ne la reconnaît qu'après. ^l3 Alors on ne met jamais tous ses œufs dans le même panier.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Bulle ou révolution, vous en pensez quoi ? ^follow Abonnez-vous pour suivre la suite.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

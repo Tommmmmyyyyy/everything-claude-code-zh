@@ -4,6 +4,7 @@ import { seq, stack, receipt, hbars, cta, at } from '../../lib/beats.js';
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
     { kind: 'mono', html: 'GTA 6 + PS5', y: 228, at: -1 },
+    { kind: 'logo', name: 'playstation', cx: 870, cy: 360, size: 140, at: -1 },
     { kind: 'sprite', name: 'console', cx: 380, by: 740, size: 480, at: -1 },
     { kind: 'sprite', name: 'controller', cx: 740, by: 760, size: 400, at: -1 },
     { kind: 'head', html: 'LE VRAI COÛT<br>SUR <span class="a">5 ANS</span>', y: 820, size: 116, at: -1 },
@@ -43,5 +44,5 @@ boot(async () => seq([
     { kind: 'chip', html: 'CE SONT LES PETITES DÉPENSES RÉPÉTÉES', style: 'red', y: 520, size: 42, at: 'lecon2', anim: 'stamp', sfx: 'stamp' },
     { kind: 'sprite', name: 'coinpile', cx: 540, by: 1120, size: 440, at: at('lecon2', .3) },
   ]) },
-  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'GTA 6 + PS5', sprites: [{ name: 'console', cx: 400, by: 900, size: 460 }, { name: 'controller', cx: 740, by: 900, size: 380 }], head: 'VOUS JOUEZ COMBIEN<br>D’<span class="a">HEURES</span> PAR SEMAINE ?', headY: 960, headSize: 84, follow: 'follow' }) },
+  { at: 'cta', fn: (a, b) => cta(a, b, { top: 'GTA 6 + PS5', sprites: [{ name: 'console', cx: 400, by: 900, size: 460 }, { name: 'controller', cx: 740, by: 900, size: 380 }], logos: [{ name: 'playstation', cx: 800, cy: 420, size: 130 }], head: 'VOUS JOUEZ COMBIEN<br>D’<span class="a">HEURES</span> PAR SEMAINE ?', headY: 960, headSize: 84, follow: 'follow' }) },
 ]));

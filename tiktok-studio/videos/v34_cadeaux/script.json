@@ -1,0 +1,59 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Un cadeau de Noël qui ne vous plaît pas ? ^pas Rassurez-vous, c'est très courant. ^placard Selon YouGov, plus d'un tiers des cadeaux non désirés finissent au fond d'un placard.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Pourtant, il y a de l'argent à récupérer. ^loop2 À condition de connaître le bon moment.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^revendus Seuls dix-neuf pour cent de ces cadeaux sont revendus. ^ipsos Pourtant, trois Français sur dix se disent prêts à le faire. ^cent Et en moyenne, ça rapporte environ {*100 €|cent euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^moment Le bon moment ? ^m1 Entre le 25 et le 28 décembre. ^m2 Les acheteurs cherchent les bonnes affaires, ^m3 et votre cadeau est encore au prix du neuf.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^pic Deuxième pic, environ un mois après Noël, ^pic2 quand les délais de retour en magasin sont dépassés. ^tech Et sur un objet tech, chaque semaine qui passe fait baisser le prix.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^astuce Mes astuces : ^a1 gardez l'emballage d'origine, ^a2 prenez de belles photos, ^a3 et affichez un prix vingt à trente pour cent sous le neuf. ^blister Les objets encore emballés partent souvent en quelques heures.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^echange Mais d'abord, regardez s'il y a un ticket cadeau. ^ech2 Un échange en magasin, c'est souvent plus simple, et sans perte.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^impots Et les impôts ? ^imp2 Revendre vos propres affaires, cadeaux compris, n'est pas imposable, sauf objet de grande valeur.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^sens Un cadeau revendu, ce n'est pas un manque de respect. ^sens2 C'est un objet qui sert à quelqu'un, au lieu de dormir dans un placard.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^cta Vous oseriez revendre un cadeau de votre belle-mère ? ^follow Abonnez-vous pour d'autres astuces comme celle-ci.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

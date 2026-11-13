@@ -78,3 +78,24 @@ export function burst(parent, { cx, cy, n = 10, color = 'var(--mint)', r0 = 40, 
   };
 }
 export const pulse = (t, t0, amp = .12, d = .45) => (t < t0 || t > t0 + d) ? 1 : 1 + amp * Math.sin(Math.PI * (t - t0) / d);
+
+// brand logo tile (app-icon style). SVG symbols from Simple Icons (CC0); trademarks belong to their owners.
+export const LOGOS = {
+  anthropic: { bg: '#191919', fg: '#F0EEE6' }, claude: { bg: '#D97757', fg: '#FFFFFF' },
+  rockstargames: { bg: '#FCAF17', fg: '#111111' }, taketwointeractivesoftware: { bg: '#111111', fg: '#FFFFFF' },
+  playstation: { bg: '#0070D1', fg: '#FFFFFF' }, playstation5: { bg: '#111111', fg: '#FFFFFF' },
+  spacex: { bg: '#0B0B0B', fg: '#FFFFFF' }, meta: { bg: '#FFFFFF', fg: '#0467DF' }, facebook: { bg: '#0866FF', fg: '#FFFFFF' },
+  nvidia: { bg: '#111111', fg: '#76B900' }, openai: { bg: '#FFFFFF', fg: '#111111' }, cisco: { bg: '#1BA0D7', fg: '#FFFFFF' },
+};
+export function logo(parent, name, { cx = 540, cy = 400, size = 200, bg, fg, z = 4 } = {}) {
+  const st = LOGOS[name] || { bg: '#111111', fg: '#FFFFFF' };
+  const el = box(parent, { x: cx - size / 2, y: cy - size / 2, w: size, hgt: size, z, origin: '50% 50%' });
+  Object.assign(el.style, { borderRadius: (size * .24) + 'px', background: bg || st.bg, boxShadow: '0 26px 60px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.14)', overflow: 'hidden' });
+  const url = `../../assets/logos/${name}.svg`;
+  const ic = h('div', 'abs', '', { left: (size * .2) + 'px', top: (size * .2) + 'px', width: (size * .6) + 'px', height: (size * .6) + 'px', background: fg || st.fg });
+  for (const k of ['-webkit-mask', 'mask']) ic.style.setProperty(k, `url(${url}) center / contain no-repeat`);
+  el.appendChild(ic);
+  el.appendChild(h('div', 'abs', '', { inset: 0, background: 'linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,0) 46%)' }));
+  if (!document.querySelector(`img[data-logo="${name}"]`)) { const im = h('img', '', '', { position: 'absolute', width: '1px', height: '1px', opacity: 0 }); im.src = url; im.dataset.logo = name; document.body.appendChild(im); }
+  return el;
+}

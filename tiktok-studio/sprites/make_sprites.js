@@ -59,6 +59,7 @@ const LIST = [
   ['popcorn', 'popcorn', { elev: 16, az: 10 }],
   ['chip', 'chip', { elev: 40, az: 25 }],
   ['trophy', 'trophy', { elev: 10, az: 15 }],
+  ['gift', 'gift', { elev: 18, az: 30 }],
 ];
 (async () => {
   const { srv, url } = await serve(ROOT);

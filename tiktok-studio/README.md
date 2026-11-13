@@ -17,7 +17,8 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
   frais de notaire, Vinted, dropshipping, laverie, franchise de burgers, coût d'un enfant,
   panneaux solaires, smartphone en plusieurs fois, 100 € de l'an 2000
 - `videos/v25_gta6` à `videos/v30_ps5gta` (actualité, 1 min 15 à 1 min 30) : prix de GTA 6, entrée en bourse
-  d'Anthropic, SpaceX le premier jour, fausses promos du Black Friday, bitcoin, GTA 6 + PS5 sur 5 ans
+  d'Anthropic, SpaceX le premier jour, fausses promos du Black Friday, bitcoin, GTA 6 + PS5 sur 5 ans,
+  budget 2027, bulle de l'IA, Noël à crédit, revendre ses cadeaux
 
 ### Modèles d'animation (`lib/beats.js`)
 
@@ -29,6 +30,9 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 - `chart` : courbes tracées en direct, avec étiquettes sur les repères.
 - `notes` (sur `hbars`, `receipt`, `chart`) : pastilles, lignes ou objets 3D ajoutés sur un repère ; `path()` trace une courbe par points.
 - `cta` : question finale, avec un bouton « S'abonner » animé (`follow: 'repere'`).
+- Logos de marques (`kind: 'logo'`, `logos` sur `cta`) : symboles vectoriels de Simple Icons (CC0, voir
+  `assets/logos/LICENSE-simple-icons.md`). Les marques restent la propriété de leurs titulaires : usage
+  d'identification dans un contexte d'actualité uniquement.
 
 ## Installation (une seule fois)
 

@@ -617,6 +617,20 @@ B.trophy = () => {
   return g;
 };
 
+
+B.gift = () => {
+  const g = new THREE.Group(); const box_ = clay(C.coral, { r: .5 }), rib = clay(C.gold, { r: .35 });
+  const b = mesh(roundedBox(2.0, 1.6, 2.0, .08, 3), box_); b.position.y = .8; g.add(b);
+  const lid = mesh(roundedBox(2.14, .38, 2.14, .08, 3), clay(0xF06A5E, { r: .5 })); lid.position.y = 1.75; g.add(lid);
+  const r1 = mesh(roundedBox(.34, 1.62, 2.06, .04, 2), rib); r1.position.y = .82; g.add(r1);
+  const r2 = mesh(roundedBox(2.06, 1.62, .34, .04, 2), rib); r2.position.y = .82; g.add(r2);
+  const r3 = mesh(roundedBox(.36, .4, 2.18, .04, 2), rib); r3.position.y = 1.75; g.add(r3);
+  const r4 = mesh(roundedBox(2.18, .4, .36, .04, 2), rib); r4.position.y = 1.75; g.add(r4);
+  for (const s of [-1, 1]) { const loop = mesh(new THREE.TorusGeometry(.38, .12, 16, 40), rib); loop.scale.set(1, .75, .6); loop.position.set(s * .36, 2.18, 0); loop.rotation.set(0, s * .35, s * .5); g.add(loop); }
+  const knot = mesh(new THREE.SphereGeometry(.17, 24, 16), rib); knot.position.y = 2.05; g.add(knot);
+  return g;
+};
+
 // ---------- staging ----------
 window.renderSprite = (name, o = {}) => {
   const size = o.size ?? 900;
