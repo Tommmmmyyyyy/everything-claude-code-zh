@@ -1,0 +1,59 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Soixante-dix millions de dollars. ^prix C'est le prix du cheval le plus cher de l'histoire. ^fou Et pourtant, ce n'est pas l'histoire la plus folle.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Voici trois chevaux hors de prix, ^loop2 et celui qui a fait perdre une fortune à son acheteur.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^trois Numéro trois : le saut d'obstacles. ^pallou En 2013, Palloubet d'Halong, un cheval de concours, aurait été vendu environ {*11 M€|onze millions d'euros}. ^sport Un record pour un cheval de sport.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^deux Numéro deux : The Green Monkey. ^gm2 Acheté {*425 000 $|quatre cent vingt-cinq mille dollars} à un an, ^gm3 il est revendu sept mois plus tard aux enchères : {*16 M$|seize millions de dollars}. ^gm4 Un record pour un cheval de deux ans.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^twist Sauf qu'il n'a couru que trois fois. ^jamais Il n'a jamais gagné une seule course. ^gains Ses gains : environ {*10 000 $|dix mille dollars}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^un Numéro un : Fusaichi Pegasus. ^fp2 Acheté {*4 M$|quatre millions de dollars} à un an. ^derby En 2000, il gagne le Kentucky Derby, la course la plus célèbre des États-Unis.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^vente Juste après, un des plus grands haras du monde le rachète pour devenir étalon : ^fp3 environ {*70 M$|soixante-dix millions de dollars}, selon les sources.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^pourquoi Pourquoi un tel prix ? ^saillies Parce qu'un étalon gagne de l'argent à chaque saillie. ^centaines Des centaines par an, parfois facturées plus de cent mille euros chacune.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^lecon La leçon : ^l1 le plus cher n'est pas toujours le meilleur. ^l2 Les chevaux, c'est le marché le plus risqué… et le plus fascinant.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^cta Lequel vous a le plus surpris ? Dites-le en commentaire. ^follow Et abonnez-vous pour d'autres histoires de chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

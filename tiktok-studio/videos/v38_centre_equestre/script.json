@@ -1,0 +1,74 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous rêvez d'ouvrir votre centre équestre ? ^reste Voilà combien il vous resterait vraiment, à la fin du mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Spoiler : ^loop2 moins que ce que vous imaginez.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^invest Pour reprendre un centre équestre, avec le terrain, le manège, les boxes et la cavalerie : ^inv2 comptez environ {*300 000 €|trois cent mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^ca Côté recettes : deux cents cavaliers à environ six cents euros l'année, ^stages les stages, ^pensions et dix chevaux de propriétaires en pension. ^ca2 Environ {*200 000 €|deux cent mille euros} de chiffre d'affaires par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^nourr Mais il faut nourrir une trentaine de chevaux : foin, granulés, paille : ^nourr2 environ {*45 000 €|quarante-cinq mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^soins Le maréchal et le vétérinaire : {*30 000 €|trente mille euros}. ^sal Deux moniteurs salariés : environ {*72 000 €|soixante-douze mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^charges L'énergie, l'eau, l'assurance, l'entretien : {*20 000 €|vingt mille euros}. ^credit Et le crédit : environ {*22 000 €|vingt-deux mille euros} par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^reste2 Il vous reste environ {*13 000 €|treize mille euros} par an. ^mois Un peu plus de mille euros par mois, avant vos cotisations.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^heures Pour soixante à soixante-dix heures par semaine, ^dimanche car les chevaux mangent aussi le dimanche. ^heure Moins de quatre euros de l'heure.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^tva Bonne nouvelle quand même : depuis 2024, la TVA sur l'équitation est revenue à cinq virgule cinq pour cent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cles Ceux qui s'en sortent misent sur les pensions, ^cles2 les stages, et les anniversaires à poney.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^lecon Un centre équestre, c'est d'abord une passion. ^lecon2 Le business vient après.",
+   "pause": 0.3
+  },
+  {
+   "id": "l13",
+   "text": "^cta Vous connaissez un gérant de centre équestre ? Envoyez-lui cette vidéo. ^follow Et abonnez-vous pour d'autres calculs sur les chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Quatre millions six cent mille euros. ^jamais C'est le prix d'un poulain d'un an, qui n'a jamais couru une seule course.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Pourquoi payer une telle somme ? ^loop2 Et surtout, est-ce que ça rapporte ?",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^arqana Chaque mois d'août, à Deauville, la maison de ventes Arqana met aux enchères des yearlings : ^yearling des pur-sang d'un an, élevés pour la course.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^record Cette année, un fils de l'étalon Wootton Bassett a été adjugé {*4,6 M€|quatre virgule six millions d'euros}. ^record2 Un record absolu pour ces ventes. ^avant L'an dernier, le record était de trois millions.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^total Sur toute la vente : plus de {*66 M€|soixante-six millions d'euros}. ^dix Dix poulains ont dépassé le million. ^moyenne Le prix moyen : environ {*280 000 €|deux cent quatre-vingt mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^ecart Et pourtant, le même jour, certains poulains partent à {*20 000 €|vingt mille euros}. ^x230 Deux cent trente fois moins.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^pourquoi Ce qu'on achète, c'est le père, la mère, la morphologie… ^espoir et surtout l'espoir.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^etalon Car un grand champion peut ensuite devenir étalon. ^saillie Et chaque saillie d'un étalon célèbre peut se facturer des dizaines de milliers d'euros, parfois bien plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Sauf que la plupart de ces poulains ne gagneront jamais de grande course. ^pari Acheter un yearling, c'est un pari à plusieurs millions.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^acheteurs Qui achète ? ^ach2 Les plus grandes écuries du monde, venues d'Irlande, du Golfe, des États-Unis. ^france Et la France est l'un des grands marchés mondiaux du cheval de course.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous mettriez combien pour un poulain ? ^follow Abonnez-vous : dans la prochaine vidéo, le cheval le plus cher de l'histoire.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

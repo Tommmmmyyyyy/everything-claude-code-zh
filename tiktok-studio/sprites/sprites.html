@@ -631,6 +631,100 @@ B.gift = () => {
   return g;
 };
 
+
+// ---------- series 5 (chevaux) ----------
+// parametric horse: col, mane, legs (leg length factor), body (body scale), halter colour, saddle cloth, blanket, socks
+B.horsev = (o = {}) => {
+  const g = new THREE.Group(); const m = clay(o.col ?? COL2.horse, { r: .55 }), dm = clay(o.mane ?? COL2.mane, { r: .7 }), hm = clay(COL2.hoof, { r: .6 });
+  const L = o.legs ?? 1, Bs = o.body ?? 1, H = .9 + (1.45 * L) / 2 - .725; const lift = 1.45 * (L - 1);
+  const top = new THREE.Group(); top.position.y = lift; g.add(top);
+  const body = cap(.62 * Bs, 1.5 * Bs, m); body.rotation.z = Math.PI / 2; body.position.set(0, 2.05, 0); top.add(body);
+  const neck = cap(.34 * Bs, .9, m); neck.position.set(1.15, 2.75, 0); neck.rotation.z = -.75; top.add(neck);
+  const hs = o.head ?? 1;
+  const head = cap(.27 * hs, .62 * hs, m); head.position.set(1.62, 3.12, 0); head.rotation.z = -2.0; top.add(head);
+  const muz = mesh(new THREE.SphereGeometry(.24 * hs, 32, 24), clay(o.muzzle ?? (o.col ?? COL2.horse), { r: .55 })); muz.scale.set(1, .85, .95); muz.position.set(1.62 + .33 * hs, 3.12 - .27 * hs, 0); top.add(muz);
+  if (o.blaze) { const bl = mesh(new THREE.CapsuleGeometry(.07, .5 * hs, 8, 16), clay(0xF4F1EA, { r: .6 })); bl.position.set(1.72, 3.1, 0); bl.rotation.z = -2.0; bl.scale.set(1, 1, .4); bl.position.z = 0; top.add(bl); }
+  for (const z of [-.12, .12]) { const e = mesh(new THREE.ConeGeometry(.08, .26, 16), m); e.position.set(1.42, 3.5, z); e.rotation.z = -.3; top.add(e); }
+  for (const z of [-.2, .2]) { const eye = mesh(new THREE.SphereGeometry(.045, 16, 12), clay(0x101010, { r: .2 })); eye.position.set(1.66, 3.2, z * 1.05); top.add(eye); }
+  const halter = mesh(new THREE.TorusGeometry(.27 * hs, .035, 10, 32), clay(o.halter ?? C.mint, { r: .5 })); halter.position.set(1.8, 2.98, 0); halter.rotation.set(0, Math.PI / 2, .9); top.add(halter);
+  for (let i = 0; i < 7; i++) { const k = i / 6; const mn = mesh(new THREE.SphereGeometry(.13, 16, 12), dm); mn.scale.set(1.3, .8, .55); mn.position.set(.78 + k * .7, 2.95 + k * .55, 0); top.add(mn); }
+  if (o.blanket) { const bk = mesh(lathe([[0, -.02], [.7 * Bs, -.02], [.72 * Bs, .9 * Bs], [0, .95 * Bs]], 48), clay(o.blanket, { r: .75, extra: {} })); bk.rotation.z = Math.PI / 2; bk.scale.set(1, 1.05, 1); bk.position.set(-.05, 2.05, 0);
+    const bm = mesh(new THREE.CylinderGeometry(.66 * Bs, .66 * Bs, 1.5, 48, 1, true, -Math.PI * .1, Math.PI * 1.2), clay(o.blanket, { r: .75 })); bm.rotation.z = Math.PI / 2; bm.position.set(-.05, 2.12, 0); top.add(bm);
+    const tr = mesh(new THREE.TorusGeometry(.67 * Bs, .03, 8, 48, Math.PI * 1.2), clay(C.gold, { r: .5 })); tr.rotation.y = Math.PI / 2; tr.rotation.x = 0; tr.rotation.z = -Math.PI * .1; tr.position.set(.7, 2.12, 0); top.add(tr); }
+  if (o.cloth) { const cl = mesh(new THREE.CylinderGeometry(.64 * Bs, .64 * Bs, .75, 48, 1, true, Math.PI * .15, Math.PI * .7), clay(o.cloth, { r: .6 })); cl.rotation.z = Math.PI / 2; cl.rotation.x = Math.PI / 2; cl.position.set(.05, 2.1, 0); top.add(cl);
+    for (const z of [-1, 1]) { const num = mesh(new THREE.CircleGeometry(.17, 32), clay(0xFFFFFF, { r: .5 })); num.position.set(-.1, 1.85, z * .66 * Bs); num.rotation.y = z > 0 ? 0 : Math.PI; top.add(num); }
+    const sd = mesh(roundedBox(.5, .1, .5, .05, 2), clay(0x2A1D14, { r: .5 })); sd.position.set(.1, 2.68 * 1 + (Bs - 1) * .6, 0); top.add(sd); }
+  for (const [x, z] of [[-.75, -.28], [-.75, .28], [.72, -.28], [.72, .28]]) {
+    const leg = mesh(new THREE.CylinderGeometry(.13 * (o.legW ?? 1), .11 * (o.legW ?? 1), 1.45 * L, 20), m); leg.position.set(x * Bs, .17 + 1.45 * L / 2, z * Bs); g.add(leg);
+    if (o.socks) { const sk = mesh(new THREE.CylinderGeometry(.125 * (o.legW ?? 1), .12 * (o.legW ?? 1), .35, 20), clay(0xF4F1EA, { r: .6 })); sk.position.set(x * Bs, .35, z * Bs); g.add(sk); }
+    const hf = mesh(new THREE.CylinderGeometry(.13 * (o.legW ?? 1), .15 * (o.legW ?? 1), .16, 20), hm); hf.position.set(x * Bs, .1, z * Bs); g.add(hf);
+  }
+  const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(-1.25 * Bs, 2.35, 0), new THREE.Vector3(-1.55 * Bs, 2.0, 0), new THREE.Vector3(-1.6 * Bs, 1.4, .05), new THREE.Vector3(-1.5 * Bs, 1.0, .1)]);
+  top.add(mesh(new THREE.TubeGeometry(curve, 30, .12, 12, false), dm));
+  return g;
+};
+B.saddle = () => {
+  const g = new THREE.Group(); const lth = clay(0x6B3F22, { r: .5 }), lth2 = clay(0x4E2C17, { r: .55 });
+  const seat = new THREE.Shape(); seat.moveTo(-1.1, .35); seat.quadraticCurveTo(-1.15, .95, -.75, 1.0); seat.quadraticCurveTo(-.2, .55, .45, .62); seat.quadraticCurveTo(.95, .7, 1.05, 1.05); seat.quadraticCurveTo(1.2, .9, 1.15, .45); seat.quadraticCurveTo(.2, .2, -1.1, .35);
+  const sg = new THREE.ExtrudeGeometry(seat, { depth: .9, bevelEnabled: true, bevelThickness: .18, bevelSize: .14, bevelSegments: 8, curveSegments: 24 }); sg.translate(0, 0, -.45);
+  g.add(mesh(sg, lth));
+  for (const z of [-1, 1]) { const flap = mesh(roundedBox(.9, 1.0, .06, .12, 3), lth2); flap.position.set(.25, .05, z * .62); flap.rotation.x = z * .12; g.add(flap);
+    const st = mesh(roundedBox(.04, .9, .06, .02, 1), clay(0x2A1D14)); st.position.set(.2, -.15, z * .7); g.add(st);
+    const ir = mesh(new THREE.TorusGeometry(.17, .035, 10, 32), metal(0xC9D2CE, .25)); ir.position.set(.2, -.68, z * .72); ir.scale.set(1, 1.15, 1); g.add(ir);
+    const tread = mesh(roundedBox(.34, .05, .14, .02, 1), metal(0xB8C2BE, .3)); tread.position.set(.2, -.86, z * .72); g.add(tread); }
+  const pad = mesh(roundedBox(2.4, .12, 1.4, .1, 3), clay(C.mint, { r: .7 })); pad.position.set(0, .28, 0); g.add(pad);
+  g.position.y = .95; const gg = new THREE.Group(); gg.add(g); return gg;
+};
+B.helmet = () => {
+  const g = new THREE.Group(); const m = new THREE.MeshPhysicalMaterial({ color: 0x1E2B3A, roughness: .45, clearcoat: .6, clearcoatRoughness: .4, envMapIntensity: 1.1 });
+  const shell = mesh(new THREE.SphereGeometry(1, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2), m); shell.scale.set(1, .95, 1.2); shell.position.y = .25; g.add(shell);
+  const rim = mesh(new THREE.TorusGeometry(1.0, .07, 12, 64), clay(0x111820, { r: .6 })); rim.rotation.x = Math.PI / 2; rim.scale.set(1, 1.2, 1); rim.position.y = .26; g.add(rim);
+  const visor = mesh(new THREE.CylinderGeometry(.95, 1.05, .08, 48, 1, false, -Math.PI * .35, Math.PI * .7), m); visor.position.set(0, .26, .25); visor.rotation.x = -.18; visor.scale.set(1, 1, 1.25); g.add(visor);
+  for (let i = -2; i <= 2; i++) { const v = mesh(roundedBox(.08, .02, .5, .01, 1), clay(C.gold, { r: .4 })); v.position.set(i * .28, 1.18 - Math.abs(i) * .1, -.1); v.rotation.z = -i * .25; g.add(v); }
+  return g;
+};
+B.horseshoe = () => {
+  const g = new THREE.Group(); const m = metal(C.gold, .28);
+  const sh = new THREE.Shape(); sh.absarc(0, 0, 1.0, -Math.PI * .22, Math.PI * 1.22, false); sh.absarc(0, 0, .6, Math.PI * 1.22, -Math.PI * .22, true); sh.closePath();
+  for (let i = 0; i < 6; i++) { const a = -Math.PI * .1 + i * (Math.PI * 1.2 / 5); const hl = new THREE.Path(); hl.absarc(.8 * Math.cos(a), .8 * Math.sin(a), .055, 0, Math.PI * 2, true); sh.holes.push(hl); }
+  const geo = new THREE.ExtrudeGeometry(sh, { depth: .18, bevelEnabled: true, bevelThickness: .06, bevelSize: .05, bevelSegments: 4, curveSegments: 48 });
+  const s = mesh(geo, m); s.rotation.z = Math.PI; s.position.y = 1.05; g.add(s);
+  return g;
+};
+B.stable = () => {
+  const g = new THREE.Group(); const w = clay(0xE9DCC6, { r: .55 }), wd = clay(0x9B5B33, { r: .6 });
+  const body = mesh(roundedBox(3.6, 1.8, 1.8, .06, 3), w); body.position.y = .9; g.add(body);
+  const rs = new THREE.Shape(); rs.moveTo(-2.0, 0); rs.lineTo(0, 1.0); rs.lineTo(2.0, 0); rs.closePath();
+  const roof = mesh(new THREE.ExtrudeGeometry(rs, { depth: 2.0, bevelEnabled: true, bevelThickness: .06, bevelSize: .06, bevelSegments: 3 }), clay(C.mint, { r: .6 })); roof.position.set(0, 1.8, -1.0); g.add(roof);
+  for (let i = 0; i < 3; i++) { const x = -1.2 + i * 1.2;
+    const low = mesh(roundedBox(.8, .75, .06, .03, 2), wd); low.position.set(x, .45, .92); g.add(low);
+    for (const k of [-1, 1]) { const xb = mesh(roundedBox(.06, 1.0, .03, .01, 1), clay(0xE9DCC6)); xb.position.set(x, .45, .96); xb.rotation.z = k * .75; xb.scale.y = .95; g.add(xb); }
+    const open = mesh(roundedBox(.8, .6, .05, .03, 2), clay(0x1A120C, { r: .7 })); open.position.set(x, 1.22, .92); g.add(open);
+    if (i === 1) { const hh = new THREE.Group(); const hm = clay(COL2.horse, { r: .55 }); const hd = cap(.18, .4, hm); hd.rotation.x = Math.PI / 2 - .2; hd.position.set(0, 0, .25); hh.add(hd); const mz = mesh(new THREE.SphereGeometry(.17, 24, 16), hm); mz.position.set(0, -.08, .55); hh.add(mz); for (const z of [-.08, .08]) { const e = mesh(new THREE.ConeGeometry(.05, .16, 12), hm); e.position.set(z, .2, .08); hh.add(e); } hh.position.set(x, 1.22, .95); g.add(hh); } }
+  const sign = mesh(roundedBox(1.2, .3, .05, .05, 2), clay(C.gold, { r: .5 })); sign.position.set(0, 2.3, 1.02); g.add(sign);
+  return g;
+};
+B.trailer = () => {
+  const g = new THREE.Group(); const w = clay(0xF4F1EA, { r: .45 });
+  const body = mesh(roundedBox(3.0, 2.0, 1.6, .3, 5), w); body.position.set(0, 1.45, 0); g.add(body);
+  const stripe = mesh(roundedBox(3.02, .22, 1.62, .06, 2), clay(C.mint)); stripe.position.set(0, 1.0, 0); g.add(stripe);
+  const win = mesh(roundedBox(.9, .45, .04, .1, 3), clay(0x0b231b, { r: .25 })); win.position.set(.6, 2.0, .81); g.add(win);
+  const ramp = mesh(roundedBox(.05, 1.4, 1.3, .03, 2), clay(0xD9D2C4)); ramp.position.set(-1.53, 1.35, 0); g.add(ramp);
+  for (const z of [.82, -.82]) { const wh = mesh(new THREE.CylinderGeometry(.36, .36, .26, 32), clay(C.ink, { r: .7 })); wh.rotation.x = Math.PI / 2; wh.position.set(.1, .4, z); g.add(wh); const hb = mesh(new THREE.CylinderGeometry(.15, .15, .28, 24), clay(0xC9D2CE)); hb.rotation.x = Math.PI / 2; hb.position.set(.1, .4, z); g.add(hb); }
+  const tow = mesh(new THREE.CylinderGeometry(.05, .05, 1.2, 12), metal(0x9AA5A1, .4)); tow.rotation.z = Math.PI / 2; tow.position.set(2.0, .6, 0); g.add(tow);
+  const jw = mesh(new THREE.CylinderGeometry(.08, .08, .6, 12), metal(0x9AA5A1, .4)); jw.position.set(2.4, .3, 0); g.add(jw);
+  return g;
+};
+B.gavel = () => {
+  const g = new THREE.Group(); const wd = clay(0x8A4E2B, { r: .45 }), wl = clay(0xB87346, { r: .45 });
+  const block = mesh(new THREE.CylinderGeometry(.9, 1.0, .3, 48), wd); block.position.y = .15; g.add(block);
+  const hd = new THREE.Group(); const barrel = mesh(new THREE.CylinderGeometry(.32, .32, 1.3, 40), wl); barrel.rotation.z = Math.PI / 2; hd.add(barrel);
+  for (const x of [-.55, .55]) { const band = mesh(new THREE.CylinderGeometry(.34, .34, .12, 40), metal(C.gold, .3)); band.rotation.z = Math.PI / 2; band.position.x = x; hd.add(band); }
+  const handle = mesh(new THREE.CylinderGeometry(.08, .1, 2.0, 24), wl); handle.position.set(0, -1.0, 0); hd.add(handle);
+  hd.rotation.z = .9; hd.rotation.y = .3; hd.position.set(.2, 1.35, 0); g.add(hd);
+  return g;
+};
+
 // ---------- staging ----------
 window.renderSprite = (name, o = {}) => {
   const size = o.size ?? 900;

@@ -1,0 +1,69 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Le cheval qui gagne l'Arc de Triomphe rapporte près de trois millions d'euros à son propriétaire. ^minutes En moins de trois minutes de course.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Mais combien a-t-il coûté avant d'en arriver là ? ^loop2 Le calcul va vous surprendre.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^arc L'Arc de Triomphe, c'est la course la plus riche d'Europe. ^arc2 Elle se court chaque mois d'octobre, à ParisLongchamp.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^daryz Cette année, c'est Daryz, aux couleurs de l'Aga Khan, qui l'a remporté. ^double Pour la deuxième année de suite.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^dotation Le prix total : {*5 M€|cinq millions d'euros}. ^premier Le premier touche {*2 857 000 €|deux millions huit cent cinquante-sept mille euros}. ^deuxieme Le deuxième : plus d'un million. ^cinquieme Et même le cinquième repart avec cent quarante-trois mille euros.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^partage Une partie revient ensuite à l'entraîneur et au jockey.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^cout Maintenant, le coût. ^pension Un cheval à l'entraînement, c'est en moyenne environ {*1 640 €|mille six cent quarante euros} par mois en France. ^an Près de vingt mille euros par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^x145 Gagner l'Arc, c'est donc environ cent quarante-cinq ans de pension moyenne, ^d2 remboursés en une seule course.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Sauf que c'est l'exception. ^moy En moyenne, les gains en course ne remboursent qu'environ la moitié des frais.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^etalon Le vrai jackpot, c'est après : ^etalon2 un vainqueur de l'Arc peut devenir étalon, et valoir bien plus que ses gains en course.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^lecon Les courses, c'est un sport de passion, ^lecon2 où quelques gagnants font rêver tous les autres.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^cta Vous avez déjà vu l'Arc de Triomphe ? ^follow Abonnez-vous pour d'autres calculs sur les chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

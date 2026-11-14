@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Être propriétaire d'un cheval de course, ce n'est pas réservé aux milliardaires. ^part Pour quelques euros par jour, vous pouvez en avoir un morceau.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Mais avant de rêver de l'Arc de Triomphe, ^loop2 regardez combien ça coûte vraiment, et combien ça rapporte.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^cout Un cheval de course à l'entraînement, c'est en moyenne environ {*1 640 €|mille six cent quarante euros} par mois en France. ^an Près de {*20 000 €|vingt mille euros} par an, sans compter le vétérinaire et les déplacements.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^groupe La solution : une écurie de groupe. ^parts Plusieurs associés se partagent un ou plusieurs chevaux.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^cinq Avec cinq pour cent d'un cheval, par exemple, ^jour comptez environ quatre à cinq euros par jour, tout compris. ^achat Plus votre part du prix d'achat du cheval.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^gains Et les gains ? ^moy En moyenne, les courses remboursent environ la moitié des frais. ^cent Sur cent euros dépensés, vous en récupérez autour de cinquante-cinq.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^twist Autrement dit, en moyenne, on perd de l'argent. ^jackpot Bien sûr, certains chevaux rapportent des centaines de milliers d'euros. ^loto Mais c'est l'exception, pas la règle.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^vivre Ce que vous achetez vraiment, c'est l'expérience : ^v1 le rond de présentation avant la course, ^v2 les discussions avec l'entraîneur, ^v3 et votre couleur qui passe la ligne en tête.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^verif Avant de signer, vérifiez qui gère l'écurie, ^verif2 et tous les frais.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^lecon C'est un loisir, pas un placement. ^lecon2 À budgéter comme un abonnement, avec un peu de chance en plus.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous mettriez combien dans un cheval de course ? ^follow Abonnez-vous pour d'autres calculs sur les chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

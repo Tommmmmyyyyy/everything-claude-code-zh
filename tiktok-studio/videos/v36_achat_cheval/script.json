@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Vous avez trouvé le cheval de vos rêves, à {*5 000 €|cinq mille euros}. ^vrai En réalité, il va vous coûter bien plus que ça, dès le premier mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Voici tous les frais auxquels personne ne pense, ^loop2 et l'erreur qui peut coûter très cher.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^visite D'abord, la visite d'achat chez le vétérinaire. ^radios Avec les radios, comptez souvent entre {*500|cinq cents} et {*1 000 €|mille euros}. ^vite2 Pas obligatoire, mais indispensable.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^transport Ensuite, le transport jusqu'à chez vous : ^trans2 de cent à plusieurs centaines d'euros, selon la distance.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^selle La selle, adaptée à son dos : ^selle2 environ {*1 500 €|mille cinq cents euros}, même d'occasion pour une bonne selle. ^equip Le filet, les tapis, les protections, les couvertures : encore {*500 €|cinq cents euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^premier Le premier mois de pension, le maréchal, les vaccins à mettre à jour : environ {*500 €|cinq cents euros}. ^assur Et l'assurance de la première année : environ {*350 €|trois cent cinquante euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^total Au total : près de {*8 750 €|huit mille sept cent cinquante euros}. ^pct Soixante-quinze pour cent de plus que le prix du cheval.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^piege Et l'erreur classique : ^piege2 choisir le cheval le moins cher pour économiser. ^piege3 Un problème de santé caché, et ce sont des milliers d'euros de vétérinaire.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^conseils Mes conseils : ^c1 essayez-le plusieurs fois, et dans différentes situations. ^c2 Demandez son carnet de santé. ^c3 Et faites toujours un contrat de vente écrit.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^budget La règle simple : prévoyez au moins la moitié du prix du cheval, en plus, pour bien démarrer.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous avez payé combien votre cheval ? ^follow Abonnez-vous pour d'autres calculs sur les chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

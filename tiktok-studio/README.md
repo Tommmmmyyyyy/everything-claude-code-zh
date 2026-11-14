@@ -19,6 +19,9 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 - `videos/v25_gta6` à `videos/v30_ps5gta` (actualité, 1 min 15 à 1 min 30) : prix de GTA 6, entrée en bourse
   d'Anthropic, SpaceX le premier jour, fausses promos du Black Friday, bitcoin, GTA 6 + PS5 sur 5 ans,
   budget 2027, bulle de l'IA, Noël à crédit, revendre ses cadeaux
+- `videos/v35_cheval_vie` à `videos/v42_arc_triomphe` (série chevaux) : un cheval sur toute sa vie, acheter un
+  cheval, l'équitation pour un enfant, ouvrir un centre équestre, cheval de course en parts, ventes de
+  Deauville, le cheval le plus cher du monde, l'Arc de Triomphe
 
 ### Modèles d'animation (`lib/beats.js`)
 

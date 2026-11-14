@@ -1,0 +1,74 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Un cheval peut vivre trente ans. ^appart Et sur toute sa vie, il peut vous coûter plus cher qu'un appartement.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Et il y a une partie de sa vie à laquelle presque personne ne pense. ^loop2 Faisons le calcul.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^achat D'abord, l'achat : un cheval de loisir se vend en moyenne autour de {*6 000 €|six mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^travail Ensuite, ses années de travail. ^arrive Il arrive chez vous à six ans, vous le montez jusqu'à vingt ans. ^mois Pension, maréchal, vétérinaire, assurance : environ {*500 €|cinq cents euros} par mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^total14 Quatorze ans à ce rythme : {*84 000 €|quatre-vingt-quatre mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^twist Sauf qu'un cheval ne s'arrête pas de vivre quand il arrête de travailler. ^ans Beaucoup vivent jusqu'à vingt-cinq, trente ans.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^retraite Sa retraite au pré, avec les soins d'un cheval âgé : environ {*300 €|trois cents euros} par mois. ^huit Huit ans de retraite : près de {*29 000 €|vingt-neuf mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^colique Ajoutez une ou deux grosses factures, comme une colique opérée : ^col2 trois à cinq mille euros à chaque fois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^total Au total : environ {*127 000 €|cent vingt-sept mille euros}. ^inflation Et avec l'inflation sur toutes ces années, plutôt {*160 000 €|cent soixante mille}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^place Le même argent, placé chaque mois à cinq pour cent ? ^place2 Plus de {*230 000 €|deux cent trente mille euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^pasprix Alors, un cheval, c'est un mauvais placement ? ^oui Financièrement, oui. ^passion Mais personne n'achète un cheval pour l'argent.",
+   "pause": 0.3
+  },
+  {
+   "id": "l12",
+   "text": "^conseil Mon conseil : pensez à sa retraite dès le premier jour. ^cagnotte Une petite épargne pour ses vieux jours, ça évite des choix déchirants.",
+   "pause": 0.3
+  },
+  {
+   "id": "l13",
+   "text": "^cta Votre cheval a quel âge ? Dites-le en commentaire. ^follow Et abonnez-vous pour d'autres calculs sur les chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}

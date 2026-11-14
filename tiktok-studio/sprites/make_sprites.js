@@ -60,6 +60,16 @@ const LIST = [
   ['chip', 'chip', { elev: 40, az: 25 }],
   ['trophy', 'trophy', { elev: 10, az: 15 }],
   ['gift', 'gift', { elev: 18, az: 30 }],
+  ['horse_grey', 'horsev', { col: 0xCFC9C0, mane: 0x8C8780, muzzle: 0xB9B2A8, blanket: 0x2E6E8E, halter: 0xF4B740, elev: 8, az: 20 }],
+  ['pony', 'horsev', { col: 0xF2EDE4, mane: 0xD8C9B0, legs: .7, body: .95, head: 1.15, legW: 1.25, halter: 0xFF5A4E, elev: 10, az: 22 }],
+  ['racehorse', 'horsev', { col: 0x3A2214, mane: 0x15100C, cloth: 0x1FCB8A, legs: 1.1, body: .95, socks: true, halter: 0xF4F1EA, elev: 8, az: 20 }],
+  ['foal', 'horsev', { col: 0xC57B47, mane: 0x6B3F22, legs: 1.25, body: .78, head: .95, legW: .8, blaze: true, halter: 0xF4B740, elev: 8, az: 18 }],
+  ['saddle', 'saddle', { elev: 18, az: 30 }],
+  ['helmet', 'helmet', { elev: 22, az: 25 }],
+  ['horseshoe', 'horseshoe', { elev: 6, rotY: -0.35 }],
+  ['stable', 'stable', { elev: 16, az: 24 }],
+  ['trailer', 'trailer', { elev: 16, az: 32 }],
+  ['gavel', 'gavel', { elev: 20, az: 25 }],
 ];
 (async () => {
   const { srv, url } = await serve(ROOT);

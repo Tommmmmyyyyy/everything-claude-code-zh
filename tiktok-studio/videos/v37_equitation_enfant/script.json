@@ -1,0 +1,64 @@
+{
+ "voice": "fabien",
+ "lead": 0.3,
+ "pause": 0.28,
+ "tail": 1.6,
+ "lines": [
+  {
+   "id": "l1",
+   "text": "^hook Votre enfant veut faire du poney ? ^prepare Préparez-vous : ce n'est pas le prix d'un cours qui compte.",
+   "pause": 0.3
+  },
+  {
+   "id": "l2",
+   "text": "^loop Je vous montre le vrai budget sur un an, ^loop2 et le moment où ça peut vraiment exploser.",
+   "pause": 0.3
+  },
+  {
+   "id": "l3",
+   "text": "^ffe L'équitation, c'est plus de {*625 000|six cent vingt-cinq mille} licenciés en France. ^filles Et plus de huit cavaliers sur dix sont des cavalières.",
+   "pause": 0.3
+  },
+  {
+   "id": "l4",
+   "text": "^licence D'abord, la licence de la Fédération : environ {*30 €|trente euros} pour un jeune. ^adhesion L'adhésion au club : souvent entre cinquante et cent euros.",
+   "pause": 0.3
+  },
+  {
+   "id": "l5",
+   "text": "^forfait Le forfait annuel, une heure par semaine : ^forf2 souvent entre {*400|quatre cents} et {*700 €|sept cents euros}, selon le club.",
+   "pause": 0.3
+  },
+  {
+   "id": "l6",
+   "text": "^equip L'équipement : un casque, des boots, un pantalon, des gants : ^equip2 environ {*200 €|deux cents euros}.",
+   "pause": 0.3
+  },
+  {
+   "id": "l7",
+   "text": "^stages Et les stages pendant les vacances : environ {*200 €|deux cents euros} la semaine. ^deux Deux semaines par an, ça fait déjà quatre cents euros.",
+   "pause": 0.3
+  },
+  {
+   "id": "l8",
+   "text": "^total Au total : environ {*1 300 €|mille trois cents euros} par an. ^mois Un peu plus de cent euros par mois.",
+   "pause": 0.3
+  },
+  {
+   "id": "l9",
+   "text": "^twist Mais le vrai saut, c'est quand il vous demande : ^question « Et si j'avais mon poney ? » ^demi Une demi-pension, c'est souvent plus de cent euros par mois en plus. ^proprio Un poney à soi : plusieurs milliers d'euros par an.",
+   "pause": 0.3
+  },
+  {
+   "id": "l10",
+   "text": "^astuces Mes astuces : ^a1 commencez par un stage ou une carte de quelques leçons, avant le forfait à l'année. ^a2 Achetez le casque neuf, pour la sécurité, et le reste d'occasion.",
+   "pause": 0.3
+  },
+  {
+   "id": "l11",
+   "text": "^cta Vous avez commencé l'équitation à quel âge ? ^follow Abonnez-vous pour d'autres calculs sur les chevaux.",
+   "pause": 0.3
+  }
+ ],
+ "tempo": 1.12
+}
