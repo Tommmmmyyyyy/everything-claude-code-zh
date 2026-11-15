@@ -297,6 +297,15 @@ def align(words, dur, gp):
             out[k] = (round(t, 3), round(t + d, 3)); t += d
     return out
 
+def apply_prange(x, sr, factor):
+    """widen (factor > 1) the pitch movement around the line's median, PSOLA, timing unchanged."""
+    if abs(factor - 1) < 1e-3: return x
+    import parselmouth
+    from parselmouth.praat import call
+    snd = parselmouth.Sound(x.astype(np.float64), sampling_frequency=sr)
+    y = call(snd, 'Change gender', 70, 350, 1.0, 0, factor, 1.0).values[0].astype(np.float32)
+    n = len(x); return np.pad(y, (0, max(0, n - len(y))))[:n]
+
 def apply_tempo(x, sr, tempo):
     """speed up speech without changing pitch (ffmpeg atempo)."""
     if abs(tempo - 1) < 1e-3: return x
@@ -391,7 +400,8 @@ def main(script_path, out_dir):
     for li, (line, words, spoken) in enumerate(parsed):
         if li in synth:
             raw, tw = synth[li]
-            tempo = float(spec.get('tempo', 1.0))
+            raw = apply_prange(raw, sr, float(line.get('prange', spec.get('prange', 1.0))))
+            tempo = float(line.get('tempo', spec.get('tempo', 1.0)))
             if tempo != 1.0:
                 raw = apply_tempo(raw, sr, tempo); tw = [(w, s_ / tempo) for w, s_ in tw]
             x = trim(raw, sr)

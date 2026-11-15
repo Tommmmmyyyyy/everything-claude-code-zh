@@ -84,6 +84,16 @@ Par défaut : « fabien », une voix d'homme française très naturelle génér�
 (modèle sous licence CC BY 4.0, voix enregistrée par l'équipe Kyutai et publiée en CC0).
 Le modèle tourne sur processeur : compter 3 à 4 minutes de calcul par vidéo de 90 secondes.
 
+Réglages de diction dans `script.json` (global ou par phrase) :
+
+- `"tempo": 1.07` : accélère la voix sans changer sa hauteur.
+- `"prange": 1.15` : élargit les montées et descentes de la voix (intonation plus vivante),
+  sans toucher au rythme.
+
+Avec `"tempo": 1.07`, `"prange": 1.15` et `"pause": 0.3`, la voix « fabien » a le même débit
+(environ 18 caractères par seconde dans une phrase), les mêmes silences et la même amplitude
+d'intonation que la voix ElevenLabs des vidéos 15 à 34.
+
 Autres voix possibles dans `script.json` : `"f1"` à `"f4"` (voix de femme Kyutai : f1 en CC0,
 f2 à f4 issues de CML-TTS en CC BY 4.0), `"pierre"` ou `"tom"` (voix d'homme Piper, plus rapides
 mais plus robotiques), `"siwis"` (voix de femme Kokoro).
