@@ -1,5 +1,5 @@
 {
- "voice": "fabien",
+ "voice": "h1",
  "lead": 0.3,
  "pause": 0.14,
  "tail": 1.6,
@@ -55,7 +55,6 @@
    "pause": 0.14
   }
  ],
- "tempo": 1.2,
- "prange": 1.15,
+ "tempo": 0.95,
  "maxgap": 0.16
 }

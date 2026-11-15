@@ -22,6 +22,12 @@ VOICES = {
     'ilan': {'engine': 'eleven', 'voice_id': 'ozVFcYMzEYF561D1IKA0', 'model': 'eleven_multilingual_v2', 'sid': 0, 'speed': 1.0,
              'settings': {'stability': .45, 'similarity_boost': .8, 'style': .2, 'use_speaker_boost': True}},
     # French female voices (Kyutai TTS): f1 = Kyutai staff recording (CC0), f2-f4 = CML-TTS / LibriVox readers (CC BY 4.0)
+    # French male voices, natural speed (pb = padding bonus, negative = faster; pbetween 0 = no forced gap)
+    'h1': {'engine': 'kyutai', 'voice': 'cml-tts/fr/4937_3731_000004-0001_enhanced.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0, 'pb': -.8, 'pbetween': 0},
+    'h2': {'engine': 'kyutai', 'voice': 'cml-tts/fr/2114_1656_000053-0001_enhanced.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0, 'pb': -.45, 'pbetween': 0},
+    'h3': {'engine': 'kyutai', 'voice': 'cml-tts/fr/7142_2432_000124-0003_enhanced.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0, 'pb': 0, 'pbetween': 0},
+    'h4': {'engine': 'kyutai', 'voice': 'cml-tts/fr/8128_7016_000047-0002_enhanced.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0, 'pb': -.6, 'pbetween': 0},
+    'h5': {'engine': 'kyutai', 'voice': 'voice-donations/2181_enhanced.wav', 'cfg': 2.0, 'temp': .6, 'sid': 0, 'speed': 1.0, 'pb': 0, 'pbetween': 0},
     'f1': {'engine': 'kyutai', 'voice': 'unmute-prod-website/developpeuse-3.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
     'f2': {'engine': 'kyutai', 'voice': 'cml-tts/fr/10087_11650_000028-0002_enhanced.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
     'f3': {'engine': 'kyutai', 'voice': 'cml-tts/fr/5207_3078_000031-0002_enhanced.wav', 'cfg': 2.0, 'temp': .7, 'sid': 0, 'speed': 1.0},
@@ -72,12 +78,14 @@ class KyutaiTTS:
                                                  dtype=torch.float32, initial_padding=4)
         self.voice_path = self.tts.get_voice_path(v['voice'])
         self.cfg = v.get('cfg', 2.0)
+        self.tts.padding_bonus = v.get('pb', 0.)
+        self.pbetween = v.get('pbetween', 1)
         self.sample_rate = self.tts.mimi.sample_rate
         self.fps = self.tts.mimi.frame_rate
 
     def batch(self, texts):
         torch, tts = self.torch, self.tts
-        entries = [tts.prepare_script([x], padding_between=1) for x in texts]
+        entries = [tts.prepare_script([x], padding_between=self.pbetween) for x in texts]
         attrs = [tts.make_condition_attributes([self.voice_path], cfg_coef=self.cfg) for _ in texts]
         res = tts.generate(entries, attrs)
         with tts.mimi.streaming(len(texts)), torch.no_grad():

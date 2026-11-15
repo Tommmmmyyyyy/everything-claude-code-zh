@@ -92,10 +92,15 @@ Réglages de diction dans `script.json` (global ou par phrase) :
 - `"maxgap": 0.16` : raccourcit les silences à l'intérieur d'une phrase (après « : » par exemple)
   à 0,16 s au maximum, pour une diction plus fluide.
 
-Réglage des vidéos 35 à 42 : `"tempo": 1.2`, `"prange": 1.15`, `"maxgap": 0.16` et `"pause": 0.14`.
-La voix « fabien » parle alors à environ 22 caractères par seconde, avec la même amplitude
-d'intonation que la voix ElevenLabs des vidéos 15 à 34. Avec `"tempo": 1.07`, sans `maxgap` et
-`"pause": 0.3`, elle a exactement le débit de cette voix ElevenLabs (environ 18 caractères par seconde).
+Les vidéos 35 à 42 utilisent la voix `"h1"` (voix d'homme française, plus claire que « fabien »)
+avec `"tempo": 0.95`, `"maxgap": 0.16` et `"pause": 0.14` : environ 22 caractères par seconde
+dans une phrase. La voix « fabien » donnait le même débit avec `"tempo": 1.2`, mais l'accélération
+après coup abîmait l'articulation.
+
+Voix d'homme françaises `"h1"` à `"h5"` : elles parlent directement vite (réglage `pb` dans
+`tts.py`, négatif = plus rapide), sans accélération après coup. h1 à h4 viennent de CML-TTS
+(CC BY 4.0 : créditer « Voix de synthèse : Kyutai TTS, voix CML-TTS (CC BY 4.0) »),
+h5 vient des dons de voix Kyutai (CC0).
 
 Autres voix possibles dans `script.json` : `"f1"` à `"f4"` (voix de femme Kyutai : f1 en CC0,
 f2 à f4 issues de CML-TTS en CC BY 4.0), `"pierre"` ou `"tom"` (voix d'homme Piper, plus rapides
