@@ -3,10 +3,10 @@ import { seq, stack, hbars, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'DEAUVILLE · AOÛT 2026', y: 228, at: -1 },
+    { kind: 'banner', html: 'RECORD À DEAUVILLE', y: 150, h: 140, size: 64, color: 'gold', at: -1 },
     { kind: 'sprite', name: 'foal', cx: 540, by: 720, size: 520, at: -1 },
     { kind: 'num', html: '4 600 000<span class="u">€</span>', y: 740, size: 130, color: 'gold', at: -1 },
-    { kind: 'head', html: 'POUR UN POULAIN<br>QUI N’A <span class="r">JAMAIS COURU</span>', y: 900, size: 88, at: 'jamais' },
+    { kind: 'head', html: 'POUR UN POULAIN<br>QUI N’A <span class="r">JAMAIS COURU</span>', y: 900, size: 88, at: -1 },
   ], { sfxIn: false }) },
   { at: 'loop', fn: (a, b) => stack(a, b, [
     { kind: 'head', html: 'POURQUOI ?<br>ET ÇA <span class="a">RAPPORTE</span> ?', y: 300, size: 120, at: 'loop' },

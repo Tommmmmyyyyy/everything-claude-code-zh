@@ -46,3 +46,14 @@ svg text { font-family: var(--fMono); }
 
 .sp { display: inline-block; width: .2em; }
 #caps .punct { color: inherit; }
+
+/* ---------- style v2 ---------- */
+body.v2 #caps .cap { left: 50px; width: 980px; top: 1272px; text-align: center; font-size: 74px; font-weight: 800; line-height: 1.06; letter-spacing: -.02em; transform-origin: 50% 50%;
+  text-shadow: 0 8px 30px rgba(0,0,0,.6), 0 2px 0 rgba(0,0,0,.4); }
+body.v2 #caps .w { display: inline-block; color: rgba(255,255,255,.5); transform-origin: 50% 70%; margin: 0 .07em; }
+body.v2 #caps .w.on { color: #fff; }
+body.v2 #caps .w.cur { color: var(--gold); }
+body.v2 #caps .w.hl { padding: 0 12px 4px; margin: 0 4px; border-radius: 12px; }
+body.v2 #caps .w.hl.on { background: var(--mint); color: var(--ink); text-shadow: none; }
+body.v2 #caps .w.hl.cur { background: var(--gold); color: var(--ink); }
+body.v2 #bg { background: radial-gradient(120% 75% at 50% 34%, #11382b 0%, #0a2019 46%, #040c09 100%); }

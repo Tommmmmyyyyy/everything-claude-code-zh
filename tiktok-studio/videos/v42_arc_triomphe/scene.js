@@ -3,10 +3,10 @@ import { seq, stack, splitbar, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'PRIX DE L’ARC DE TRIOMPHE', y: 228, at: -1 },
+    { kind: 'banner', html: 'ARC DE TRIOMPHE', y: 150, h: 140, size: 64, color: 'gold', at: -1 },
     { kind: 'sprite', name: 'racehorse', cx: 540, by: 720, size: 520, at: -1 },
     { kind: 'num', html: '≈ 2,9<span class="u">M€</span>', y: 740, size: 170, color: 'gold', at: -1 },
-    { kind: 'head', html: 'EN MOINS DE<br><span class="a">3 MINUTES</span>', y: 950, size: 100, at: 'minutes' },
+    { kind: 'head', html: 'EN MOINS DE<br><span class="a">3 MINUTES</span>', y: 950, size: 100, at: -1 },
   ], { sfxIn: false }) },
   { at: 'loop', fn: (a, b) => stack(a, b, [
     { kind: 'head', html: 'COMBIEN A-T-IL<br><span class="r">COÛTÉ</span> AVANT ?', y: 300, size: 110, at: 'loop' },

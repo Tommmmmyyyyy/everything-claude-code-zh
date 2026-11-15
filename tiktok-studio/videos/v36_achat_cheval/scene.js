@@ -3,10 +3,10 @@ import { seq, stack, receipt, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'ACHETER UN CHEVAL', y: 228, at: -1 },
+    { kind: 'banner', html: 'AVANT D’ACHETER UN CHEVAL', y: 150, h: 140, size: 56, color: 'gold', at: -1 },
     { kind: 'sprite', name: 'horse', cx: 540, by: 720, size: 520, at: -1 },
     { kind: 'num', html: '5 000<span class="u">€</span>', y: 740, size: 170, color: 'gold', at: -1 },
-    { kind: 'head', html: 'VRAIMENT ?', y: 950, size: 110, at: 'vrai', color: 'var(--red)' },
+    { kind: 'head', html: 'VRAIMENT ?', y: 950, size: 110, at: -1, color: 'var(--red)' },
   ], { sfxIn: false }) },
   { at: 'loop', fn: (a, b) => stack(a, b, [
     { kind: 'head', html: 'LES FRAIS<br>AUXQUELS <span class="r">PERSONNE</span><br>NE PENSE', y: 300, size: 104, at: 'loop' },

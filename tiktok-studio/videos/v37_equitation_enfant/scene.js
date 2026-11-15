@@ -3,7 +3,7 @@ import { seq, stack, receipt, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'ÉQUITATION · UN AN', y: 228, at: -1 },
+    { kind: 'banner', html: 'PARENTS DE CAVALIERS', y: 150, h: 140, size: 64, color: 'mint', at: -1 },
     { kind: 'sprite', name: 'pony', cx: 540, by: 720, size: 500, at: -1 },
     { kind: 'head', html: 'VOTRE ENFANT VEUT<br>FAIRE DU <span class="a">PONEY</span> ?', y: 770, size: 100, at: -1 },
     { kind: 'chip', html: 'LE VRAI BUDGET', style: 'gold', y: 1010, size: 56, at: 'prepare' },

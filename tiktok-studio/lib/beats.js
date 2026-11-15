@@ -1,5 +1,5 @@
 // Declarative "beats": every video is a list of reusable scene templates driven by voice cues.
-import { scene, cue, h, svg, tf, A, anim, clamp, lerp, ease, prog, Odo, count, fmt, sfx, TL } from './engine.js';
+import { scene, cue, h, svg, tf, A, anim, clamp, lerp, ease, prog, Odo, count, fmt, sfx, TL, BEATS } from './engine.js';
 import { box, text, obj, label, panel, burst, pulse, logo } from './kit.js';
 
 export const MINT = '#2EE6A0', GOLD = '#F4B740', RED = '#FF5A4E', CREAM = '#F3ECDF';
@@ -67,6 +67,13 @@ function makeItem(root, it) {
       el = odo.el; break;
     }
     case 'sprite': el = obj(root, it.name, { cx: it.cx ?? 540, by: it.by ?? 900, w: it.size || 500, z: it.z ?? 2 }); break;
+    case 'banner': {
+      const hh = it.h || 150, sz = it.size || 62;
+      el = box(root, { x: 0, y, w: 1080, hgt: hh, z: 8 });
+      el.appendChild(h('div', 'abs', '', { left: '-60px', right: '-60px', top: 0, bottom: 0, background: col(it.color || 'gold'), transform: `rotate(${it.tilt ?? -2.5}deg)`, boxShadow: '0 24px 60px rgba(0,0,0,.45)' }));
+      el.appendChild(h('div', 'head abs', it.html, { left: '40px', right: '40px', top: (hh / 2 - sz * .46) + 'px', textAlign: 'center', fontSize: sz + 'px', color: 'var(--ink)', transform: `rotate(${it.tilt ?? -2.5}deg)`, whiteSpace: 'nowrap' }));
+      break;
+    }
     case 'logo': el = logo(root, it.name, { cx: it.cx ?? 540, cy: it.cy ?? 400, size: it.size || 200, bg: it.bg, fg: it.fg, z: it.z ?? 4 }); break;
     case 'row': {
       el = box(root, { x: 70, y, w: 940, hgt: it.h || 170 });
@@ -106,7 +113,7 @@ export function stack(start, end, items, { lab, foot, sfxIn = true } = {}) {
         const until = it.until == null ? out : T(it.until) - .1;
         const base = { ...(it.base || {}) };
         if (it.pulse) base.s = (base.s ?? 1) * pulse(t, T(it.pulse), .07, .45);
-        const r = anim(t, at - (it.kind === 'odo' ? .35 : 0), until, { type: it.anim || ((it.kind === 'sprite' || it.kind === 'logo') ? 'pop' : it.kind === 'chip' ? 'pop' : 'up'), float: it.float ?? (it.kind === 'sprite' ? 5 : it.kind === 'logo' ? 4 : 0), rot: it.rot, rot2: it.rot2, dist: it.dist });
+        const r = anim(t, at - (it.kind === 'odo' ? .35 : 0), until, { type: it.anim || ((it.kind === 'sprite' || it.kind === 'logo') ? 'pop' : it.kind === 'chip' ? 'pop' : it.kind === 'banner' ? 'down' : 'up'), float: it.float ?? (it.kind === 'sprite' ? 5 : it.kind === 'logo' ? 4 : 0), rot: it.rot, rot2: it.rot2, dist: it.dist });
         r.x += base.x || 0; r.y += base.y || 0; r.s *= base.s ?? 1; r.r += base.r || 0;
         if (it.dim) r.o *= lerp(1, .35, prog(t, T(it.dim), .4));
         tf(el, r);
@@ -234,6 +241,7 @@ export function cta(start, end, { top, sprites = [], logos = [], head, headY = 1
 // run a list of beats: each {at: cue, fn: (start, end) => ...}
 export function seq(list) {
   const starts = list.map((b, i) => i === 0 ? 0 : T(b.at) - .3);
+  BEATS.length = 0; BEATS.push(...starts);
   list.forEach((b, i) => b.fn(starts[i], i + 1 < list.length ? starts[i + 1] : TL.duration + 1));
 }
 export const at = (c, dt = 0) => [c, dt];

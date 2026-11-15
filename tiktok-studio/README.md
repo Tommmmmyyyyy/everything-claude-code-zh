@@ -33,6 +33,9 @@ banque d'images ni musique sous licence : la musique et les sons sont générés
 - `chart` : courbes tracées en direct, avec étiquettes sur les repères.
 - `notes` (sur `hbars`, `receipt`, `chart`) : pastilles, lignes ou objets 3D ajoutés sur un repère ; `path()` trace une courbe par points.
 - `cta` : question finale, avec un bouton « S'abonner » animé (`follow: 'repere'`).
+- Style v2 (`<body class="v2">` dans `index.html`) : caméra qui avance en continu, zoom à chaque changement
+  de scène, secousse sur les tampons, flash, particules, gros sous-titres centrés (mot en cours en or) et
+  bandeau d'accroche (`kind: 'banner'`) sur la première image.
 - Logos de marques (`kind: 'logo'`, `logos` sur `cta`) : symboles vectoriels de Simple Icons (CC0, voir
   `assets/logos/LICENSE-simple-icons.md`). Les marques restent la propriété de leurs titulaires : usage
   d'identification dans un contexte d'actualité uniquement.

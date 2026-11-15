@@ -141,8 +141,8 @@ export function buildCaptions(root) {
       const chars = cur.reduce((a, x) => a + x.display.length + 1, 0);
       let rest = 0;
       for (let j = i; j < W.length; j++) { rest++; if (/[,.;:?!…]$/.test(W[j].display)) break; }
-      const tooLong = cur.length >= 4 || chars + w.display.length > 24;
-      const tailOk = rest === 1 && w.display.length <= 6 && chars + w.display.length <= 30;
+      const tooLong = V2.on ? (cur.length >= 3 || chars + w.display.length > 17) : (cur.length >= 4 || chars + w.display.length > 24);
+      const tailOk = rest === 1 && w.display.length <= 6 && chars + w.display.length <= (V2.on ? 21 : 30);
       if (cur.length && tooLong && !tailOk) flush();
       cur.push(w);
       if (/[,.;:?!…]$/.test(w.display)) flush();
@@ -174,8 +174,10 @@ export function buildCaptions(root) {
       e.el.style.display = on ? 'block' : 'none';
       if (!on) continue;
       const p = ease.outCubic(clamp((t - e.t0) / .12));
-      e.el.style.opacity = p; e.el.style.transform = `translateY(${(1 - p) * 14}px)`;
-      e.ws.forEach((s, i) => { const on = t >= e.g[i].start - .03; s.classList.toggle('on', on); if (s.tail) s.tail.classList.toggle('on', on); });
+      e.el.style.opacity = p; e.el.style.transform = V2.on ? `scale(${(.92 + .08 * ease.outBack(clamp((t - e.t0) / .16), 2.2)).toFixed(4)})` : `translateY(${(1 - p) * 14}px)`;
+      e.ws.forEach((s, i) => { const on = t >= e.g[i].start - .03; s.classList.toggle('on', on); if (s.tail) s.tail.classList.toggle('on', on);
+        if (V2.on) { const nx = e.g[i + 1] ? e.g[i + 1].start - .03 : e.g[i].end + .25; const cur = on && t < nx; s.classList.toggle('cur', cur);
+          s.style.transform = cur ? `scale(${(1 + .09 * (1 - ease.outCubic(clamp((t - e.g[i].start + .03) / .16)))).toFixed(4)})` : 'none'; } });
     }
   };
 }
@@ -188,7 +190,34 @@ export function scene(t0, t1, build, { pre = .1, post = .5 } = {}) {
   scenes.push({ t0: t0 - pre, t1: t1 + post, root, update });
 }
 export const ticker = f => tickers.push(f);
-export const sfx = (name, at, gain = 1, dur = 0) => SFX.push({ name, at: +at.toFixed(3), gain, dur });
+export const sfx = (name, at, gain = 1, dur = 0) => { SFX.push({ name, at: +at.toFixed(3), gain, dur }); if (name === 'stamp') SHAKES.push(at); };
+// style v2 (opt-in with <body class="v2">): camera push-in, punch on beat changes, shake on stamps, flash, dust, big captions
+export const V2 = { on: false };
+export const BEATS = [];
+export const SHAKES = [];
+function setupV2() {
+  const stage = document.getElementById('stage');
+  const flash = h('div', 'abs', '', { inset: 0, pointerEvents: 'none', opacity: 0, background: 'radial-gradient(70% 50% at 50% 40%, rgba(255,255,255,.9), rgba(46,230,160,.25) 70%, rgba(46,230,160,0))', zIndex: 5 });
+  stage.after(flash);
+  const dust = document.createElement('canvas'); dust.width = 540; dust.height = 960; Object.assign(dust.style, { position: 'absolute', inset: 0, width: '1080px', height: '1920px', pointerEvents: 'none' });
+  document.getElementById('glow').after(dust);
+  const g = dust.getContext('2d'); let sd = 97; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  const P = Array.from({ length: 46 }, () => ({ x: rnd() * 540, y: rnd() * 960, r: .6 + rnd() * 2.2, v: 4 + rnd() * 12, ph: rnd() * 6.28, a: .05 + rnd() * .16 }));
+  ticker(t => {
+    g.clearRect(0, 0, 540, 960);
+    for (const p of P) { const y = ((p.y - t * p.v) % 960 + 960) % 960, x = p.x + Math.sin(t * .4 + p.ph) * 14;
+      g.fillStyle = `rgba(214,255,236,${(p.a * (.6 + .4 * Math.sin(t * 1.3 + p.ph))).toFixed(3)})`; g.beginPath(); g.arc(x, y, p.r, 0, 6.283); g.fill(); }
+    let i = -1; for (let k = 0; k < BEATS.length; k++) if (t >= BEATS[k]) i = k;
+    const b0 = i >= 0 ? BEATS[i] : 0, b1 = i + 1 < BEATS.length ? BEATS[i + 1] : TL.duration;
+    let s = 1 + .04 * ease.inOutCubic(clamp((t - b0) / Math.max(.5, b1 - b0)));
+    const k = clamp((t - b0) / .34); if (i > 0) s *= 1 + .075 * (1 - ease.outCubic(k));
+    let dx = 0, dy = 0;
+    for (const a of SHAKES) { const u = t - a; if (u >= 0 && u < .34) { const amp = 13 * (1 - u / .34); dx += Math.sin(u * 95) * amp; dy += Math.cos(u * 73) * amp * .6; } }
+    stage.style.transformOrigin = '50% 40%';
+    stage.style.transform = `translate(${dx.toFixed(2)}px,${dy.toFixed(2)}px) scale(${s.toFixed(4)})`;
+    const fu = t - b0; flash.style.opacity = (i > 0 && fu >= 0 && fu < .22) ? (.3 * (1 - fu / .22)).toFixed(3) : 0;
+  });
+}
 
 // ---------- background ----------
 export function setupBackground() {
@@ -215,7 +244,9 @@ export function renderFrame(t) {
 export async function boot(main) {
   await loadTimeline('build/timeline.json');
   setupBackground();
+  V2.on = document.body.classList.contains('v2');
   await main();
+  if (V2.on) setupV2();
   ticker(buildCaptions(document.getElementById('caps')));
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.decode().catch(() => { })));

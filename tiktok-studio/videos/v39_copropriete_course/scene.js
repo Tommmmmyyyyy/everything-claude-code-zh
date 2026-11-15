@@ -3,7 +3,7 @@ import { seq, stack, hbars, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'CHEVAL DE COURSE', y: 228, at: -1 },
+    { kind: 'banner', html: 'CHEVAUX DE COURSE', y: 150, h: 140, size: 64, color: 'mint', at: -1 },
     { kind: 'sprite', name: 'racehorse', cx: 540, by: 720, size: 520, at: -1 },
     { kind: 'head', html: 'PROPRIÉTAIRE<br>POUR <span class="a">QUELQUES €</span> ?', y: 770, size: 104, at: -1 },
     { kind: 'chip', html: 'PAS BESOIN D’ÊTRE MILLIARDAIRE', style: 'gold', y: 1010, size: 46, at: 'part' },

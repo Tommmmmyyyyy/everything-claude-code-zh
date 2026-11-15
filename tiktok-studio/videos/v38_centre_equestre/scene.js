@@ -3,7 +3,7 @@ import { seq, stack, waterfall, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'CENTRE ÉQUESTRE', y: 228, at: -1 },
+    { kind: 'banner', html: 'CENTRE ÉQUESTRE : LA VÉRITÉ', y: 150, h: 140, size: 56, color: 'gold', at: -1 },
     { kind: 'sprite', name: 'stable', cx: 540, by: 720, size: 540, at: -1 },
     { kind: 'head', html: 'COMBIEN IL VOUS<br><span class="a">RESTE</span> ?', y: 770, size: 110, at: -1 },
     { kind: 'chip', html: 'MOINS QUE VOUS NE CROYEZ', style: 'red', y: 1010, size: 50, at: 'loop2', anim: 'stamp', sfx: 'stamp' },

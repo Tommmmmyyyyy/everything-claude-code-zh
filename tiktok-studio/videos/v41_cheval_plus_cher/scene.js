@@ -3,10 +3,10 @@ import { seq, stack, hbars, cta, at } from '../../lib/beats.js';
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'LE CHEVAL LE PLUS CHER DE L’HISTOIRE', y: 228, at: -1 },
+    { kind: 'banner', html: 'LE CHEVAL LE PLUS CHER', y: 150, h: 140, size: 64, color: 'gold', at: -1 },
     { kind: 'sprite', name: 'racehorse', cx: 540, by: 720, size: 520, at: -1 },
     { kind: 'num', html: '70 000 000<span class="u">$</span>', y: 740, size: 120, color: 'gold', at: -1 },
-    { kind: 'head', html: 'ET CE N’EST PAS<br>LE <span class="r">PLUS FOU</span>', y: 900, size: 96, at: 'fou' },
+    { kind: 'head', html: 'ET CE N’EST PAS<br>LE <span class="r">PLUS FOU</span>', y: 900, size: 96, at: -1 },
   ], { sfxIn: false }) },
   { at: 'loop', fn: (a, b) => stack(a, b, [
     { kind: 'head', html: '3 CHEVAUX<br><span class="g">HORS DE PRIX</span>', y: 300, size: 120, at: 'loop' },

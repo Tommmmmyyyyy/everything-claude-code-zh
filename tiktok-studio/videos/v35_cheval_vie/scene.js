@@ -6,10 +6,10 @@ const cost = x => { if (x < 6) return 0; let c = 6000; const w = Math.min(x, 20)
 
 boot(async () => seq([
   { fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'UN CHEVAL · TOUTE SA VIE', y: 228, at: -1 },
+    { kind: 'banner', html: 'PROPRIÉTAIRES DE CHEVAUX', y: 150, h: 140, size: 56, color: 'gold', at: -1 },
     { kind: 'sprite', name: 'horse', cx: 540, by: 720, size: 520, at: -1 },
     { kind: 'num', html: '30<span class="u">ANS</span>', y: 740, size: 170, color: 'gold', at: -1 },
-    { kind: 'head', html: 'PLUS CHER QU’UN<br><span class="r">APPARTEMENT</span> ?', y: 950, size: 100, at: 'appart' },
+    { kind: 'head', html: 'PLUS CHER QU’UN<br><span class="r">APPARTEMENT</span> ?', y: 950, size: 100, at: -1 },
   ], { sfxIn: false }) },
   { at: 'loop', fn: (a, b) => stack(a, b, [
     { kind: 'head', html: 'UNE PARTIE DE SA VIE<br>À LAQUELLE <span class="g">PERSONNE</span><br>NE PENSE', y: 300, size: 96, at: 'loop' },
