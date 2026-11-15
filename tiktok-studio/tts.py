@@ -246,6 +246,32 @@ def trim(x, sr, thr=0.008):
     a = max(0, idx[0] - int(0.07 * sr)); b = min(len(x), idx[-1] + int(0.06 * sr))
     return x[a:b]
 
+def squeeze_gaps(x, sr, maxgap, thr_db=-38):
+    """shorten silences inside a line to maxgap seconds; returns audio and a time map."""
+    hop = int(.01 * sr); n = len(x) // hop
+    if n < 3: return x, lambda t: t
+    rms = np.sqrt(np.mean(x[:n * hop].reshape(n, hop) ** 2, axis=1) + 1e-12)
+    sil = 20 * np.log10(rms / rms.max()) < thr_db
+    keep, cuts, i = int(maxgap * sr), [], 0
+    while i < n:
+        if not sil[i]: i += 1; continue
+        j = i
+        while j < n and sil[j]: j += 1
+        if i > 0 and j < n and (j - i) * hop > keep:
+            cuts.append((i * hop + keep // 2, j * hop - keep // 2))
+        i = j
+    if not cuts: return x, lambda t: t
+    parts, prev = [], 0
+    for a, b in cuts: parts.append(x[prev:a]); prev = b
+    parts.append(x[prev:])
+    def fmap(t):
+        s_, rem = t * sr, 0
+        for a, b in cuts:
+            if s_ >= b: rem += b - a
+            elif s_ > a: rem += s_ - a
+        return (s_ - rem) / sr
+    return np.concatenate(parts), fmap
+
 def gaps(x, sr):
     hop = int(0.01 * sr); fr = int(0.025 * sr)
     rms = np.array([np.sqrt(np.mean(x[i:i + fr] ** 2)) for i in range(0, max(1, len(x) - fr), hop)])
@@ -409,6 +435,10 @@ def main(script_path, out_dir):
             off = max(0, env[0] - int(0.07 * sr)) / sr if len(env) else 0.0
             dur = len(x) / sr
             tm = map_word_times(words, [(w, max(0.0, s - off)) for w, s in tw], dur)
+            mg = float(line.get('maxgap', spec.get('maxgap', 0)))
+            if mg > 0:
+                x, fm = squeeze_gaps(x, sr, mg)
+                tm = [(fm(a_), fm(b_)) for a_, b_ in tm]; dur = len(x) / sr
         else:
             a = tts.generate(spoken, sid=line.get('sid', sid), speed=line.get('speed', speed))
             sr = a.sample_rate

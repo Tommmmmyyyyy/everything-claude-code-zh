@@ -86,13 +86,16 @@ Le modèle tourne sur processeur : compter 3 à 4 minutes de calcul par vidéo d
 
 Réglages de diction dans `script.json` (global ou par phrase) :
 
-- `"tempo": 1.07` : accélère la voix sans changer sa hauteur.
+- `"tempo": 1.2` : accélère la voix sans changer sa hauteur.
 - `"prange": 1.15` : élargit les montées et descentes de la voix (intonation plus vivante),
   sans toucher au rythme.
+- `"maxgap": 0.16` : raccourcit les silences à l'intérieur d'une phrase (après « : » par exemple)
+  à 0,16 s au maximum, pour une diction plus fluide.
 
-Avec `"tempo": 1.07`, `"prange": 1.15` et `"pause": 0.3`, la voix « fabien » a le même débit
-(environ 18 caractères par seconde dans une phrase), les mêmes silences et la même amplitude
-d'intonation que la voix ElevenLabs des vidéos 15 à 34.
+Réglage des vidéos 35 à 42 : `"tempo": 1.2`, `"prange": 1.15`, `"maxgap": 0.16` et `"pause": 0.14`.
+La voix « fabien » parle alors à environ 22 caractères par seconde, avec la même amplitude
+d'intonation que la voix ElevenLabs des vidéos 15 à 34. Avec `"tempo": 1.07`, sans `maxgap` et
+`"pause": 0.3`, elle a exactement le débit de cette voix ElevenLabs (environ 18 caractères par seconde).
 
 Autres voix possibles dans `script.json` : `"f1"` à `"f4"` (voix de femme Kyutai : f1 en CC0,
 f2 à f4 issues de CML-TTS en CC BY 4.0), `"pierre"` ou `"tom"` (voix d'homme Piper, plus rapides
