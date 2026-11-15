@@ -411,13 +411,15 @@ def main(script_path, out_dir):
         # QA: re-synthesize lines whose transcript drifts from the text, keep the best take
         tries = int(spec.get('qa_tries', 3))
         score = {}
+        rate = lambda i: len(parsed[i][2]) / max(.1, len(trim(synth[i][0], sr)) / sr)
+        med = float(np.median([rate(i) for i in range(len(parsed))]))
         for rnd in range(tries):
             bad = []
             for i, (line, words, sp) in enumerate(parsed):
                 if i in score and score[i] <= .12: continue
                 x = trim(synth[i][0], sr)
                 disp = ' '.join(w['display'] for w in words)
-                sc = wer(disp, asr_text(x, sr)) + (.3 if long_pause(x, sr) else 0)
+                sc = wer(disp, asr_text(x, sr)) + (.3 if long_pause(x, sr) else 0) + (.3 if rate(i) > 1.18 * med else 0)
                 if i not in score or sc < score[i]:
                     score[i] = sc; best = synth[i]
                     pickle.dump(best, open(key(sp), 'wb'))
