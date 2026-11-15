@@ -30,7 +30,7 @@ boot(async () => seq([
     notes: [{ at: 'mois', html: '≈ 105 € PAR MOIS', style: 'red', y: 1060, size: 60 }],
     foot: 'MONTANTS INDICATIFS · VARIENT BEAUCOUP SELON LE CLUB' }) },
   { at: 'twist', fn: (a, b) => stack(a, b, [
-    { kind: 'head', html: '« ET SI J’AVAIS<br>MON <span class="g">PONEY</span> ? »', y: 280, size: 104, at: 'question' },
+    { kind: 'head', html: '« ET SI J’AVAIS<br>MON <span class="g">PONEY</span> ? »', y: 280, size: 104, at: at('twist', .1) },
     { kind: 'row', icon: 'up', iconColor: 'gold', html: 'DEMI-PENSION', sub: 'EN PLUS DU FORFAIT', right: '+ 100 €/MOIS', rColor: 'gold', rSize: 48, y: 520, h: 170, size: 48, at: 'demi' },
     { kind: 'row', icon: 'up', iconColor: 'red', html: 'SON PONEY', sub: 'PENSION · SOINS · MATÉRIEL', right: 'MILLIERS €/AN', rColor: 'red', rSize: 40, y: 710, h: 170, size: 48, at: 'proprio' },
     { kind: 'sprite', name: 'pony', cx: 540, by: 1170, size: 300, at: at('proprio', .4) },

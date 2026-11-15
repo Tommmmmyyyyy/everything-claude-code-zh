@@ -52,7 +52,7 @@ boot(async () => seq([
     notes: [{ at: 'inflation', html: 'AVEC L’INFLATION : ≈ 160 000 €', style: 'red', y: 1150, size: 46 }] }) },
   { at: 'place', fn: (a, b) => stack(a, b, [
     { kind: 'mono', html: 'LE MÊME ARGENT, PLACÉ CHAQUE MOIS À 5 %', y: 280, at: 'place', color: 'cream' },
-    { kind: 'odo', to: 230000, digits: 6, prefix: '+&nbsp;', y: 340, size: 150, color: 'mint', at: 'place2' },
+    { kind: 'odo', to: 230000, digits: 6, prefix: '+&nbsp;', y: 340, size: 150, color: 'mint', at: at('place', .15) },
     { kind: 'head', html: 'UN MAUVAIS<br><span class="r">PLACEMENT</span> ?', y: 600, size: 100, at: 'pasprix' },
     { kind: 'chip', html: 'FINANCIÈREMENT, OUI', style: 'red', y: 830, size: 56, at: 'oui', anim: 'stamp', sfx: 'stamp' },
     { kind: 'mono', html: 'MAIS PERSONNE N’ACHÈTE UN CHEVAL POUR L’ARGENT', y: 960, at: 'passion', color: 'cream' },

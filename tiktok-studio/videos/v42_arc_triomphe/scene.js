@@ -29,8 +29,8 @@ boot(async () => seq([
       { at: 'cinquieme', label: '5ᵉ', value: 143000, display: '143 000', color: 'mint' },
     ], foot: 'ALLOCATIONS 2026 · UNE PARTIE REVIENT À L’ENTRAÎNEUR ET AU JOCKEY' }) },
   { at: 'cout', fn: (a, b) => stack(a, b, [
-    { kind: 'mono', html: 'UN CHEVAL À L’ENTRAÎNEMENT', y: 270, at: 'pension', color: 'cream' },
-    { kind: 'num', html: '≈ 1 640<span class="u">€/MOIS</span>', y: 320, size: 120, color: 'red', at: 'pension' },
+    { kind: 'mono', html: 'UN CHEVAL À L’ENTRAÎNEMENT', y: 270, at: at('cout', .1), color: 'cream' },
+    { kind: 'num', html: '≈ 1 640<span class="u">€/MOIS</span>', y: 320, size: 120, color: 'red', at: at('cout', .2) },
     { kind: 'mono', html: '≈ 20 000 € PAR AN · MOYENNE FRANÇAISE', y: 470, at: 'an' },
     { kind: 'num', html: '145<span class="u">ANS</span>', y: 560, size: 200, color: 'gold', at: 'x145' },
     { kind: 'mono', html: 'DE PENSION, REMBOURSÉS EN UNE COURSE', y: 790, at: 'd2', color: 'cream' },

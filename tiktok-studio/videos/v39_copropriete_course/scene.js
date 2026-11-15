@@ -26,7 +26,7 @@ boot(async () => seq([
     { kind: 'chip', html: '≈ 4 À 5 € PAR JOUR', style: 'mint', y: 900, size: 64, at: 'jour', anim: 'stamp', sfx: 'stamp' },
     { kind: 'mono', html: '+ VOTRE PART DU PRIX D’ACHAT', y: 1020, at: 'achat', color: 'cream' },
   ], { lab: ['02', 'LA SOLUTION'] }) },
-  { at: 'gains', fn: (a, b) => hbars(a, b, { lab: ['03', 'ET LES GAINS ?'], head: 'SUR <span class="g">100 €</span> DÉPENSÉS', headAt: 'cent', max: 100, y0: 520, gapY: 230,
+  { at: 'gains', fn: (a, b) => hbars(a, b, { lab: ['03', 'ET LES GAINS ?'], head: 'SUR <span class="g">100 €</span> DÉPENSÉS', headAt: at('gains', .1), max: 100, y0: 520, gapY: 230,
     rows: [
       { at: 'cent', n: 'FRAIS', nSize: 56, value: 100, display: '100 €', color: 'red', per: 'PENSION, VÉTO, TRANSPORT' },
       { at: at('cent', .8), n: 'GAINS', nSize: 56, value: 55, display: '≈ 55 €', color: 'mint', per: 'EN MOYENNE' },

@@ -9,8 +9,8 @@ boot(async () => seq([
     { kind: 'chip', html: 'MOINS QUE VOUS NE CROYEZ', style: 'red', y: 1010, size: 50, at: 'loop2', anim: 'stamp', sfx: 'stamp' },
   ], { sfxIn: false }) },
   { at: 'invest', fn: (a, b) => stack(a, b, [
-    { kind: 'odo', to: 300000, digits: 6, prefix: '≈&nbsp;', y: 280, size: 160, color: 'gold', at: 'inv2' },
-    { kind: 'mono', html: 'TERRAIN · MANÈGE · BOXES · CAVALERIE', y: 470, at: at('inv2', .4), color: 'cream' },
+    { kind: 'odo', to: 300000, digits: 6, prefix: '≈&nbsp;', y: 280, size: 160, color: 'gold', at: at('invest', .15) },
+    { kind: 'mono', html: 'TERRAIN · MANÈGE · BOXES · CAVALERIE', y: 470, at: at('invest', .5), color: 'cream' },
     { kind: 'row', icon: 'heart', iconColor: 'mint', html: '200 CAVALIERS', sub: '≈ 600 € L’ANNÉE', y: 560, h: 150, size: 46, at: 'ca' },
     { kind: 'row', icon: 'sun', iconColor: 'gold', html: 'LES STAGES', y: 725, h: 150, size: 46, at: 'stages' },
     { kind: 'row', icon: 'home', iconColor: 'cream', html: '10 CHEVAUX EN PENSION', y: 890, h: 150, size: 46, at: 'pensions' },
