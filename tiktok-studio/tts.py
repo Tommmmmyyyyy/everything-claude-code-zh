@@ -411,7 +411,11 @@ def main(script_path, out_dir):
         # QA: re-synthesize lines whose transcript drifts from the text, keep the best take
         tries = int(spec.get('qa_tries', 3))
         score = {}
-        rate = lambda i: len(parsed[i][2]) / max(.1, len(trim(synth[i][0], sr)) / sr)
+        mg0 = float(spec.get('maxgap', 0))
+        def rate(i):
+            x_ = trim(synth[i][0], sr)
+            if mg0 > 0: x_ = squeeze_gaps(x_, sr, mg0)[0]
+            return len(parsed[i][2]) / max(.1, len(x_) / sr)
         med = float(np.median([rate(i) for i in range(len(parsed))]))
         for rnd in range(tries):
             bad = []
